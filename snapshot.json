@@ -1,0 +1,846 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-11-20T22:18:43Z",
+  "repository": "ShadyF4RR/Stockfish",
+  "dashboard_url": "https://shadyf4rr.github.io/Stockfish/",
+  "workers": [
+    {
+      "id": "cloud-supervised",
+      "status": "idle",
+      "last_seen": "2026-11-20T22:14:34Z",
+      "offline_after_seconds": 900,
+      "cpu_percent": 5.3,
+      "ram_used_bytes": 1053818880,
+      "ram_total_bytes": 18881708032,
+      "temperature_c": null,
+      "experiment_id": "EXP-ADVERSARIAL-001",
+      "nps": null,
+      "metric_scope": {
+        "cpu": "OS aggregate /proc/stat",
+        "ram": "OS aggregate /proc/meminfo",
+        "temperature": null
+      },
+      "started_at": "2026-11-20T22:01:28Z"
+    }
+  ],
+  "agents": [
+    {
+      "role": "coordinator",
+      "status": "assigned",
+      "task": "Among legal root choices, retain a draw when alternatives are weaker and investigate whether supported equivalent expected results can prefer a continuation.",
+      "experiment_id": "EXP-CONT-000003",
+      "updated_at": "2026-11-20T22:16:52+00:00"
+    },
+    {
+      "role": "search",
+      "status": "assigned",
+      "task": "The existing quiet-check ordering bonus can recognize useful discovered checks and special checking moves that direct destination-square masks miss. Earlier ordering may save search when these quiet moves force a reply.",
+      "experiment_id": "EXP-TACTICAL-QUIETCHECK-001",
+      "updated_at": "2026-11-20T22:01:07+00:00"
+    },
+    {
+      "role": "evaluation",
+      "status": "unreported",
+      "task": null,
+      "experiment_id": null,
+      "updated_at": null
+    },
+    {
+      "role": "implementation",
+      "status": "unreported",
+      "task": null,
+      "experiment_id": null,
+      "updated_at": null
+    },
+    {
+      "role": "reviewer",
+      "status": "unreported",
+      "task": null,
+      "experiment_id": null,
+      "updated_at": null
+    },
+    {
+      "role": "testing",
+      "status": "unreported",
+      "task": null,
+      "experiment_id": null,
+      "updated_at": null
+    }
+  ],
+  "experiments": [
+    {
+      "id": "EXP-ADVERSARIAL-001",
+      "status": "partial",
+      "hypothesis": "Measure head-to-head score and practical win rate for quiet-check ordering on the registered opening and opponent panel.",
+      "baseline_commit": "1819b9ea37588be8adb044179fb54512f87c8249",
+      "candidate_commit": "c72e2482c77f8eabca37550f019ed55bfb8a7b79",
+      "source_changes": [
+        "src/movepick.cpp"
+      ],
+      "started_at": null,
+      "updated_at": null,
+      "duration_seconds": null,
+      "games_completed": 192,
+      "games_planned": 192,
+      "games_remaining": 0,
+      "wdl": null,
+      "elo": null,
+      "performance": [],
+      "conclusion": "192 recorded games across test and control arms. 34 abnormal games. See the registered analyses for the separate head-to-head and practical endpoints. Abnormal or missing observations preclude an affirmative overall strength finding.",
+      "report_url": "https://github.com/ShadyF4RR/Stockfish/blob/research/reporting/research-lab/reports/EXP-ADVERSARIAL-001.md",
+      "links": [
+        {
+          "label": "matches.json",
+          "url": "https://github.com/ShadyF4RR/Stockfish/blob/research/adversarial-tactics/research-lab/results/EXP-ADVERSARIAL-001/matches.json"
+        },
+        {
+          "label": "preregistration.json",
+          "url": "https://github.com/ShadyF4RR/Stockfish/blob/research/adversarial-tactics/research-lab/results/EXP-ADVERSARIAL-001/preregistration.json"
+        },
+        {
+          "label": "analysis.json",
+          "url": "https://github.com/ShadyF4RR/Stockfish/blob/research/adversarial-tactics/research-lab/results/EXP-ADVERSARIAL-001/analysis.json"
+        },
+        {
+          "label": "PGNs and Fastchess logs",
+          "url": "https://github.com/ShadyF4RR/Stockfish/tree/research/adversarial-tactics/research-lab/results/EXP-ADVERSARIAL-001/cells"
+        }
+      ],
+      "groups": [
+        {
+          "arm": "baseline",
+          "opponent": "weiss",
+          "split": "discovery",
+          "time_control": "1+0.01",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "weiss",
+          "split": "discovery",
+          "time_control": "1+0.01",
+          "games": 6,
+          "wins": 5,
+          "draws": 1,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "ethereal",
+          "split": "discovery",
+          "time_control": "1+0.01",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 4
+        },
+        {
+          "arm": "baseline",
+          "opponent": "ethereal",
+          "split": "discovery",
+          "time_control": "1+0.01",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 3
+        },
+        {
+          "arm": "baseline",
+          "opponent": "fruit",
+          "split": "discovery",
+          "time_control": "3+0.03",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "fruit",
+          "split": "discovery",
+          "time_control": "3+0.03",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "weiss",
+          "split": "discovery",
+          "time_control": "3+0.03",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 1
+        },
+        {
+          "arm": "baseline",
+          "opponent": "weiss",
+          "split": "discovery",
+          "time_control": "3+0.03",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "baseline",
+          "opponent": "stockfish",
+          "split": "discovery",
+          "time_control": "3+0.03",
+          "games": 6,
+          "wins": 2,
+          "draws": 4,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "stockfish",
+          "split": "discovery",
+          "time_control": "3+0.03",
+          "games": 6,
+          "wins": 0,
+          "draws": 6,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "fruit",
+          "split": "discovery",
+          "time_control": "1+0.01",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "baseline",
+          "opponent": "fruit",
+          "split": "discovery",
+          "time_control": "1+0.01",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "baseline",
+          "opponent": "stockfish",
+          "split": "discovery",
+          "time_control": "1+0.01",
+          "games": 6,
+          "wins": 2,
+          "draws": 3,
+          "losses": 1,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "stockfish",
+          "split": "discovery",
+          "time_control": "1+0.01",
+          "games": 6,
+          "wins": 1,
+          "draws": 5,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "ethereal",
+          "split": "discovery",
+          "time_control": "3+0.03",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 5
+        },
+        {
+          "arm": "baseline",
+          "opponent": "ethereal",
+          "split": "discovery",
+          "time_control": "3+0.03",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 5
+        },
+        {
+          "arm": "baseline",
+          "opponent": "fruit",
+          "split": "holdout",
+          "time_control": "3+0.03",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "fruit",
+          "split": "holdout",
+          "time_control": "3+0.03",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "weiss",
+          "split": "holdout",
+          "time_control": "1+0.01",
+          "games": 6,
+          "wins": 5,
+          "draws": 1,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "baseline",
+          "opponent": "weiss",
+          "split": "holdout",
+          "time_control": "1+0.01",
+          "games": 6,
+          "wins": 5,
+          "draws": 1,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "baseline",
+          "opponent": "fruit",
+          "split": "holdout",
+          "time_control": "1+0.01",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "fruit",
+          "split": "holdout",
+          "time_control": "1+0.01",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "weiss",
+          "split": "holdout",
+          "time_control": "3+0.03",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "baseline",
+          "opponent": "weiss",
+          "split": "holdout",
+          "time_control": "3+0.03",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "baseline",
+          "opponent": "ethereal",
+          "split": "holdout",
+          "time_control": "3+0.03",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 4
+        },
+        {
+          "arm": "candidate",
+          "opponent": "ethereal",
+          "split": "holdout",
+          "time_control": "3+0.03",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 4
+        },
+        {
+          "arm": "candidate",
+          "opponent": "ethereal",
+          "split": "holdout",
+          "time_control": "1+0.01",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 4
+        },
+        {
+          "arm": "baseline",
+          "opponent": "ethereal",
+          "split": "holdout",
+          "time_control": "1+0.01",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 4
+        },
+        {
+          "arm": "baseline",
+          "opponent": "stockfish",
+          "split": "holdout",
+          "time_control": "1+0.01",
+          "games": 6,
+          "wins": 1,
+          "draws": 5,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "stockfish",
+          "split": "holdout",
+          "time_control": "1+0.01",
+          "games": 6,
+          "wins": 0,
+          "draws": 5,
+          "losses": 1,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "stockfish",
+          "split": "holdout",
+          "time_control": "3+0.03",
+          "games": 6,
+          "wins": 1,
+          "draws": 5,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "baseline",
+          "opponent": "stockfish",
+          "split": "holdout",
+          "time_control": "3+0.03",
+          "games": 6,
+          "wins": 2,
+          "draws": 3,
+          "losses": 1,
+          "abnormal_games": 0
+        }
+      ],
+      "build": {
+        "target": "build",
+        "COMP": "gcc",
+        "CXX": "g++",
+        "ARCH": "x86-64-avx2"
+      },
+      "correctness": null,
+      "source": "Fastchess panel",
+      "reported_by": "testing"
+    },
+    {
+      "id": "EXP-COMPRESSION-001",
+      "status": "documented",
+      "hypothesis": "A lossless compression change may reduce engine or network storage and loading costs while preserving decoded data and engine behavior. Measure its effect on resident memory, startup time, CPU use and search speed before considering matches.",
+      "baseline_commit": "edb0d9db6731067ec50ce619ff372b463bc4dd5d",
+      "candidate_commit": null,
+      "source_changes": [
+        "research-lab/proofs/mszip/",
+        ".github/workflows/mszip-package.yml"
+      ],
+      "started_at": "2026-11-20T20:58:46+00:00",
+      "updated_at": "2026-11-20T21:20:33+00:00",
+      "duration_seconds": 1307,
+      "games_completed": 4,
+      "games_planned": null,
+      "games_remaining": null,
+      "wdl": null,
+      "elo": null,
+      "performance": [
+        {
+          "label": "Linux official executable",
+          "value": 103153472,
+          "unit": "bytes"
+        },
+        {
+          "label": "Linux MSZIP launcher",
+          "value": 88174740,
+          "unit": "bytes"
+        },
+        {
+          "label": "Windows official executable",
+          "value": 103046300,
+          "unit": "bytes"
+        },
+        {
+          "label": "Windows MSZIP launcher",
+          "value": 88265216,
+          "unit": "bytes"
+        }
+      ],
+      "conclusion": "Packaging result documented. Owner identifies MSZIP and direct GUI/HTML use in the earlier experiment. Its exact files, implementation and 135 MB input were not recovered. Independent reconstruction restores the official native engine automatically. No playing-strength claim.",
+      "report_url": "https://github.com/ShadyF4RR/Stockfish/blob/research/reporting/research-lab/reports/EXP-COMPRESSION-001.md",
+      "links": [
+        {
+          "label": "README.md",
+          "url": "https://github.com/ShadyF4RR/Stockfish/blob/research/adversarial-tactics/research-lab/results/EXP-COMPRESSION-001/README.md"
+        }
+      ],
+      "groups": [],
+      "build": "Official Stockfish 19 Linux x86-64 universal release, prebuilt; no recompilation.",
+      "correctness": "All four restores passed SHA-256 and length checks. Gzip outputs passed cmp, NNUE diagnostics matched at three positions, all eight benches searched 2497913 nodes. The actual MSZIP launchers passed UCI, a forced legal move and the SF19 release bench on native Windows and Linux GitHub runners. A Linux desktop GUI and Chromium HTML client drove the packaged engine.",
+      "source": "registered record",
+      "reported_by": "evaluation"
+    },
+    {
+      "id": "EXP-CONT-000001",
+      "status": "inconclusive",
+      "hypothesis": "Halving the six-ply continuation-history contribution when ordering quiet moves may improve first-quiet cutoff selection.",
+      "baseline_commit": "1819b9ea37588be8adb044179fb54512f87c8249",
+      "candidate_commit": "f2f67475aa6722e73f473d1203f8d833a65bc35f",
+      "source_changes": [
+        "src/movepick.cpp"
+      ],
+      "started_at": "2026-11-20T21:49:26+00:00",
+      "updated_at": "2026-11-20T21:57:09+00:00",
+      "duration_seconds": 463,
+      "games_completed": null,
+      "games_planned": null,
+      "games_remaining": null,
+      "wdl": null,
+      "elo": null,
+      "performance": [],
+      "conclusion": "Supervised subscription task. Candidate 4 wins, 9 draws, 3 losses in 8 fixed pairs. Paired 95% interval spans zero. No public test.",
+      "report_url": "https://github.com/ShadyF4RR/Stockfish/blob/research/reporting/research-lab/reports/EXP-CONT-000001.md",
+      "links": [],
+      "groups": [],
+      "build": null,
+      "correctness": null,
+      "source": "coordinator queue",
+      "reported_by": "coordinator"
+    },
+    {
+      "id": "EXP-CONT-000002",
+      "status": "inconclusive",
+      "hypothesis": "Testing SEE-qualified quiet checks with the general gives_check predicate may surface useful discovered checks earlier in tactical search.",
+      "baseline_commit": "1819b9ea37588be8adb044179fb54512f87c8249",
+      "candidate_commit": "c72e2482c77f8eabca37550f019ed55bfb8a7b79",
+      "source_changes": [
+        "src/movepick.cpp"
+      ],
+      "started_at": "2026-11-20T21:57:13+00:00",
+      "updated_at": "2026-11-20T22:16:28+00:00",
+      "duration_seconds": 1155,
+      "games_completed": null,
+      "games_planned": null,
+      "games_remaining": null,
+      "wdl": null,
+      "elo": null,
+      "performance": [],
+      "conclusion": "192/192 games completed. 34 time forfeits invalidated the registered panel. Direct candidate vs baseline 2W/21D/1L, holdout 1W/10D/1L, measured NPS -12.06%. No escalation or Fishtest.",
+      "report_url": "https://github.com/ShadyF4RR/Stockfish/blob/research/reporting/research-lab/reports/EXP-CONT-000002.md",
+      "links": [],
+      "groups": [],
+      "build": null,
+      "correctness": null,
+      "source": "coordinator queue",
+      "reported_by": "coordinator"
+    },
+    {
+      "id": "EXP-CONT-000003",
+      "status": "running",
+      "hypothesis": "Among legal root choices, retain a draw when alternatives are weaker and investigate whether supported equivalent expected results can prefer a continuation.",
+      "baseline_commit": "1819b9ea37588be8adb044179fb54512f87c8249",
+      "candidate_commit": null,
+      "source_changes": [],
+      "started_at": "2026-11-20T22:16:52+00:00",
+      "updated_at": "2026-11-20T22:16:52+00:00",
+      "duration_seconds": 111,
+      "games_completed": null,
+      "games_planned": null,
+      "games_remaining": null,
+      "wdl": null,
+      "elo": null,
+      "performance": [],
+      "conclusion": null,
+      "report_url": null,
+      "links": [],
+      "groups": [],
+      "build": null,
+      "correctness": null,
+      "source": "coordinator queue",
+      "reported_by": "coordinator"
+    },
+    {
+      "id": "EXP-SEARCH-SIXPLY-001",
+      "status": "inconclusive",
+      "hypothesis": "Reducing the six-ply continuation history weight in quiet move ordering may improve cutoff selection and playing strength.",
+      "baseline_commit": "1819b9ea37588be8adb044179fb54512f87c8249",
+      "candidate_commit": "f2f67475aa6722e73f473d1203f8d833a65bc35f",
+      "source_changes": [
+        "src/movepick.cpp"
+      ],
+      "started_at": "2026-11-20T21:47:56+00:00",
+      "updated_at": "2026-11-20T21:55:32+00:00",
+      "duration_seconds": 456,
+      "games_completed": 16,
+      "games_planned": 16,
+      "games_remaining": 0,
+      "wdl": {
+        "wins": 4,
+        "draws": 9,
+        "losses": 3
+      },
+      "elo": {
+        "estimate": 21.74306492903707,
+        "lower": -507.5606494350888,
+        "upper": null,
+        "method": "fixed-sample paired Hoeffding"
+      },
+      "performance": [
+        {
+          "label": "Baseline mean bench",
+          "value": 858781,
+          "unit": "NPS"
+        },
+        {
+          "label": "Candidate mean bench",
+          "value": 806134,
+          "unit": "NPS"
+        }
+      ],
+      "conclusion": "4 wins, 9 draws, 3 losses across eight color-reversed pairs. Candidate Elo estimate +21.7, 95% paired Hoeffding interval [-507.6, unbounded].",
+      "report_url": "https://github.com/ShadyF4RR/Stockfish/blob/research/reporting/research-lab/reports/EXP-SEARCH-SIXPLY-001.md",
+      "links": [
+        {
+          "label": "README.md",
+          "url": "https://github.com/ShadyF4RR/Stockfish/blob/research/adversarial-tactics/research-lab/results/EXP-SEARCH-SIXPLY-001/README.md"
+        },
+        {
+          "label": "plan.json",
+          "url": "https://github.com/ShadyF4RR/Stockfish/blob/research/adversarial-tactics/research-lab/results/EXP-SEARCH-SIXPLY-001/plan.json"
+        },
+        {
+          "label": "bench.json",
+          "url": "https://github.com/ShadyF4RR/Stockfish/blob/research/adversarial-tactics/research-lab/results/EXP-SEARCH-SIXPLY-001/bench.json"
+        },
+        {
+          "label": "validation.log",
+          "url": "https://github.com/ShadyF4RR/Stockfish/blob/research/adversarial-tactics/research-lab/results/EXP-SEARCH-SIXPLY-001/validation.log"
+        },
+        {
+          "label": "games.pgn",
+          "url": "https://github.com/ShadyF4RR/Stockfish/blob/research/adversarial-tactics/research-lab/results/EXP-SEARCH-SIXPLY-001/games.pgn"
+        },
+        {
+          "label": "fastchess.log",
+          "url": "https://github.com/ShadyF4RR/Stockfish/blob/research/adversarial-tactics/research-lab/results/EXP-SEARCH-SIXPLY-001/fastchess.log"
+        },
+        {
+          "label": "match.json",
+          "url": "https://github.com/ShadyF4RR/Stockfish/blob/research/adversarial-tactics/research-lab/results/EXP-SEARCH-SIXPLY-001/match.json"
+        },
+        {
+          "label": "initial-validator.json",
+          "url": "https://github.com/ShadyF4RR/Stockfish/blob/research/adversarial-tactics/research-lab/results/EXP-SEARCH-SIXPLY-001/initial-validator.json"
+        }
+      ],
+      "groups": [],
+      "build": {
+        "ARCH": "x86-64-avx2",
+        "COMP": "gcc",
+        "CXX": "g++",
+        "target": "build"
+      },
+      "correctness": {
+        "binary_sha256": "b7adc6946a0bb975a183e8d32a69439c6f165f0a6350233856efaf85aeac036e",
+        "commit": "f2f67475aa6722e73f473d1203f8d833a65bc35f",
+        "notes": "Full perft and UCI passed on first launch. Exposed /etc/alternatives for awk in a fresh sandbox and reran the upstream reproducibility test unchanged.",
+        "perft": "passed",
+        "perft_positions": 20,
+        "reprosearch": "passed",
+        "reprosearch_node_budgets": 20,
+        "uci": "passed"
+      },
+      "source": "registered record",
+      "reported_by": "search"
+    },
+    {
+      "id": "EXP-TACTICAL-QUIETCHECK-001",
+      "status": "active",
+      "hypothesis": "The existing quiet-check ordering bonus can recognize useful discovered checks and special checking moves that direct destination-square masks miss. Earlier ordering may save search when these quiet moves force a reply.",
+      "baseline_commit": "1819b9ea37588be8adb044179fb54512f87c8249",
+      "candidate_commit": "c72e2482c77f8eabca37550f019ed55bfb8a7b79",
+      "source_changes": [
+        "src/movepick.cpp"
+      ],
+      "started_at": "2026-11-20T21:56:48+00:00",
+      "updated_at": "2026-11-20T22:01:07+00:00",
+      "duration_seconds": 1315,
+      "games_completed": null,
+      "games_planned": null,
+      "games_remaining": null,
+      "wdl": null,
+      "elo": null,
+      "performance": [
+        {
+          "label": "Baseline mean bench",
+          "value": 270008,
+          "unit": "NPS"
+        },
+        {
+          "label": "Candidate mean bench",
+          "value": 237440,
+          "unit": "NPS"
+        }
+      ],
+      "conclusion": "Passed source review, UCI checks, perft and reproducibility. Local panel EXP-ADVERSARIAL-001 owns match outcomes; no public testing or promotion.",
+      "report_url": null,
+      "links": [
+        {
+          "label": "README.md",
+          "url": "https://github.com/ShadyF4RR/Stockfish/blob/research/adversarial-tactics/research-lab/results/EXP-TACTICAL-QUIETCHECK-001/README.md"
+        },
+        {
+          "label": "plan.json",
+          "url": "https://github.com/ShadyF4RR/Stockfish/blob/research/adversarial-tactics/research-lab/results/EXP-TACTICAL-QUIETCHECK-001/plan.json"
+        },
+        {
+          "label": "bench.json",
+          "url": "https://github.com/ShadyF4RR/Stockfish/blob/research/adversarial-tactics/research-lab/results/EXP-TACTICAL-QUIETCHECK-001/bench.json"
+        },
+        {
+          "label": "validation.log",
+          "url": "https://github.com/ShadyF4RR/Stockfish/blob/research/adversarial-tactics/research-lab/results/EXP-TACTICAL-QUIETCHECK-001/validation.log"
+        }
+      ],
+      "groups": [],
+      "build": {
+        "ARCH": "x86-64-avx2",
+        "COMP": "gcc",
+        "CXX": "g++",
+        "target": "build"
+      },
+      "correctness": {
+        "binary_sha256": "b14133496231665034aa2a8ea75d475a05224b3f3528fb97f06ca317cecb856d",
+        "commit": "c72e2482c77f8eabca37550f019ed55bfb8a7b79",
+        "perft": "passed",
+        "reprosearch": "passed",
+        "uci": "passed"
+      },
+      "source": "registered record",
+      "reported_by": "search"
+    }
+  ],
+  "promotions": [],
+  "fishtest": [],
+  "activity": {
+    "commits": [
+      {
+        "title": "Reserve only the bounded worker time needed for a supervised experiment",
+        "url": "https://github.com/ShadyF4RR/Stockfish/commit/5eb6c83bd1b3edceb6dcd195d6e2f5a471b9ca3d",
+        "at": "2026-11-20T22:16:48Z"
+      },
+      {
+        "title": "Verify evidence handoffs with sixteen distinct legal opening roots",
+        "url": "https://github.com/ShadyF4RR/Stockfish/commit/b2e170294412178b3ae3c629f32f9dc6f641a704",
+        "at": "2026-11-20T22:05:54Z"
+      },
+      {
+        "title": "Match Fastchess opening positions with legal en passant rights",
+        "url": "https://github.com/ShadyF4RR/Stockfish/commit/4f213c04efae47bf37d0915622f76f73e0bd2651",
+        "at": "2026-11-20T22:01:43Z"
+      },
+      {
+        "title": "Restore unprivileged access to sparse worker mount points",
+        "url": "https://github.com/ShadyF4RR/Stockfish/commit/e7c0a1fd9599fc04ac3e0c09c65324e04669ddb3",
+        "at": "2026-11-20T22:00:21Z"
+      },
+      {
+        "title": "Record first subscription-backed Stockfish experiment and paired screen",
+        "url": "https://github.com/ShadyF4RR/Stockfish/commit/66282a02e0d24f94c82a66afc853ca496f062b61",
+        "at": "2026-11-20T21:57:15Z"
+      },
+      {
+        "title": "Distinguish inference route reachability from authenticated inference",
+        "url": "https://github.com/ShadyF4RR/Stockfish/commit/97bb9610b107f4bf74fc56a6d4ac42c4ef238d1f",
+        "at": "2026-11-20T21:54:30Z"
+      },
+      {
+        "title": "Replicate cloud-authored candidates on GitHub without allocating extra games",
+        "url": "https://github.com/ShadyF4RR/Stockfish/commit/f1729e31aedcc99fa55099df5a3bc1f8b6c684cc",
+        "at": "2026-11-20T21:53:33Z"
+      },
+      {
+        "title": "Coordinate subscription-only cloud research with a durable bounded fork queue",
+        "url": "https://github.com/ShadyF4RR/Stockfish/commit/a2a0a9cda2e18b2ee421751cf6a9639a740bad13",
+        "at": "2026-11-20T21:51:17Z"
+      }
+    ],
+    "pull_requests": [
+      {
+        "title": "Establish the Stockfish research lab, Fishtest workflow and compression evidence",
+        "url": "https://github.com/ShadyF4RR/Stockfish/pull/1",
+        "at": "2026-11-20T21:24:18Z"
+      },
+      {
+        "title": "Share the official Fishtest client and monitor verified lab runs",
+        "url": "https://github.com/ShadyF4RR/Stockfish/pull/2",
+        "at": "2026-11-20T21:32:10Z"
+      },
+      {
+        "title": "Study general tactical search with an adversarial opening holdout and independent opponents",
+        "url": "https://github.com/ShadyF4RR/Stockfish/pull/4",
+        "at": "2026-11-20T22:15:46Z"
+      },
+      {
+        "title": "Coordinate bounded Stockfish experiments in subscription-authenticated Codex Cloud",
+        "url": "https://github.com/ShadyF4RR/Stockfish/pull/3",
+        "at": "2026-11-20T22:17:04Z"
+      }
+    ],
+    "status": "supplied"
+  },
+  "scheduler": {
+    "status": "Two four-hour pilot ticks configured; no verified unattended experiment cycle",
+    "updated_at": "2026-11-20T22:18:31.467696+00:00",
+    "url": "https://github.com/ShadyF4RR/Stockfish/pull/3"
+  },
+  "notifications": [],
+  "report_ref": "research/reporting",
+  "validated_performance": [],
+  "seen_notification_ids": [],
+  "milestone_digest": "f2bc54e3a3ab6bfd3400a0bee8069d5b859712bd81f4f2a4ddafc790294355c0"
+}
