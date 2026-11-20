@@ -3,11 +3,10 @@
 import argparse
 import hashlib
 import json
-import os
 from pathlib import Path
 import re
 import shutil
-import statistics
+import subprocess
 import sys
 import tempfile
 import time
@@ -74,8 +73,8 @@ def plan(args):
     for field in COMPARABLE:
         if builds["baseline"][field] != builds["candidate"][field]:
             raise ValueError(f"unmatched builds: {field}")
-    refs = {name: dict(profile, sha256=sha256(path)) for (name, profile), path in
-            ((item, engine(args, item[0])) for item in PROFILES.items())}
+    refs = {name: dict(profile, sha256=sha256(engine(args, name)))
+            for name, profile in PROFILES.items()}
     cells = []
     for split in SPLITS:
         blocks = sorted(((name, clock) for name in PROFILES for clock in CLOCKS),
@@ -182,7 +181,7 @@ def campaign(args, reg):
                 if len(item["games"]) != len(subset)*2 or any(g["termination"]!="normal" for g in item["games"]):
                     raise ValueError("missing game or abnormal termination")
                 item["status"] = "complete"
-            except (OSError, ValueError, KeyError, TimeoutError) as exc:
+            except (OSError, ValueError, KeyError, TimeoutError, subprocess.TimeoutExpired) as exc:
                 item["reason"] = str(exc)
                 file = scratch/"games.pgn"
                 if not item["pgn_sha256"] and file.is_file() and not file.is_symlink() and file.stat().st_size <= 1024**2:
@@ -209,8 +208,10 @@ def main():
     reg=args.out/"preregistration.json"
     if args.action=="register":
         args.out.mkdir(parents=True, exist_ok=True)
+        settings = plan(args)
         with reg.open("x") as stream:
-            json.dump(plan(args), stream, indent=2); stream.write("\n")
+            json.dump(settings, stream, indent=2)
+            stream.write("\n")
         return 0
     return campaign(args, json.loads(reg.read_text()))
 

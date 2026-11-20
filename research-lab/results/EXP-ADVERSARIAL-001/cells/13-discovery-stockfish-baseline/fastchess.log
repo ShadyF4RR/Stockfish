@@ -1,0 +1,21 @@
+bwrap: Only the last --chdir option will take effect
+Started game 1 of 6 (arm_baseline vs vs_stockfish)
+Started game 2 of 6 (vs_stockfish vs arm_baseline)
+Finished game 1 (arm_baseline vs vs_stockfish): 1/2-1/2 {Draw by insufficient mating material}
+Started game 3 of 6 (arm_baseline vs vs_stockfish)
+Finished game 2 (vs_stockfish vs arm_baseline): 1/2-1/2 {Draw by 3-fold repetition}
+Started game 4 of 6 (vs_stockfish vs arm_baseline)
+Finished game 4 (vs_stockfish vs arm_baseline): 1-0 {White mates}
+Started game 5 of 6 (arm_baseline vs vs_stockfish)
+Finished game 3 (arm_baseline vs vs_stockfish): 1-0 {White mates}
+Started game 6 of 6 (vs_stockfish vs arm_baseline)
+Finished game 5 (arm_baseline vs vs_stockfish): 1/2-1/2 {Draw by insufficient mating material}
+Finished game 6 (vs_stockfish vs arm_baseline): 0-1 {Black mates}
+--------------------------------------------------
+Results of arm_baseline vs vs_stockfish (1+0.01, 1t, 16MB, book.epd):
+Elo: 58.45 +/- 98.05, nElo: 173.72 +/- 278.00
+LOS: 88.97 %, DrawRatio: 66.67 %, PairsRatio: inf
+Games: 6, Wins: 2, Losses: 1, Draws: 3, Points: 3.5 (58.33 %)
+Ptnml(0-2): [0, 0, 2, 1, 0], WL/DD Ratio: 1.00
+--------------------------------------------------
+Finished match

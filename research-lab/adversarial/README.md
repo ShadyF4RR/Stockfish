@@ -15,3 +15,7 @@ Read the [frozen positions](positions.md), [analysis rules](analysis-plan.md), [
 ## First experiment
 
 The first candidate changes a single quiet-move ordering predicate. Its existing exchange-safety threshold still applies. A quiet discovered check illustrates which moves become eligible. The experiment has no opening-specific data or UCI option in the engine. [Engine change](https://github.com/ShadyF4RR/Stockfish/commit/c72e2482c77f8eabca37550f019ed55bfb8a7b79) · [Preregistered mechanism and benchmark](../results/EXP-TACTICAL-QUIETCHECK-001/plan.json)
+
+## Outcome
+
+The pilot completed 192 games. Thirty-four time forfeits invalidate the full registered comparison. On the untouched direct Stockfish panel the candidate had one win, ten draws and one loss. There was insufficient evidence for a general strength gain or a practical win-rate gain. Its measured NPS was lower on the shared test host. The experiment stays in the fork. [Analysis, intervals and W/D/L](../results/EXP-ADVERSARIAL-001/REPORT.md) · [Raw games by cell](../results/EXP-ADVERSARIAL-001/cells) · [Metric protocol](METRIC.md) · [Discovery measurements](../results/EXP-ADVERSARIAL-001/difficulty-discovery.json)

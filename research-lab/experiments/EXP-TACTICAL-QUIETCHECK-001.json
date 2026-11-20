@@ -1,0 +1,102 @@
+{
+  "baseline_commit": "1819b9ea37588be8adb044179fb54512f87c8249",
+  "candidate_commit": "c72e2482c77f8eabca37550f019ed55bfb8a7b79",
+  "created_at": "2026-11-20T21:56:48+00:00",
+  "evidence": {
+    "artifacts": [
+      "research-lab/results/EXP-TACTICAL-QUIETCHECK-001/README.md",
+      "research-lab/results/EXP-TACTICAL-QUIETCHECK-001/plan.json",
+      "research-lab/results/EXP-TACTICAL-QUIETCHECK-001/mechanism.json",
+      "research-lab/results/EXP-TACTICAL-QUIETCHECK-001/validation.log",
+      "research-lab/results/EXP-TACTICAL-QUIETCHECK-001/review.json"
+    ],
+    "benchmark": "research-lab/results/EXP-TACTICAL-QUIETCHECK-001/bench.json",
+    "build_configuration": {
+      "ARCH": "x86-64-avx2",
+      "COMP": "gcc",
+      "CXX": "g++",
+      "target": "build"
+    },
+    "compiler": "g++ (Debian 14.2.0-19) 14.2.0",
+    "compression": null,
+    "compute_usage": {
+      "bench_cpu_seconds": 13.1082,
+      "paid_api_usd": 0,
+      "public_fishtest_games": 0
+    },
+    "correctness": {
+      "binary_sha256": "b14133496231665034aa2a8ea75d475a05224b3f3528fb97f06ca317cecb856d",
+      "commit": "c72e2482c77f8eabca37550f019ed55bfb8a7b79",
+      "perft": "passed",
+      "reprosearch": "passed",
+      "uci": "passed"
+    },
+    "elo_estimate": null,
+    "elo_uncertainty": null,
+    "fishtest": null,
+    "games": null,
+    "hardware": {
+      "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+      "cpus_available": 5,
+      "kernel": "6.18.57",
+      "machine": "x86_64"
+    },
+    "hardware_review": null,
+    "match_settings": "research-lab/results/EXP-ADVERSARIAL-001/preregistration.json",
+    "review": {
+      "baseline_sha": "1819b9ea37588be8adb044179fb54512f87c8249",
+      "reviewed_sha": "c72e2482c77f8eabca37550f019ed55bfb8a7b79",
+      "reviewer": "/root/independent_review",
+      "summary": "Single quiet-scoring predicate switches cached direct-check squares to the existing const gives_check predicate (including discovered and applicable special-move checks). Generated moves satisfy its structural assertions; legal move filtering is unchanged. Existing see_ge(-75) treats special moves as zero and thus admits them. No ownership, sharing, or indexing change or identified UB. General across openings. Additional checks on quiet moves may cost NPS; measure on control suite and clocked paired runs. Source-only approval for screening; no strength claim.",
+      "unresolved_defects": [],
+      "verdict": "approved"
+    },
+    "statistical_decision": "pending panel results"
+  },
+  "explanation": "Passed source review, UCI checks, perft and reproducibility. Local panel EXP-ADVERSARIAL-001 owns match outcomes; no public testing or promotion.",
+  "hypothesis": "The existing quiet-check ordering bonus can recognize useful discovered checks and special checking moves that direct destination-square masks miss. Earlier ordering may save search when these quiet moves force a reply.",
+  "id": "EXP-TACTICAL-QUIETCHECK-001",
+  "related_experiments": [],
+  "reports": [
+    {
+      "baseline_commit": "1819b9ea37588be8adb044179fb54512f87c8249",
+      "candidate_commit": "c72e2482c77f8eabca37550f019ed55bfb8a7b79",
+      "evidence": {
+        "artifacts": [
+          "research-lab/results/EXP-TACTICAL-QUIETCHECK-001/mechanism.json",
+          "research-lab/results/EXP-TACTICAL-QUIETCHECK-001/plan.json"
+        ]
+      },
+      "role": "search",
+      "summary": "The existing quiet-check ordering bonus can recognize useful discovered checks and special checking moves that direct destination-square masks miss. Earlier ordering may save search when these quiet moves force a reply."
+    },
+    {
+      "baseline_commit": "1819b9ea37588be8adb044179fb54512f87c8249",
+      "candidate_commit": "c72e2482c77f8eabca37550f019ed55bfb8a7b79",
+      "evidence": {
+        "review": "research-lab/results/EXP-TACTICAL-QUIETCHECK-001/review.json"
+      },
+      "role": "reviewer",
+      "summary": "Single quiet-scoring predicate switches cached direct-check squares to the existing const gives_check predicate (including discovered and applicable special-move checks). Generated moves satisfy its structural assertions; legal move filtering is unchanged. Existing see_ge(-75) treats special moves as zero and thus admits them. No ownership, sharing, or indexing change or identified UB. General across openings. Additional checks on quiet moves may cost NPS; measure on control suite and clocked paired runs. Source-only approval for screening; no strength claim."
+    },
+    {
+      "baseline_commit": "1819b9ea37588be8adb044179fb54512f87c8249",
+      "candidate_commit": "c72e2482c77f8eabca37550f019ed55bfb8a7b79",
+      "evidence": {
+        "benchmark": "research-lab/results/EXP-TACTICAL-QUIETCHECK-001/bench.json",
+        "correctness": "research-lab/results/EXP-TACTICAL-QUIETCHECK-001/validation.log"
+      },
+      "role": "testing",
+      "summary": "All 20 perft cases passed. Repeated searches agreed across 20 node budgets. The candidate reproduced its 1,058,541-node benchmark in both runs."
+    }
+  ],
+  "responsible_agent": "search",
+  "retry_reason": null,
+  "schema_version": 1,
+  "source_changes": [
+    "src/movepick.cpp"
+  ],
+  "status": "active",
+  "topic": "quiet-check-ordering-discovered",
+  "updated_at": "2026-11-20T22:01:07+00:00"
+}

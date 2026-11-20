@@ -1,0 +1,1249 @@
+{
+  "status": "unverified_or_incomplete",
+  "reason": "campaign status incomplete",
+  "observed": [
+    {
+      "split": "discovery",
+      "opponent": "weiss",
+      "time_control": "1+0.01",
+      "arm": "baseline",
+      "status": "complete",
+      "normal_wdl": [
+        6,
+        0,
+        0
+      ]
+    },
+    {
+      "split": "discovery",
+      "opponent": "weiss",
+      "time_control": "1+0.01",
+      "arm": "candidate",
+      "status": "complete",
+      "normal_wdl": [
+        5,
+        1,
+        0
+      ]
+    },
+    {
+      "split": "discovery",
+      "opponent": "ethereal",
+      "time_control": "1+0.01",
+      "arm": "candidate",
+      "status": "invalid",
+      "normal_wdl": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "split": "discovery",
+      "opponent": "ethereal",
+      "time_control": "1+0.01",
+      "arm": "baseline",
+      "status": "invalid",
+      "normal_wdl": [
+        3,
+        0,
+        0
+      ]
+    },
+    {
+      "split": "discovery",
+      "opponent": "fruit",
+      "time_control": "3+0.03",
+      "arm": "baseline",
+      "status": "complete",
+      "normal_wdl": [
+        6,
+        0,
+        0
+      ]
+    },
+    {
+      "split": "discovery",
+      "opponent": "fruit",
+      "time_control": "3+0.03",
+      "arm": "candidate",
+      "status": "complete",
+      "normal_wdl": [
+        6,
+        0,
+        0
+      ]
+    },
+    {
+      "split": "discovery",
+      "opponent": "weiss",
+      "time_control": "3+0.03",
+      "arm": "candidate",
+      "status": "invalid",
+      "normal_wdl": [
+        5,
+        0,
+        0
+      ]
+    },
+    {
+      "split": "discovery",
+      "opponent": "weiss",
+      "time_control": "3+0.03",
+      "arm": "baseline",
+      "status": "complete",
+      "normal_wdl": [
+        6,
+        0,
+        0
+      ]
+    },
+    {
+      "split": "discovery",
+      "opponent": "stockfish",
+      "time_control": "3+0.03",
+      "arm": "baseline",
+      "status": "complete",
+      "normal_wdl": [
+        2,
+        4,
+        0
+      ]
+    },
+    {
+      "split": "discovery",
+      "opponent": "stockfish",
+      "time_control": "3+0.03",
+      "arm": "candidate",
+      "status": "complete",
+      "normal_wdl": [
+        0,
+        6,
+        0
+      ]
+    },
+    {
+      "split": "discovery",
+      "opponent": "fruit",
+      "time_control": "1+0.01",
+      "arm": "candidate",
+      "status": "complete",
+      "normal_wdl": [
+        6,
+        0,
+        0
+      ]
+    },
+    {
+      "split": "discovery",
+      "opponent": "fruit",
+      "time_control": "1+0.01",
+      "arm": "baseline",
+      "status": "complete",
+      "normal_wdl": [
+        6,
+        0,
+        0
+      ]
+    },
+    {
+      "split": "discovery",
+      "opponent": "stockfish",
+      "time_control": "1+0.01",
+      "arm": "baseline",
+      "status": "complete",
+      "normal_wdl": [
+        2,
+        3,
+        1
+      ]
+    },
+    {
+      "split": "discovery",
+      "opponent": "stockfish",
+      "time_control": "1+0.01",
+      "arm": "candidate",
+      "status": "complete",
+      "normal_wdl": [
+        1,
+        5,
+        0
+      ]
+    },
+    {
+      "split": "discovery",
+      "opponent": "ethereal",
+      "time_control": "3+0.03",
+      "arm": "candidate",
+      "status": "invalid",
+      "normal_wdl": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "split": "discovery",
+      "opponent": "ethereal",
+      "time_control": "3+0.03",
+      "arm": "baseline",
+      "status": "invalid",
+      "normal_wdl": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "split": "holdout",
+      "opponent": "fruit",
+      "time_control": "3+0.03",
+      "arm": "baseline",
+      "status": "complete",
+      "normal_wdl": [
+        6,
+        0,
+        0
+      ]
+    },
+    {
+      "split": "holdout",
+      "opponent": "fruit",
+      "time_control": "3+0.03",
+      "arm": "candidate",
+      "status": "complete",
+      "normal_wdl": [
+        6,
+        0,
+        0
+      ]
+    },
+    {
+      "split": "holdout",
+      "opponent": "weiss",
+      "time_control": "1+0.01",
+      "arm": "candidate",
+      "status": "complete",
+      "normal_wdl": [
+        5,
+        1,
+        0
+      ]
+    },
+    {
+      "split": "holdout",
+      "opponent": "weiss",
+      "time_control": "1+0.01",
+      "arm": "baseline",
+      "status": "complete",
+      "normal_wdl": [
+        5,
+        1,
+        0
+      ]
+    },
+    {
+      "split": "holdout",
+      "opponent": "fruit",
+      "time_control": "1+0.01",
+      "arm": "baseline",
+      "status": "complete",
+      "normal_wdl": [
+        6,
+        0,
+        0
+      ]
+    },
+    {
+      "split": "holdout",
+      "opponent": "fruit",
+      "time_control": "1+0.01",
+      "arm": "candidate",
+      "status": "complete",
+      "normal_wdl": [
+        6,
+        0,
+        0
+      ]
+    },
+    {
+      "split": "holdout",
+      "opponent": "weiss",
+      "time_control": "3+0.03",
+      "arm": "candidate",
+      "status": "complete",
+      "normal_wdl": [
+        6,
+        0,
+        0
+      ]
+    },
+    {
+      "split": "holdout",
+      "opponent": "weiss",
+      "time_control": "3+0.03",
+      "arm": "baseline",
+      "status": "complete",
+      "normal_wdl": [
+        6,
+        0,
+        0
+      ]
+    },
+    {
+      "split": "holdout",
+      "opponent": "ethereal",
+      "time_control": "3+0.03",
+      "arm": "baseline",
+      "status": "invalid",
+      "normal_wdl": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "split": "holdout",
+      "opponent": "ethereal",
+      "time_control": "3+0.03",
+      "arm": "candidate",
+      "status": "invalid",
+      "normal_wdl": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "split": "holdout",
+      "opponent": "ethereal",
+      "time_control": "1+0.01",
+      "arm": "candidate",
+      "status": "invalid",
+      "normal_wdl": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "split": "holdout",
+      "opponent": "ethereal",
+      "time_control": "1+0.01",
+      "arm": "baseline",
+      "status": "invalid",
+      "normal_wdl": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "split": "holdout",
+      "opponent": "stockfish",
+      "time_control": "1+0.01",
+      "arm": "baseline",
+      "status": "complete",
+      "normal_wdl": [
+        1,
+        5,
+        0
+      ]
+    },
+    {
+      "split": "holdout",
+      "opponent": "stockfish",
+      "time_control": "1+0.01",
+      "arm": "candidate",
+      "status": "complete",
+      "normal_wdl": [
+        0,
+        5,
+        1
+      ]
+    },
+    {
+      "split": "holdout",
+      "opponent": "stockfish",
+      "time_control": "3+0.03",
+      "arm": "candidate",
+      "status": "complete",
+      "normal_wdl": [
+        1,
+        5,
+        0
+      ]
+    },
+    {
+      "split": "holdout",
+      "opponent": "stockfish",
+      "time_control": "3+0.03",
+      "arm": "baseline",
+      "status": "complete",
+      "normal_wdl": [
+        2,
+        3,
+        1
+      ]
+    }
+  ],
+  "planned_games": 192,
+  "planned_cells": 32,
+  "completed_cells": 23,
+  "observed_games": 192,
+  "sensitivity": {
+    "discovery": {
+      "cells": [
+        {
+          "opponent": "stockfish",
+          "clock": "1+0.01",
+          "baseline_wdl": [
+            2,
+            3,
+            1
+          ],
+          "baseline_abnormal": 0,
+          "candidate_wdl": [
+            1,
+            5,
+            0
+          ],
+          "candidate_abnormal": 0,
+          "registered_positions": 3,
+          "normal_complete_openings": 3,
+          "normal_pair_candidate_wdl": [
+            1,
+            5,
+            0
+          ],
+          "normal_pair_baseline_wdl": null,
+          "bounds": {
+            "score": [
+              0.08333333333333333,
+              0.08333333333333333
+            ]
+          },
+          "normal_pair_score": 0.08333333333333333
+        },
+        {
+          "opponent": "stockfish",
+          "clock": "3+0.03",
+          "baseline_wdl": [
+            2,
+            4,
+            0
+          ],
+          "baseline_abnormal": 0,
+          "candidate_wdl": [
+            0,
+            6,
+            0
+          ],
+          "candidate_abnormal": 0,
+          "registered_positions": 3,
+          "normal_complete_openings": 3,
+          "normal_pair_candidate_wdl": [
+            0,
+            6,
+            0
+          ],
+          "normal_pair_baseline_wdl": null,
+          "bounds": {
+            "score": [
+              0.0,
+              0.0
+            ]
+          },
+          "normal_pair_score": 0.0
+        },
+        {
+          "opponent": "fruit",
+          "clock": "1+0.01",
+          "baseline_wdl": [
+            6,
+            0,
+            0
+          ],
+          "baseline_abnormal": 0,
+          "candidate_wdl": [
+            6,
+            0,
+            0
+          ],
+          "candidate_abnormal": 0,
+          "registered_positions": 3,
+          "normal_complete_openings": 3,
+          "normal_pair_candidate_wdl": [
+            6,
+            0,
+            0
+          ],
+          "normal_pair_baseline_wdl": [
+            6,
+            0,
+            0
+          ],
+          "bounds": {
+            "win": [
+              0,
+              0
+            ],
+            "score": [
+              0.0,
+              0.0
+            ]
+          },
+          "normal_pair_win": 0.0,
+          "normal_pair_score": 0.0
+        },
+        {
+          "opponent": "fruit",
+          "clock": "3+0.03",
+          "baseline_wdl": [
+            6,
+            0,
+            0
+          ],
+          "baseline_abnormal": 0,
+          "candidate_wdl": [
+            6,
+            0,
+            0
+          ],
+          "candidate_abnormal": 0,
+          "registered_positions": 3,
+          "normal_complete_openings": 3,
+          "normal_pair_candidate_wdl": [
+            6,
+            0,
+            0
+          ],
+          "normal_pair_baseline_wdl": [
+            6,
+            0,
+            0
+          ],
+          "bounds": {
+            "win": [
+              0,
+              0
+            ],
+            "score": [
+              0.0,
+              0.0
+            ]
+          },
+          "normal_pair_win": 0.0,
+          "normal_pair_score": 0.0
+        },
+        {
+          "opponent": "ethereal",
+          "clock": "1+0.01",
+          "baseline_wdl": [
+            6,
+            0,
+            0
+          ],
+          "baseline_abnormal": 3,
+          "candidate_wdl": [
+            6,
+            0,
+            0
+          ],
+          "candidate_abnormal": 4,
+          "registered_positions": 3,
+          "normal_complete_openings": 1,
+          "normal_pair_candidate_wdl": [
+            2,
+            0,
+            0
+          ],
+          "normal_pair_baseline_wdl": [
+            2,
+            0,
+            0
+          ],
+          "bounds": {
+            "win": [
+              -0.6666666666666666,
+              0.5
+            ],
+            "score": [
+              -0.6666666666666666,
+              0.5
+            ]
+          },
+          "normal_pair_win": 0.0,
+          "normal_pair_score": 0.0
+        },
+        {
+          "opponent": "ethereal",
+          "clock": "3+0.03",
+          "baseline_wdl": [
+            6,
+            0,
+            0
+          ],
+          "baseline_abnormal": 5,
+          "candidate_wdl": [
+            6,
+            0,
+            0
+          ],
+          "candidate_abnormal": 5,
+          "registered_positions": 3,
+          "normal_complete_openings": 0,
+          "normal_pair_candidate_wdl": [
+            0,
+            0,
+            0
+          ],
+          "normal_pair_baseline_wdl": [
+            0,
+            0,
+            0
+          ],
+          "bounds": {
+            "win": [
+              -0.8333333333333334,
+              0.8333333333333334
+            ],
+            "score": [
+              -0.8333333333333334,
+              0.8333333333333334
+            ]
+          },
+          "normal_pair_win": null,
+          "normal_pair_score": null
+        },
+        {
+          "opponent": "weiss",
+          "clock": "1+0.01",
+          "baseline_wdl": [
+            6,
+            0,
+            0
+          ],
+          "baseline_abnormal": 0,
+          "candidate_wdl": [
+            5,
+            1,
+            0
+          ],
+          "candidate_abnormal": 0,
+          "registered_positions": 3,
+          "normal_complete_openings": 3,
+          "normal_pair_candidate_wdl": [
+            5,
+            1,
+            0
+          ],
+          "normal_pair_baseline_wdl": [
+            6,
+            0,
+            0
+          ],
+          "bounds": {
+            "win": [
+              -0.16666666666666666,
+              -0.16666666666666666
+            ],
+            "score": [
+              -0.08333333333333333,
+              -0.08333333333333333
+            ]
+          },
+          "normal_pair_win": -0.16666666666666666,
+          "normal_pair_score": -0.08333333333333333
+        },
+        {
+          "opponent": "weiss",
+          "clock": "3+0.03",
+          "baseline_wdl": [
+            6,
+            0,
+            0
+          ],
+          "baseline_abnormal": 0,
+          "candidate_wdl": [
+            6,
+            0,
+            0
+          ],
+          "candidate_abnormal": 1,
+          "registered_positions": 3,
+          "normal_complete_openings": 2,
+          "normal_pair_candidate_wdl": [
+            4,
+            0,
+            0
+          ],
+          "normal_pair_baseline_wdl": [
+            4,
+            0,
+            0
+          ],
+          "bounds": {
+            "win": [
+              -0.16666666666666666,
+              0
+            ],
+            "score": [
+              -0.16666666666666666,
+              0.0
+            ]
+          },
+          "normal_pair_win": 0.0,
+          "normal_pair_score": 0.0
+        }
+      ],
+      "opening_families": [
+        "London",
+        "Queen\u2019s Gambit Declined",
+        "Sicilian"
+      ],
+      "objective": {
+        "score": {
+          "sample_range": [
+            0.041666666666666664,
+            0.041666666666666664
+          ],
+          "uncertainty_envelope": [
+            -0.5,
+            0.5
+          ]
+        },
+        "normal_complete_openings_across_cells": 6,
+        "candidate_normal_pair_wdl": [
+          1,
+          11,
+          0
+        ],
+        "baseline_normal_pair_wdl": null
+      },
+      "practical": {
+        "win": {
+          "sample_range": [
+            -0.3055555555555556,
+            0.19444444444444445
+          ],
+          "uncertainty_envelope": [
+            -1.0,
+            1.0
+          ]
+        },
+        "score": {
+          "sample_range": [
+            -0.2916666666666667,
+            0.20833333333333334
+          ],
+          "uncertainty_envelope": [
+            -1.0,
+            1.0
+          ]
+        },
+        "normal_complete_openings_across_cells": 12,
+        "candidate_normal_pair_wdl": [
+          23,
+          1,
+          0
+        ],
+        "baseline_normal_pair_wdl": [
+          24,
+          0,
+          0
+        ]
+      },
+      "raw_arm_outcomes": {
+        "head_to_head": {
+          "candidate": {
+            "wdl": [
+              1,
+              11,
+              0
+            ],
+            "fractions": [
+              0.08333333333333333,
+              0.9166666666666666,
+              0.0
+            ]
+          },
+          "baseline": {
+            "wdl": [
+              4,
+              7,
+              1
+            ],
+            "fractions": [
+              0.3333333333333333,
+              0.5833333333333334,
+              0.08333333333333333
+            ]
+          }
+        },
+        "independent": {
+          "candidate": {
+            "wdl": [
+              35,
+              1,
+              0
+            ],
+            "fractions": [
+              0.9722222222222222,
+              0.027777777777777776,
+              0.0
+            ]
+          },
+          "baseline": {
+            "wdl": [
+              36,
+              0,
+              0
+            ],
+            "fractions": [
+              1.0,
+              0.0,
+              0.0
+            ]
+          }
+        }
+      }
+    },
+    "holdout": {
+      "cells": [
+        {
+          "opponent": "stockfish",
+          "clock": "1+0.01",
+          "baseline_wdl": [
+            1,
+            5,
+            0
+          ],
+          "baseline_abnormal": 0,
+          "candidate_wdl": [
+            0,
+            5,
+            1
+          ],
+          "candidate_abnormal": 0,
+          "registered_positions": 3,
+          "normal_complete_openings": 3,
+          "normal_pair_candidate_wdl": [
+            0,
+            5,
+            1
+          ],
+          "normal_pair_baseline_wdl": null,
+          "bounds": {
+            "score": [
+              -0.08333333333333333,
+              -0.08333333333333333
+            ]
+          },
+          "normal_pair_score": -0.08333333333333333
+        },
+        {
+          "opponent": "stockfish",
+          "clock": "3+0.03",
+          "baseline_wdl": [
+            2,
+            3,
+            1
+          ],
+          "baseline_abnormal": 0,
+          "candidate_wdl": [
+            1,
+            5,
+            0
+          ],
+          "candidate_abnormal": 0,
+          "registered_positions": 3,
+          "normal_complete_openings": 3,
+          "normal_pair_candidate_wdl": [
+            1,
+            5,
+            0
+          ],
+          "normal_pair_baseline_wdl": null,
+          "bounds": {
+            "score": [
+              0.08333333333333333,
+              0.08333333333333333
+            ]
+          },
+          "normal_pair_score": 0.08333333333333333
+        },
+        {
+          "opponent": "fruit",
+          "clock": "1+0.01",
+          "baseline_wdl": [
+            6,
+            0,
+            0
+          ],
+          "baseline_abnormal": 0,
+          "candidate_wdl": [
+            6,
+            0,
+            0
+          ],
+          "candidate_abnormal": 0,
+          "registered_positions": 3,
+          "normal_complete_openings": 3,
+          "normal_pair_candidate_wdl": [
+            6,
+            0,
+            0
+          ],
+          "normal_pair_baseline_wdl": [
+            6,
+            0,
+            0
+          ],
+          "bounds": {
+            "win": [
+              0,
+              0
+            ],
+            "score": [
+              0.0,
+              0.0
+            ]
+          },
+          "normal_pair_win": 0.0,
+          "normal_pair_score": 0.0
+        },
+        {
+          "opponent": "fruit",
+          "clock": "3+0.03",
+          "baseline_wdl": [
+            6,
+            0,
+            0
+          ],
+          "baseline_abnormal": 0,
+          "candidate_wdl": [
+            6,
+            0,
+            0
+          ],
+          "candidate_abnormal": 0,
+          "registered_positions": 3,
+          "normal_complete_openings": 3,
+          "normal_pair_candidate_wdl": [
+            6,
+            0,
+            0
+          ],
+          "normal_pair_baseline_wdl": [
+            6,
+            0,
+            0
+          ],
+          "bounds": {
+            "win": [
+              0,
+              0
+            ],
+            "score": [
+              0.0,
+              0.0
+            ]
+          },
+          "normal_pair_win": 0.0,
+          "normal_pair_score": 0.0
+        },
+        {
+          "opponent": "ethereal",
+          "clock": "1+0.01",
+          "baseline_wdl": [
+            6,
+            0,
+            0
+          ],
+          "baseline_abnormal": 4,
+          "candidate_wdl": [
+            6,
+            0,
+            0
+          ],
+          "candidate_abnormal": 4,
+          "registered_positions": 3,
+          "normal_complete_openings": 1,
+          "normal_pair_candidate_wdl": [
+            2,
+            0,
+            0
+          ],
+          "normal_pair_baseline_wdl": [
+            2,
+            0,
+            0
+          ],
+          "bounds": {
+            "win": [
+              -0.6666666666666666,
+              0.6666666666666666
+            ],
+            "score": [
+              -0.6666666666666666,
+              0.6666666666666666
+            ]
+          },
+          "normal_pair_win": 0.0,
+          "normal_pair_score": 0.0
+        },
+        {
+          "opponent": "ethereal",
+          "clock": "3+0.03",
+          "baseline_wdl": [
+            6,
+            0,
+            0
+          ],
+          "baseline_abnormal": 4,
+          "candidate_wdl": [
+            6,
+            0,
+            0
+          ],
+          "candidate_abnormal": 4,
+          "registered_positions": 3,
+          "normal_complete_openings": 1,
+          "normal_pair_candidate_wdl": [
+            2,
+            0,
+            0
+          ],
+          "normal_pair_baseline_wdl": [
+            2,
+            0,
+            0
+          ],
+          "bounds": {
+            "win": [
+              -0.6666666666666666,
+              0.6666666666666666
+            ],
+            "score": [
+              -0.6666666666666666,
+              0.6666666666666666
+            ]
+          },
+          "normal_pair_win": 0.0,
+          "normal_pair_score": 0.0
+        },
+        {
+          "opponent": "weiss",
+          "clock": "1+0.01",
+          "baseline_wdl": [
+            5,
+            1,
+            0
+          ],
+          "baseline_abnormal": 0,
+          "candidate_wdl": [
+            5,
+            1,
+            0
+          ],
+          "candidate_abnormal": 0,
+          "registered_positions": 3,
+          "normal_complete_openings": 3,
+          "normal_pair_candidate_wdl": [
+            5,
+            1,
+            0
+          ],
+          "normal_pair_baseline_wdl": [
+            5,
+            1,
+            0
+          ],
+          "bounds": {
+            "win": [
+              0.0,
+              0.0
+            ],
+            "score": [
+              0.0,
+              0.0
+            ]
+          },
+          "normal_pair_win": 0.0,
+          "normal_pair_score": 0.0
+        },
+        {
+          "opponent": "weiss",
+          "clock": "3+0.03",
+          "baseline_wdl": [
+            6,
+            0,
+            0
+          ],
+          "baseline_abnormal": 0,
+          "candidate_wdl": [
+            6,
+            0,
+            0
+          ],
+          "candidate_abnormal": 0,
+          "registered_positions": 3,
+          "normal_complete_openings": 3,
+          "normal_pair_candidate_wdl": [
+            6,
+            0,
+            0
+          ],
+          "normal_pair_baseline_wdl": [
+            6,
+            0,
+            0
+          ],
+          "bounds": {
+            "win": [
+              0,
+              0
+            ],
+            "score": [
+              0.0,
+              0.0
+            ]
+          },
+          "normal_pair_win": 0.0,
+          "normal_pair_score": 0.0
+        }
+      ],
+      "opening_families": [
+        "Benko",
+        "Nimzo-Indian",
+        "Queen\u2019s Indian"
+      ],
+      "objective": {
+        "score": {
+          "sample_range": [
+            0.0,
+            0.0
+          ],
+          "uncertainty_envelope": [
+            -0.5,
+            0.5
+          ]
+        },
+        "normal_complete_openings_across_cells": 6,
+        "candidate_normal_pair_wdl": [
+          1,
+          10,
+          1
+        ],
+        "baseline_normal_pair_wdl": null
+      },
+      "practical": {
+        "win": {
+          "sample_range": [
+            -0.2222222222222222,
+            0.2222222222222222
+          ],
+          "uncertainty_envelope": [
+            -1.0,
+            1.0
+          ]
+        },
+        "score": {
+          "sample_range": [
+            -0.2222222222222222,
+            0.2222222222222222
+          ],
+          "uncertainty_envelope": [
+            -1.0,
+            1.0
+          ]
+        },
+        "normal_complete_openings_across_cells": 14,
+        "candidate_normal_pair_wdl": [
+          27,
+          1,
+          0
+        ],
+        "baseline_normal_pair_wdl": [
+          27,
+          1,
+          0
+        ]
+      },
+      "raw_arm_outcomes": {
+        "head_to_head": {
+          "candidate": {
+            "wdl": [
+              1,
+              10,
+              1
+            ],
+            "fractions": [
+              0.08333333333333333,
+              0.8333333333333334,
+              0.08333333333333333
+            ]
+          },
+          "baseline": {
+            "wdl": [
+              3,
+              8,
+              1
+            ],
+            "fractions": [
+              0.25,
+              0.6666666666666666,
+              0.08333333333333333
+            ]
+          }
+        },
+        "independent": {
+          "candidate": {
+            "wdl": [
+              35,
+              1,
+              0
+            ],
+            "fractions": [
+              0.9722222222222222,
+              0.027777777777777776,
+              0.0
+            ]
+          },
+          "baseline": {
+            "wdl": [
+              35,
+              1,
+              0
+            ],
+            "fractions": [
+              0.9722222222222222,
+              0.027777777777777776,
+              0.0
+            ]
+          }
+        }
+      }
+    }
+  },
+  "abnormal_games": 34,
+  "matches_sha256": "1251ea180f50acc7749310057edb9f461cf83dfeca0af21dcc4e7b6116697d1a",
+  "preregistration_sha256": "0880997250bdc15791335f49973390424590fa5f52eca5b9d343d986abd9f7d0",
+  "analysis_plan_sha256": "3a3f84ca9859dc83d4afd94ffadcb42f7a42add5c18c5b43ffae4cb4070d495f",
+  "corpus_sha256": "e8ddf0965834cca649488413fc9b8437669c715d8f1c8fa74a64578fba106238",
+  "speed": {
+    "nps": {
+      "baseline": [
+        269396,
+        270620
+      ],
+      "candidate": [
+        239597,
+        235283
+      ]
+    },
+    "change_pct": -12.061864833634562,
+    "bench_sha256": "eabf0f81960d04326d4f98b3153f0e840c6b882ac3e67f77ed8a57fe0cd4ec8e"
+  }
+}
