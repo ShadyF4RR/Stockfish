@@ -1,0 +1,255 @@
+{
+  "as_of": "2026-11-20T22:12:37Z",
+  "experiment": "EXP-ADVERSARIAL-001",
+  "status": "in_progress",
+  "observed_in": "Codex Cloud",
+  "tool": "Fastchess",
+  "completed_from_archived_cells": 162,
+  "planned": 192,
+  "cells": [
+    {
+      "opponent": "weiss",
+      "arm": "baseline",
+      "split": "discovery",
+      "time_control": "1+0.01",
+      "status": "complete",
+      "pgn_sha256": "5754550fce90cb47a11c30c505ad1e9af41afe83bcf203fbf1753ebad07cb461",
+      "games": 6
+    },
+    {
+      "opponent": "weiss",
+      "arm": "candidate",
+      "split": "discovery",
+      "time_control": "1+0.01",
+      "status": "complete",
+      "pgn_sha256": "76d255924b8cb1fcab0d5d79b0689e26a328f8495963eb43d89408469eb42bbc",
+      "games": 6
+    },
+    {
+      "opponent": "ethereal",
+      "arm": "candidate",
+      "split": "discovery",
+      "time_control": "1+0.01",
+      "status": "invalid",
+      "pgn_sha256": "f4f2c0560c66247d79899be5f984a906da7f6006f6ab1496564106ae639ce09d",
+      "games": 6
+    },
+    {
+      "opponent": "ethereal",
+      "arm": "baseline",
+      "split": "discovery",
+      "time_control": "1+0.01",
+      "status": "invalid",
+      "pgn_sha256": "ebbb7187dce5bd7c02a135bcb69ce625a66fee0c7ec31a18766a7a1a2774585d",
+      "games": 6
+    },
+    {
+      "opponent": "fruit",
+      "arm": "baseline",
+      "split": "discovery",
+      "time_control": "3+0.03",
+      "status": "complete",
+      "pgn_sha256": "94ceff0b1ef3decc339d74877a52c1e054802f2b21f09a324030660739ceb8e3",
+      "games": 6
+    },
+    {
+      "opponent": "fruit",
+      "arm": "candidate",
+      "split": "discovery",
+      "time_control": "3+0.03",
+      "status": "complete",
+      "pgn_sha256": "d9610bcd8d9e3f5ecc2f694148e65ad989cb6127e402667dd13d3e412c657e07",
+      "games": 6
+    },
+    {
+      "opponent": "weiss",
+      "arm": "candidate",
+      "split": "discovery",
+      "time_control": "3+0.03",
+      "status": "invalid",
+      "pgn_sha256": "49ac321a9d757084a946626d14e3c7bbbc5aff0e0e55f57cd37c92781c7f7b3a",
+      "games": 6
+    },
+    {
+      "opponent": "weiss",
+      "arm": "baseline",
+      "split": "discovery",
+      "time_control": "3+0.03",
+      "status": "complete",
+      "pgn_sha256": "29fec73014e530937129ee6981411a021e5d0b78717335e5861bb5e59a2b3566",
+      "games": 6
+    },
+    {
+      "opponent": "stockfish",
+      "arm": "baseline",
+      "split": "discovery",
+      "time_control": "3+0.03",
+      "status": "complete",
+      "pgn_sha256": "af61b86f0c476e140dfdc594b4d4ffa17287187646021cf6edb6f9e72593717d",
+      "games": 6
+    },
+    {
+      "opponent": "stockfish",
+      "arm": "candidate",
+      "split": "discovery",
+      "time_control": "3+0.03",
+      "status": "complete",
+      "pgn_sha256": "6e637b32531f63f862e7f5b6e8af26c9d00829117de26e6543581c8114db5e75",
+      "games": 6
+    },
+    {
+      "opponent": "fruit",
+      "arm": "candidate",
+      "split": "discovery",
+      "time_control": "1+0.01",
+      "status": "complete",
+      "pgn_sha256": "69220c82242bad563a7c0e42304151e6076ec039492dad6ddb188055098d8dba",
+      "games": 6
+    },
+    {
+      "opponent": "fruit",
+      "arm": "baseline",
+      "split": "discovery",
+      "time_control": "1+0.01",
+      "status": "complete",
+      "pgn_sha256": "473e71dcc3a25ad8f43858284b7c9c9d25197450754a6b645a2c492709542f7b",
+      "games": 6
+    },
+    {
+      "opponent": "stockfish",
+      "arm": "baseline",
+      "split": "discovery",
+      "time_control": "1+0.01",
+      "status": "complete",
+      "pgn_sha256": "f51dfb839f47ca1384d6100ef6ae08c828c5b64c7546b655f800ed697282f212",
+      "games": 6
+    },
+    {
+      "opponent": "stockfish",
+      "arm": "candidate",
+      "split": "discovery",
+      "time_control": "1+0.01",
+      "status": "complete",
+      "pgn_sha256": "cc2c270e3b658a1baa9a0b5c9fee493ab241a2617c42dc546cf4dd0368dce44d",
+      "games": 6
+    },
+    {
+      "opponent": "ethereal",
+      "arm": "candidate",
+      "split": "discovery",
+      "time_control": "3+0.03",
+      "status": "invalid",
+      "pgn_sha256": "7baf2eb99bab333955a4e3479ab7d47ce53f54c74632a6e0da71154d025d2971",
+      "games": 6
+    },
+    {
+      "opponent": "ethereal",
+      "arm": "baseline",
+      "split": "discovery",
+      "time_control": "3+0.03",
+      "status": "invalid",
+      "pgn_sha256": "2ceab5fd950f9d85189ed17ba0c2cdb1add81e93b9bc478526a8c448f44fed52",
+      "games": 6
+    },
+    {
+      "opponent": "fruit",
+      "arm": "baseline",
+      "split": "holdout",
+      "time_control": "3+0.03",
+      "status": "complete",
+      "pgn_sha256": "b50123901f916052383ee56912f7c9399dc432f44ddeee38cbcd4839c2987101",
+      "games": 6
+    },
+    {
+      "opponent": "fruit",
+      "arm": "candidate",
+      "split": "holdout",
+      "time_control": "3+0.03",
+      "status": "complete",
+      "pgn_sha256": "f69da501d24f7b8a288f7bfe21e0f368d1fba8129b2a765683f46367e802a6ae",
+      "games": 6
+    },
+    {
+      "opponent": "weiss",
+      "arm": "candidate",
+      "split": "holdout",
+      "time_control": "1+0.01",
+      "status": "complete",
+      "pgn_sha256": "545dd4c5047207fb4882a95e961aaf41cbfb2358d06d9b8682a23f88770be0d3",
+      "games": 6
+    },
+    {
+      "opponent": "weiss",
+      "arm": "baseline",
+      "split": "holdout",
+      "time_control": "1+0.01",
+      "status": "complete",
+      "pgn_sha256": "9a38eeadbf32c448d8badde2bf5393225f70c56e08639d3ec0da56fa58085db7",
+      "games": 6
+    },
+    {
+      "opponent": "fruit",
+      "arm": "baseline",
+      "split": "holdout",
+      "time_control": "1+0.01",
+      "status": "complete",
+      "pgn_sha256": "fc72b8bb4d46c9ce6ea065564b7aac67145c33b08e35f310b5f53aabbbb2248b",
+      "games": 6
+    },
+    {
+      "opponent": "fruit",
+      "arm": "candidate",
+      "split": "holdout",
+      "time_control": "1+0.01",
+      "status": "complete",
+      "pgn_sha256": "42b2f6547aa9339f108d6f1cb0bf2e094b8da8426ad46dd4286620261bf313de",
+      "games": 6
+    },
+    {
+      "opponent": "weiss",
+      "arm": "candidate",
+      "split": "holdout",
+      "time_control": "3+0.03",
+      "status": "complete",
+      "pgn_sha256": "099d481adf201488f484c8010465eb0d53f602106c26b568bf965c53de3400e1",
+      "games": 6
+    },
+    {
+      "opponent": "weiss",
+      "arm": "baseline",
+      "split": "holdout",
+      "time_control": "3+0.03",
+      "status": "complete",
+      "pgn_sha256": "1c23e4bd0fbb4716968f3ee3a3b4158cbc3ba4b24f800ff4704ecd53c009e648",
+      "games": 6
+    },
+    {
+      "opponent": "ethereal",
+      "arm": "baseline",
+      "split": "holdout",
+      "time_control": "3+0.03",
+      "status": "invalid",
+      "pgn_sha256": "635bc70d9ff33628643ae4e4fcb5ff0c40ec94173531390ccb11aa17014f55c3",
+      "games": 6
+    },
+    {
+      "opponent": "ethereal",
+      "arm": "candidate",
+      "split": "holdout",
+      "time_control": "3+0.03",
+      "status": "invalid",
+      "pgn_sha256": "e0643adcba720a6541376ba701fa56b440fd2617321e9454abb79028f689789a",
+      "games": 6
+    },
+    {
+      "opponent": "ethereal",
+      "arm": "candidate",
+      "split": "holdout",
+      "time_control": "1+0.01",
+      "status": "invalid",
+      "pgn_sha256": "2a76b8d1eba9dce1bda7a86e3826b4ae6c7800c6d80dc23a07eb082a97b5eeae",
+      "games": 6
+    }
+  ],
+  "preregistration_sha256": "0880997250bdc15791335f49973390424590fa5f52eca5b9d343d986abd9f7d0"
+}
