@@ -9,6 +9,7 @@ import re
 import subprocess
 import sys
 import time
+from uuid import uuid4
 from urllib.parse import urlencode
 
 LAB = Path(__file__).resolve().parents[1]
@@ -17,6 +18,7 @@ import experiment as ledger
 from local_evidence import local_evidence, require, verify_review
 from official_results import fetch_json, inspect_run
 from public_runs import listing, page_number, read_run
+from fork_ledger import publish_append
 
 OFFICIAL = 'https://github.com/official-stockfish/Stockfish'
 FORK = 'https://github.com/' + json.loads((LAB / 'config/promotion.yaml').read_text())['fork']
@@ -269,12 +271,22 @@ def submit_handoff(record):
             'new similar runs require human reconciliation')
     reconcile_reservation(state, 10)
     authorization['handoff_issued_at'] = ledger.now()
+    authorization['handoff_id'] = str(uuid4())
     return {'outcome': 'human_submission_required', 'submitted': False, 'run_id': None,
-            'form': FORM, 'authorized_account': packet['username'], 'packet': packet,
+            'handoff_id': authorization['handoff_id'], 'form': FORM,
+            'authorized_account': packet['username'], 'packet': packet,
             'form_fields': {'tests-repo': packet['repo'], 'base-branch': packet['base_sha'],
                             'test-branch': packet['candidate_sha'], 'base-signature': packet['base_signature'],
                             'test-signature': packet['candidate_signature'], 'run-info': packet['info']},
             'next_action': 'Sign in to the official form, verify settings and current refs, submit once, then attach its run ID.'}
+
+
+def publish_record(record, event):
+    def fork_git(*args):
+        return subprocess.run(['git', *args], cwd=ledger.ROOT, text=True, capture_output=True, check=True,
+                              timeout=60, env={**os.environ, 'GIT_TERMINAL_PROMPT': '0'}).stdout.strip()
+
+    return publish_append(fork_git, FORK, ledger.CONFIG['ledger_branch'], lambda: ledger.save(record, event))
 
 
 def parser():
@@ -332,7 +344,7 @@ def main():
         with ledger.ledger_lock():
             record = ledger.load_record(args.id)
             handoff = submit_handoff(record)
-            ledger.save(record, 'Fishtest human form handoff issued')
+            handoff['published_ledger_sha'] = publish_record(record, 'Fishtest human form handoff issued')
             print(json.dumps(handoff, indent=2))
         return 3
     if args.action in ('show', 'stage', 'upstream-pr'):
@@ -359,8 +371,9 @@ def main():
             before = json.dumps(record, sort_keys=True)
             state = update(record, args)
             if json.dumps(record, sort_keys=True) != before:
-                ledger.save(record, f"Fishtest {args.action} ({state['status']})")
-            print(json.dumps(state, indent=2), flush=True)
+                publish_record(record, f"Fishtest {args.action} ({state['status']})")
+            output = stage_view(record, state) if args.action == 'reserve' else state
+            print(json.dumps(output, indent=2), flush=True)
             if state['status'] != 'active':
                 break
 

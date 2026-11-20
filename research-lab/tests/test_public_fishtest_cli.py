@@ -104,7 +104,7 @@ class PublicFishtestCLI(unittest.TestCase):
         with patch.dict(cli.ledger.CONFIG, fishtest=config), patch.object(cli, 'verify_review'), \
              patch.object(cli, 'gate_public_slot', return_value={'similar_description_or_branch': []}), \
              patch.object(cli, 'reconcile_reservation'), patch.object(cli.ledger, 'ledger_lock'), \
-             patch.object(cli.ledger, 'load_record', return_value=row), patch.object(cli.ledger, 'save') as save:
+             patch.object(cli.ledger, 'load_record', return_value=row), patch.object(cli, 'publish_record', return_value='c'*40) as save:
             code, result, paths = command(['submit', 'Demo'], [])
             self.assertEqual(code, 3)
             save.assert_called_once()
