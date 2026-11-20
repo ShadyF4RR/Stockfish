@@ -1,0 +1,370 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-11-20T22:13:59Z",
+  "workers": [
+    {
+      "id": "cloud-supervised",
+      "updated_at": "2026-11-20T22:13:59Z",
+      "offline_after_seconds": 900,
+      "status": "testing",
+      "started_at": "2026-11-20T22:01:28Z",
+      "experiment_id": "EXP-ADVERSARIAL-001",
+      "completed_games": 186,
+      "planned_games": 192,
+      "remaining_games": 6,
+      "groups": [
+        {
+          "arm": "baseline",
+          "opponent": "weiss",
+          "time_control": "1+0.01",
+          "split": "discovery",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "weiss",
+          "time_control": "1+0.01",
+          "split": "discovery",
+          "games": 6,
+          "wins": 5,
+          "draws": 1,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "ethereal",
+          "time_control": "1+0.01",
+          "split": "discovery",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 4
+        },
+        {
+          "arm": "baseline",
+          "opponent": "ethereal",
+          "time_control": "1+0.01",
+          "split": "discovery",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 3
+        },
+        {
+          "arm": "baseline",
+          "opponent": "fruit",
+          "time_control": "3+0.03",
+          "split": "discovery",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "fruit",
+          "time_control": "3+0.03",
+          "split": "discovery",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "weiss",
+          "time_control": "3+0.03",
+          "split": "discovery",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 1
+        },
+        {
+          "arm": "baseline",
+          "opponent": "weiss",
+          "time_control": "3+0.03",
+          "split": "discovery",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "baseline",
+          "opponent": "stockfish",
+          "time_control": "3+0.03",
+          "split": "discovery",
+          "games": 6,
+          "wins": 2,
+          "draws": 4,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "stockfish",
+          "time_control": "3+0.03",
+          "split": "discovery",
+          "games": 6,
+          "wins": 0,
+          "draws": 6,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "fruit",
+          "time_control": "1+0.01",
+          "split": "discovery",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "baseline",
+          "opponent": "fruit",
+          "time_control": "1+0.01",
+          "split": "discovery",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "baseline",
+          "opponent": "stockfish",
+          "time_control": "1+0.01",
+          "split": "discovery",
+          "games": 6,
+          "wins": 2,
+          "draws": 3,
+          "losses": 1,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "stockfish",
+          "time_control": "1+0.01",
+          "split": "discovery",
+          "games": 6,
+          "wins": 1,
+          "draws": 5,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "ethereal",
+          "time_control": "3+0.03",
+          "split": "discovery",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 5
+        },
+        {
+          "arm": "baseline",
+          "opponent": "ethereal",
+          "time_control": "3+0.03",
+          "split": "discovery",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 5
+        },
+        {
+          "arm": "baseline",
+          "opponent": "fruit",
+          "time_control": "3+0.03",
+          "split": "holdout",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "fruit",
+          "time_control": "3+0.03",
+          "split": "holdout",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "weiss",
+          "time_control": "1+0.01",
+          "split": "holdout",
+          "games": 6,
+          "wins": 5,
+          "draws": 1,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "baseline",
+          "opponent": "weiss",
+          "time_control": "1+0.01",
+          "split": "holdout",
+          "games": 6,
+          "wins": 5,
+          "draws": 1,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "baseline",
+          "opponent": "fruit",
+          "time_control": "1+0.01",
+          "split": "holdout",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "fruit",
+          "time_control": "1+0.01",
+          "split": "holdout",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "weiss",
+          "time_control": "3+0.03",
+          "split": "holdout",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "baseline",
+          "opponent": "weiss",
+          "time_control": "3+0.03",
+          "split": "holdout",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "baseline",
+          "opponent": "ethereal",
+          "time_control": "3+0.03",
+          "split": "holdout",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 4
+        },
+        {
+          "arm": "candidate",
+          "opponent": "ethereal",
+          "time_control": "3+0.03",
+          "split": "holdout",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 4
+        },
+        {
+          "arm": "candidate",
+          "opponent": "ethereal",
+          "time_control": "1+0.01",
+          "split": "holdout",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 4
+        },
+        {
+          "arm": "baseline",
+          "opponent": "ethereal",
+          "time_control": "1+0.01",
+          "split": "holdout",
+          "games": 6,
+          "wins": 6,
+          "draws": 0,
+          "losses": 0,
+          "abnormal_games": 4
+        },
+        {
+          "arm": "baseline",
+          "opponent": "stockfish",
+          "time_control": "1+0.01",
+          "split": "holdout",
+          "games": 6,
+          "wins": 1,
+          "draws": 5,
+          "losses": 0,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "stockfish",
+          "time_control": "1+0.01",
+          "split": "holdout",
+          "games": 6,
+          "wins": 0,
+          "draws": 5,
+          "losses": 1,
+          "abnormal_games": 0
+        },
+        {
+          "arm": "candidate",
+          "opponent": "stockfish",
+          "time_control": "3+0.03",
+          "split": "holdout",
+          "games": 6,
+          "wins": 1,
+          "draws": 5,
+          "losses": 0,
+          "abnormal_games": 0
+        }
+      ],
+      "nps": null,
+      "cpu_percent": 46.3,
+      "ram_used_mib": 1574,
+      "ram_total_mib": 18007,
+      "temperature_c": null,
+      "metric_scope": {
+        "cpu": "OS aggregate /proc/stat",
+        "ram": "OS aggregate /proc/meminfo",
+        "temperature": null
+      }
+    }
+  ]
+}
