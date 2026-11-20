@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "stage": "C",
+  "status": "invalid",
+  "baseline": {
+    "commit": "1819b9ea37588be8adb044179fb54512f87c8249",
+    "binary_sha256": "57ac1871660913d617b85887a58192cc39ebd581134e87840232a199d0280ff7",
+    "arch": "x86-64-avx2",
+    "compiler": "g++ (Debian 14.2.0-19) 14.2.0",
+    "compiler_binary_sha256": "6b3696e4dcb85e1c949c732a02befa50e3983ecf94ce7e8e58d9d503b954b79d",
+    "jobs": 4,
+    "hardware": {
+      "machine": "x86_64",
+      "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+      "kernel": "6.18.57",
+      "cpus_available": 5
+    },
+    "build_flags": {
+      "target": "build",
+      "COMP": "gcc",
+      "CXX": "g++",
+      "ARCH": "x86-64-avx2"
+    },
+    "networks": {
+      "nn-bddd9d57eb87.nnue": "bddd9d57eb87bf09a6c4e1a3b3f1cc18855c83ee45fdbe18018ac3763b56b38e"
+    }
+  },
+  "candidate": {
+    "commit": "f2f67475aa6722e73f473d1203f8d833a65bc35f",
+    "binary_sha256": "b7adc6946a0bb975a183e8d32a69439c6f165f0a6350233856efaf85aeac036e",
+    "arch": "x86-64-avx2",
+    "compiler": "g++ (Debian 14.2.0-19) 14.2.0",
+    "compiler_binary_sha256": "6b3696e4dcb85e1c949c732a02befa50e3983ecf94ce7e8e58d9d503b954b79d",
+    "jobs": 2,
+    "hardware": {
+      "machine": "x86_64",
+      "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+      "kernel": "6.18.57",
+      "cpus_available": 5
+    },
+    "build_flags": {
+      "target": "build",
+      "COMP": "gcc",
+      "CXX": "g++",
+      "ARCH": "x86-64-avx2"
+    },
+    "networks": {
+      "nn-bddd9d57eb87.nnue": "bddd9d57eb87bf09a6c4e1a3b3f1cc18855c83ee45fdbe18018ac3763b56b38e"
+    }
+  },
+  "settings": {
+    "max_pairs": 50,
+    "default_pairs": 10,
+    "timeout_seconds": 1800,
+    "concurrency": 1,
+    "time_control": "4+0.04",
+    "hash_mib": 16,
+    "seed": 20261120,
+    "reserve_cpus": 2,
+    "reserve_mib": 4096,
+    "minimum_engine_mib": 384,
+    "max_worker_cpus": 6,
+    "max_worker_mib": 12288,
+    "calibration_pairs": 2,
+    "calibration_timeout_seconds": 300,
+    "pairs": 8,
+    "threads": 1
+  },
+  "hardware_profile": "cloud_detected",
+  "capacity": {
+    "cpu_ids": [
+      0,
+      1
+    ],
+    "effective_cpus": 4,
+    "total_mib": 16384,
+    "available_mib": 15113,
+    "reserve_cpus": 2,
+    "reserve_mib": 4096,
+    "usable_mib": 11017
+  },
+  "allocation": {
+    "concurrency": 1,
+    "threads": 1,
+    "cpu_ids": [
+      0
+    ],
+    "process_limit_mib": 639,
+    "peak_budget_mib": 1917
+  },
+  "runner": {
+    "system": "Linux",
+    "node": "b79103a106f3",
+    "release": "6.18.57",
+    "version": "#1 SMP Tue Oct 20 21:56:04 UTC 2026",
+    "machine": "x86_64",
+    "processor": ""
+  },
+  "command": [
+    "/tmp/sf-lab-fastchess/fastchess",
+    "-engine",
+    "cmd=/tmp/lab-sixply-build/stockfish",
+    "name=candidate",
+    "-engine",
+    "cmd=/tmp/sf-lab-pinned/stockfish",
+    "name=baseline",
+    "-each",
+    "proto=uci",
+    "tc=4+0.04",
+    "option.Threads=1",
+    "option.Ponder=false",
+    "option.Hash=16",
+    "-openings",
+    "file=/tmp/sf-lab-fastchess/app/tests/data/openings.epd",
+    "format=epd",
+    "order=random",
+    "-srand",
+    "20261120",
+    "-rounds",
+    "8",
+    "-games",
+    "2",
+    "-repeat",
+    "-concurrency",
+    "1",
+    "-report",
+    "penta=true",
+    "-pgnout",
+    "file=games.pgn",
+    "min=false"
+  ],
+  "book_sha256": "421a4efcddb95c3e70b1f9ad6abbeab1edcb6ab8e9ae743d94c42a5d78a6e82a",
+  "fastchess_sha256": "a95c06372a4e74c28b11148f4ad252502e2db30fe7fb7d241abe4603ced47367",
+  "networks_changed": false,
+  "decision": "invalid",
+  "reason": "ValueError: repeated or unknown opening across rounds",
+  "compute": {
+    "wall_seconds": 222.58938649899983,
+    "child_cpu_seconds": 220.578201
+  }
+}

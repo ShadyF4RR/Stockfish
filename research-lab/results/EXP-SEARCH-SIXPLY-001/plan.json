@@ -1,0 +1,28 @@
+{
+  "experiment_id": "EXP-SEARCH-SIXPLY-001",
+  "baseline": "1819b9ea37588be8adb044179fb54512f87c8249",
+  "candidate": "f2f67475aa6722e73f473d1203f8d833a65bc35f",
+  "hypothesis": "Reducing the six-ply continuation history weight in quiet move ordering may improve cutoff selection and playing strength.",
+  "change": "In MovePicker::generate_and_score<QUIETS>(), add (*ch5)[pc][to] / 2 instead of the full term. Keep the history update and other terms fixed.",
+  "bench": {
+    "command": ["stockfish", "bench"],
+    "order": ["baseline", "candidate", "candidate", "baseline"],
+    "threads": 1,
+    "hash_mib": 16,
+    "depth": 13,
+    "cpu_affinity": 0,
+    "primary_observation": "Reproducible node signatures for each revision. Two repetitions under shared cloud conditions cannot establish a speed effect."
+  },
+  "screen": {
+    "fastchess_revision": "894616028492ae6114835195f14a899f6fa237d3",
+    "book_sha256": "421a4efcddb95c3e70b1f9ad6abbeab1edcb6ab8e9ae743d94c42a5d78a6e82a",
+    "seed": 20261120,
+    "pairs": 8,
+    "time_control": "4+0.04",
+    "concurrency": 1,
+    "threads_per_engine": 1,
+    "hash_mib": 16,
+    "decision_rule": "Use the lab's fixed-sample paired Hoeffding 95% interval. Interpret an interval spanning zero and +3 as inconclusive. Play exactly the planned pairs once after correctness and review.",
+    "budget": "One bounded local diagnostic screen. No public runs or promotion."
+  }
+}

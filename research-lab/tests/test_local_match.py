@@ -5,11 +5,19 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from local_match import START, results
+from local_match import START, opening_key, results
 from worker_resources import MIB, allocation
 
 
 class MatchTests(unittest.TestCase):
+    def test_en_passant_book_and_pgn_identity(self):
+        no_capture = "r1b1kbnr/pp1nq3/2pp1pp1/4p2p/2PPP2B/2N2N2/PP2BPPP/R2QK2R w KQkq h6"
+        self.assertEqual(opening_key(no_capture), no_capture.replace(" h6", " -"))
+        legal = "7k/8/8/5pP1/8/8/8/K7 w - f6"
+        self.assertEqual(opening_key(legal), legal)
+        pinned = "7k/8/8/r4pPK/8/8/8/8 w - f6"
+        self.assertEqual(opening_key(pinned), pinned.replace(" f6", " -"))
+
     def test_admit_both_engines_and_manager(self):
         cfg = {"hash_mib": 16, "minimum_engine_mib": 384}
         limits = {"usable_mib": 12000, "cpu_ids": list(range(6))}

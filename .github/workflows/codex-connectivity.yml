@@ -1,0 +1,33 @@
+name: Subscription transport diagnostics
+on:
+  workflow_dispatch:
+  push:
+    branches: [research/continuous-coordinator]
+    paths: [.github/workflows/codex-connectivity.yml]
+permissions: {}
+jobs:
+  probe:
+    if: github.repository == 'ShadyF4RR/Stockfish'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - name: Compare anonymous HTTP reachability without credentials or inference
+        run: |
+          python3 - <<'PY'
+          from urllib import request, error
+          urls = (
+              'https://chatgpt.com/backend-api/codex/models',
+              'https://chatgpt.com/backend-api/codex/responses',
+              'https://developers.openai.com/codex/auth/',
+              'https://tests.stockfishchess.org/api/active_runs',
+          )
+          for url in urls:
+              try:
+                  with request.urlopen(url, timeout=15) as reply:
+                      print(url, reply.status, reply.headers.get('Server'), 'HTTP response')
+              except error.HTTPError as exc:
+                  print(url, exc.code, exc.headers.get('Server'), 'HTTP response',
+                        'challenge=' + str(exc.headers.get('cf-mitigated') == 'challenge'))
+              except OSError as exc:
+                  print(url, 'transport error', str(exc)[:240])
+          PY

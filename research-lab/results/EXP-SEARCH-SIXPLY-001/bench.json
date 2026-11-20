@@ -1,0 +1,121 @@
+{
+  "baseline": "1819b9ea37588be8adb044179fb54512f87c8249",
+  "candidate": "f2f67475aa6722e73f473d1203f8d833a65bc35f",
+  "bench_order": [
+    "baseline",
+    "candidate",
+    "candidate",
+    "baseline"
+  ],
+  "worker": {
+    "candidate": {
+      "build": {
+        "commit": "f2f67475aa6722e73f473d1203f8d833a65bc35f",
+        "binary_sha256": "b7adc6946a0bb975a183e8d32a69439c6f165f0a6350233856efaf85aeac036e",
+        "arch": "x86-64-avx2",
+        "compiler": "g++ (Debian 14.2.0-19) 14.2.0",
+        "compiler_binary_sha256": "6b3696e4dcb85e1c949c732a02befa50e3983ecf94ce7e8e58d9d503b954b79d",
+        "jobs": 2,
+        "hardware": {
+          "machine": "x86_64",
+          "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+          "kernel": "6.18.57",
+          "cpus_available": 5
+        },
+        "build_flags": {
+          "target": "build",
+          "COMP": "gcc",
+          "CXX": "g++",
+          "ARCH": "x86-64-avx2"
+        },
+        "networks": {
+          "nn-bddd9d57eb87.nnue": "bddd9d57eb87bf09a6c4e1a3b3f1cc18855c83ee45fdbe18018ac3763b56b38e"
+        }
+      },
+      "correctness": {
+        "commit": "f2f67475aa6722e73f473d1203f8d833a65bc35f",
+        "binary_sha256": "b7adc6946a0bb975a183e8d32a69439c6f165f0a6350233856efaf85aeac036e",
+        "uci": "passed",
+        "perft": "passed",
+        "reprosearch": "passed",
+        "perft_positions": 20,
+        "reprosearch_node_budgets": 20,
+        "notes": "Full perft and UCI passed on first launch. Exposed /etc/alternatives for awk in a fresh sandbox and reran the upstream reproducibility test unchanged."
+      }
+    },
+    "baseline": {
+      "build": {
+        "commit": "1819b9ea37588be8adb044179fb54512f87c8249",
+        "binary_sha256": "57ac1871660913d617b85887a58192cc39ebd581134e87840232a199d0280ff7",
+        "arch": "x86-64-avx2",
+        "compiler": "g++ (Debian 14.2.0-19) 14.2.0",
+        "compiler_binary_sha256": "6b3696e4dcb85e1c949c732a02befa50e3983ecf94ce7e8e58d9d503b954b79d",
+        "jobs": 4,
+        "hardware": {
+          "machine": "x86_64",
+          "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+          "kernel": "6.18.57",
+          "cpus_available": 5
+        },
+        "build_flags": {
+          "target": "build",
+          "COMP": "gcc",
+          "CXX": "g++",
+          "ARCH": "x86-64-avx2"
+        },
+        "networks": {
+          "nn-bddd9d57eb87.nnue": "bddd9d57eb87bf09a6c4e1a3b3f1cc18855c83ee45fdbe18018ac3763b56b38e"
+        }
+      },
+      "correctness": {
+        "commit": "1819b9ea37588be8adb044179fb54512f87c8249",
+        "binary_sha256": "57ac1871660913d617b85887a58192cc39ebd581134e87840232a199d0280ff7",
+        "uci": "passed",
+        "perft": "passed",
+        "reprosearch": "passed"
+      }
+    }
+  },
+  "runs": [
+    {
+      "order": 1,
+      "side": "baseline",
+      "nodes": 1488683,
+      "nps": 861506,
+      "engine_ms": 1728,
+      "wall_seconds": 2.7072,
+      "cpu_seconds": 2.6996,
+      "log_sha256": "90d0a2de103c8176d56b2c82b82fc3d3fa66bca98f65d45471b671d2b8a8a39c"
+    },
+    {
+      "order": 2,
+      "side": "candidate",
+      "nodes": 1377908,
+      "nps": 815330,
+      "engine_ms": 1690,
+      "wall_seconds": 2.1198,
+      "cpu_seconds": 2.1124,
+      "log_sha256": "b43ed3ddd4fff4b47f8f32c6947f42ec623fba48b8a5dc53ee758b821e3a89eb"
+    },
+    {
+      "order": 3,
+      "side": "candidate",
+      "nodes": 1377908,
+      "nps": 796939,
+      "engine_ms": 1729,
+      "wall_seconds": 2.1788,
+      "cpu_seconds": 2.1723,
+      "log_sha256": "08eca545f6c1dc3b9a3357060062cae6abfed7bd60b823c8eec55aa6b5d9a12c"
+    },
+    {
+      "order": 4,
+      "side": "baseline",
+      "nodes": 1488683,
+      "nps": 856056,
+      "engine_ms": 1739,
+      "wall_seconds": 2.1685,
+      "cpu_seconds": 2.161,
+      "log_sha256": "899848b890de81e4f3907074f7674f98f619a4e7f9b5e42244fd9aebdfb92854"
+    }
+  ]
+}

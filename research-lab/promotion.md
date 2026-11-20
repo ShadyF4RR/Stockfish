@@ -1,5 +1,7 @@
 # Promotion and protected branches
 
+The [continuous promotion controller](continuous/PROMOTION.md) implements opt-in fork integration through a protected merge queue and exact-commit CI. The Phase 1 preflight below remains available for local review.
+
 Run `research-lab/scripts/promote.sh research-lab/experiments/<id>.json` in a
 **trusted checkout of the reviewed lab** with its local `research/integration`
 branch synchronized to the fork. Prerequisites are Bash, Python 3.8+ and

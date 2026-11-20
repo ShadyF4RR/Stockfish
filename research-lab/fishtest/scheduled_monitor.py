@@ -73,16 +73,16 @@ class LedgerStore:
                 raise ValueError("ledger record ID and filename disagree")
             yield record
 
-    def write(self, tip, records):
+    def write(self, tip, records, message="Update verified Fishtest observations"):
         self.git("read-tree", tip)
         for record in records:
             data = (json.dumps(record, indent=2, sort_keys=True, allow_nan=False) + "\n").encode()
             if len(data) > MAX_RECORD_BYTES:
                 raise ValueError("updated ledger record exceeds byte limit")
             oid = self.git("hash-object", "-w", "--stdin", data=data).decode().strip()
-            self.git("update-index", "--cacheinfo", "100644", oid, f"{DIRECTORY}/{record['id']}.json")
+            self.git("update-index", "--add", "--cacheinfo", "100644", oid, f"{DIRECTORY}/{record['id']}.json")
         tree = self.git("write-tree").decode().strip()
-        commit = self.git("commit-tree", tree, "-p", tip, "-m", "Update verified Fishtest observations").decode().strip()
+        commit = self.git("commit-tree", tree, "-p", tip, "-m", message).decode().strip()
         self.git("push", self.remote, commit + ":" + REF)
         return commit
 

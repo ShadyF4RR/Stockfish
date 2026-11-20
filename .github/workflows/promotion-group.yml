@@ -1,0 +1,34 @@
+name: Verify integration queue entry
+on:
+  pull_request:
+    branches: [research/integration]
+  merge_group:
+permissions:
+  contents: read
+  pull-requests: read
+  actions: read
+jobs:
+  verify:
+    name: research-promotion
+    runs-on: ubuntu-24.04
+    timeout-minutes: 38
+    steps:
+      - name: Read the trusted verifier
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          ref: ${{ vars.RESEARCH_PROMOTION_CONTROL_SHA }}
+          persist-credentials: false
+      - name: Verify the exact group commit and authoritative evidence
+        if: github.event_name == 'merge_group'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PROMOTION_CONTROL_SHA: ${{ vars.RESEARCH_PROMOTION_CONTROL_SHA }}
+          RESEARCH_PROMOTION_ENABLED: ${{ vars.RESEARCH_PROMOTION_ENABLED }}
+          PROMOTION_RULESET_CERTIFICATE: ${{ vars.RESEARCH_PROMOTION_RULESET_CERTIFICATE }}
+        run: python3 research-lab/scripts/reconcile_promotion.py merge-group
+      - name: Verify fork PR scope and registered candidate SHA
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PROMOTION_CONTROL_SHA: ${{ vars.RESEARCH_PROMOTION_CONTROL_SHA }}
+        run: python3 research-lab/scripts/reconcile_promotion.py pr-head

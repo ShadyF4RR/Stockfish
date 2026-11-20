@@ -14,8 +14,13 @@ def read(path):
     return json.loads(Path(path).read_text())
 
 
-def inspect_engine(directory, commit):
-    _, build = read_build(directory)
+def inspect_engine(directory, commit, *, verified_worker_manifests=False):
+    # Isolated worker binaries never enter the publisher. Its caller must first
+    # verify the exact worker run, immutable artifact and individual file hashes.
+    if verified_worker_manifests:
+        build = read(directory / 'build.json')
+    else:
+        _, build = read_build(directory)
     validation, bench = (read(directory / name) for name in ('validation.json', 'benchmark.json'))
     binary = build['binary_sha256']
     for record in (build, validation, bench):
@@ -51,10 +56,10 @@ def verify_review(record):
             'record the implementing identities and use a distinct reviewer')
 
 
-def local_evidence(record, base_dir, new_dir, match_dir, book, rationale):
+def local_evidence(record, base_dir, new_dir, match_dir, book, rationale, *, verified_worker_manifests=False):
     verify_review(record)
-    base, base_signature = inspect_engine(base_dir, record['baseline_commit'])
-    new, new_signature = inspect_engine(new_dir, record['candidate_commit'])
+    base, base_signature = inspect_engine(base_dir, record['baseline_commit'], verified_worker_manifests=verified_worker_manifests)
+    new, new_signature = inspect_engine(new_dir, record['candidate_commit'], verified_worker_manifests=verified_worker_manifests)
     require(base['commit'] != new['commit'], 'self-matches do not qualify')
     match = read(match_dir / 'match.json')
     require(match['baseline'] == base and match['candidate'] == new,

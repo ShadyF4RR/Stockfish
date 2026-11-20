@@ -1,0 +1,41 @@
+Indexing opening suite...
+Started game 1 of 16 (candidate vs baseline)
+Finished game 1 (candidate vs baseline): 1-0 {White mates}
+Started game 2 of 16 (baseline vs candidate)
+Finished game 2 (baseline vs candidate): 1-0 {White mates}
+Started game 3 of 16 (candidate vs baseline)
+Finished game 3 (candidate vs baseline): 1-0 {White mates}
+Started game 4 of 16 (baseline vs candidate)
+Finished game 4 (baseline vs candidate): 1-0 {White mates}
+Started game 5 of 16 (candidate vs baseline)
+Finished game 5 (candidate vs baseline): 1/2-1/2 {Draw by insufficient mating material}
+Started game 6 of 16 (baseline vs candidate)
+Finished game 6 (baseline vs candidate): 1/2-1/2 {Draw by insufficient mating material}
+Started game 7 of 16 (candidate vs baseline)
+Finished game 7 (candidate vs baseline): 1/2-1/2 {Draw by 3-fold repetition}
+Started game 8 of 16 (baseline vs candidate)
+Finished game 8 (baseline vs candidate): 0-1 {Black mates}
+Started game 9 of 16 (candidate vs baseline)
+Finished game 9 (candidate vs baseline): 1-0 {White mates}
+Started game 10 of 16 (baseline vs candidate)
+Finished game 10 (baseline vs candidate): 1/2-1/2 {Draw by fifty moves rule}
+Started game 11 of 16 (candidate vs baseline)
+Finished game 11 (candidate vs baseline): 1/2-1/2 {Draw by 3-fold repetition}
+Started game 12 of 16 (baseline vs candidate)
+Finished game 12 (baseline vs candidate): 1-0 {White mates}
+Started game 13 of 16 (candidate vs baseline)
+Finished game 13 (candidate vs baseline): 1/2-1/2 {Draw by 3-fold repetition}
+Started game 14 of 16 (baseline vs candidate)
+Finished game 14 (baseline vs candidate): 1/2-1/2 {Draw by insufficient mating material}
+Started game 15 of 16 (candidate vs baseline)
+Finished game 15 (candidate vs baseline): 1/2-1/2 {Draw by insufficient mating material}
+Started game 16 of 16 (baseline vs candidate)
+Finished game 16 (baseline vs candidate): 1/2-1/2 {Draw by 3-fold repetition}
+--------------------------------------------------
+Results of candidate vs baseline (4+0.04, 1t, 16MB, openings.epd):
+Elo: 21.74 +/- 73.54, nElo: 51.23 +/- 170.24
+LOS: 72.23 %, DrawRatio: 62.50 %, PairsRatio: 2.00
+Games: 16, Wins: 4, Losses: 3, Draws: 9, Points: 8.5 (53.12 %)
+Ptnml(0-2): [0, 1, 5, 2, 0], WL/DD Ratio: 0.67
+--------------------------------------------------
+Finished match

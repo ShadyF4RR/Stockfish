@@ -47,7 +47,69 @@ def elo(score):
     return 400 * math.log10(score / (1 - score)) if 0 < score < 1 else None
 
 
+def opening_key(fen):
+    """Canonical FEN position, dropping an EP target only if no legal EP capture exists."""
+    board, side, castle, ep = fen.split()[:4]
+    if ep == "-":
+        return " ".join((board, side, castle, ep))
+    sq = {}
+    rows = board.split("/")
+    if len(rows) != 8 or not re.fullmatch(r"[a-h][36]", ep):
+        raise ValueError("invalid EPD position")
+    for rank, row in enumerate(reversed(rows)):
+        file = 0
+        for symbol in row:
+            if symbol.isdigit():
+                file += int(symbol)
+            else:
+                sq[file, rank] = symbol
+                file += 1
+        if file != 8:
+            raise ValueError("invalid EPD board")
+    white = side == "w"
+    direction = 1 if white else -1
+    x, y = ord(ep[0]) - ord("a"), int(ep[1])-1
+    start = y-direction
+    pawn, enemy = ("P", "p") if white else ("p", "P")
+    kings = [square for square, piece in sq.items() if piece == ("K" if white else "k")]
+    if len(kings) != 1:
+        raise ValueError("invalid king count in EPD position")
+    king = kings[0]
+
+    def attacked(after):
+        kx, ky = king
+        for (a, b), piece in after.items():
+            if piece.isupper() == white:
+                continue
+            dx, dy = kx-a, ky-b
+            kind = piece.lower()
+            if kind == "p" and abs(dx) == 1 and dy == -direction:
+                return True
+            if kind == "n" and sorted((abs(dx), abs(dy))) == [1, 2]:
+                return True
+            if kind == "k" and max(abs(dx), abs(dy)) == 1:
+                return True
+            linear = kind in ("r", "q") and (dx == 0 or dy == 0)
+            diagonal = kind in ("b", "q") and abs(dx) == abs(dy)
+            if linear or diagonal:
+                sx, sy = (dx > 0)-(dx < 0), (dy > 0)-(dy < 0)
+                if all((a + j*sx, b + j*sy) not in after for j in range(1, max(abs(dx), abs(dy)))):
+                    return True
+        return False
+
+    if y == (5 if white else 2) and (x,y) not in sq and sq.get((x,start)) == enemy:
+        for a in (x-1,x+1):
+            if sq.get((a,start)) == pawn:
+                after = sq.copy()
+                del after[a,start], after[x,start]
+                after[x,y] = pawn
+                if not attacked(after):
+                    return " ".join((board, side, castle, ep))
+    return " ".join((board, side, castle, "-"))
+
+
 def results(pgn, pairs, book_positions):
+    book_positions = {opening_key(fen) for fen in book_positions}
     rounds = {}
     for block in pgn.read_text().split("\n\n"):
         if not block.lstrip().startswith("["):
@@ -74,7 +136,7 @@ def results(pgn, pairs, book_positions):
         if len(games) != 2:
             raise ValueError("each round must have two games")
         first, second = games
-        position = " ".join(first[1].split()[:4])
+        position = opening_key(first[1])
         if first[0] == second[0] or first[1] != second[1]:
             raise ValueError("pair must replay the same opening with colors reversed")
         if position in used or position not in book_positions:
@@ -119,7 +181,7 @@ def run(args, cfg, plan, limits, out, timeout):
             raise ValueError(f"build manifests disagree on {key}")
     book = args.book.resolve(strict=True)
     book_hash = sha256(book)
-    positions = [" ".join(line.split()[:4]) for line in book.read_text().splitlines() if line.strip()]
+    positions = [opening_key(line) for line in book.read_text().splitlines() if line.strip()]
     if len(set(positions)) != len(positions) or len(positions) < pairs:
         raise ValueError("book needs distinct positions and at least one opening per pair")
 

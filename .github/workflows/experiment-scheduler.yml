@@ -2,39 +2,46 @@ name: Research queue inventory
 on:
   workflow_dispatch:
   schedule:
-    - cron: '17 4 * * *'
+    - cron: '17 */4 * * *'
 
 permissions:
   contents: read
 
 concurrency:
-  group: research-ledger-inventory
+  group: research-queue-inventory
   cancel-in-progress: false
 
 jobs:
   inventory:
-    # Phase 1 default is off. Opt-in only enables a read-only inventory.
-    if: vars.RESEARCH_QUEUE_INVENTORY == 'enabled'
+    if: >-
+      github.repository == 'ShadyF4RR/Stockfish' &&
+      vars.RESEARCH_QUEUE_INVENTORY == 'enabled'
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 4
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          ref: research/ledger
+          ref: research/queue
           persist-credentials: false
-          sparse-checkout: research-lab/experiments
-      - name: Read versioned queue data
-        working-directory: ${{ runner.temp }}
+          sparse-checkout: queue.json
+          sparse-checkout-cone-mode: false
+      - name: Summarize the persistent queue
         run: |
-          python3 -I - <<'PYTHON'
+          python3 -I - <<'PY'
+          from collections import Counter
           import json, os
           from pathlib import Path
-          ledger = Path(os.environ["GITHUB_WORKSPACE"]) / "research-lab" / "experiments"
-          rows = []
-          for path in sorted(ledger.glob("*.json")):
-              if path.is_symlink() or path.stat().st_size > 2_000_000:
-                  raise ValueError("Unexpected ledger entry")
-              record = json.loads(path.read_text())
-              rows.append({key: record[key] for key in ("id", "topic", "status")})
-          print(json.dumps(rows, ensure_ascii=True))
-          PYTHON
+          p = Path('queue.json')
+          if p.is_symlink() or p.stat().st_size > 24 * 1024 * 1024:
+              raise ValueError('Unexpected queue file')
+          state = json.loads(p.read_text())
+          if state['schema'] != 1 or state['rehearsal'] is not None:
+              raise ValueError('Unexpected queue schema')
+          counts = Counter(i['status'] for i in state['items'])
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as f:
+              print('## Stockfish research queue\n', file=f)
+              for status in ('queued', 'running', 'screened', 'inconclusive', 'rejected', 'failed', 'proposed'):
+                  print(f'- {status}: {counts[status]}', file=f)
+              print(f'- paused: {bool(state["paused"])}', file=f)
+              print('\nCoding runs use the subscription-authenticated Codex Cloud task.', file=f)
+          PY

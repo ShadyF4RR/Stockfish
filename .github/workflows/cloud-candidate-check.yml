@@ -1,0 +1,84 @@
+name: Codex Cloud candidate validation
+on:
+  push:
+    branches: [master, research/continuous-coordinator]
+    paths:
+      - research-lab/config/cloud-candidate.json
+      - research-lab/continuous/validate_candidate.py
+      - .github/workflows/cloud-candidate-check.yml
+  workflow_dispatch:
+    inputs:
+      experiment:
+        description: 'Published experiment ID, for example EXP-SEARCH-SIXPLY-001'
+        type: string
+        required: true
+      baseline:
+        description: 'Exact tip of research/baseline (40 lowercase hex digits)'
+        type: string
+        required: true
+      candidate:
+        description: 'Exact tip of experiment/<ID> (40 lowercase hex digits)'
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloud-candidate-validation
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    if: >-
+      github.repository == 'ShadyF4RR/Stockfish' && github.event.repository.private == false
+      && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/research/continuous-coordinator')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 28
+    steps:
+      - name: Check out the exact control revision
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          path: control
+
+      - name: Verify public experiment and baseline refs before checking out engine source
+        env:
+          EVENT: ${{ github.event_name }}
+          INPUT_EXPERIMENT: ${{ inputs.experiment }}
+          INPUT_CANDIDATE: ${{ inputs.candidate }}
+          INPUT_BASELINE: ${{ inputs.baseline }}
+        working-directory: control
+        run: |
+          if [[ "$EVENT" == workflow_dispatch ]]; then
+            request=(--experiment "$INPUT_EXPERIMENT" --candidate "$INPUT_CANDIDATE" --baseline "$INPUT_BASELINE")
+          else
+            request=(--marker research-lab/config/cloud-candidate.json)
+          fi
+          python3 -B research-lab/continuous/cloud_candidate.py "$RUNNER_TEMP/engine-sources" "${request[@]}" > "$RUNNER_TEMP/request.tmp"
+          mv "$RUNNER_TEMP/request.tmp" "$RUNNER_TEMP/request.json"
+          cat "$RUNNER_TEMP/request.json"
+
+      - name: Install sandbox dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends expect bubblewrap
+
+      - name: Run the pinned comparison in the isolated engine worker
+        working-directory: control
+        run: |
+          python3 -B research-lab/continuous/validate_candidate.py \
+            "$RUNNER_TEMP/engine-sources/baseline" "$RUNNER_TEMP/engine-sources/candidate" \
+            "$RUNNER_TEMP/evidence" --build-only
+
+      - name: Preserve measurements, stage decision and exact request
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: cloud-candidate-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/request.json
+            ${{ runner.temp }}/evidence/
+          retention-days: 30
+          if-no-files-found: warn
