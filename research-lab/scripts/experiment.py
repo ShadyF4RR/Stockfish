@@ -227,14 +227,16 @@ def main():
     proposal = commands.add_parser("propose", help="admit one hypothesis against the pinned local baseline")
     proposal.add_argument("id", type=slug)
     proposal.add_argument("topic", type=slug, help="stable conceptual duplicate key")
-    proposal.add_argument("agent", choices=CONFIG["research_roles"])
+    proposal.add_argument("agent", type=lambda role: "evaluation" if role == "performance" else role,
+                          choices=CONFIG["research_roles"])
     proposal.add_argument("hypothesis", type=nonempty)
     proposal.add_argument("--retry-reason", type=nonempty)
     begin = commands.add_parser("start", help="reserve a slot, then create or recover its candidate worktree")
     begin.add_argument("id", type=slug)
     report = commands.add_parser("report", help="append a structured, commit-specific agent handoff")
     report.add_argument("id", type=slug)
-    report.add_argument("role", choices=CONFIG["roles"])
+    report.add_argument("role", type=lambda role: "testing" if role == "performance" else role,
+                        choices=CONFIG["roles"])
     report.add_argument("file", type=Path)
     end = commands.add_parser("finish", help="archive an experiment and release its slot")
     end.add_argument("id", type=slug)

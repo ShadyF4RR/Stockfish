@@ -5,8 +5,7 @@
     "evaluation",
     "implementation",
     "reviewer",
-    "testing",
-    "performance"
+    "testing"
   ],
   "limits": {
     "concurrent_coding_experiments": 2,
@@ -16,14 +15,17 @@
   "ledger_branch": "research/ledger",
   "autonomous_execution_enabled": false,
   "paid_api_budget_usd": 0,
+  "coding_execution": "chatgpt_subscription_codex_cloud",
+  "local_model_fallback": false,
+  "coordinator_interval_hours": 4,
+  "concurrent_chess_campaigns": 1,
   "nnue_training_budget_hours": 0,
   "public_fishtest_budget_hours": 0,
   "public_fishtest_username": "ShadyF4RR",
   "public_fishtest_max_games_approved": {"stc": 0, "ltc": 0},
   "research_roles": [
     "search",
-    "evaluation",
-    "performance"
+    "evaluation"
   ],
   "fishtest": {
     "submission_mode": "human_official_form",

@@ -15,7 +15,7 @@ def capacity(cfg, profile):
     for cpu in sorted(os.sched_getaffinity(0)):
         topology = Path(f"/sys/devices/system/cpu/cpu{cpu}/topology")
         key = tuple((topology / k).read_text().strip() for k in ("physical_package_id", "core_id"))
-        cores.setdefault(key, cpu)
+        cores.setdefault(cpu if profile.get("count_vcpus") else key, cpu)
     count = min(len(cores), profile.get("max_machine_cpus", len(cores)))
     mem = {k: int(v.split()[0]) // 1024 for k, v in (line.split(":", 1)
            for line in Path("/proc/meminfo").read_text().splitlines())}

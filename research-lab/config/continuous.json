@@ -1,0 +1,34 @@
+{
+  "fork": "ShadyF4RR/Stockfish",
+  "baseline_branch": "research/baseline",
+  "lease_minutes": 120,
+  "max_attempts": 2,
+  "max_hypotheses_per_day": 3,
+  "max_discovery_attempts_per_day": 2,
+  "runner_minutes_per_attempt": 110,
+  "daily_budget": {
+    "requests": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cost_usd": 0,
+    "runner_minutes": 220
+  },
+  "lifetime_budget": {
+    "requests": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cost_usd": 0,
+    "runner_minutes": 1100
+  },
+  "rehearsal_daily_runner_minutes": 330,
+  "rehearsal_lifetime_runner_minutes": 440,
+  "bootstrap": {
+    "topic": "quiet-six-ply-continuation",
+    "hypothesis": "Halving the six-ply continuation-history contribution when ordering quiet moves may improve first-quiet cutoff selection.",
+    "path": "src/movepick.cpp"
+  },
+  "subscription_cloud": {
+    "operator_claims_enabled": true,
+    "unattended_dispatch": false
+  }
+}

@@ -2,6 +2,10 @@
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md), the [lab guide](research-lab/README.md), the applicable role card under `research-lab/agents/`, and existing experiment records before proposing or implementing a change. Stockfish and contributions retain the upstream GPLv3 license.
 
+## Six research roles
+
+The research coordinator admits and prioritizes hypotheses. The search researcher studies search and time management. The evaluation researcher studies NNUE and score behavior. The implementation agent writes the one-variable patch. A separate reviewer evaluates correctness and experiment design. The statistical testing agent runs validation, benchmarks and paired matches and owns the [performance measurement specialization](research-lab/agents/performance.md). Evaluation and search researchers can propose hardware-related hypotheses in their domain. Preserve the provenance of historical handoffs that use the former `performance` role label.
+
 ## Working branches
 
 Use `origin` for this fork. Use `upstream` only to read official Stockfish. Preserve the pinned `research/baseline`. Coordinate experiments through the ledger and use the worktree assigned to the experiment. Keep each engine branch to one conceptual variable. The only automatic promotion target after activation is `research/integration`.
@@ -18,7 +22,7 @@ Use `origin` for this fork. Use `upstream` only to read official Stockfish. Pres
 
 Work in Codex Cloud and on the GitHub fork by default. The owner's optional local machine has 8 CPU cores and 16 GB RAM. A local run requires a connected worker. The owner does not need a local clone. Use the detected worker profile and its resource limits in `research-lab/config/testing.yaml`. Reserve capacity for the OS. Compare concurrent one-thread games with multi-thread allocations on the same worker, record games/hour, and freeze identical settings for both engines. See the [lab guide](research-lab/README.md).
 
-Read the [EXP-COMPRESSION-001 protocol](research-lab/experiments/compression-001.md) and its queue record before extending compression work. Distinguish release tag, platform, executable, embedded network and distribution archive. Record sizes in bytes, verify restored content, and measure runtime costs separately. Assign the performance role for startup, CPU, RSS, cache and NPS. The testing agent decides whether measured runtime differences justify games. Keep proofs of concept on isolated fork branches. An artifact-size finding can be recorded without an Elo claim.
+Read the [EXP-COMPRESSION-001 protocol](research-lab/experiments/compression-001.md) and its queue record before extending compression work. Distinguish release tag, platform, executable, embedded network and distribution archive. Record sizes in bytes, verify restored content, and measure runtime costs separately. Assign startup, CPU, RSS, cache and NPS measurements to the statistical testing agent. The testing agent decides whether measured runtime differences justify games. Keep proofs of concept on isolated fork branches. An artifact-size finding can be recorded without an Elo claim.
 
 ## Future Codex tasks and public testing
 
@@ -33,3 +37,9 @@ For further MSZIP work consult the [dedicated experiment branch](https://github.
 Use `python3 research-lab/fishtest/cli.py` from the trusted lab checkout for public reads and the approved coordinator ledger for state changes. The designated public account is `ShadyF4RR`. The account owner signs into the official Fishtest site in their own browser to submit a reviewed stage. Keep credentials and session tokens out of code, prompts, configuration, CLI arguments and GitHub Secrets. All agents share the same submission queue, account settings and public slot. See the [agent command and configuration guide](research-lab/fishtest/OPERATIONS.md).
 
 Public browsing and result inspection require no account. The scheduled monitor verifies known runs, records their official outcomes, and prepares the next stage or upstream PR text. An active run from a different account or an arbitrary status query cannot authorize an escalation. Keep autonomous public submission disabled. Any future machine submission method requires an operator-supported interface, explicit maintainer permission and separate verification.
+
+## Subscription-only research execution
+
+Use ordinary online Codex Cloud tasks under the owner's ChatGPT subscription and the strongest online coding model available to that account for the assignment. Keep additional API spending at $0. If the included allowance is exhausted, pause. Switching to a local model requires explicit owner approval. The public fork's GitHub workflows handle builds, queue reporting, and anonymous Fishtest reads. Keep account credentials in the first-party Codex session.
+
+Claim one hypothesis from the persistent queue inside an already-started hosted task. Record the exact candidate, review, correctness results, measured resources and next eligible hypothesis before releasing the lease. Keep at most two coding experiments and one chess campaign active. The current queue serializes the complete experiment. Follow the [queue commands](research-lab/continuous/QUEUE.md) and [subscription and connectivity guide](research-lab/continuous/SUBSCRIPTION.md).

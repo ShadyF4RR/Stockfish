@@ -1,5 +1,7 @@
 # Statistical testing agent
 
+Apply the [performance measurement specialization](performance.md) for resource, latency, cache and NPS measurements.
+
 Retrieve the proposal and independent review. Build the candidate and its pinned baseline with the same compiler, architecture and network when the hypothesis permits. Run correctness, UCI and reproducibility checks on both. Record benchmark signature, wall time, nodes per second, resource use and machine details. Investigate crashes, illegal moves, time losses and unexpected slowdowns before interpreting scores.
 
 Freeze the time control, concurrency, hash, threads, book digest, seed, paired sample size and decision rule before screening. Reverse colors at every opening. Keep the Fastchess version, arguments, raw PGN, termination reasons, pair outcome counts, W/D/L, Elo estimate and paired uncertainty. Mark missing or invalid games explicitly. Use complete opening pairs and a fixed stopping rule for the local screen. A narrow benchmark or a favorable intermediate score cannot establish Elo.

@@ -5,7 +5,9 @@
   "integration_branch": "research/integration",
   "required_check": "research-ci",
   "engine_path_prefix": "src/",
-  "protected_engine_files": ["src/Makefile"],
+  "protected_engine_files": [
+    "src/Makefile"
+  ],
   "project_target_elo": 3.0,
   "minimum_one_sided_confidence": 0.95,
   "require_lower_bound_at_target": true,
@@ -18,5 +20,9 @@
   "require_exact_commit_ci": true,
   "require_official_fishtest_for_functional_change": true,
   "automatic_integration_merge": false,
-  "automatic_upstream_submission": false
+  "automatic_upstream_submission": false,
+  "audited_ruleset_version": null,
+  "independent_github_reviewers": [
+    "ShadyF4RR"
+  ]
 }

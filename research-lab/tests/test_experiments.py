@@ -70,7 +70,10 @@ class LedgerTest(unittest.TestCase):
                                        "candidate_commit": None, "summary": "artifact inventory",
                                        "evidence": {"artifacts": ["example"]}}))
         self.lab("report", seed["id"], "performance", str(payload))
-        self.assertEqual(json.loads(self.lab("show", seed["id"]))["status"], "proposed")
+        stored = json.loads(self.lab("show", seed["id"]))
+        self.assertEqual(stored["status"], "proposed")
+        self.assertEqual(stored["responsible_agent"], "evaluation")
+        self.assertEqual(stored["reports"][-1]["role"], "testing")
         tree = self.lab("start", seed["id"])
         self.assertEqual(self.git("branch", "--show-current", cwd=tree), "experiment/" + seed["id"])
         self.assertEqual(json.loads(self.lab("show", seed["id"]))["id"], seed["id"])

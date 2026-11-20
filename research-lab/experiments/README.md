@@ -44,6 +44,8 @@ The daily quota includes all proposals admitted on that UTC date, even if
 they have since been archived. Active jobs consume slots until closed. The
 config sets the limits to two coding slots and three daily proposals.
 
+The six current roles are defined in `config/agents.yaml`. Older records retain their original `performance` labels. For CLI compatibility, a new proposal made with that label is filed under `evaluation`, and a new measurement handoff is filed under `testing`.
+
 A research handoff for a proposed experiment includes its exact `baseline_commit`
 and a null `candidate_commit`. This records artifact identification or other
 research without reserving a coding slot. After the worktree is created,
