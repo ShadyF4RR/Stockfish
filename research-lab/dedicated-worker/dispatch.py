@@ -236,7 +236,10 @@ def change(store, state, x, now):
         owner = state["enrolled_pc"]
         ready = state.get("ready_pc") or {}
         decision = "waiting_for_pc"
-        if state["paused"] or state["active"]:
+        settings = json.loads((Path(__file__).resolve().parents[1] / "config/agents.yaml").read_text())
+        if settings["autonomous_execution_enabled"] is not True or settings["paid_api_budget_usd"] != 0:
+            decision = "disabled"
+        elif state["paused"] or state["active"]:
             decision = "paused" if state["paused"] else "campaign_active"
         elif owner and ready.get("owner") == owner and now - datetime.fromisoformat(ready["at"]) < timedelta(minutes=15):
             decision = "no_eligible_match"
@@ -251,6 +254,8 @@ def change(store, state, x, now):
                 decision = "dispatched " + m["experiment"]
                 break
         state["last_schedule"] = dict(run=x.run, event=x.event, at=stamp(now), decision=decision)
+        if x.event == "schedule":
+            state["last_cron"] = dict(state["last_schedule"])
         return state["last_schedule"]
     if action == "ready":
         if x.owner != state["enrolled_pc"]:

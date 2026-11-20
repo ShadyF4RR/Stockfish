@@ -28,7 +28,7 @@
     "path": "src/movepick.cpp"
   },
   "subscription_cloud": {
-    "operator_claims_enabled": true,
+    "operator_claims_enabled": false,
     "unattended_dispatch": false
   }
 }

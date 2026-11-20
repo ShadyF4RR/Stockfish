@@ -81,7 +81,7 @@ def count_today(state, now, kind):
 
 def admit(state, proposal, now, config):
     p = canonical(proposal)
-    all_proposals = state["items"] + state["deferred"]
+    all_proposals = state["items"] + state["deferred"] + state.get("testing_handoffs", [])
     if any(it["topic"] == p["topic"] or it["hypothesis"].casefold() == p["hypothesis"].casefold()
            for it in all_proposals):
         return "duplicate"

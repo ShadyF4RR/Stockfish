@@ -185,7 +185,8 @@ def run(args, cfg, plan, limits, out, timeout):
     if len(set(positions)) != len(positions) or len(positions) < pairs:
         raise ValueError("book needs distinct positions and at least one opening per pair")
 
-    out.mkdir(parents=True, exist_ok=False)
+    checkpointed = cfg.get("checkpoint_games", False)
+    out.mkdir(parents=True, exist_ok=checkpointed)
     command = [str(fastchess), "-engine", f"cmd={candidate_path}", "name=candidate",
                "-engine", f"cmd={baseline_path}", "name=baseline",
                "-each", "proto=uci", f"tc={cfg['time_control']}", f"option.Threads={plan['threads']}",
@@ -205,21 +206,26 @@ def run(args, cfg, plan, limits, out, timeout):
     usage_before = resource.getrusage(resource.RUSAGE_CHILDREN)
     start = time.monotonic()
     try:
-        with (out / "fastchess.log").open("wb") as log:
-            # Start in a fresh directory with no inherited GitHub or API credentials.
-            with subprocess.Popen(command, cwd=out, stdout=log, stderr=subprocess.STDOUT,
-                                  env={"PATH": os.defpath, "LC_ALL": "C", "HOME": str(out),
-                                       "MALLOC_ARENA_MAX": "2"},
-                                  preexec_fn=lambda: apply_limits(plan), start_new_session=True) as proc:
-                try:
-                    if proc.wait(timeout=max(0, deadline - time.monotonic())) != 0:
-                        raise ValueError("Fastchess failed; see fastchess.log")
-                finally:
-                    # Include engine children if the match manager exits unexpectedly.
+        if checkpointed:
+            import checkpoint_games
+            checkpoint_games.play(command, book.read_text().splitlines(), out, record,
+                                  deadline, apply_limits, opening_key)
+        else:
+            with (out / "fastchess.log").open("wb") as log:
+                # Start in a fresh directory with no inherited GitHub or API credentials.
+                with subprocess.Popen(command, cwd=out, stdout=log, stderr=subprocess.STDOUT,
+                                      env={"PATH": os.defpath, "LC_ALL": "C", "HOME": str(out),
+                                           "MALLOC_ARENA_MAX": "2"},
+                                      preexec_fn=lambda: apply_limits(plan), start_new_session=True) as proc:
                     try:
-                        os.killpg(proc.pid, signal.SIGKILL)
-                    except ProcessLookupError:
-                        pass
+                        if proc.wait(timeout=max(0, deadline - time.monotonic())) != 0:
+                            raise ValueError("Fastchess failed; see fastchess.log")
+                    finally:
+                        # Include engine children if the match manager exits unexpectedly.
+                        try:
+                            os.killpg(proc.pid, signal.SIGKILL)
+                        except ProcessLookupError:
+                            pass
         if sha256(book) != book_hash:
             raise ValueError("opening book changed during the run")
         for binary, build in ((candidate_path, candidate), (baseline_path, baseline)):
