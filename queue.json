@@ -1,7 +1,23 @@
 {
   "active": null,
   "enrolled_pc": null,
-  "jobs": {},
+  "jobs": {
+    "EXP-QSEARCH-CHECKCAP-001": {
+      "attempts": [],
+      "manifest": {
+        "baseline": "1819b9ea37588be8adb044179fb54512f87c8249",
+        "candidate": "fb5c6f82983e23b1ad0c6518960e8dc4a0c5b300",
+        "experiment": "EXP-QSEARCH-CHECKCAP-001",
+        "max_minutes": 110,
+        "pairs": 50,
+        "placement": "preferred",
+        "seed": 20261120,
+        "time_control": "4+0.04"
+      },
+      "status": "pending",
+      "submitted_at": "2026-11-20T22:53:16+00:00"
+    }
+  },
   "limits": {
     "daily": {
       "games": 232,
