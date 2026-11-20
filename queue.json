@@ -48,14 +48,30 @@
       "topic": "quiet-six-ply-continuation"
     },
     {
-      "attempts": [],
-      "baseline": null,
+      "attempts": [
+        {
+          "budget": {
+            "cost_usd": 0.0,
+            "input_tokens": 0,
+            "output_tokens": 0,
+            "requests": 0,
+            "runner_minutes": 110
+          },
+          "checkpoints": [],
+          "expires_at": "2026-11-20T23:57:13+00:00",
+          "job": "cloud-56eb3d6f00c23b433aed94-tactical",
+          "lease": "c9b3e1ac28e3446681bd3841b46c635b",
+          "provider": "subscription_cloud_task",
+          "started_at": "2026-11-20T21:57:13+00:00"
+        }
+      ],
+      "baseline": "1819b9ea37588be8adb044179fb54512f87c8249",
       "created_at": "2026-11-20T21:57:09+00:00",
       "hypothesis": "Testing SEE-qualified quiet checks with the general gives_check predicate may surface useful discovered checks earlier in tactical search.",
       "id": "EXP-CONT-000002",
       "kind": "run",
       "path": "src/movepick.cpp",
-      "status": "queued",
+      "status": "running",
       "topic": "see-qualified-quiet-checks"
     }
   ],
