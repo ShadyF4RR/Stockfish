@@ -17,6 +17,7 @@ jobs:
           from urllib import request, error
           urls = (
               'https://chatgpt.com/backend-api/codex/models',
+              'https://chatgpt.com/backend-api/codex/responses',
               'https://developers.openai.com/codex/auth/',
               'https://tests.stockfishchess.org/api/active_runs',
           )
