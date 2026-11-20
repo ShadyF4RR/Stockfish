@@ -20,7 +20,7 @@ $file = Join-Path $env:TEMP 'Install-StockfishWorker.ps1'
 Invoke-WebRequest -UseBasicParsing $url -OutFile $file
 if ((Get-FileHash $file -Algorithm SHA256).Hash -ne '3afc21619a2f8cabe7cf9d44042407a4a4cf9f316aacc0c8c9992fe827cc9998') { throw 'Installer checksum mismatch' }
 Unblock-File -LiteralPath $file
-& $file -ControlSha $pin
+powershell.exe -NoProfile -ExecutionPolicy RemoteSigned -File $file -ControlSha $pin
 ```
 
 If the installer enables WSL and requests a reboot, reboot and repeat this block. It imports the hash-pinned Ubuntu image, builds pinned Fastchess and installs the service. Allow provisioning to finish. The guest can use up to eight vCPUs and 12 GiB, with a 10 GiB hard memory limit on the worker service.
