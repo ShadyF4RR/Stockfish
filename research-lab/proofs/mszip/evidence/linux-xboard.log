@@ -1,0 +1,484 @@
+recognized 'normal' (-1) as variant normal
+recognized 'normal' (-1) as variant normal
+recognized 'normal' (-1) as variant normal
+shuffleOpenings = 0
+Requested font set for list -*-helvetica-medium-r-normal--14-*-*-*-*-*-*-*,-misc-fixed-medium-r-normal--14-*-*-*-*-*-*-*,-*-*-*-*-*-*-14-*-*-*-*-*-*-*
+ got list -*-helvetica-medium-r-normal--14-*-*-*-*-*-*-*,-misc-fixed-medium-r-normal--14-*-*-*-*-*-*-*,-*-*-*-*-*-*-14-*-*-*-*-*-*-*, locale C.UTF-8
+ got charset -adobe-helvetica-medium-r-normal--14-101-100-100-p-0-iso8859-1
+ got charset -adobe-helvetica-medium-r-normal--14-101-100-100-p-0-iso8859-1
+ got charset -adobe-helvetica-medium-r-normal--14-101-100-100-p-0-iso8859-2
+ got charset -adobe-helvetica-medium-r-normal--14-101-100-100-p-0-iso8859-15
+ missing charset ISO8859-3
+ missing charset ISO8859-4
+ missing charset ISO8859-5
+ missing charset KOI8-R
+ missing charset ISO8859-7
+ missing charset ISO8859-9
+ missing charset ISO8859-13
+ missing charset ISO8859-14
+ missing charset JISX0208.1983-0
+ missing charset KSC5601.1987-0
+ missing charset GB2312.1980-0
+ missing charset JISX0201.1976-0
+ missing charset ISO10646-1
+Requested font set for list -*-helvetica-bold-r-normal--34-*-*-*-*-*-*-*,-misc-fixed-bold-r-normal--34-*-*-*-*-*-*-*,-*-*-*-*-*-*-34-*-*-*-*-*-*-*
+ got list -*-helvetica-bold-r-normal--34-*-*-*-*-*-*-*,-misc-fixed-bold-r-normal--34-*-*-*-*-*-*-*,-*-*-*-*-*-*-34-*-*-*-*-*-*-*, locale C.UTF-8
+ got charset -adobe-helvetica-bold-r-normal--34-246-100-100-p-0-iso8859-1
+ got charset -adobe-helvetica-bold-r-normal--34-246-100-100-p-0-iso8859-1
+ got charset -adobe-helvetica-bold-r-normal--34-246-100-100-p-0-iso8859-2
+ got charset -adobe-helvetica-bold-r-normal--34-246-100-100-p-0-iso8859-15
+ missing charset ISO8859-3
+ missing charset ISO8859-4
+ missing charset ISO8859-5
+ missing charset KOI8-R
+ missing charset ISO8859-7
+ missing charset ISO8859-9
+ missing charset ISO8859-13
+ missing charset ISO8859-14
+ missing charset JISX0208.1983-0
+ missing charset KSC5601.1987-0
+ missing charset GB2312.1980-0
+ missing charset JISX0201.1976-0
+ missing charset ISO10646-1
+Requested font set for list -*-helvetica-bold-r-normal--12-*-*-*-*-*-*-*,-misc-fixed-bold-r-normal--12-*-*-*-*-*-*-*,-*-*-*-*-*-*-12-*-*-*-*-*-*-*
+ got list -*-helvetica-bold-r-normal--12-*-*-*-*-*-*-*,-misc-fixed-bold-r-normal--12-*-*-*-*-*-*-*,-*-*-*-*-*-*-12-*-*-*-*-*-*-*, locale C.UTF-8
+ got charset -adobe-helvetica-bold-r-normal--12-87-100-100-p-0-iso8859-1
+ got charset -adobe-helvetica-bold-r-normal--12-87-100-100-p-0-iso8859-1
+ got charset -adobe-helvetica-bold-r-normal--12-87-100-100-p-0-iso8859-2
+ got charset -adobe-helvetica-bold-r-normal--12-87-100-100-p-0-iso8859-15
+ missing charset ISO8859-3
+ missing charset ISO8859-4
+ missing charset ISO8859-5
+ missing charset KOI8-R
+ missing charset ISO8859-7
+ missing charset ISO8859-9
+ missing charset ISO8859-13
+ missing charset ISO8859-14
+ missing charset JISX0208.1983-0
+ missing charset KSC5601.1987-0
+ missing charset GB2312.1980-0
+ missing charset JISX0201.1976-0
+ missing charset ISO10646-1
+shuffleOpenings = 0
+Version: xboard 4.9.1 + stockfish19-mszip ()
+Reset(1, 0) from gameMode 0
+recognized 'normal' (-1) as variant normal
+GameEnds(0, (null), 2)
+shuffleOpenings = 0
+StartChildProcess (dir="") polyglot -noini -ec "/tmp/sf19-mszip-build/linux/stockfish19-mszip" -ed "/tmp/sf19-gui/replayed"
+211 >first : xboard
+protover 2
+242 <first : PolyGlot 2.0.4 by Fabien Letouzey.
+3043 <first : feature done=0
+3043 >first : accepted done
+3043 <first : feature analyze=1
+3043 >first : accepted analyze
+3043 <first : feature exclude=1
+3043 >first : accepted exclude
+3043 <first : feature colors=0
+3043 >first : accepted colors
+3043 <first : feature draw=1
+3043 >first : accepted draw
+3043 <first : feature ics=1
+3043 >first : accepted ics
+3043 <first : feature myname="Stockfish 19"
+3043 >first : accepted myname
+3043 <first : feature name=1
+3043 >first : accepted name
+3043 <first : feature pause=0
+3043 >first : accepted pause
+3043 <first : feature ping=1
+3043 >first : accepted ping
+3043 <first : feature playother=1
+3043 >first : accepted playother
+3043 <first : feature sigint=1
+3043 >first : accepted sigint
+3043 <first : feature reuse=1
+3043 >first : accepted reuse
+3043 <first : feature san=0
+3043 >first : accepted san
+3043 <first : feature setboard=1
+3043 >first : accepted setboard
+3043 <first : feature sigint=0
+3043 >first : accepted sigint
+3043 <first : feature sigterm=0
+3043 >first : accepted sigterm
+3043 <first : feature time=1
+3043 >first : accepted time
+3043 <first : feature usermove=1
+3043 >first : accepted usermove
+3043 <first : feature nps=1
+3043 >first : accepted nps
+3043 <first : feature memory=1
+3043 >first : accepted memory
+3043 <first : feature smp=1
+3043 >first : accepted smp
+3043 <first : feature egt="syzygy"
+3043 >first : accepted egt
+3043 <first : feature variants="normal,fischerandom"
+3043 >first : accepted variants
+3043 <first : feature option="Debug Log File -file <empty>"
+3043 >first : accepted option
+3043 <first : feature option="NumaPolicy -string auto"
+3043 >first : accepted option
+3043 <first : feature option="Clear Hash -button"
+3043 >first : accepted option
+3043 <first : feature option="MultiPV -spin 1 1 256"
+3043 >first : accepted option
+3043 <first : feature option="Skill Level -spin 20 0 20"
+3043 >first : accepted option
+3043 <first : feature option="Move Overhead -spin 10 0 5000"
+3043 >first : accepted option
+3043 <first : feature option="nodestime -spin 0 0 10000"
+3043 >first : accepted option
+3043 <first : feature option="UCI_LimitStrength -check 0"
+3043 >first : accepted option
+3043 <first : feature option="UCI_Elo -spin 1320 1320 3190"
+3043 >first : accepted option
+3043 <first : feature option="UCI_ShowWDL -check 0"
+3043 >first : accepted option
+3043 <first : feature option="SyzygyProbeDepth -spin 1 1 100"
+3043 >first : accepted option
+3043 <first : feature option="Syzygy50MoveRule -check 1"
+3043 >first : accepted option
+3043 <first : feature option="SyzygyProbeLimit -spin 7 0 7"
+3043 >first : accepted option
+3043 <first : feature option="EvalFile -file nn-1a298aa575a0.nnue"
+3043 >first : accepted option
+3043 <first : feature option="Polyglot exclude move -string "
+3043 >first : accepted option
+3043 <first : feature option="Polyglot SettingsFile -file /tmp/sf19-gui/replayed/.polyglot/Stockfish_19.ini"
+3043 >first : accepted option
+3043 <first : feature option="Polyglot Log -check 0"
+3043 >first : accepted option
+3043 <first : feature option="Polyglot LogFile -file polyglot.log"
+3043 >first : accepted option
+3043 <first : feature option="Polyglot Resign -check 0"
+3043 >first : accepted option
+3043 <first : feature option="Polyglot ResignMoves -spin 3 0 10000"
+3043 >first : accepted option
+3043 <first : feature option="Polyglot QueenNeverResigns -check 1"
+3043 >first : accepted option
+3043 <first : feature option="Polyglot ResignScore -spin 600 0 10000"
+3043 >first : accepted option
+3043 <first : feature option="Polyglot Handledraws -check 0"
+3043 >first : accepted option
+3043 <first : feature option="Polyglot ContemptScore -spin 30 0 10000"
+3043 >first : accepted option
+3043 <first : feature option="Polyglot Book -check 0"
+3043 >first : accepted option
+3043 <first : feature option="Polyglot BookFile -file book.bin"
+3043 >first : accepted option
+3043 <first : feature option="Polyglot BookRandom -check 1"
+3043 >first : accepted option
+3043 <first : feature option="Polyglot BookDepth -spin 256 0 256"
+3043 >first : accepted option
+3043 <first : feature option="Polyglot ShowTbHits -check 0"
+3043 >first : accepted option
+3043 <first : feature option="Polyglot STFudge -spin 20 0 1000"
+3043 >first : accepted option
+3043 <first : feature option="Polyglot SyncStop -check 0"
+3043 >first : accepted option
+3043 <first : feature option="Polyglot Save -save"
+3043 >first : accepted option
+3043 <first : feature done=1
+3043 >first : accepted done
+3044 >first : memory 68
+3048 >first : cores 1
+3048 >first : new
+random
+3048 >first : ics -
+3048 >first : level 40 1 0
+3048 >first : sd 5
+3048 >first : post
+3048 >first : hard
+3048 >first : ping 1
+Impossible move , type = 0
+Reset(0, 1) from gameMode 0
+recognized 'normal' (-1) as variant normal
+GameEnds(0, (null), 2)
+3049 >first : force
+3049 >first : ping 2
+shuffleOpenings = 0
+3049 >first : memory 68
+3049 >first : cores 1
+3049 >first : new
+random
+3049 >first : ics -
+3049 >first : level 40 1 0
+3049 >first : sd 5
+3049 >first : post
+3049 >first : hard
+3049 >first : ping 3
+Impossible move , type = 0
+shuffleOpenings = 0
+FEN castling rights: 134 134 134 134 134 134
+3056 >first : force
+write FEN 50-move: 0 0 0
+e0. p=-6
+3056 >first : setboard 7k/5Q2/6K1/8/8/8/8/8 w - - 0 1
+ 134 134 134 134 134 134
+ 134 134 134 134 134 134
+ 7 0 4 7 0 4
+Load Position
+3070 <first : pong 1
+3070 <first : pong 2
+3081 <first : pong 3
+StartChildProcess (dir="") polyglot -noini -ec "/tmp/lab-official-sf19/stockfish/stockfish-linux-x86-64-universal" -ed "/tmp/sf19-gui/replayed"
+3090 >second: xboard
+protover 2
+3092 <second: PolyGlot 2.0.4 by Fabien Letouzey.
+3610 <second: feature done=0
+3610 >second: accepted done
+3610 <second: feature analyze=1
+3610 >second: accepted analyze
+3610 <second: feature exclude=1
+3610 >second: accepted exclude
+3610 <second: feature colors=0
+3610 >second: accepted colors
+3610 <second: feature draw=1
+3610 >second: accepted draw
+3610 <second: feature ics=1
+3610 >second: accepted ics
+3610 <second: feature myname="Stockfish 19"
+3610 >second: accepted myname
+3610 <second: feature name=1
+3610 >second: accepted name
+3610 <second: feature pause=0
+3610 >second: accepted pause
+3610 <second: feature ping=1
+3610 >second: accepted ping
+3610 <second: feature playother=1
+3610 >second: accepted playother
+3610 <second: feature sigint=1
+3610 >second: accepted sigint
+3610 <second: feature reuse=1
+3610 >second: accepted reuse
+3610 <second: feature san=0
+3610 >second: accepted san
+3610 <second: feature setboard=1
+3610 >second: accepted setboard
+3610 <second: feature sigint=0
+3610 >second: accepted sigint
+3610 <second: feature sigterm=0
+3610 >second: accepted sigterm
+3610 <second: feature time=1
+3610 >second: accepted time
+3610 <second: feature usermove=1
+3610 >second: accepted usermove
+3610 <second: feature nps=1
+3610 >second: accepted nps
+3610 <second: feature memory=1
+3610 >second: accepted memory
+3611 <second: feature smp=1
+3611 >second: accepted smp
+3611 <second: feature egt="syzygy"
+3611 >second: accepted egt
+3611 <second: feature variants="normal,fischerandom"
+3611 >second: accepted variants
+3611 <second: feature option="Debug Log File -file <empty>"
+3611 >second: accepted option
+3611 <second: feature option="NumaPolicy -string auto"
+3611 >second: accepted option
+3611 <second: feature option="Clear Hash -button"
+3611 >second: accepted option
+3611 <second: feature option="MultiPV -spin 1 1 256"
+3611 >second: accepted option
+3611 <second: feature option="Skill Level -spin 20 0 20"
+3611 >second: accepted option
+3611 <second: feature option="Move Overhead -spin 10 0 5000"
+3611 >second: accepted option
+3611 <second: feature option="nodestime -spin 0 0 10000"
+3611 >second: accepted option
+3611 <second: feature option="UCI_LimitStrength -check 0"
+3611 >second: accepted option
+3611 <second: feature option="UCI_Elo -spin 1320 1320 3190"
+3611 >second: accepted option
+3611 <second: feature option="UCI_ShowWDL -check 0"
+3611 >second: accepted option
+3611 <second: feature option="SyzygyProbeDepth -spin 1 1 100"
+3611 >second: accepted option
+3611 <second: feature option="Syzygy50MoveRule -check 1"
+3611 >second: accepted option
+3611 <second: feature option="SyzygyProbeLimit -spin 7 0 7"
+3611 >second: accepted option
+3611 <second: feature option="EvalFile -file nn-1a298aa575a0.nnue"
+3611 >second: accepted option
+3611 <second: feature option="Polyglot exclude move -string "
+3611 >second: accepted option
+3611 <second: feature option="Polyglot SettingsFile -file /tmp/sf19-gui/replayed/.polyglot/Stockfish_19.ini"
+3611 >second: accepted option
+3611 <second: feature option="Polyglot Log -check 0"
+3611 >second: accepted option
+3611 <second: feature option="Polyglot LogFile -file polyglot.log"
+3611 >second: accepted option
+3611 <second: feature option="Polyglot Resign -check 0"
+3611 >second: accepted option
+3611 <second: feature option="Polyglot ResignMoves -spin 3 0 10000"
+3611 >second: accepted option
+3611 <second: feature option="Polyglot QueenNeverResigns -check 1"
+3611 >second: accepted option
+3611 <second: feature option="Polyglot ResignScore -spin 600 0 10000"
+3611 >second: accepted option
+3611 <second: feature option="Polyglot Handledraws -check 0"
+3611 >second: accepted option
+3611 <second: feature option="Polyglot ContemptScore -spin 30 0 10000"
+3611 >second: accepted option
+3611 <second: feature option="Polyglot Book -check 0"
+3611 >second: accepted option
+3611 <second: feature option="Polyglot BookFile -file book.bin"
+3611 >second: accepted option
+3611 <second: feature option="Polyglot BookRandom -check 1"
+3611 >second: accepted option
+3611 <second: feature option="Polyglot BookDepth -spin 256 0 256"
+3611 >second: accepted option
+3611 <second: feature option="Polyglot ShowTbHits -check 0"
+3611 >second: accepted option
+3611 <second: feature option="Polyglot STFudge -spin 20 0 1000"
+3611 >second: accepted option
+3611 <second: feature option="Polyglot SyncStop -check 0"
+3611 >second: accepted option
+3611 <second: feature option="Polyglot Save -save"
+3611 >second: accepted option
+3611 <second: feature done=1
+3611 >second: accepted done
+3612 >second: memory 68
+3616 >second: cores 1
+3616 >second: new
+random
+3616 >second: ics -
+3616 >second: level 40 1 0
+3616 >second: sd 5
+3616 >second: post
+3616 >second: hard
+3616 >second: ping 1
+Impossible move , type = 0
+3617 >second: force
+3638 <second: pong 1
+write FEN 50-move: 0 0 0
+e0. p=-6
+3647 >second: setboard 7k/5Q2/6K1/8/8/8/8/8 w - - 0 1
+Two Machines
+New game (1): Stockfish 19-Stockfish 19 (w)
+3647 >first : computer
+3647 >first : name Stockfish 19
+3647 >second: computer
+3647 >second: name Stockfish 19
+3647 >first : time 6000
+3647 >first : otim 6000
+book hit = (NULL)
+3647 >first : go
+nps: w=-1, b=-1
+3648 <first : 1 +0 0 0 Available processors: 0
+Impossible move , type = 0
+3648 <first : 1 +0 0 0 Using 1 thread
+Impossible move , type = 32
+3649 <first : 1 +0 0 0 NNUE evaluation using nn-1a298aa575a0.nnue (109MiB, (86896, 1024, 32, 32, 1))
+Impossible move , type = 25
+3649 <first : 1 +0 0 0 Network replica 1: Shared memory.
+Impossible move , type = 0
+3649 <first : 1 +100001 0 28 Qg7#
+3649 <first : 1 +100001 0 28 Qg7#
+3650 <first : move f7g7
+3650 >second: time 6000
+3650 >second: otim 5999
+book hit = (NULL)
+3650 >second: usermove 3650 >second: f7g7
+3650 >second: go
+3726 <first : 1-0 {White mates}
+GameEnds(26, White mates, 5)
+write FEN 50-move: 0 1 0
+e0. p=-6
+e1. p=100
+3729 >first : result 1-0 {White mates}
+3729 >second: result 1-0 {White mates}
+3729 >first : force
+3729 >first : ping 4
+3729 >second: force
+3729 >second: ping 2
+3729 <second: 1-0 {White mates}
+3729 <second: pong 2
+3729 <first : pong 4
+Reset(0, 1) from gameMode 8
+recognized 'normal' (-1) as variant normal
+GameEnds(0, (null), 2)
+shuffleOpenings = 0
+3740 >first : memory 68
+3740 >first : cores 1
+3740 >first : new
+random
+3744 >first : ics -
+3744 >first : level 40 1 0
+3744 >first : sd 5
+3744 >first : post
+3744 >first : hard
+3744 >first : ping 5
+Impossible move f7g7, type = 0
+shuffleOpenings = 0
+FEN castling rights: 134 134 134 134 134 134
+3750 >first : force
+write FEN 50-move: 0 0 0
+e0. p=-6
+3750 >first : setboard 7k/5Q2/6K1/8/8/8/8/8 w - - 0 1
+ 134 134 134 134 134 134
+ 134 134 134 134 134 134
+ 7 0 4 7 0 4
+Load Position
+3752 <first : pong 5
+3762 >second: memory 68
+3763 >second: cores 1
+3763 >second: new
+random
+3768 >second: ics -
+3768 >second: level 40 1 0
+3768 >second: sd 5
+3768 >second: post
+3768 >second: hard
+3768 >second: ping 3
+Impossible move f7g7, type = 0
+3768 >second: force
+3768 <second: pong 3
+write FEN 50-move: 0 0 0
+e0. p=-6
+3829 >second: setboard 7k/5Q2/6K1/8/8/8/8/8 w - - 0 1
+Two Machines
+New game (2): Stockfish 19-Stockfish 19 (b)
+3830 >first : computer
+3830 >first : name Stockfish 19
+3830 >second: computer
+3830 >second: name Stockfish 19
+3830 >second: time 6000
+3830 >second: otim 6000
+book hit = (NULL)
+3830 >second: go
+nps: w=-1, b=-1
+3830 <second: 1 +0 0 0 Available processors: 0
+Impossible move f7g7, type = 0
+3831 <second: 1 +0 0 0 Using 1 thread
+Impossible move f7g7, type = 32
+3831 <second: 1 +0 0 0 NNUE evaluation using nn-1a298aa575a0.nnue (109MiB, (86896, 1024, 32, 32, 1))
+Impossible move f7n/, type = 25
+3831 <second: 1 +0 0 0 Network replica 1: Shared memory.
+Impossible move f7n/, type = 0
+3831 <second: 1 +100001 0 28 Qg7#
+3832 <second: 1 +100001 0 28 Qg7#
+3832 <second: move f7g7
+3832 >first : time 6000
+3832 >first : otim 5999
+book hit = (NULL)
+3832 >first : usermove 3832 >first : f7g7
+3832 >first : go
+3906 <second: 1-0 {White mates}
+GameEnds(26, White mates, 6)
+write FEN 50-move: 0 1 0
+e0. p=-6
+e1. p=100
+3906 >first : result 1-0 {White mates}
+3906 >second: result 1-0 {White mates}
+3906 >first : force
+3906 >first : ping 6
+3906 >second: force
+3906 >second: ping 4
+GameEnds(26, White mates, 2)
+3907 >first : quit
+4209 >second: quit

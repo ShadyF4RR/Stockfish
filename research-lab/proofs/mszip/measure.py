@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Compare the official Linux SF19 executable with a trusted, self-extracting MSZIP launcher."""
 import argparse
-import collections
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import platform
@@ -67,7 +67,7 @@ class Monitor:
             self.stop.wait(0.01)
 
 
-def trial(exe, cache, native_sha, cpu, timeout, full):
+def trial(exe, cache, native_sha, cpu, timeout, full, packed):
     def expire(*_):
         raise TimeoutError("engine trial exceeded its deadline")
 
@@ -123,7 +123,8 @@ def trial(exe, cache, native_sha, cpu, timeout, full):
         record["ready_seconds"] = time.monotonic() - start
         # Linux launcher replaces itself with the restored engine before UCI ready.
         running = Path(f"/proc/{proc.pid}/exe").resolve(strict=True)
-        if exe != running and running.parent != cache:
+        expected_path = cache / ("stockfish-" + native_sha) if packed else exe
+        if running != expected_path:
             raise ValueError(f"unexpected exec target {running}")
         record["ready_memory_kib"] = memory(proc.pid)
         record["first_search"] = search("startpos", 100000)
@@ -189,6 +190,31 @@ def summarize(samples):
     return summary
 
 
+def paired_speed(samples):
+    def rate(row):
+        suite = row["steady_searches"]
+        return 1000 * sum(s["nodes"] for s in suite) / sum(s["search_ms"] for s in suite)
+
+    groups = {}
+    for row in samples:
+        groups.setdefault(row["block"], {})[row["mode"]] = rate(row)
+    n = len(groups)
+    # Exact binomial sign interval for the median paired ratio. Small n can
+    # require unbounded endpoints to attain 95% rather than overstating coverage.
+    k = 0
+    for i in range(1, n // 2 + 1):
+        if 2 * sum(math.comb(n, j) for j in range(i)) / 2**n <= 0.05:
+            k = i
+    coverage = 1 - 2 * sum(math.comb(n, j) for j in range(k)) / 2**n
+    summary = {}
+    for key in ("packed_fresh", "packed_cached"):
+        ratios = sorted(m[key] / m["native"] for m in groups.values())
+        bounds = [ratios[k - 1], ratios[-k]] if k else [None, None]
+        summary[key] = dict(median_ratio=statistics.median(ratios), interval=bounds,
+                            coverage=coverage, blocks=n, method="paired sign order statistics")
+    return summary
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("native", type=Path)
@@ -201,10 +227,15 @@ def main():
     packed = args.launcher.resolve(strict=True)
     if args.cpu not in os.sched_getaffinity(0) or digest(native) != NATIVE_SHA or packed == native:
         parser.error("need an allowed CPU, official sf_19 Linux universal binary, and its separate launcher")
+    manifest = json.loads((packed.parent / "manifest.json").read_text())
+    launcher_digest = digest(packed)
+    if (manifest.get("codec") != "MSZIP" or manifest.get("platform") != "linux/amd64"
+            or manifest.get("input_sha256") != NATIVE_SHA or manifest.get("launcher_sha256") != launcher_digest):
+        parser.error("launcher and its build.sh MSZIP manifest must identify the official release")
     if args.report.exists():
         parser.error("output exists")
     cpu = Path("/proc/cpuinfo").read_text().split("\n\n")[0]
-    report = dict(schema_version=1, native_sha256=NATIVE_SHA, launcher_sha256=digest(packed),
+    report = dict(schema_version=1, native_sha256=NATIVE_SHA, launcher_sha256=launcher_digest,
                   cpu=args.cpu, kernel=platform.release(), cpuinfo=cpu,
                   default_nnue_sha256=NET_SHA, positions=POSITIONS,
                   page_cache="uncontrolled; empty launcher cache is first-use, filesystem pages may be warm",
@@ -214,14 +245,15 @@ def main():
     with tempfile.TemporaryDirectory(prefix="sf19-mszip-measure-") as tmp:
         root = Path(tmp)
         cached = root / "warm"
-        trial(packed, cached, NATIVE_SHA, args.cpu, 45, False)
+        trial(packed, cached, NATIVE_SHA, args.cpu, 45, False, True)
         for block in range(args.blocks):
             order = MOTIONS[block % 3:] + MOTIONS[:block % 3]
             if block % 2:
                 order = tuple(reversed(order))
             for key in order:
                 cache = root / key if key == "native" else cached if key == "packed_cached" else root / f"new-{block}"
-                row = trial(native if key == "native" else packed, cache, NATIVE_SHA, args.cpu, 60, True)
+                row = trial(native if key == "native" else packed, cache, NATIVE_SHA, args.cpu,
+                            60, True, key != "native")
                 identity = (row["first_search"]["bestmove"], row["first_search"]["score"], row["eval"],
                             [(s["nodes"], s["score"], s["bestmove"]) for s in row["steady_searches"]])
                 if signature is not None and identity != signature:
@@ -232,6 +264,7 @@ def main():
                     shutil.rmtree(cache)
             print(f"completed block {block + 1}/{args.blocks}", flush=True)
     report["medians"] = summarize(report["samples"])
+    report["paired_speed"] = paired_speed(report["samples"])
     args.report.write_text(json.dumps(report, indent=2) + "\n")
 
 

@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "id": "EXP-COMPRESSION-001",
+  "topic": "distribution packaging",
+  "status": "documented",
+  "hypothesis": "A directly launchable MSZIP package can approach 88 MB and preserve the official Stockfish 19 engine and its evaluation behavior.",
+  "responsible_agent": "performance",
+  "baseline_commit": "edb0d9db6731067ec50ce619ff372b463bc4dd5d",
+  "candidate_commit": null,
+  "packaging_commit": "45a664a5a5af824f4319ea3a7de6d057c350e73e",
+  "branch": "experiment/EXP-COMPRESSION-001",
+  "historical_observation": {
+    "source": "owner report",
+    "codec": "MSZIP",
+    "input_approx_mb": 135,
+    "output_approx_mb": 88,
+    "historical_implementation_recovered": false,
+    "historical_runtime": null
+  },
+  "source_changes": [
+    "research-lab/proofs/mszip/",
+    ".github/workflows/mszip-package.yml"
+  ],
+  "build_configuration": {
+    "linux": "research-lab/results/EXP-COMPRESSION-001/linux-build.json",
+    "windows": "research-lab/results/EXP-COMPRESSION-001/windows-build.json"
+  },
+  "executable_bytes": {
+    "linux": 88174740,
+    "windows": 88265216
+  },
+  "runtime_model": "Automatic restoration of the complete native PE/ELF to a private cache. UCI plus optional local HTTP-to-UCI service.",
+  "hardware_and_compiler": {
+    "compiler": "go version go1.24.6 linux/amd64",
+    "runtime": "research-lab/proofs/mszip/evidence/linux-runtime.json"
+  },
+  "benchmark": {
+    "signature": 2497913,
+    "linux_trials": 30,
+    "medians": {
+      "native": {
+        "uci_seconds": 0.5739946480000526,
+        "ready_seconds": 0.5946711075000621,
+        "first_bestmove_seconds": 0.807285752499979,
+        "kernel_max_process_rss_kib": 324116.0,
+        "sampled_group_peak_rss_kib": 323908.0,
+        "user_cpu_s": 4.6592145,
+        "system_cpu_s": 0.25218199999999996,
+        "bench_nps": 848870.5,
+        "steady_suite_nps": 643368.1447019308
+      },
+      "packed_fresh": {
+        "uci_seconds": 2.841556677499966,
+        "ready_seconds": 2.8636157844999843,
+        "first_bestmove_seconds": 3.0054266370000278,
+        "kernel_max_process_rss_kib": 324316.0,
+        "sampled_group_peak_rss_kib": 324276.0,
+        "user_cpu_s": 6.317918000000001,
+        "system_cpu_s": 0.48903549999999996,
+        "bench_nps": 912994.0,
+        "steady_suite_nps": 719770.2132042435
+      },
+      "packed_cached": {
+        "uci_seconds": 0.7370619700000134,
+        "ready_seconds": 0.7551207510000495,
+        "first_bestmove_seconds": 0.9148433995000005,
+        "kernel_max_process_rss_kib": 324352.0,
+        "sampled_group_peak_rss_kib": 323862.0,
+        "user_cpu_s": 4.7548315,
+        "system_cpu_s": 0.367264,
+        "bench_nps": 857214.0,
+        "steady_suite_nps": 637908.9125265129
+      }
+    },
+    "native_windows_warm_medians": {
+      "native": {
+        "readyok_ms": 321.87570000002097,
+        "Nodes/second": 972328,
+        "sampled_tree_peak_working_set_bytes": 300892160
+      },
+      "mszip": {
+        "readyok_ms": 422.9654000000096,
+        "Nodes/second": 954130,
+        "sampled_tree_peak_working_set_bytes": 277385216
+      }
+    },
+    "native_windows_trials": 8
+  },
+  "correctness": "Independent Cabinet decode recovered both original executable digests. Native Windows and Linux UCI and canonical bench passed. All 30 Linux trials agreed on fixed-node results and NNUE evaluation in three positions.",
+  "match_settings": {
+    "purpose": "GUI/manager compatibility",
+    "xboard": "Two mate-in-one games, reversed colors",
+    "fastchess": "One opening pair at 4+0.04, 1 thread, 16 MiB hash"
+  },
+  "games": 4,
+  "elo_games": 0,
+  "elo_estimate": null,
+  "elo_uncertainty": null,
+  "statistical_decision": "No Elo test. No demonstrated runtime advantage.",
+  "compute_usage": {
+    "public_jobs": 0,
+    "linux_runtime_cpu_per_trial": "research-lab/proofs/mszip/evidence/linux-runtime.json",
+    "hardware": "Codex Cloud, GitHub-hosted Linux and Windows runners"
+  },
+  "explanation": "Direct GUI/HTML use and an approximately 88 MB executable were reproduced. First-use decoding and warm hash verification add startup cost. Source release input sizes are about 103 MB. Keep available as a packaging option.",
+  "results": "research-lab/results/EXP-COMPRESSION-001/README.md",
+  "verification_run": "https://github.com/ShadyF4RR/Stockfish/actions/runs/44819051300",
+  "windows_comparison_run": "https://github.com/ShadyF4RR/Stockfish/actions/runs/44819695849"
+}

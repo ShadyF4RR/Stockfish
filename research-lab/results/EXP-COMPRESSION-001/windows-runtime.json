@@ -1,0 +1,128 @@
+{
+  "environment": "Windows-2025Server-10.0.26100-SP0",
+  "cpu": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD",
+  "sha256": {
+    "native": "45bc8e4969147db9c2eb533810637994619bff0eacc81ccfd9854394901bcbd0",
+    "mszip": "d4d8230c9c60379cd22c04ec75fb562f24dbf1637408e2e12e63681b46a4da91"
+  },
+  "cache": "fresh launcher install, then fresh processes using the populated install; OS file cache uncontrolled",
+  "ram": "Maximum sampled sum of process-tree working sets at 50 ms intervals; shared pages may be counted twice. Null if a required process was never observed.",
+  "trials": [
+    {
+      "kind": "native",
+      "block": "prime",
+      "uciok_ms": 371.1677000000009,
+      "readyok_ms": 371.2515999999937,
+      "Total time (ms)": 2841,
+      "Nodes searched": 2497913,
+      "Nodes/second": 879237,
+      "max_observed_processes": 1,
+      "sampled_tree_peak_working_set_bytes": 335138816,
+      "sample_errors": [],
+      "wall_seconds": 3.276312599999983
+    },
+    {
+      "kind": "mszip",
+      "block": "fresh-install",
+      "uciok_ms": 2899.082099999987,
+      "readyok_ms": 2899.1690999999946,
+      "Total time (ms)": 2578,
+      "Nodes searched": 2497913,
+      "Nodes/second": 968934,
+      "max_observed_processes": 2,
+      "sampled_tree_peak_working_set_bytes": 369553408,
+      "sample_errors": [],
+      "wall_seconds": 5.539937699999996
+    },
+    {
+      "kind": "native",
+      "block": "warm-1",
+      "uciok_ms": 319.1273999999851,
+      "readyok_ms": 319.19309999997836,
+      "Total time (ms)": 2559,
+      "Nodes searched": 2497913,
+      "Nodes/second": 976128,
+      "max_observed_processes": 1,
+      "sampled_tree_peak_working_set_bytes": 309465088,
+      "sample_errors": [],
+      "wall_seconds": 2.929915099999988
+    },
+    {
+      "kind": "mszip",
+      "block": "warm-1",
+      "uciok_ms": 422.8322000000162,
+      "readyok_ms": 422.90020000001505,
+      "Total time (ms)": 2618,
+      "Nodes searched": 2497913,
+      "Nodes/second": 954130,
+      "max_observed_processes": 2,
+      "sampled_tree_peak_working_set_bytes": 277344256,
+      "sample_errors": [],
+      "wall_seconds": 3.096636399999994
+    },
+    {
+      "kind": "mszip",
+      "block": "warm-2",
+      "uciok_ms": 451.5388000000087,
+      "readyok_ms": 451.6083999999978,
+      "Total time (ms)": 2720,
+      "Nodes searched": 2497913,
+      "Nodes/second": 918350,
+      "max_observed_processes": 2,
+      "sampled_tree_peak_working_set_bytes": 277385216,
+      "sample_errors": [],
+      "wall_seconds": 3.227651800000018
+    },
+    {
+      "kind": "native",
+      "block": "warm-2",
+      "uciok_ms": 321.8531999999925,
+      "readyok_ms": 321.92190000000664,
+      "Total time (ms)": 2590,
+      "Nodes searched": 2497913,
+      "Nodes/second": 964445,
+      "max_observed_processes": 1,
+      "sampled_tree_peak_working_set_bytes": 282988544,
+      "sample_errors": [],
+      "wall_seconds": 2.9656187999999872
+    },
+    {
+      "kind": "native",
+      "block": "warm-3",
+      "uciok_ms": 321.8062000000259,
+      "readyok_ms": 321.87570000002097,
+      "Total time (ms)": 2569,
+      "Nodes searched": 2497913,
+      "Nodes/second": 972328,
+      "max_observed_processes": 1,
+      "sampled_tree_peak_working_set_bytes": 300892160,
+      "sample_errors": [],
+      "wall_seconds": 2.944314100000014
+    },
+    {
+      "kind": "mszip",
+      "block": "warm-3",
+      "uciok_ms": 422.904299999999,
+      "readyok_ms": 422.9654000000096,
+      "Total time (ms)": 2570,
+      "Nodes searched": 2497913,
+      "Nodes/second": 971950,
+      "max_observed_processes": 2,
+      "sampled_tree_peak_working_set_bytes": 335433728,
+      "sample_errors": [],
+      "wall_seconds": 3.046390500000001
+    }
+  ],
+  "warm_medians": {
+    "native": {
+      "readyok_ms": 321.87570000002097,
+      "Nodes/second": 972328,
+      "sampled_tree_peak_working_set_bytes": 300892160
+    },
+    "mszip": {
+      "readyok_ms": 422.9654000000096,
+      "Nodes/second": 954130,
+      "sampled_tree_peak_working_set_bytes": 277385216
+    }
+  }
+}

@@ -1,0 +1,2619 @@
+{
+  "schema_version": 1,
+  "native_sha256": "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+  "launcher_sha256": "fd75419d6792664c7ac7260de67fc9b9c7ba49187813b239ada9c353a4680722",
+  "cpu": 2,
+  "kernel": "6.18.57",
+  "cpuinfo": "processor\t: 0\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 207\nmodel name\t: INTEL(R) XEON(R) PLATINUM 8573C\nstepping\t: 2\nmicrocode\t: 0x1\ncpu MHz\t\t: 2299.998\ncache size\t: 266240 KB\nphysical id\t: 0\nsiblings\t: 5\ncore id\t\t: 0\ncpu cores\t: 5\napicid\t\t: 0\ninitial apicid\t: 0\nfpu\t\t: yes\nfpu_exception\t: yes\ncpuid level\t: 28\nwp\t\t: yes\nflags\t\t: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid tsc_known_freq pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch cpuid_fault fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves arat avx512vbmi umip avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm arch_capabilities\nbugs\t\t: spectre_v1 spectre_v2 spec_store_bypass swapgs taa retbleed bhi spectre_v2_user its\nbogomips\t: 4599.99\nclflush size\t: 64\ncache_alignment\t: 64\naddress sizes\t: 46 bits physical, 57 bits virtual\npower management:",
+  "default_nnue_sha256": "1a298aa575a085434d29027978dc36867fe9c5bcea9376654b7a8eba1e52dfc2",
+  "positions": [
+    "startpos",
+    "startpos moves e2e4 c7c5",
+    "startpos moves d2d4 d7d5 c2c4"
+  ],
+  "page_cache": "uncontrolled; empty launcher cache is first-use, filesystem pages may be warm",
+  "pmu_devices": [
+    "breakpoint",
+    "msr",
+    "software"
+  ],
+  "samples": [
+    {
+      "block": 1,
+      "mode": "native",
+      "uci_seconds": 0.6083761469999445,
+      "ready_seconds": 0.6338790840000001,
+      "ready_memory_kib": {
+        "Rss": 263184,
+        "Pss": 262345,
+        "Shared_Clean": 864,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98200,
+        "Private_Dirty": 164120
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 564983,
+        "search_ms": 177,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 0.8222825069999544,
+      "search_memory_kib": {
+        "Rss": 263488,
+        "Pss": 262645,
+        "Shared_Clean": 868,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98260,
+        "Private_Dirty": 164360
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 720599,
+          "search_ms": 347,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 551074,
+          "search_ms": 454,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 524486,
+          "search_ms": 477,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 789479,
+      "wall_seconds": 5.345408857999928,
+      "launched_executable": "stockfish-linux-x86-64-universal",
+      "running_executable": "stockfish-linux-x86-64-universal",
+      "kernel_max_process_rss_kib": 324176,
+      "sampled_group_peak_rss_kib": 323888,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish-linux-x86-64-universal": 323888
+      },
+      "user_cpu_s": 5.058546,
+      "system_cpu_s": 0.26966599999999996,
+      "minor_faults": 60470,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 24
+    },
+    {
+      "block": 1,
+      "mode": "packed_fresh",
+      "uci_seconds": 2.518036744000028,
+      "ready_seconds": 2.5356438460000845,
+      "ready_memory_kib": {
+        "Rss": 263284,
+        "Pss": 262447,
+        "Shared_Clean": 864,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98292,
+        "Private_Dirty": 164128
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 763374,
+        "search_ms": 131,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 2.6729809309999837,
+      "search_memory_kib": {
+        "Rss": 263576,
+        "Pss": 262735,
+        "Shared_Clean": 868,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98340,
+        "Private_Dirty": 164368
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 750894,
+          "search_ms": 333,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 738017,
+          "search_ms": 339,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 714800,
+          "search_ms": 350,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 973845,
+      "wall_seconds": 6.3327938340000856,
+      "launched_executable": "stockfish19-mszip",
+      "running_executable": "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+      "kernel_max_process_rss_kib": 324368,
+      "sampled_group_peak_rss_kib": 324396,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish19-mszip": 91628,
+        "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19": 324396
+      },
+      "user_cpu_s": 5.892053,
+      "system_cpu_s": 0.38525299999999996,
+      "minor_faults": 62776,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 201496
+    },
+    {
+      "block": 1,
+      "mode": "packed_cached",
+      "uci_seconds": 0.6533253939999213,
+      "ready_seconds": 0.6724696549999862,
+      "ready_memory_kib": {
+        "Rss": 263296,
+        "Pss": 262459,
+        "Shared_Clean": 864,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98308,
+        "Private_Dirty": 164124
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 699314,
+        "search_ms": 143,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 0.8218776799999432,
+      "search_memory_kib": {
+        "Rss": 263604,
+        "Pss": 262763,
+        "Shared_Clean": 868,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98372,
+        "Private_Dirty": 164364
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 679478,
+          "search_ms": 368,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 377927,
+          "search_ms": 662,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 760425,
+          "search_ms": 329,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 916329,
+      "wall_seconds": 4.973485618000041,
+      "launched_executable": "stockfish19-mszip",
+      "running_executable": "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+      "kernel_max_process_rss_kib": 324352,
+      "sampled_group_peak_rss_kib": 323828,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish19-mszip": 2424,
+        "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19": 323828
+      },
+      "user_cpu_s": 4.602906,
+      "system_cpu_s": 0.333235,
+      "minor_faults": 60682,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 8
+    },
+    {
+      "block": 2,
+      "mode": "native",
+      "uci_seconds": 0.7079172319999998,
+      "ready_seconds": 0.728983954999876,
+      "ready_memory_kib": {
+        "Rss": 263176,
+        "Pss": 231300,
+        "Shared_Clean": 62932,
+        "Shared_Dirty": 0,
+        "Private_Clean": 36120,
+        "Private_Dirty": 164124
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 709234,
+        "search_ms": 141,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 0.8775751989999208,
+      "search_memory_kib": {
+        "Rss": 263484,
+        "Pss": 219298,
+        "Shared_Clean": 87548,
+        "Shared_Dirty": 0,
+        "Private_Clean": 11572,
+        "Private_Dirty": 164364
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 637877,
+          "search_ms": 392,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 569904,
+          "search_ms": 439,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 667146,
+          "search_ms": 375,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 790729,
+      "wall_seconds": 5.306397310999955,
+      "launched_executable": "stockfish-linux-x86-64-universal",
+      "running_executable": "stockfish-linux-x86-64-universal",
+      "kernel_max_process_rss_kib": 324232,
+      "sampled_group_peak_rss_kib": 323476,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish-linux-x86-64-universal": 323476
+      },
+      "user_cpu_s": 4.948144,
+      "system_cpu_s": 0.31929799999999997,
+      "minor_faults": 60479,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 8
+    },
+    {
+      "block": 2,
+      "mode": "packed_cached",
+      "uci_seconds": 1.1315527120000297,
+      "ready_seconds": 1.1596751649999533,
+      "ready_memory_kib": {
+        "Rss": 263272,
+        "Pss": 262424,
+        "Shared_Clean": 872,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98272,
+        "Private_Dirty": 164128
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 689668,
+        "search_ms": 145,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 1.318645822999997,
+      "search_memory_kib": {
+        "Rss": 263548,
+        "Pss": 262696,
+        "Shared_Clean": 876,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98304,
+        "Private_Dirty": 164368
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 634639,
+          "search_ms": 394,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 392144,
+          "search_ms": 638,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 583170,
+          "search_ms": 429,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 780841,
+      "wall_seconds": 6.056317561000014,
+      "launched_executable": "stockfish19-mszip",
+      "running_executable": "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+      "kernel_max_process_rss_kib": 324404,
+      "sampled_group_peak_rss_kib": 323660,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish19-mszip": 2408,
+        "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19": 323660
+      },
+      "user_cpu_s": 5.392827,
+      "system_cpu_s": 0.595024,
+      "minor_faults": 60680,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 8
+    },
+    {
+      "block": 2,
+      "mode": "packed_fresh",
+      "uci_seconds": 3.072948770000039,
+      "ready_seconds": 3.0888063950001197,
+      "ready_memory_kib": {
+        "Rss": 263328,
+        "Pss": 262483,
+        "Shared_Clean": 868,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98336,
+        "Private_Dirty": 164124
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 552497,
+        "search_ms": 181,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 3.2757292610001514,
+      "search_memory_kib": {
+        "Rss": 263636,
+        "Pss": 262787,
+        "Shared_Clean": 872,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98400,
+        "Private_Dirty": 164364
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 642796,
+          "search_ms": 389,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 653232,
+          "search_ms": 383,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 742373,
+          "search_ms": 337,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 902751,
+      "wall_seconds": 7.220465399000204,
+      "launched_executable": "stockfish19-mszip",
+      "running_executable": "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+      "kernel_max_process_rss_kib": 324436,
+      "sampled_group_peak_rss_kib": 324416,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish19-mszip": 91592,
+        "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19": 324416
+      },
+      "user_cpu_s": 6.597728,
+      "system_cpu_s": 0.557474,
+      "minor_faults": 62825,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 201496
+    },
+    {
+      "block": 3,
+      "mode": "packed_cached",
+      "uci_seconds": 0.7918824089999816,
+      "ready_seconds": 0.8080582810000578,
+      "ready_memory_kib": {
+        "Rss": 263224,
+        "Pss": 262378,
+        "Shared_Clean": 868,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98228,
+        "Private_Dirty": 164128
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 704239,
+        "search_ms": 142,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 0.9554263850000098,
+      "search_memory_kib": {
+        "Rss": 263532,
+        "Pss": 262682,
+        "Shared_Clean": 872,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98292,
+        "Private_Dirty": 164368
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 690740,
+          "search_ms": 362,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 633387,
+          "search_ms": 395,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 651510,
+          "search_ms": 384,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 855449,
+      "wall_seconds": 5.097705023000117,
+      "launched_executable": "stockfish19-mszip",
+      "running_executable": "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+      "kernel_max_process_rss_kib": 324188,
+      "sampled_group_peak_rss_kib": 324224,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish19-mszip": 2408,
+        "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19": 324224
+      },
+      "user_cpu_s": 4.714975,
+      "system_cpu_s": 0.36873999999999996,
+      "minor_faults": 60680,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 8
+    },
+    {
+      "block": 3,
+      "mode": "native",
+      "uci_seconds": 0.4077690359999906,
+      "ready_seconds": 0.4294297669998741,
+      "ready_memory_kib": {
+        "Rss": 152620,
+        "Pss": 101754,
+        "Shared_Clean": 98864,
+        "Shared_Dirty": 2048,
+        "Private_Clean": 0,
+        "Private_Dirty": 51708
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 735308,
+        "search_ms": 136,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 0.5732331919998614,
+      "search_memory_kib": {
+        "Rss": 236608,
+        "Pss": 182604,
+        "Shared_Clean": 98928,
+        "Shared_Dirty": 8256,
+        "Private_Clean": 0,
+        "Private_Dirty": 129424
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 716469,
+          "search_ms": 349,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 646480,
+          "search_ms": 387,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 733665,
+          "search_ms": 341,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 659079,
+      "wall_seconds": 5.570925795999983,
+      "launched_executable": "stockfish-linux-x86-64-universal",
+      "running_executable": "stockfish-linux-x86-64-universal",
+      "kernel_max_process_rss_kib": 263436,
+      "sampled_group_peak_rss_kib": 263572,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish-linux-x86-64-universal": 263572
+      },
+      "user_cpu_s": 5.340023,
+      "system_cpu_s": 0.178396,
+      "minor_faults": 32461,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 0
+    },
+    {
+      "block": 3,
+      "mode": "packed_fresh",
+      "uci_seconds": 3.853803328999902,
+      "ready_seconds": 3.8809197909999966,
+      "ready_memory_kib": {
+        "Rss": 263324,
+        "Pss": 262476,
+        "Shared_Clean": 868,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98336,
+        "Private_Dirty": 164120
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 490205,
+        "search_ms": 204,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 4.092677571999957,
+      "search_memory_kib": {
+        "Rss": 263656,
+        "Pss": 262803,
+        "Shared_Clean": 872,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98424,
+        "Private_Dirty": 164360
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 496126,
+          "search_ms": 504,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 481130,
+          "search_ms": 520,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 526694,
+          "search_ms": 475,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 628880,
+      "wall_seconds": 9.646165096999994,
+      "launched_executable": "stockfish19-mszip",
+      "running_executable": "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+      "kernel_max_process_rss_kib": 324316,
+      "sampled_group_peak_rss_kib": 324408,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish19-mszip": 91620,
+        "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19": 324408
+      },
+      "user_cpu_s": 8.832234,
+      "system_cpu_s": 0.743309,
+      "minor_faults": 62854,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 201496
+    },
+    {
+      "block": 4,
+      "mode": "packed_cached",
+      "uci_seconds": 0.867026377000002,
+      "ready_seconds": 0.8929345169999579,
+      "ready_memory_kib": {
+        "Rss": 263324,
+        "Pss": 262477,
+        "Shared_Clean": 868,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98332,
+        "Private_Dirty": 164124
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 487814,
+        "search_ms": 205,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 1.1072418520000156,
+      "search_memory_kib": {
+        "Rss": 263600,
+        "Pss": 262749,
+        "Shared_Clean": 872,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98364,
+        "Private_Dirty": 164364
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 483651,
+          "search_ms": 517,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 496404,
+          "search_ms": 504,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 475627,
+          "search_ms": 526,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 607026,
+      "wall_seconds": 6.852420959000028,
+      "launched_executable": "stockfish19-mszip",
+      "running_executable": "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+      "kernel_max_process_rss_kib": 324308,
+      "sampled_group_peak_rss_kib": 324404,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish19-mszip": 2408,
+        "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19": 324404
+      },
+      "user_cpu_s": 6.35143,
+      "system_cpu_s": 0.409367,
+      "minor_faults": 60682,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 8
+    },
+    {
+      "block": 4,
+      "mode": "packed_fresh",
+      "uci_seconds": 3.0977298400000564,
+      "ready_seconds": 3.116023506000147,
+      "ready_memory_kib": {
+        "Rss": 263324,
+        "Pss": 262487,
+        "Shared_Clean": 864,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98336,
+        "Private_Dirty": 164124
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 518145,
+        "search_ms": 193,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 3.314614666000125,
+      "search_memory_kib": {
+        "Rss": 263600,
+        "Pss": 262759,
+        "Shared_Clean": 868,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98368,
+        "Private_Dirty": 164364
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 762341,
+          "search_ms": 328,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 738017,
+          "search_ms": 339,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 786729,
+          "search_ms": 318,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 870352,
+      "wall_seconds": 7.22334700600004,
+      "launched_executable": "stockfish19-mszip",
+      "running_executable": "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+      "kernel_max_process_rss_kib": 324336,
+      "sampled_group_peak_rss_kib": 324368,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish19-mszip": 91560,
+        "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19": 324368
+      },
+      "user_cpu_s": 6.5497309999999995,
+      "system_cpu_s": 0.5904349999999999,
+      "minor_faults": 62966,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 201480
+    },
+    {
+      "block": 4,
+      "mode": "native",
+      "uci_seconds": 0.5269735389999823,
+      "ready_seconds": 0.5456907350001075,
+      "ready_memory_kib": {
+        "Rss": 263240,
+        "Pss": 262398,
+        "Shared_Clean": 864,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98252,
+        "Private_Dirty": 164124
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 649363,
+        "search_ms": 154,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 0.7075436970001192,
+      "search_memory_kib": {
+        "Rss": 263548,
+        "Pss": 262702,
+        "Shared_Clean": 868,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98316,
+        "Private_Dirty": 164364
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 712387,
+          "search_ms": 351,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 674361,
+          "search_ms": 371,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 667146,
+          "search_ms": 375,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 913647,
+      "wall_seconds": 4.6017614200000025,
+      "launched_executable": "stockfish-linux-x86-64-universal",
+      "running_executable": "stockfish-linux-x86-64-universal",
+      "kernel_max_process_rss_kib": 324360,
+      "sampled_group_peak_rss_kib": 324312,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish-linux-x86-64-universal": 324312
+      },
+      "user_cpu_s": 4.350713,
+      "system_cpu_s": 0.229768,
+      "minor_faults": 60489,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 0
+    },
+    {
+      "block": 5,
+      "mode": "packed_fresh",
+      "uci_seconds": 2.843532517999847,
+      "ready_seconds": 2.8617550809999557,
+      "ready_memory_kib": {
+        "Rss": 263136,
+        "Pss": 262299,
+        "Shared_Clean": 864,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98148,
+        "Private_Dirty": 164124
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 709234,
+        "search_ms": 141,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 3.009090710999999,
+      "search_memory_kib": {
+        "Rss": 263380,
+        "Pss": 262539,
+        "Shared_Clean": 868,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98148,
+        "Private_Dirty": 164364
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 781400,
+          "search_ms": 320,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 738017,
+          "search_ms": 339,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 789211,
+          "search_ms": 317,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 985758,
+      "wall_seconds": 6.579130639999903,
+      "launched_executable": "stockfish19-mszip",
+      "running_executable": "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+      "kernel_max_process_rss_kib": 324116,
+      "sampled_group_peak_rss_kib": 323956,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish19-mszip": 91656,
+        "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19": 323956
+      },
+      "user_cpu_s": 6.147624,
+      "system_cpu_s": 0.359143,
+      "minor_faults": 63023,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 201480
+    },
+    {
+      "block": 5,
+      "mode": "packed_cached",
+      "uci_seconds": 0.6822415310000451,
+      "ready_seconds": 0.7021832210000412,
+      "ready_memory_kib": {
+        "Rss": 263264,
+        "Pss": 262426,
+        "Shared_Clean": 864,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98272,
+        "Private_Dirty": 164128
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 606072,
+        "search_ms": 165,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 0.8742604139999912,
+      "search_memory_kib": {
+        "Rss": 263540,
+        "Pss": 262698,
+        "Shared_Clean": 868,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98304,
+        "Private_Dirty": 164368
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 663257,
+          "search_ms": 377,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 605782,
+          "search_ms": 413,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 712763,
+          "search_ms": 351,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 695410,
+      "wall_seconds": 5.667748361000122,
+      "launched_executable": "stockfish19-mszip",
+      "running_executable": "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+      "kernel_max_process_rss_kib": 324244,
+      "sampled_group_peak_rss_kib": 324344,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish19-mszip": 2408,
+        "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19": 324344
+      },
+      "user_cpu_s": 5.248758,
+      "system_cpu_s": 0.36058599999999996,
+      "minor_faults": 60685,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 0
+    },
+    {
+      "block": 5,
+      "mode": "native",
+      "uci_seconds": 0.581879071000003,
+      "ready_seconds": 0.5987367590000758,
+      "ready_memory_kib": {
+        "Rss": 262936,
+        "Pss": 262098,
+        "Shared_Clean": 864,
+        "Shared_Dirty": 0,
+        "Private_Clean": 97948,
+        "Private_Dirty": 164124
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 497522,
+        "search_ms": 201,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 0.806425051000133,
+      "search_memory_kib": {
+        "Rss": 263240,
+        "Pss": 262398,
+        "Shared_Clean": 868,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98008,
+        "Private_Dirty": 164364
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 602525,
+          "search_ms": 415,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 631787,
+          "search_ms": 396,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 727267,
+          "search_ms": 344,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 932753,
+      "wall_seconds": 4.728562239999974,
+      "launched_executable": "stockfish-linux-x86-64-universal",
+      "running_executable": "stockfish-linux-x86-64-universal",
+      "kernel_max_process_rss_kib": 324056,
+      "sampled_group_peak_rss_kib": 324024,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish-linux-x86-64-universal": 324024
+      },
+      "user_cpu_s": 4.346685,
+      "system_cpu_s": 0.34002299999999996,
+      "minor_faults": 60485,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 0
+    },
+    {
+      "block": 6,
+      "mode": "packed_fresh",
+      "uci_seconds": 2.6396456279999256,
+      "ready_seconds": 2.65672316999985,
+      "ready_memory_kib": {
+        "Rss": 263300,
+        "Pss": 262462,
+        "Shared_Clean": 864,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98308,
+        "Private_Dirty": 164128
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 684945,
+        "search_ms": 146,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 2.809027815000036,
+      "search_memory_kib": {
+        "Rss": 263608,
+        "Pss": 262766,
+        "Shared_Clean": 868,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98372,
+        "Private_Dirty": 164368
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 665021,
+          "search_ms": 376,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 636610,
+          "search_ms": 393,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 702752,
+          "search_ms": 356,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 909323,
+      "wall_seconds": 6.745813172999988,
+      "launched_executable": "stockfish19-mszip",
+      "running_executable": "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+      "kernel_max_process_rss_kib": 324316,
+      "sampled_group_peak_rss_kib": 324276,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish19-mszip": 91656,
+        "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19": 324276
+      },
+      "user_cpu_s": 6.375763,
+      "system_cpu_s": 0.303102,
+      "minor_faults": 62718,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 201472
+    },
+    {
+      "block": 6,
+      "mode": "native",
+      "uci_seconds": 0.6421420330000274,
+      "ready_seconds": 0.6611849860000802,
+      "ready_memory_kib": {
+        "Rss": 263124,
+        "Pss": 262287,
+        "Shared_Clean": 864,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98132,
+        "Private_Dirty": 164128
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 671154,
+        "search_ms": 149,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 0.8191159080001853,
+      "search_memory_kib": {
+        "Rss": 263368,
+        "Pss": 262527,
+        "Shared_Clean": 868,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98132,
+        "Private_Dirty": 164368
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 683191,
+          "search_ms": 366,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 571205,
+          "search_ms": 438,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 668930,
+          "search_ms": 374,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 933799,
+      "wall_seconds": 4.736587322000105,
+      "launched_executable": "stockfish-linux-x86-64-universal",
+      "running_executable": "stockfish-linux-x86-64-universal",
+      "kernel_max_process_rss_kib": 324036,
+      "sampled_group_peak_rss_kib": 324104,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish-linux-x86-64-universal": 324104
+      },
+      "user_cpu_s": 4.370285,
+      "system_cpu_s": 0.326831,
+      "minor_faults": 60485,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 0
+    },
+    {
+      "block": 6,
+      "mode": "packed_cached",
+      "uci_seconds": 0.6564091420000295,
+      "ready_seconds": 0.6790337110001019,
+      "ready_memory_kib": {
+        "Rss": 263228,
+        "Pss": 262385,
+        "Shared_Clean": 868,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98240,
+        "Private_Dirty": 164120
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 680285,
+        "search_ms": 147,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 0.8332242339999993,
+      "search_memory_kib": {
+        "Rss": 263504,
+        "Pss": 262657,
+        "Shared_Clean": 872,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98272,
+        "Private_Dirty": 164360
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 652866,
+          "search_ms": 383,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 661873,
+          "search_ms": 378,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 660105,
+          "search_ms": 379,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 921399,
+      "wall_seconds": 4.7551042820000475,
+      "launched_executable": "stockfish19-mszip",
+      "running_executable": "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+      "kernel_max_process_rss_kib": 324352,
+      "sampled_group_peak_rss_kib": 324304,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish19-mszip": 2408,
+        "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19": 324304
+      },
+      "user_cpu_s": 4.404452,
+      "system_cpu_s": 0.318739,
+      "minor_faults": 60682,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 0
+    },
+    {
+      "block": 7,
+      "mode": "native",
+      "uci_seconds": 0.38696691500013003,
+      "ready_seconds": 0.4032114530000399,
+      "ready_memory_kib": {
+        "Rss": 152740,
+        "Pss": 101892,
+        "Shared_Clean": 98832,
+        "Shared_Dirty": 2048,
+        "Private_Clean": 152,
+        "Private_Dirty": 51708
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 775209,
+        "search_ms": 129,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 0.5380918930000007,
+      "search_memory_kib": {
+        "Rss": 236732,
+        "Pss": 144034,
+        "Shared_Clean": 98844,
+        "Shared_Dirty": 85732,
+        "Private_Clean": 208,
+        "Private_Dirty": 51948
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 729002,
+          "search_ms": 343,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 696902,
+          "search_ms": 359,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 779376,
+          "search_ms": 321,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 907012,
+      "wall_seconds": 4.391838169000039,
+      "launched_executable": "stockfish-linux-x86-64-universal",
+      "running_executable": "stockfish-linux-x86-64-universal",
+      "kernel_max_process_rss_kib": 263628,
+      "sampled_group_peak_rss_kib": 263696,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish-linux-x86-64-universal": 263696
+      },
+      "user_cpu_s": 4.17845,
+      "system_cpu_s": 0.12717299999999998,
+      "minor_faults": 32464,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 0
+    },
+    {
+      "block": 7,
+      "mode": "packed_fresh",
+      "uci_seconds": 2.839580837000085,
+      "ready_seconds": 2.865476488000013,
+      "ready_memory_kib": {
+        "Rss": 263296,
+        "Pss": 262452,
+        "Shared_Clean": 868,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98304,
+        "Private_Dirty": 164124
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 769246,
+        "search_ms": 130,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 3.0017625630000566,
+      "search_memory_kib": {
+        "Rss": 263604,
+        "Pss": 262757,
+        "Shared_Clean": 872,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98368,
+        "Private_Dirty": 164364
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 753156,
+          "search_ms": 332,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 646480,
+          "search_ms": 387,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 725159,
+          "search_ms": 345,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 997967,
+      "wall_seconds": 6.652417839000009,
+      "launched_executable": "stockfish19-mszip",
+      "running_executable": "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+      "kernel_max_process_rss_kib": 324244,
+      "sampled_group_peak_rss_kib": 324276,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish19-mszip": 91656,
+        "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19": 324276
+      },
+      "user_cpu_s": 6.019978,
+      "system_cpu_s": 0.525273,
+      "minor_faults": 62709,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 201496
+    },
+    {
+      "block": 7,
+      "mode": "packed_cached",
+      "uci_seconds": 0.6422077269999136,
+      "ready_seconds": 0.6618324339999617,
+      "ready_memory_kib": {
+        "Rss": 263296,
+        "Pss": 262452,
+        "Shared_Clean": 868,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98304,
+        "Private_Dirty": 164124
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 740755,
+        "search_ms": 135,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 0.8038278310000351,
+      "search_memory_kib": {
+        "Rss": 263572,
+        "Pss": 262725,
+        "Shared_Clean": 872,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98336,
+        "Private_Dirty": 164364
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 733278,
+          "search_ms": 341,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 718931,
+          "search_ms": 348,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 476533,
+          "search_ms": 525,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 551903,
+      "wall_seconds": 6.644085478000079,
+      "launched_executable": "stockfish19-mszip",
+      "running_executable": "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+      "kernel_max_process_rss_kib": 324384,
+      "sampled_group_peak_rss_kib": 323064,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish19-mszip": 2404,
+        "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19": 323064
+      },
+      "user_cpu_s": 6.161792,
+      "system_cpu_s": 0.365788,
+      "minor_faults": 60682,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 16
+    },
+    {
+      "block": 8,
+      "mode": "native",
+      "uci_seconds": 0.49171859399984896,
+      "ready_seconds": 0.5138228939999863,
+      "ready_memory_kib": {
+        "Rss": 152736,
+        "Pss": 101931,
+        "Shared_Clean": 98744,
+        "Shared_Dirty": 2048,
+        "Private_Clean": 240,
+        "Private_Dirty": 51704
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 349657,
+        "search_ms": 286,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 0.8081464539998251,
+      "search_memory_kib": {
+        "Rss": 236664,
+        "Pss": 144013,
+        "Shared_Clean": 98748,
+        "Shared_Dirty": 85732,
+        "Private_Clean": 240,
+        "Private_Dirty": 51944
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 448114,
+          "search_ms": 558,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 648155,
+          "search_ms": 386,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 670723,
+          "search_ms": 373,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 786992,
+      "wall_seconds": 5.382122282999944,
+      "launched_executable": "stockfish-linux-x86-64-universal",
+      "running_executable": "stockfish-linux-x86-64-universal",
+      "kernel_max_process_rss_kib": 263484,
+      "sampled_group_peak_rss_kib": 263564,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish-linux-x86-64-universal": 263564
+      },
+      "user_cpu_s": 5.167691,
+      "system_cpu_s": 0.167317,
+      "minor_faults": 32461,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 24
+    },
+    {
+      "block": 8,
+      "mode": "packed_cached",
+      "uci_seconds": 0.9923030249999556,
+      "ready_seconds": 1.017093122999995,
+      "ready_memory_kib": {
+        "Rss": 263232,
+        "Pss": 262392,
+        "Shared_Clean": 864,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98244,
+        "Private_Dirty": 164124
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 675689,
+        "search_ms": 148,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 1.1764577320000171,
+      "search_memory_kib": {
+        "Rss": 263508,
+        "Pss": 262664,
+        "Shared_Clean": 868,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98276,
+        "Private_Dirty": 164364
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 746411,
+          "search_ms": 335,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 602862,
+          "search_ms": 415,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 698826,
+          "search_ms": 358,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 894027,
+      "wall_seconds": 5.135711718000039,
+      "launched_executable": "stockfish19-mszip",
+      "running_executable": "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+      "kernel_max_process_rss_kib": 324352,
+      "sampled_group_peak_rss_kib": 323896,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish19-mszip": 2408,
+        "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19": 323896
+      },
+      "user_cpu_s": 4.669154,
+      "system_cpu_s": 0.420979,
+      "minor_faults": 60687,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 8
+    },
+    {
+      "block": 8,
+      "mode": "packed_fresh",
+      "uci_seconds": 2.5473534989998825,
+      "ready_seconds": 2.5613897480000105,
+      "ready_memory_kib": {
+        "Rss": 263220,
+        "Pss": 262382,
+        "Shared_Clean": 864,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98232,
+        "Private_Dirty": 164124
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 757590,
+        "search_ms": 132,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 2.699525300999994,
+      "search_memory_kib": {
+        "Rss": 263528,
+        "Pss": 262686,
+        "Shared_Clean": 868,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98296,
+        "Private_Dirty": 164364
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 722682,
+          "search_ms": 346,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 735847,
+          "search_ms": 340,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 776956,
+          "search_ms": 322,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 747206,
+      "wall_seconds": 7.111024885999996,
+      "launched_executable": "stockfish19-mszip",
+      "running_executable": "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+      "kernel_max_process_rss_kib": 324188,
+      "sampled_group_peak_rss_kib": 324220,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish19-mszip": 91484,
+        "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19": 324220
+      },
+      "user_cpu_s": 6.482965,
+      "system_cpu_s": 0.452798,
+      "minor_faults": 62742,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 201520
+    },
+    {
+      "block": 9,
+      "mode": "packed_cached",
+      "uci_seconds": 0.9488714099998106,
+      "ready_seconds": 0.9664895149999211,
+      "ready_memory_kib": {
+        "Rss": 263296,
+        "Pss": 262458,
+        "Shared_Clean": 864,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98308,
+        "Private_Dirty": 164124
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 763374,
+        "search_ms": 131,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 1.1035440879998077,
+      "search_memory_kib": {
+        "Rss": 263572,
+        "Pss": 262730,
+        "Shared_Clean": 868,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98340,
+        "Private_Dirty": 164364
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 468254,
+          "search_ms": 534,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 704754,
+          "search_ms": 355,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 731520,
+          "search_ms": 342,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 858979,
+      "wall_seconds": 5.334850349999897,
+      "launched_executable": "stockfish19-mszip",
+      "running_executable": "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+      "kernel_max_process_rss_kib": 324384,
+      "sampled_group_peak_rss_kib": 322888,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish19-mszip": 2432,
+        "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19": 322888
+      },
+      "user_cpu_s": 4.794688,
+      "system_cpu_s": 0.480008,
+      "minor_faults": 60694,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 8
+    },
+    {
+      "block": 9,
+      "mode": "native",
+      "uci_seconds": 0.9846947570001703,
+      "ready_seconds": 1.0099161959999492,
+      "ready_memory_kib": {
+        "Rss": 263180,
+        "Pss": 262337,
+        "Shared_Clean": 868,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98184,
+        "Private_Dirty": 164128
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 526326,
+        "search_ms": 190,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 1.210411299000043,
+      "search_memory_kib": {
+        "Rss": 263488,
+        "Pss": 262641,
+        "Shared_Clean": 872,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98248,
+        "Private_Dirty": 164368
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 541229,
+          "search_ms": 462,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 454061,
+          "search_ms": 551,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 517971,
+          "search_ms": 483,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 673110,
+      "wall_seconds": 6.509352144000104,
+      "launched_executable": "stockfish-linux-x86-64-universal",
+      "running_executable": "stockfish-linux-x86-64-universal",
+      "kernel_max_process_rss_kib": 324316,
+      "sampled_group_peak_rss_kib": 324256,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish-linux-x86-64-universal": 324256
+      },
+      "user_cpu_s": 5.916798,
+      "system_cpu_s": 0.495805,
+      "minor_faults": 60494,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 0
+    },
+    {
+      "block": 9,
+      "mode": "packed_fresh",
+      "uci_seconds": 3.0109414500000184,
+      "ready_seconds": 3.0276398670000617,
+      "ready_memory_kib": {
+        "Rss": 263260,
+        "Pss": 262422,
+        "Shared_Clean": 864,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98276,
+        "Private_Dirty": 164120
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 699314,
+        "search_ms": 143,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 3.17755709700009,
+      "search_memory_kib": {
+        "Rss": 263568,
+        "Pss": 262726,
+        "Shared_Clean": 868,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98340,
+        "Private_Dirty": 164360
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 698458,
+          "search_ms": 358,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 670745,
+          "search_ms": 373,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 731520,
+          "search_ms": 342,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 916665,
+      "wall_seconds": 7.030095604000053,
+      "launched_executable": "stockfish19-mszip",
+      "running_executable": "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+      "kernel_max_process_rss_kib": 324212,
+      "sampled_group_peak_rss_kib": 323368,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish19-mszip": 91632,
+        "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19": 323368
+      },
+      "user_cpu_s": 6.260073,
+      "system_cpu_s": 0.7024469999999999,
+      "minor_faults": 62707,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 201504
+    },
+    {
+      "block": 10,
+      "mode": "packed_cached",
+      "uci_seconds": 0.6668101640000259,
+      "ready_seconds": 0.6813464469998962,
+      "ready_memory_kib": {
+        "Rss": 263296,
+        "Pss": 262458,
+        "Shared_Clean": 864,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98308,
+        "Private_Dirty": 164124
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 769246,
+        "search_ms": 130,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 0.8164515749999737,
+      "search_memory_kib": {
+        "Rss": 263604,
+        "Pss": 262762,
+        "Shared_Clean": 868,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98372,
+        "Private_Dirty": 164364
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 783849,
+          "search_ms": 319,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 740201,
+          "search_ms": 338,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 796751,
+          "search_ms": 314,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 1042099,
+      "wall_seconds": 4.238834533000045,
+      "launched_executable": "stockfish19-mszip",
+      "running_executable": "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+      "kernel_max_process_rss_kib": 324244,
+      "sampled_group_peak_rss_kib": 323404,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish19-mszip": 2424,
+        "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19": 323404
+      },
+      "user_cpu_s": 3.9069149999999997,
+      "system_cpu_s": 0.3049,
+      "minor_faults": 60694,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 8
+    },
+    {
+      "block": 10,
+      "mode": "packed_fresh",
+      "uci_seconds": 2.511823727999854,
+      "ready_seconds": 2.5305815019999045,
+      "ready_memory_kib": {
+        "Rss": 263264,
+        "Pss": 262426,
+        "Shared_Clean": 864,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98276,
+        "Private_Dirty": 164124
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 763374,
+        "search_ms": 131,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 2.667975558999842,
+      "search_memory_kib": {
+        "Rss": 263540,
+        "Pss": 262698,
+        "Shared_Clean": 868,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98308,
+        "Private_Dirty": 164364
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 744190,
+          "search_ms": 336,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 725182,
+          "search_ms": 345,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 774551,
+          "search_ms": 323,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 997170,
+      "wall_seconds": 6.22935563499982,
+      "launched_executable": "stockfish19-mszip",
+      "running_executable": "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+      "kernel_max_process_rss_kib": 324384,
+      "sampled_group_peak_rss_kib": 323316,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish19-mszip": 91680,
+        "stockfish-0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19": 323316
+      },
+      "user_cpu_s": 5.80888,
+      "system_cpu_s": 0.36135,
+      "minor_faults": 62747,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 201504
+    },
+    {
+      "block": 10,
+      "mode": "native",
+      "uci_seconds": 0.5661102250001022,
+      "ready_seconds": 0.5906054560000484,
+      "ready_memory_kib": {
+        "Rss": 263180,
+        "Pss": 262342,
+        "Shared_Clean": 864,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98188,
+        "Private_Dirty": 164128
+      },
+      "first_search": {
+        "nodes": 100002,
+        "nps": 746283,
+        "search_ms": 134,
+        "score": "cp 39",
+        "bestmove": "e2e4",
+        "depth": 18
+      },
+      "first_bestmove_seconds": 0.7331013329999223,
+      "search_memory_kib": {
+        "Rss": 263488,
+        "Pss": 262646,
+        "Shared_Clean": 868,
+        "Shared_Dirty": 0,
+        "Private_Clean": 98252,
+        "Private_Dirty": 164368
+      },
+      "steady_searches": [
+        {
+          "nodes": 250048,
+          "nps": 788794,
+          "search_ms": 317,
+          "score": "cp 27",
+          "bestmove": "e2e4",
+          "depth": 20
+        },
+        {
+          "nodes": 250188,
+          "nps": 738017,
+          "search_ms": 339,
+          "score": "cp 36",
+          "bestmove": "g1f3",
+          "depth": 19
+        },
+        {
+          "nodes": 250180,
+          "nps": 814918,
+          "search_ms": 307,
+          "score": "cp -26",
+          "bestmove": "e7e6",
+          "depth": 20
+        }
+      ],
+      "eval": [
+        "NNUE evaluation          -1 (side to move, internal units)",
+        "NNUE evaluation        +0.00 (white side)",
+        "Final evaluation      +0.00 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          +25 (side to move, internal units)",
+        "NNUE evaluation        +0.09 (white side)",
+        "Final evaluation      +0.11 (white side) [with scaled NNUE, ...]",
+        "NNUE evaluation          -31 (side to move, internal units)",
+        "NNUE evaluation        +0.11 (white side)",
+        "Final evaluation      +0.14 (white side) [with scaled NNUE, ...]"
+      ],
+      "bench_nodes": 2497913,
+      "bench_nps": 1019556,
+      "wall_seconds": 4.2059941550000985,
+      "launched_executable": "stockfish-linux-x86-64-universal",
+      "running_executable": "stockfish-linux-x86-64-universal",
+      "kernel_max_process_rss_kib": 324232,
+      "sampled_group_peak_rss_kib": 323928,
+      "sampled_peak_rss_by_image_kib": {
+        "stockfish-linux-x86-64-universal": 323928
+      },
+      "user_cpu_s": 3.926533,
+      "system_cpu_s": 0.234698,
+      "minor_faults": 60489,
+      "major_faults": 0,
+      "disk_input_512b": 0,
+      "disk_output_512b": 0
+    }
+  ],
+  "medians": {
+    "native": {
+      "uci_seconds": 0.5739946480000526,
+      "ready_seconds": 0.5946711075000621,
+      "first_bestmove_seconds": 0.807285752499979,
+      "kernel_max_process_rss_kib": 324116.0,
+      "sampled_group_peak_rss_kib": 323908.0,
+      "user_cpu_s": 4.6592145,
+      "system_cpu_s": 0.25218199999999996,
+      "bench_nps": 848870.5,
+      "steady_suite_nps": 643368.1447019308
+    },
+    "packed_fresh": {
+      "uci_seconds": 2.841556677499966,
+      "ready_seconds": 2.8636157844999843,
+      "first_bestmove_seconds": 3.0054266370000278,
+      "kernel_max_process_rss_kib": 324316.0,
+      "sampled_group_peak_rss_kib": 324276.0,
+      "user_cpu_s": 6.317918000000001,
+      "system_cpu_s": 0.48903549999999996,
+      "bench_nps": 912994.0,
+      "steady_suite_nps": 719770.2132042435
+    },
+    "packed_cached": {
+      "uci_seconds": 0.7370619700000134,
+      "ready_seconds": 0.7551207510000495,
+      "first_bestmove_seconds": 0.9148433995000005,
+      "kernel_max_process_rss_kib": 324352.0,
+      "sampled_group_peak_rss_kib": 323862.0,
+      "user_cpu_s": 4.7548315,
+      "system_cpu_s": 0.367264,
+      "bench_nps": 857214.0,
+      "steady_suite_nps": 637908.9125265129
+    }
+  },
+  "paired_speed": {
+    "packed_fresh": {
+      "median_ratio": 1.1005858847546377,
+      "interval": [
+        0.959163346613546,
+        1.3065476190476193
+      ],
+      "coverage": 0.978515625,
+      "blocks": 10,
+      "method": "paired sign order statistics"
+    },
+    "packed_cached": {
+      "median_ratio": 0.967834961472537,
+      "interval": [
+        0.8254620123203285,
+        1.1886281588447654
+      ],
+      "coverage": 0.978515625,
+      "blocks": 10,
+      "method": "paired sign order statistics"
+    }
+  }
+}

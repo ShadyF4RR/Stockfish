@@ -1,0 +1,50 @@
+[Event "Computer Chess Game"]
+[Site "b79103a106f3"]
+[Date "2026.11.20"]
+[Round "1"]
+[White "Stockfish 19"]
+[Black "Stockfish 19"]
+[Result "1-0"]
+[TimeControl "40/60"]
+[FEN "7k/5Q2/6K1/8/8/8/8/8 w - - 0 1"]
+[SetUp "1"]
+
+{--------------
+. . . . . . . k
+. . . . . Q . .
+. . . . . . K .
+. . . . . . . .
+. . . . . . . .
+. . . . . . . .
+. . . . . . . .
+. . . . . . . .
+white to play
+--------------}
+1. Qg7#
+{White mates} 1-0
+
+[Event "Computer Chess Game"]
+[Site "b79103a106f3"]
+[Date "2026.11.20"]
+[Round "2"]
+[White "Stockfish 19"]
+[Black "Stockfish 19"]
+[Result "1-0"]
+[TimeControl "40/60"]
+[FEN "7k/5Q2/6K1/8/8/8/8/8 w - - 0 1"]
+[SetUp "1"]
+
+{--------------
+. . . . . . . k
+. . . . . Q . .
+. . . . . . K .
+. . . . . . . .
+. . . . . . . .
+. . . . . . . .
+. . . . . . . .
+. . . . . . . .
+white to play
+--------------}
+1. Qg7#
+{White mates} 1-0
+

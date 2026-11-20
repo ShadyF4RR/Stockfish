@@ -1,0 +1,3 @@
+# Preserve source transcripts and PGNs byte-for-byte.
+*.pgn -text whitespace=-blank-at-eof,-blank-at-eol
+*.log -text whitespace=-blank-at-eof,-blank-at-eol
