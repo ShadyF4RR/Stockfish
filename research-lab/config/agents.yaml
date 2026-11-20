@@ -8,9 +8,10 @@
     "testing"
   ],
   "limits": {
-    "concurrent_coding_experiments": 2,
+    "concurrent_coding_experiments": 1,
     "new_hypotheses_per_utc_day": 3
   },
+  "staffing": {"default": "main_agent_only", "optional_subagent": "independent_reviewer_for_substantial_or_high_risk_changes", "match_execution": "non_model_worker"},
   "baseline_branch": "research/baseline",
   "ledger_branch": "research/ledger",
   "autonomous_execution_enabled": false,
