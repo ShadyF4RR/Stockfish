@@ -1,6 +1,19 @@
 # Public Fishtest handoff
 
-The CLI prepares standard functional STC and LTC SPRTs, reserves the lab's public slot and reads results from the official service. Submission goes through the owner's authenticated Fishtest web form and moderator approval. The CLI uses public GET endpoints and public Git refs. [Interface investigation and sources](interfaces.md)
+The CLI prepares standard functional STC and LTC SPRTs, reserves the lab's public slot and reads results from the official service. Submission goes through the owner's authenticated Fishtest web form and moderator approval. The CLI uses public GET endpoints and public Git refs. [Agent commands, account settings and deployment](OPERATIONS.md) · [Interface investigation and sources](interfaces.md)
+
+## Inspect public runs
+
+These commands use anonymous reads. They accept any official run ID or its HTTPS view URL. A lab record is required only for coordinating the lab's own experiment stages.
+
+```bash
+python3 research-lab/fishtest/cli.py active --limit 10
+python3 research-lab/fishtest/cli.py completed --page 1
+python3 research-lab/fishtest/cli.py status RUN_ID_OR_VIEW_URL
+python3 research-lab/fishtest/cli.py results RUN_ID_OR_VIEW_URL
+```
+
+`status` shows game totals, source commits, worker and approval state, and the official test design. `results` also retrieves the official Elo estimate and 95% interval for SPRTs with played games. For fixed-game runs it passes the paired frequencies, or WDL if pairs are unavailable, to the official calculator. SPSA reports tuning iterations and game totals. A test awaiting games has no Elo estimate. Lists give the number of records in the service response, plus the number returned after any display limit.
 
 ## Prepare a reviewed local screen
 
@@ -9,7 +22,7 @@ Run the CLI on a single persistent Linux coordinator with Python 3.9+, Git and n
 ```bash
 ft=research-lab/fishtest/cli.py
 python3 "$ft" prepare EXP-ID --baseline /builds/base --candidate /builds/head \
-  --match /results/screen --book /books/screen.epd --username PUBLIC_ACCOUNT_NAME \
+  --match /results/screen --book /books/screen.epd --username ShadyF4RR \
   --rationale "Evidence supporting a public test and limitations of the local screen" \
   --explanation "Technical explanation of the isolated engine change"
 python3 "$ft" show EXP-ID
@@ -21,16 +34,22 @@ The CLI checks the binaries against the manifests, both commits, passing UCI/per
 
 ## Reserve and submit one stage
 
-The owner configures the public account name, a positive cumulative hour allocation, and the actual server-enforced maximum games in `public_fishtest_max_games_approved` for each authorized stage in `config/agents.yaml`. Both stage ceilings and hours start at zero. An hours-only budget cannot reserve a public run. Keep passwords, cookies, CSRF tokens and private messages out of all CLI arguments and records. Use a public-safe approval reference. The human operator must have permission to use the account and compute. Check equivalent ideas, historical runs, alternate branch names and maintainers' current guidance. The CLI checks the active listing, up to ten recent 50-run history pages and local stable patch IDs. By default it checks three history pages. Review similar descriptions and record findings with `--related-review` when applicable.
+The owner has authorized the configured public account `ShadyF4RR`. The owner sets a positive cumulative hour allocation and the server-enforced maximum games in `public_fishtest_max_games_approved` for each authorized stage in `config/agents.yaml`. Both stage ceilings and hours start at zero. An hours-only budget cannot reserve a public run. Keep passwords, cookies, CSRF tokens and private messages out of all CLI arguments and records. Use a public-safe approval reference. The human operator must have permission to use the account and compute. Check equivalent ideas, historical runs, alternate branch names and maintainers' current guidance. The CLI checks the active listing, up to ten recent 50-run history pages and local stable patch IDs. By default it checks three history pages. Review similar descriptions and record findings with `--related-review` when applicable.
 
 ```bash
 python3 "$ft" reserve EXP-ID --hours APPROVED_HOURS --authorization APPROVAL_REFERENCE \
   --duplicate-review "Scope of historical search and findings" --approved-server-cap-and-rules
 ```
 
-Every reservation claims its hours against the total allocation. Record an allocation compatible with the server's actual contract. The inspected server sets an 800,000-game ceiling per standard SPRT. It does not enforce a custom CPU-hour deadline through this form. Keep the slot unreserved if the approved budget cannot cover the official configuration. One shared coordinator and ledger checkout are required. The Git common-directory lock serializes local transactions. Independent clones need a shared transaction service before use. The CLI cannot prevent an unrelated person from submitting manually outside this lab.
+Every reservation claims its hours against the total allocation. Record an allocation compatible with the server's actual contract. The inspected server sets an 800,000-game ceiling per standard SPRT. It does not enforce a custom CPU-hour deadline through this form. Keep the slot unreserved if the approved budget cannot cover the official configuration. One shared coordinator and ledger checkout are required. The Git common-directory lock serializes local transactions. Coordinators in separate clones compete for the same authoritative fork ref using fast-forward Git publication. The CLI cannot prevent an unrelated person from submitting manually outside this lab.
 
-After a successful reservation, sign in to the official form with the configured account. Select the packet's standard stage. Use the full base SHA as the base ref and the exact candidate SHA as the test ref, and confirm both signatures, test repo, opening book, threads, time controls, engine options, SPRT bounds and summary. Check official master and fork branch again just before clicking Submit. A changed pin requires fresh local evidence. A moderator independently approves the queued run. [Official form](https://tests.stockfishchess.org/tests/run)
+After a successful reservation, request the single-use human handoff. Exit 3 means the form is ready for the owner.
+
+```bash
+python3 "$ft" submit EXP-ID
+```
+
+Sign in to the official form with the configured account. Select the packet's standard stage. Use the full base SHA as the base ref and the exact candidate SHA as the test ref, and confirm both signatures, test repo, opening book, threads, time controls, engine options, SPRT bounds and summary. Check official master and fork branch again just before clicking Submit. A changed pin requires fresh local evidence. A moderator independently approves the queued run. [Official form](https://tests.stockfishchess.org/tests/run)
 
 ```bash
 python3 "$ft" attach EXP-ID OFFICIAL_RUN_ID_OR_VIEW_URL
@@ -48,4 +67,4 @@ python3 "$ft" upstream-pr EXP-ID > /tmp/upstream-pr.md
 
 `monitor` exits on a stage transition, error or its polling limit (1–24 reads, 60–3600 seconds apart). Retrying `refresh` reconciles the current state after a read failure. Service changes, blocked network access and incompatible data fail closed. Result recording does not grant the project's separate +3 Elo integration gate. This CLI has no upstream write or merge operation.
 
-Every state change is committed to the owner's ledger checkout with the existing ledger transaction. Push that branch through the approved fork workflow to replicate it across workers. Existing pending ledger changes, an occupied slot or failed required evidence checks stop the command. The CLI exits 0 on success, 1 on a blocked operation and 2 for invalid arguments.
+A mutating CLI command requires a synchronized dedicated ledger checkout, an existing `origin/research/ledger` on the configured fork, and an authenticated Git identity with contents write access to that branch. Before public testing, publish any reviewed local experiment-record commits and fetch the current shared branch. Never pass a password or token as a command-line argument. The coordinator verifies the fork's fetched and pushed identities and shared tip, commits each Fishtest state change, pushes it as a fast-forward and reads back the commit. It returns a ready handoff only after confirming the unique handoff marker on the fork. The same publication applies to reserve, attach, refresh and release. A race or uncertain response leaves the local commit intact and withholds success. Inspect `git fetch origin research/ledger` and `git log --left-right HEAD...FETCH_HEAD`, reconcile the official run and retained local commit, then resume; an unconfirmed handoff must never be submitted. Multiple agents must coordinate against this same ledger. Existing pending ledger changes, an occupied slot or failed required evidence checks stop the command. The CLI exits 0 on success, 1 on a blocked operation, 2 for invalid arguments and 3 when `submit` reaches the human form handoff.

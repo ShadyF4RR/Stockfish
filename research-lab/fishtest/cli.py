@@ -9,6 +9,7 @@ import re
 import subprocess
 import sys
 import time
+from uuid import uuid4
 from urllib.parse import urlencode
 
 LAB = Path(__file__).resolve().parents[1]
@@ -16,6 +17,8 @@ sys.path.insert(0, str(LAB / 'scripts'))
 import experiment as ledger
 from local_evidence import local_evidence, require, verify_review
 from official_results import fetch_json, inspect_run
+from public_runs import listing, page_number, read_run
+from fork_ledger import publish_append
 
 OFFICIAL = 'https://github.com/official-stockfish/Stockfish'
 FORK = 'https://github.com/' + json.loads((LAB / 'config/promotion.yaml').read_text())['fork']
@@ -108,7 +111,7 @@ def patch_id(base, head):
     return subprocess.check_output(['git', 'patch-id', '--stable'], input=diff).decode().split()[0]
 
 
-def gate_public_slot(record, packet, args):
+def gate_public_slot(record, packet, args, *, already_reserved=False):
     require(ledger.CONFIG.get('public_fishtest_username') == packet['username'],
             'owner-approved public Fishtest account must match this packet')
     require(ledger.CONFIG.get('public_fishtest_max_games_approved', {}).get(packet['stage'], 0)
@@ -120,11 +123,12 @@ def gate_public_slot(record, packet, args):
     for other in ledger.records():
         state = other.get(PUBLIC, {})
         reserved_hours += sum(a['hours'] for a in state.get('authorizations', []) if not a.get('released'))
-        require(state.get('status') not in ('reserved', 'active'),
+        own_reservation = already_reserved and other['id'] == record['id'] and state.get('status') == 'reserved'
+        require(own_reservation or state.get('status') not in ('reserved', 'active'),
                 f"public slot already occupied by {other['id']}")
         if other['id'] != record['id'] and state.get('patch_id') == record[PUBLIC]['patch_id']:
             require(packet['stage'] not in state.get('runs', {}), 'equivalent patch already tested in ledger')
-    require(reserved_hours + args.hours <= hours, 'cumulative public allocations exceed approved budget')
+    require(reserved_hours + (0 if already_reserved else args.hours) <= hours, 'cumulative public allocations exceed approved budget')
     if packet['stage'] == 'ltc':
         stc = inspect_run(record[PUBLIC]['runs']['stc']['run_id'], make_packet(record, record[PUBLIC]['local'], 'stc'))
         require(stc['status'] == 'passed', 'official STC no longer passes')
@@ -187,7 +191,10 @@ def update(record, args):
         ledger.git('merge-base', '--is-ancestor', evidence['base_sha'], evidence['candidate_sha'])
         paths = ledger.git('diff', '--name-only', evidence['base_sha'], evidence['candidate_sha']).splitlines()
         require(paths and all(p.startswith('src/') and p != 'src/Makefile' for p in paths), 'expected a focused engine patch')
-        evidence['username'] = args.username
+        account = ledger.CONFIG.get('public_fishtest_username')
+        require(account and (args.username is None or account == args.username),
+                'prepare requires the configured owner-approved public Fishtest username')
+        evidence['username'] = account
         packet = make_packet(record, evidence, 'stc')
         verify_refs(packet)
         record[PUBLIC] = {'status': 'prepared', 'local': evidence, 'packet': packet, 'runs': {},
@@ -228,16 +235,79 @@ def update(record, args):
     return record[PUBLIC]
 
 
+def stage_view(record, state):
+    status, packet = state['status'], state['packet']
+    if record['status'] != 'screened' or not same_pins(record, packet):
+        next_action = 'reconcile archived record or changed pins'
+    elif status == 'reserved':
+        next_action = 'attach' if state['authorizations'][-1].get('handoff_issued_at') else 'submit'
+    else:
+        next_action = {'prepared': 'reserve', 'active': 'refresh', 'pr_prepared': 'upstream-pr'}.get(status)
+    return {'experiment': record['id'], 'stage': packet['stage'], 'local_status': status,
+            'base_sha': packet['base_sha'], 'candidate_sha': packet['candidate_sha'],
+            'next_action': next_action, 'runs': {stage: {'url': run['url'], 'status': run['status']}
+                                                for stage, run in state['runs'].items()}}
+
+
+def submit_handoff(record):
+    config = ledger.CONFIG.get('fishtest', {})
+    require(config.get('submission_mode') == 'human_official_form' and
+            config.get('automatic_public_submission') is False,
+            'review the Fishtest configuration: only human_official_form with automatic_public_submission=false is supported')
+    state = record.get(PUBLIC)
+    require(state and state['status'] == 'reserved', 'an approved public reservation is required')
+    packet = state['packet']
+    verify_review(record)
+    require(same_pins(record, packet), 'experiment pins changed since public reservation')
+    authorization = state['authorizations'][-1]
+    require(authorization.get('stage') == packet['stage'] and not authorization.get('released')
+            and authorization.get('approved_server_cap_and_current_rules'), 'invalid stage authorization')
+    require(not authorization.get('handoff_issued_at'),
+            'human handoff already issued; attach the run, or reconcile a verified unsubmitted reservation')
+    args = argparse.Namespace(hours=authorization['hours'], pages=authorization['public_checks']['finished_pages_scanned'],
+                              related_review=authorization['related_review'])
+    checks = gate_public_slot(record, packet, args, already_reserved=True)
+    require(set(checks['similar_description_or_branch']) <= set(authorization['public_checks']['similar_description_or_branch']),
+            'new similar runs require human reconciliation')
+    reconcile_reservation(state, 10)
+    authorization['handoff_issued_at'] = ledger.now()
+    authorization['handoff_id'] = str(uuid4())
+    return {'outcome': 'human_submission_required', 'submitted': False, 'run_id': None,
+            'handoff_id': authorization['handoff_id'], 'form': FORM,
+            'authorized_account': packet['username'], 'packet': packet,
+            'form_fields': {'tests-repo': packet['repo'], 'base-branch': packet['base_sha'],
+                            'test-branch': packet['candidate_sha'], 'base-signature': packet['base_signature'],
+                            'test-signature': packet['candidate_signature'], 'run-info': packet['info']},
+            'next_action': 'Sign in to the official form, verify settings and current refs, submit once, then attach its run ID.'}
+
+
+def publish_record(record, event):
+    def fork_git(*args):
+        return subprocess.run(['git', *args], cwd=ledger.ROOT, text=True, capture_output=True, check=True,
+                              timeout=60, env={**os.environ, 'GIT_TERMINAL_PROMPT': '0'}).stdout.strip()
+
+    return publish_append(fork_git, FORK, ledger.CONFIG['ledger_branch'], lambda: ledger.save(record, event))
+
+
 def parser():
     cli = argparse.ArgumentParser(description=__doc__)
     commands = cli.add_subparsers(dest='action', required=True)
-    for name in ('prepare', 'reserve', 'release', 'attach', 'refresh', 'monitor', 'show', 'upstream-pr'):
+    for name in ('active', 'completed', 'status', 'results'):
+        sub = commands.add_parser(name, help='read public official Fishtest data')
+        if name in ('active', 'completed'):
+            sub.add_argument('--limit', type=page_number, help='return the first N runs from this response')
+        if name == 'completed':
+            sub.add_argument('--page', type=page_number, default=1)
+        if name in ('status', 'results'):
+            sub.add_argument('run', help='public run ID or official HTTPS run URL')
+    for name in ('prepare', 'reserve', 'submit', 'release', 'attach', 'refresh', 'monitor', 'show', 'stage', 'upstream-pr'):
         sub = commands.add_parser(name)
         sub.add_argument('id', type=ledger.slug)
         if name == 'prepare':
             for field in ('baseline', 'candidate', 'match', 'book'):
                 sub.add_argument('--' + field, required=True, type=Path)
-            for field in ('username', 'rationale', 'explanation'):
+            sub.add_argument('--username', type=ledger.nonempty, help='defaults to the configured public account')
+            for field in ('rationale', 'explanation'):
                 sub.add_argument('--' + field, required=True, type=ledger.nonempty)
         if name in ('reserve', 'release'):
             sub.add_argument('--pages', type=int, choices=range(1, 11), default=3)
@@ -260,7 +330,24 @@ def parser():
 
 def main():
     args = parser().parse_args()
-    if args.action in ('show', 'upstream-pr'):
+    if args.action in ('active', 'completed'):
+        report = listing(args.action == 'active', getattr(args, 'page', 1))
+        if args.limit:
+            report['runs'] = report['runs'][:args.limit]
+        report['returned'] = len(report['runs'])
+        print(json.dumps(report, indent=2))
+        return
+    if args.action in ('status', 'results'):
+        print(json.dumps(read_run(args.run, args.action == 'results'), indent=2))
+        return
+    if args.action == 'submit':
+        with ledger.ledger_lock():
+            record = ledger.load_record(args.id)
+            handoff = submit_handoff(record)
+            handoff['published_ledger_sha'] = publish_record(record, 'Fishtest human form handoff issued')
+            print(json.dumps(handoff, indent=2))
+        return 3
+    if args.action in ('show', 'stage', 'upstream-pr'):
         record = ledger.load_record(args.id)
         state = record.get(PUBLIC)
         require(state, 'no prepared packet')
@@ -270,7 +357,7 @@ def main():
             verify_review(record)
             print(state['upstream_pr_body'], end='')
         else:
-            print(json.dumps(state, indent=2))
+            print(json.dumps(stage_view(record, state) if args.action == 'stage' else state, indent=2))
         return
     polls = 1
     if args.action == 'monitor':
@@ -284,14 +371,15 @@ def main():
             before = json.dumps(record, sort_keys=True)
             state = update(record, args)
             if json.dumps(record, sort_keys=True) != before:
-                ledger.save(record, f"Fishtest {args.action} ({state['status']})")
-            print(json.dumps(state, indent=2), flush=True)
+                publish_record(record, f"Fishtest {args.action} ({state['status']})")
+            output = stage_view(record, state) if args.action == 'reserve' else state
+            print(json.dumps(output, indent=2), flush=True)
             if state['status'] != 'active':
                 break
 
 
 if __name__ == '__main__':
     try:
-        main()
+        sys.exit(main())
     except (OSError, ValueError, KeyError, TypeError, subprocess.SubprocessError) as exc:
         sys.exit(f'Fishtest workflow blocked: {exc}')
