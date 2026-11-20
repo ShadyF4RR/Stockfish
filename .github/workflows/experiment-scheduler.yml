@@ -10,6 +10,7 @@ on:
       - 'research-lab/approved-matches/*.json'
 
 permissions:
+  actions: read
   contents: write
 concurrency:
   group: stockfish-match-admissions
@@ -41,3 +42,10 @@ jobs:
             --topic screen-qsearch-checkcap-001 --match EXP-QSEARCH-CHECKCAP-001 \
             --baseline 1819b9ea37588be8adb044179fb54512f87c8249 --candidate fb5c6f82983e23b1ad0c6518960e8dc4a0c5b300
           "${dispatch[@]}" schedule --event "$GITHUB_EVENT_NAME" --run "$GITHUB_RUN_ID" | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Record GitHub workflow state
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/actions/workflows/experiment-scheduler.yml" \
+            --jq '"GitHub workflow state = " + .state' | tee -a "$GITHUB_STEP_SUMMARY"

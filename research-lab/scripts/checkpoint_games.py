@@ -6,6 +6,14 @@ import subprocess
 import time
 
 
+def sync_directory(path):
+    fd = os.open(path, os.O_RDONLY)
+    try:
+        os.fsync(fd)
+    finally:
+        os.close(fd)
+
+
 def write(path, data):
     temp = path.with_suffix(".tmp")
     with temp.open("wb") as stream:
@@ -13,11 +21,7 @@ def write(path, data):
         stream.flush()
         os.fsync(stream.fileno())
     temp.replace(path)
-    fd = os.open(path.parent, os.O_RDONLY)
-    try:
-        os.fsync(fd)
-    finally:
-        os.close(fd)
+    sync_directory(path.parent)
 
 
 def completed(directory, white, fen, clock, round_number, opening_key):
@@ -34,6 +38,9 @@ def completed(directory, white, fen, clock, round_number, opening_key):
             or tags.get("Termination") != "normal" or tags.get("TimeControl") != clock
             or opening_key(tags.get("FEN","")) != opening_key(fen)):
         raise ValueError("unsettled game " + directory.name)
+    with path.open("rb") as stream:
+        os.fsync(stream.fileno())
+    sync_directory(directory)
     return text.replace('[Round "1"]', f'[Round "{round_number}"]', 1)
 
 
@@ -81,6 +88,7 @@ def play(command, rows, out, record, deadline, apply_limits, opening_key):
             while pending and len(active) < plan["concurrency"]:
                 i,white,fen,directory = pending.pop(0)
                 directory.mkdir()
+                sync_directory(out)
                 write(directory / "book.epd", (fen+"\n").encode())
                 args = prefix + ["-openings","file=book.epd","format=epd","order=sequential",
                                  "-srand",str(settings["seed"]),"-rounds","1","-games","1",
