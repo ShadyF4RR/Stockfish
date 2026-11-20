@@ -1,5 +1,11 @@
 {
-  "deferred": [],
+  "deferred": [
+    {
+      "hypothesis": "An opt-in seeded ordering of equivalently evaluated legal root moves can change variety without sacrificing expected score.",
+      "path": "src/search.cpp",
+      "topic": "opt-in-seeded-root-diversity"
+    }
+  ],
   "items": [
     {
       "attempts": [
