@@ -3,6 +3,7 @@
 param(
     [Parameter(Mandatory = $true)][ValidatePattern('^[0-9a-f]{40}$')][string]$ControlSha,
     [Security.SecureString]$WorkerToken,
+    [switch]$Resume,
     [switch]$Keeper
 )
 Set-StrictMode -Version Latest
@@ -67,26 +68,89 @@ function Read-Envelope([string]$Path) {
         [IO.File]::ReadAllBytes($Path), $null, [Security.Cryptography.DataProtectionScope]::LocalMachine))
 }
 
-function Invoke-GuestBytes([string]$Command, [byte[]]$Bytes) {
+# The only data copied to the Windows log is the structured output of the
+# diagnostic shell below. The token import never enters that shell.
+$logPath = Join-Path $handoff 'provisioning.log'
+function Write-ProvisionLog([string]$Message) {
+    [IO.File]::AppendAllText($logPath, ([DateTime]::UtcNow.ToString('o') + ' ' + $Message + [Environment]::NewLine), $utf8)
+}
+
+function Invoke-GuestBytes([string]$Command, [byte[]]$Bytes, [switch]$Diagnostics) {
     # Commands are fixed below. Credential bytes pass only through the child's stdin.
     $entry = New-Object Diagnostics.ProcessStartInfo
     $entry.FileName = $wsl
-    $entry.Arguments = "--distribution $distro --user root --exec $Command"
+    $entry.Arguments = "--distribution $distro --user root --cd / --exec $Command"
     $entry.UseShellExecute = $false
     $entry.RedirectStandardInput = $true
+    $entry.RedirectStandardOutput = $true
+    $entry.RedirectStandardError = $true
+    $entry.StandardOutputEncoding = $utf8
     $proc = [Diagnostics.Process]::Start($entry)
     try {
-        $proc.StandardInput.BaseStream.Write($Bytes, 0, $Bytes.Length)
-        $proc.StandardInput.Close()
+        # Drain WSL launcher errors privately. They may contain host environment data.
+        $errors = $proc.StandardError.BaseStream.CopyToAsync([IO.Stream]::Null)
+        $inputFailed = $false
+        try {
+            $write = $proc.StandardInput.BaseStream.WriteAsync($Bytes, 0, $Bytes.Length)
+            [void]$write.GetAwaiter().GetResult()
+        }
+        catch { $inputFailed = $true }
+        finally { $proc.StandardInput.BaseStream.Close() }
+        while ($null -ne ($line = $proc.StandardOutput.ReadLine())) {
+            if ($Diagnostics -and $line -cmatch '^(stage=|failure stage=|stderr: )') { Write-ProvisionLog $line }
+        }
         $proc.WaitForExit()
-        if ($proc.ExitCode -ne 0) { throw "Guest provisioning command exited $($proc.ExitCode)" }
+        [void]$errors.GetAwaiter().GetResult()
+        if ($proc.ExitCode -ne 0) {
+            $message = "WSL command $Command exited $($proc.ExitCode)"
+            Write-ProvisionLog $message
+            throw "$message. See $logPath"
+        }
+        if ($inputFailed) { throw "Incomplete input to $Command. See $logPath" }
     } finally {
         $proc.Dispose()
     }
 }
 
-function Invoke-GuestScript([string]$Script) {
-    Invoke-GuestBytes '/bin/bash -se' ($utf8.GetBytes($Script.Replace("`r`n", "`n")))
+function Invoke-GuestScript([string]$Stage, [string]$Script) {
+    Write-ProvisionLog "stage=$Stage"
+    # fd 3 carries trusted stage/error records. Discard normal stdout. Filter
+    # arbitrary stderr before it crosses WSL: an apt URL or compiler message
+    # can contain secrets even if the installer itself supplied none.
+    $prologue = @'
+set -Eeuo pipefail
+exec 3>&1 >/dev/null
+export LC_ALL=C
+provision_stage() { SF_STAGE=$1; export SF_STAGE; printf 'stage=%s\n' "$1" >&3; }
+provision_error() {
+    printf 'failure stage=%s exit=%s file=%s line=%s command=%s\n' "$SF_STAGE" "$1" "$2" "$3" "${4//$'\n'/ }" >&3
+}
+export -f provision_stage provision_error
+trap 'provision_error "$?" "${BASH_SOURCE[0]:-bootstrap}" "$LINENO" "$BASH_COMMAND"' ERR
+exec 2> >(awk '
+  BEGIN {
+    packages = "(ca-certificates|git|curl|python3|build-essential|expect|bubblewrap|util-linux|time|gh)"
+    pattern = "permission denied|operation not permitted|read-only file system|no space left on device|no such file or directory"
+    pattern = pattern "|unable to locate package( " packages ")?|could not get lock|unable to acquire|dpkg was interrupted|unmet dependencies|hash sum mismatch"
+    pattern = pattern "|temporary failure resolving|could not resolve host|unable to access|connection timed out|connection refused|certificate verification failed"
+    pattern = pattern "|could not read username|authentication failed|repository not found|not a git repository|dubious ownership|reference is not a tree|couldn.t find remote ref|early eof|index-pack failed"
+    pattern = pattern "|no rule to make target|fatal error|compilation terminated|undefined reference|out of memory|killed signal|checksums? did not match|unrecognized command-line option|cannot find|makefile:[0-9]+|collect2: error"
+    pattern = pattern "|returned an error code [(][0-9]+[)]|error [0-9]+|exit status [0-9]+|no installation candidate|unable to fetch|cannot lock ref"
+    pattern = pattern "|control process exited with error code|failed to start|failed to enable|bad unit file setting|failed to connect to bus|command not found|syntax error|error: (401|403|404|407|429|500|502|503)"
+  }
+  {
+    rest = tolower($0)
+    if (!match(rest, pattern) && !omitted++) { print "stderr: unclassified output withheld"; fflush() }
+    while (match(rest, pattern)) {
+      message = substr(rest, RSTART, RLENGTH)
+      rest = substr(rest, RSTART + RLENGTH)
+      if (!seen[message]++) { print "stderr: " message; fflush() }
+    }
+  }' >&3)
+'@
+    # A child (especially apt) must never consume the rest of bash's script from stdin.
+    $wrapped = $prologue + "`nprovision_stage '$Stage'`n{" + "`n" + $Script + "`n} </dev/null`n"
+    Invoke-GuestBytes '/bin/bash -se' ($utf8.GetBytes($wrapped.Replace("`r`n", "`n"))) -Diagnostics
 }
 
 function Start-Keeper {
@@ -96,6 +160,10 @@ function Start-Keeper {
         throw 'The keeper requires its dedicated non-administrator account.'
     }
     if ([IO.File]::ReadAllText($pinFile).Trim() -cne $ControlSha) { throw 'Control pin mismatch.' }
+    if ((Test-Path -LiteralPath $logPath) -and (Get-Item -LiteralPath $logPath).Length -ge 1MB) {
+        Move-Item -Force -LiteralPath $logPath -Destination ($logPath + '.previous')
+    }
+    Write-ProvisionLog "keeper start control=$ControlSha"
     $profileDir = [Environment]::GetFolderPath('UserProfile')
     $localData = [Environment]::GetFolderPath('LocalApplicationData')
     if (-not $profileDir -or -not $localData) { throw 'The dedicated Windows user profile must be loaded.' }
@@ -115,8 +183,9 @@ function Start-Keeper {
     if ((Test-Path -LiteralPath $cfg) -and [IO.File]::ReadAllText($cfg) -ne $settings) {
         throw 'Existing .wslconfig differs from the dedicated worker settings.'
     }
-    [IO.File]::WriteAllText($cfg, $settings, $utf8)
+    if (-not (Test-Path -LiteralPath $cfg)) { [IO.File]::WriteAllText($cfg, $settings, $utf8) }
     if ($registrations.Count -eq 0) {
+        if ($Resume) { throw 'Resume requires the original registered WSL distribution.' }
         # Microsoft WSL DistributionInfo.json, commit cb19ae16acb8a02dbae8802ab55cc681015715c2.
         $url = 'https://releases.ubuntu.com/24.04.5/ubuntu-24.04.5-wsl-amd64.wsl'
         $digest = 'bb415d824822c4b878125729af451a5d18fb13d1cf5cbed9a7393ad64ac6039e'
@@ -138,7 +207,7 @@ function Start-Keeper {
 
     $configured = Join-Path $data 'wsl-configured-v1'
     if (-not (Test-Path -LiteralPath $configured)) {
-        Invoke-GuestScript @'
+        Invoke-GuestScript 'WSL configuration' @'
 umask 022
 cat > /etc/wsl.conf <<'WSLCONF'
 [boot]
@@ -159,12 +228,15 @@ sync
 
     $serviceAction = 'start'
     $ready = Join-Path $data ('installed-' + $ControlSha)
-    if (-not (Test-Path -LiteralPath $ready)) {
+    if (-not (Test-Path -LiteralPath $ready) -or [IO.File]::ReadAllText($ready) -cne $ControlSha) {
         $install = @'
 set -eu
 export DEBIAN_FRONTEND=noninteractive GIT_TERMINAL_PROMPT=0 GIT_CONFIG_NOSYSTEM=1 GIT_CONFIG_GLOBAL=/dev/null
+provision_stage "bootstrap package installation"
+dpkg --configure --pending
 apt-get update
 apt-get install -y --no-install-recommends git ca-certificates
+provision_stage "control Git checkout"
 tmp=$(mktemp -d /var/tmp/stockfish-control.XXXXXXXX)
 trap 'rm -rf -- "$tmp"' EXIT
 git init -q "$tmp"
@@ -172,13 +244,15 @@ git -C "$tmp" remote add origin https://github.com/ShadyF4RR/Stockfish.git
 git -C "$tmp" fetch -q --depth=1 --no-tags origin APPROVED_SHA
 git -C "$tmp" checkout -q --detach APPROVED_SHA
 test "$(git -C "$tmp" rev-parse HEAD)" = APPROVED_SHA
+provision_stage "worker installation"
 /bin/bash "$tmp/research-lab/dedicated-worker/install-guest.sh" APPROVED_SHA
 '@
-        Invoke-GuestScript ($install.Replace('APPROVED_SHA', $ControlSha))
+        Invoke-GuestScript 'guest provisioning' ($install.Replace('APPROVED_SHA', $ControlSha))
         [IO.File]::WriteAllText($ready, $ControlSha, $utf8)
         $serviceAction = 'restart'
     }
     if (Test-Path -LiteralPath $tokenFile) {
+        Write-ProvisionLog "stage=credential import"
         $bytes = Read-Envelope $tokenFile
         try { Invoke-GuestBytes '/usr/local/libexec/stockfish-worker-set-credential' $bytes }
         finally { [Array]::Clear($bytes, 0, $bytes.Length) }
@@ -195,7 +269,7 @@ systemctl SERVICE_ACTION stockfish-worker.service
 sleep 2
 systemctl is-active --quiet stockfish-worker.service
 '@
-    Invoke-GuestScript ($launch.Replace('APPROVED_SHA', $ControlSha).Replace('SERVICE_ACTION', $serviceAction))
+    Invoke-GuestScript 'service readiness' ($launch.Replace('APPROVED_SHA', $ControlSha).Replace('SERVICE_ACTION', $serviceAction))
     $ownerId = (& $wsl --distribution $distro --user sfworker --exec /usr/bin/python3 -I /opt/stockfish-lab/research-lab/dedicated-worker/worker.py identity --state /var/lib/stockfish-worker).Trim()
     if ($LASTEXITCODE -ne 0 -or $ownerId -cnotmatch '^pc-[a-f0-9]{32}$') { throw 'No valid PC worker identity.' }
     $initialized = @{ owner = $ownerId; control_sha = $ControlSha; started_at = [DateTime]::UtcNow.ToString('o'); distro = $distro }
@@ -241,57 +315,81 @@ $task = Get-ScheduledTask -TaskName $taskName -TaskPath '\' -ErrorAction Silentl
 if ($task -and (-not $account -or $task.Principal.UserId -notin @($winAccount, "$env:COMPUTERNAME\$winAccount", $account.SID.Value))) {
     throw 'The task name belongs to a different principal.'
 }
+if ($Resume -and (-not $account -or -not $task)) { throw 'Resume requires the existing worker account and scheduled task.' }
 if ($task -and $task.State -eq 'Running') {
     throw 'The keeper is already running. Drain work and stop it before changing the pin or rotating a token.'
 }
 
-Write-PrivateDirectory $root $null $null
-Write-PrivateDirectory $private $null $null
-$passwordFile = Join-Path $private 'host-account.dpapi'
-if (-not $account) {
-    $rnd = New-Object byte[] 48
-    $rng = [Security.Cryptography.RandomNumberGenerator]::Create()
-    try { $rng.GetBytes($rnd) } finally { $rng.Dispose() }
-    $password = 'Sf!9' + [Convert]::ToBase64String($rnd)
-    $pwBytes = $utf8.GetBytes($password)
-    try { Write-Envelope $passwordFile $pwBytes } finally { [Array]::Clear($pwBytes, 0, $pwBytes.Length) }
-    $account = New-LocalUser -Name $winAccount -Password (ConvertTo-SecureString $password -AsPlainText -Force) -AccountNeverExpires -PasswordNeverExpires -UserMayNotChangePassword
-    [IO.File]::WriteAllText($record, $account.SID.Value, $utf8)
-} else {
-    $pwBytes = Read-Envelope $passwordFile
-    try { $password = $utf8.GetString($pwBytes) } finally { [Array]::Clear($pwBytes, 0, $pwBytes.Length) }
+$oldRegistration = $null
+$restoreEnabled = $false
+if ($Resume) {
+    $scheduler = New-Object -ComObject 'Schedule.Service'
+    $scheduler.Connect()
+    $oldRegistration = $scheduler.GetFolder('\').GetTask($taskName)
+    $restoreEnabled = $oldRegistration.Enabled
+    $oldRegistration.Enabled = $false
 }
-if (@(Get-LocalGroupMember -SID $admins | Where-Object { $_.SID -eq $account.SID }).Count) {
-    throw 'Remove the dedicated account from Administrators before installation.'
-}
-Write-PrivateDirectory $root $account.SID 'ReadAndExecute'
-Write-PrivateDirectory $handoff $account.SID 'Modify'
-Write-PrivateDirectory $inbox $account.SID 'ReadAndExecute'
-$entry = Join-Path $root 'Install-StockfishWorker.ps1'
-if ([IO.Path]::GetFullPath($PSCommandPath) -ne [IO.Path]::GetFullPath($entry)) {
-    Copy-Item -LiteralPath $PSCommandPath -Destination $entry -Force
-}
-[IO.File]::WriteAllText($pinFile, $ControlSha, $utf8)
-if ($null -eq $WorkerToken) {
-    $WorkerToken = Read-Host 'Scoped STOCKFISH_WORKER_TOKEN (hidden)' -AsSecureString
-}
-$tokenBytes = ConvertTo-SecretBytes $WorkerToken
 try {
-    if ($tokenBytes.Length -lt 20 -or $tokenBytes.Length -gt 4096) { throw 'Invalid worker credential length.' }
-    Write-Envelope $tokenFile $tokenBytes
-    # The service can delete this envelope after import but cannot create a replacement
-    # link in the administrator-owned input directory.
-    $fileAcl = [IO.File]::GetAccessControl($tokenFile)
-    $fileAcl.AddAccessRule((New-Object Security.AccessControl.FileSystemAccessRule($account.SID,'Delete','Allow')))
-    [IO.File]::SetAccessControl($tokenFile, $fileAcl)
-} finally { [Array]::Clear($tokenBytes, 0, $tokenBytes.Length) }
-$exe = Join-Path $env:SystemRoot 'System32\WindowsPowerShell\v1.0\powershell.exe'
-$arguments = '-NoProfile -NonInteractive -ExecutionPolicy Bypass -File "' + $entry + '" -Keeper -ControlSha ' + $ControlSha
-$action = New-ScheduledTaskAction -Execute $exe -Argument $arguments
-$trigger = New-ScheduledTaskTrigger -AtStartup
-$settings = New-ScheduledTaskSettingsSet -StartWhenAvailable -MultipleInstances IgnoreNew -ExecutionTimeLimit ([TimeSpan]::Zero) -RestartCount 999 -RestartInterval (New-TimeSpan -Minutes 1) -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries
-try {
-    Register-ScheduledTask -TaskName $taskName -TaskPath '\' -Action $action -Trigger $trigger -Settings $settings -RunLevel Limited -User "$env:COMPUTERNAME\$winAccount" -Password $password -Force | Out-Null
-} finally { $password = $null }
+    if ($Resume -and $oldRegistration.GetInstances(0).Count -gt 0) {
+        throw 'The previous keeper is still running. Wait for provisioning to exit before resuming.'
+    }
+    Write-PrivateDirectory $root $null $null
+    Write-PrivateDirectory $private $null $null
+    $passwordFile = Join-Path $private 'host-account.dpapi'
+    if (-not $account) {
+        $rnd = New-Object byte[] 48
+        $rng = [Security.Cryptography.RandomNumberGenerator]::Create()
+        try { $rng.GetBytes($rnd) } finally { $rng.Dispose() }
+        $password = 'Sf!9' + [Convert]::ToBase64String($rnd)
+        $pwBytes = $utf8.GetBytes($password)
+        try { Write-Envelope $passwordFile $pwBytes } finally { [Array]::Clear($pwBytes, 0, $pwBytes.Length) }
+        $account = New-LocalUser -Name $winAccount -Password (ConvertTo-SecureString $password -AsPlainText -Force) -AccountNeverExpires -PasswordNeverExpires -UserMayNotChangePassword
+        [IO.File]::WriteAllText($record, $account.SID.Value, $utf8)
+    } else {
+        $pwBytes = Read-Envelope $passwordFile
+        try { $password = $utf8.GetString($pwBytes) } finally { [Array]::Clear($pwBytes, 0, $pwBytes.Length) }
+    }
+    if (@(Get-LocalGroupMember -SID $admins | Where-Object { $_.SID -eq $account.SID }).Count) {
+        throw 'Remove the dedicated account from Administrators before installation.'
+    }
+    Write-PrivateDirectory $root $account.SID 'ReadAndExecute'
+    Write-PrivateDirectory $handoff $account.SID 'Modify'
+    Write-PrivateDirectory $inbox $account.SID 'ReadAndExecute'
+    $entry = Join-Path $root ('Install-StockfishWorker-' + $ControlSha + '.ps1')
+    if ([IO.Path]::GetFullPath($PSCommandPath) -ne [IO.Path]::GetFullPath($entry)) {
+        Copy-Item -LiteralPath $PSCommandPath -Destination $entry -Force
+    }
+    # Resume reuses the pending DPAPI envelope or the credential already in WSL.
+    if (-not $Resume -or $null -ne $WorkerToken) {
+        if ($null -eq $WorkerToken) {
+            $WorkerToken = Read-Host 'Scoped STOCKFISH_WORKER_TOKEN (hidden)' -AsSecureString
+        }
+        $tokenBytes = ConvertTo-SecretBytes $WorkerToken
+        try {
+            if ($tokenBytes.Length -lt 20 -or $tokenBytes.Length -gt 4096) { throw 'Invalid worker credential length.' }
+            Write-Envelope $tokenFile $tokenBytes
+            # The service can delete this envelope after import but cannot create a replacement
+            # link in the administrator-owned input directory.
+            $fileAcl = [IO.File]::GetAccessControl($tokenFile)
+            $fileAcl.AddAccessRule((New-Object Security.AccessControl.FileSystemAccessRule($account.SID,'Delete','Allow')))
+            [IO.File]::SetAccessControl($tokenFile, $fileAcl)
+        } finally { [Array]::Clear($tokenBytes, 0, $tokenBytes.Length) }
+    }
+
+    $exe = Join-Path $env:SystemRoot 'System32\WindowsPowerShell\v1.0\powershell.exe'
+    $arguments = '-NoProfile -NonInteractive -ExecutionPolicy Bypass -File "' + $entry + '" -Keeper -ControlSha ' + $ControlSha
+    if ($Resume) { $arguments += ' -Resume' }
+    $action = New-ScheduledTaskAction -Execute $exe -Argument $arguments
+    $trigger = New-ScheduledTaskTrigger -AtStartup
+    $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable -MultipleInstances IgnoreNew -ExecutionTimeLimit ([TimeSpan]::Zero) -RestartCount 999 -RestartInterval (New-TimeSpan -Minutes 1) -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries
+    try {
+        Register-ScheduledTask -TaskName $taskName -TaskPath '\' -Action $action -Trigger $trigger -Settings $settings -RunLevel Limited -User "$env:COMPUTERNAME\$winAccount" -Password $password -Force | Out-Null
+    } finally { $password = $null }
+    [IO.File]::WriteAllText($pinFile, $ControlSha, $utf8)
+    if ($Resume) { Enable-ScheduledTask -TaskName $taskName -TaskPath '\' | Out-Null }
+    $restoreEnabled = $false
+} finally {
+    if ($restoreEnabled) { Enable-ScheduledTask -TaskName $taskName -TaskPath '\' | Out-Null }
+}
 Start-ScheduledTask -TaskName $taskName -TaskPath '\'
 Write-Output "Scheduled $taskName. Verify guest startup in $handoff\last-start.json and then test a Windows reboot."

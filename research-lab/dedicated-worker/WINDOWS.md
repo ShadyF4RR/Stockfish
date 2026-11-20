@@ -18,7 +18,7 @@ if ($pin -cnotmatch '^[0-9a-f]{40}$') { throw 'Invalid commit' }
 $url = "https://raw.githubusercontent.com/ShadyF4RR/Stockfish/$pin/research-lab/dedicated-worker/Install-StockfishWorker.ps1"
 $file = Join-Path $env:TEMP 'Install-StockfishWorker.ps1'
 Invoke-WebRequest -UseBasicParsing $url -OutFile $file
-if ((Get-FileHash $file -Algorithm SHA256).Hash -ne '3afc21619a2f8cabe7cf9d44042407a4a4cf9f316aacc0c8c9992fe827cc9998') { throw 'Installer checksum mismatch' }
+if ((Get-FileHash $file -Algorithm SHA256).Hash -ne 'e1508a7ee8f86282d18e38e8771490a5ea139f1359369308542b92de5cf3d395') { throw 'Installer checksum mismatch' }
 Unblock-File -LiteralPath $file
 powershell.exe -NoProfile -ExecutionPolicy RemoteSigned -File $file -ControlSha $pin
 ```
@@ -32,6 +32,25 @@ Get-Content "$handoff\last-start.json" | ConvertFrom-Json | Select-Object owner,
 ```
 
 If startup fails, inspect `last-error.json` in that directory. Match the control SHA and copy only the public `pc-…` owner string. In the fork's **Settings → Secrets and variables → Actions → Variables**, create **STOCKFISH_PC_OWNER** with that value. The next tick enrolls the PC. The service reports readiness after its startup, capacity and Fastchess checks. A subsequent tick releases the pending request. The service then claims the global slot. Leave the machine powered and awake on AC for testing. After an idle reboot, verify the same owner and a new startup timestamp.
+
+## Resume a failed Linux provisioning attempt
+
+Use the download and checksum commands above with the new pin. For an existing installation, use this final command in elevated 64-bit Windows PowerShell 5.1.
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy RemoteSigned -File $file -ControlSha $pin -Resume
+```
+
+Resume requires the original task, Windows account SID and registered WSL distribution. Run it after the failed keeper exits. The installer temporarily disables new launches of that task while updating its definition. It reuses the pending encrypted token or the credential already in the guest. Completed releases and Fastchess builds are checked before reuse. The worker's game and identity directories stay in the existing VHD.
+
+Read the protected diagnostics in elevated PowerShell. Each attempt starts with its control SHA. A Linux failure records its stage, script, line, exit code and Bash command as written. Shell variables in those commands retain their source names. Recognized stderr fragments are recorded, while other subprocess output is withheld to protect credentials. The log rotates on keeper startup at 1 MiB, retaining one previous copy.
+
+```powershell
+$handoff = "$env:ProgramData\StockfishResearchWorker\Handoff"
+Get-Content "$handoff\provisioning.log" -Tail 40
+```
+
+A successful installer launch only registers the task. Check for a fresh `last-start.json` with the requested SHA after the service readiness checks. Enrollment and completion of a real match are recorded separately.
 
 ## Read the evidence
 
