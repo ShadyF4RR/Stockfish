@@ -32,10 +32,15 @@
     "elo_estimate": null,
     "elo_uncertainty": null,
     "fishtest": null,
-    "games": 0,
+    "games": 4,
     "hardware": "Codex Cloud Linux x86-64, same single-CPU affinity on all engine runtime trials. No CPU cache PMU.",
     "hardware_review": null,
-    "match_settings": null,
+    "match_settings": {
+      "elo_games": 0,
+      "fastchess": "one color-reversed pair, 4+0.04, 1 thread, 16 MiB hash",
+      "purpose": "client compatibility",
+      "xboard": "two legal mate-in-one games with reversed colors"
+    },
     "review": null,
     "statistical_decision": "Packaging only. No engine strength test warranted."
   },
@@ -66,6 +71,41 @@
       "restored_bytes": 103153472,
       "restored_sha256": "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
       "zlib_version": "1.3.2"
+    },
+    "linux_runtime_medians": {
+      "native": {
+        "bench_nps": 848870.5,
+        "first_bestmove_seconds": 0.807285752499979,
+        "kernel_max_process_rss_kib": 324116.0,
+        "ready_seconds": 0.5946711075000621,
+        "sampled_group_peak_rss_kib": 323908.0,
+        "steady_suite_nps": 643368.1447019308,
+        "system_cpu_s": 0.25218199999999996,
+        "uci_seconds": 0.5739946480000526,
+        "user_cpu_s": 4.6592145
+      },
+      "packed_cached": {
+        "bench_nps": 857214.0,
+        "first_bestmove_seconds": 0.9148433995000005,
+        "kernel_max_process_rss_kib": 324352.0,
+        "ready_seconds": 0.7551207510000495,
+        "sampled_group_peak_rss_kib": 323862.0,
+        "steady_suite_nps": 637908.9125265129,
+        "system_cpu_s": 0.367264,
+        "uci_seconds": 0.7370619700000134,
+        "user_cpu_s": 4.7548315
+      },
+      "packed_fresh": {
+        "bench_nps": 912994.0,
+        "first_bestmove_seconds": 3.0054266370000278,
+        "kernel_max_process_rss_kib": 324316.0,
+        "ready_seconds": 2.8636157844999843,
+        "sampled_group_peak_rss_kib": 324276.0,
+        "steady_suite_nps": 719770.2132042435,
+        "system_cpu_s": 0.48903549999999996,
+        "uci_seconds": 2.841556677499966,
+        "user_cpu_s": 6.317918000000001
+      }
     },
     "reconstruction": {
       "activation": "Automatic first-use decode to private cache, SHA-256 verified on subsequent launches",
@@ -104,7 +144,8 @@
       "restored_bytes": 103046300,
       "restored_sha256": "45bc8e4969147db9c2eb533810637994619bff0eacc81ccfd9854394901bcbd0",
       "zlib_version": "1.3.2"
-    }
+    },
+    "windows_performance_run": "https://github.com/ShadyF4RR/Stockfish/actions/runs/44819695849"
   },
   "previous_proof": {
     "branch": "proof/compression-artifact-tool",
