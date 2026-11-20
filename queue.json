@@ -18,6 +18,12 @@
       "submitted_at": "2026-11-20T22:53:16+00:00"
     }
   },
+  "last_schedule": {
+    "at": "2026-11-20T22:53:21+00:00",
+    "decision": "waiting_for_pc",
+    "event": "push",
+    "run": 44832541424
+  },
   "limits": {
     "daily": {
       "games": 232,
