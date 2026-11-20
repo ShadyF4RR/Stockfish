@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
-"""Measure a single deterministic gzip round trip on a bounded regular file."""
+"""Measure a single deterministic gzip or xz round trip on a bounded regular file."""
 import argparse
 import contextlib
 import gzip
 import hashlib
 import json
+import lzma
 import os
 from pathlib import Path
 import platform
 import re
+import resource
 import stat
 import struct
 import tempfile
@@ -65,8 +67,9 @@ def measured(operation):
                     "process_cpu_seconds": time.process_time() - cpu}
 
 
-def measure(path, directory, level, limit):
-    packed, restored = directory / "packed.gz", directory / "restored.bin"
+def measure(path, directory, codec, level, limit):
+    extension = "gz" if codec == "gzip" else "xz"
+    packed, restored = directory / f"packed.{extension}", directory / "restored.bin"
     with open(path, "rb", opener=open_regular) as source:
         initial = os.fstat(source.fileno())
         if initial.st_size > limit:
@@ -76,7 +79,11 @@ def measure(path, directory, level, limit):
 
         def compress():
             with packed.open("xb") as disk:
-                with gzip.GzipFile(filename="", mode="wb", fileobj=disk, mtime=0, compresslevel=level) as dest:
+                if codec == "gzip":
+                    stream = gzip.GzipFile(filename="", mode="wb", fileobj=disk, mtime=0, compresslevel=level)
+                else:
+                    stream = lzma.LZMAFile(disk, "wb", format=lzma.FORMAT_XZ, check=lzma.CHECK_CRC64, preset=level)
+                with stream as dest:
                     return transfer(source, dest, limit)
 
         (size, digest), compression = measured(compress)
@@ -85,7 +92,8 @@ def measure(path, directory, level, limit):
             raise ValueError("input changed during measurement")
 
     def decompress():
-        with gzip.open(packed, "rb") as source, restored.open("xb") as dest:
+        opener = gzip.open if codec == "gzip" else lzma.open
+        with opener(packed, "rb") as source, restored.open("xb") as dest:
             transfer(source, dest, size)
 
     _, decompression = measured(decompress)
@@ -98,12 +106,13 @@ def measure(path, directory, level, limit):
     return {
         "input_name": path.name, "kind": artifact_kind(header, path.name, size, digest),
         "input_bytes": size, "input_sha256": digest,
-        "gzip_bytes": packed_size, "gzip_sha256": packed_hash,
+        f"{codec}_bytes": packed_size, f"{codec}_sha256": packed_hash,
         "restored_bytes": restored_size, "restored_sha256": restored_hash,
-        "gzip_to_input_ratio": packed_size / size if size else None,
+        f"{codec}_to_input_ratio": packed_size / size if size else None,
         "round_trip_verified": True, "compression": compression, "decompression": decompression,
-        "gzip_level": level, "max_input_bytes": limit,
+        "codec": codec, f"{codec}_level": level, "max_input_bytes": limit,
         "python_version": platform.python_version(), "zlib_version": zlib.ZLIB_RUNTIME_VERSION,
+        "peak_process_rss_kib_linux": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
         "machine": platform.machine(), "kernel": platform.release(),
     }
 
@@ -119,10 +128,13 @@ def open_regular(name, flags):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("file", type=Path)
+    parser.add_argument("--codec", choices=("gzip", "xz"), default="gzip")
     parser.add_argument("--level", type=int, choices=range(1, 10), default=1)
     parser.add_argument("--max-mib", type=int, default=256)
-    parser.add_argument("--keep-dir", type=Path, help="create a new directory for packed.gz and restored.bin")
+    parser.add_argument("--keep-dir", type=Path, help="create a new directory for the archive and restored.bin")
     args = parser.parse_args()
+    if platform.system() != "Linux":
+        parser.error("this measurement protocol requires Linux RSS semantics")
     if not 1 <= args.max_mib <= 512:
         parser.error("max-mib must be between 1 and 512")
     try:
@@ -132,8 +144,8 @@ def main():
                 directory = args.keep_dir
             else:
                 directory = Path(stack.enter_context(tempfile.TemporaryDirectory()))
-            print(json.dumps(measure(args.file, directory, args.level, args.max_mib * 1024**2), indent=2))
-    except (OSError, ValueError, EOFError) as exc:
+            print(json.dumps(measure(args.file, directory, args.codec, args.level, args.max_mib * 1024**2), indent=2))
+    except (OSError, ValueError, EOFError, lzma.LZMAError) as exc:
         parser.exit(1, f"round trip failed: {exc}\n")
 
 

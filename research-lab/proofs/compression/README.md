@@ -1,6 +1,6 @@
 # Stockfish 19 packaging experiment
 
-This isolated proof measures lossless, single-threaded gzip compression of two
+This isolated proof measures lossless, single-threaded gzip and xz compression of two
 Stockfish 19 release artifacts. Each restored file has the same byte count and
 SHA-256 digest as its input. The network is also embedded in the executable, so
 the two reductions describe separate packaging choices and cannot be added.
@@ -20,18 +20,42 @@ The official tag `sf_19` resolves to
 Sources: [release asset](https://github.com/official-stockfish/Stockfish/releases/download/sf_19/stockfish-linux-x86-64-universal.tar.gz)
 and [tagged network selection](https://github.com/official-stockfish/Stockfish/blob/edb0d9db6731067ec50ce619ff372b463bc4dd5d/src/evaluate.h).
 
+## Independent codec comparison
+
+A second experiment used the LZMA2 codec in an xz container with a CRC64
+checksum. Gzip controls used DEFLATE at level 1. The historical algorithm is
+unknown. Each input and codec combination ran once, sequentially in a fresh
+process, pinned to one logical CPU at niceness 10. Preset 1 bounds the scope
+of this comparison. Each compressed stream restored the exact input size and
+SHA-256, and the gzip controls reproduced both earlier compressed hashes.
+
+| Input | Codec | Packed bytes | Reduction | Pack CPU (s) | Restore CPU (s) | Peak process RSS (KiB) |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Executable | gzip 1 | 82,783,671 | 19.75% | 9.050 | 3.365 | 15,480 |
+| Executable | xz 1 | 80,003,676 | 22.44% | 18.439 | 3.605 | 24,568 |
+| NNUE | gzip 1 | 80,631,428 | 18.15% | 6.286 | 0.762 | 15,472 |
+| NNUE | xz 1 | 78,951,720 | 19.86% | 18.263 | 4.808 | 24,616 |
+
+XZ saved 2,779,995 more bytes on the executable and 1,679,708 more bytes
+on the network. These trials measured greater compression CPU and peak RSS
+with xz. Peak RSS covers the whole Python process, including buffering,
+hashing and both codec operations. The [raw records](sf19-codecs.json)
+include wall time, process CPU time, parameters and all three hashes.
+
 ## Protocol
 
-Use Linux, Python 3.8+ with zlib, and enough temporary disk space for the gzip
+Use Linux, Python 3.8+ with zlib and lzma, and enough temporary disk space for the gzip
 member and the restored file. These runs used Python 3.12.14 and zlib 1.3.2.
 Obtain the exact inputs above, then run once per artifact with a 90-second limit.
 
 ```sh
 timeout 90s python3 roundtrip.py /path/to/stockfish-linux-x86-64-universal
 timeout 90s python3 roundtrip.py /path/to/nn-1a298aa575a0.nnue
+# Select one allowed CPU on the host, then repeat for each input and codec.
+timeout 90s taskset -c 4 nice -n 10 python3 roundtrip.py /path/to/input --codec xz --level 1
 ```
 
-Pass `--keep-dir /path/to/new-dir` to retain `packed.gz` and `restored.bin`
+Pass `--keep-dir /path/to/new-dir` to retain `packed.gz` or `packed.xz` alongside `restored.bin`
 in a newly created directory. The tool reads one regular file in 1 MiB
 chunks and leaves executable permission unset on restored data. It identifies
 familiar executable, NNUE and container signatures and labels other inputs
@@ -41,7 +65,7 @@ executes or recursively extracts its input. Exit 0 indicates verified byte
 counts and SHA-256, exit 1 indicates a failed measurement and exit 2 indicates
 a usage error. A failure with `--keep-dir` can leave partial files.
 
-The output reports gzip length including framing. An empty gzip filename and
+The output reports the complete stored length including container framing. An empty gzip filename and
 a zero header timestamp remove two common sources of run-to-run variation.
 Pack and restore timings include streaming hashes and buffered file I/O.
 An independent reread hashes the restored file outside the measured restore
