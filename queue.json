@@ -110,6 +110,9 @@
     {
       "attempts": [
         {
+          "artifacts": {
+            "report": "https://github.com/ShadyF4RR/Stockfish/blob/research/reporting/research-lab/results/EXP-REPETITION-001/REPORT.md"
+          },
           "budget": {
             "cost_usd": 0.0,
             "input_tokens": 0,
@@ -117,6 +120,7 @@
             "requests": 0,
             "runner_minutes": 45
           },
+          "candidate_sha": "293da879bd27da174728cda7b5b46d8011f2a3ac",
           "checkpoints": [
             {
               "details": {
@@ -131,11 +135,23 @@
               "time": "2026-11-20T22:16:55+00:00"
             }
           ],
+          "ended_at": "2026-11-20T22:29:20+00:00",
           "expires_at": "2026-11-21T00:16:52+00:00",
           "job": "cloud-56eb3d6f00c23b433aed94-repetition",
           "lease": "8686dadd74744917bb645df0cef3f21c",
+          "next_proposals": [],
+          "outcome": "inconclusive",
           "provider": "subscription_cloud_task",
-          "started_at": "2026-11-20T22:16:52+00:00"
+          "reason": "Environment interrupted on longer clock. Verified 41 complete PGNs, 8W/27D/6L, sample +16.96 Elo. 43 finishes logged of 48 scheduled. Both engines took 2/8 eligible immediate repetitions. No promotion or public test.",
+          "receipt": "8a92e1ab595541b9410738db0136ccfdd448318ea8930dfaab097e63a30ab526",
+          "started_at": "2026-11-20T22:16:52+00:00",
+          "usage": {
+            "cost_usd": 0.0,
+            "input_tokens": 0,
+            "output_tokens": 0,
+            "requests": 0,
+            "runner_minutes": 25
+          }
         }
       ],
       "baseline": "1819b9ea37588be8adb044179fb54512f87c8249",
@@ -144,7 +160,7 @@
       "id": "EXP-CONT-000003",
       "kind": "run",
       "path": "src/search.cpp",
-      "status": "running",
+      "status": "inconclusive",
       "topic": "root-repetition-expected-score"
     }
   ],
