@@ -1,0 +1,56 @@
+{
+  "roles": [
+    "coordinator",
+    "search",
+    "evaluation",
+    "implementation",
+    "reviewer",
+    "testing"
+  ],
+  "limits": {
+    "concurrent_coding_experiments": 1,
+    "new_hypotheses_per_utc_day": 3
+  },
+  "staffing": {
+    "default": "main_agent_only",
+    "optional_subagent": null,
+    "match_execution": "non_model_worker"
+  },
+  "baseline_branch": "research/baseline",
+  "ledger_branch": "research/ledger",
+  "autonomous_execution_enabled": true,
+  "paid_api_budget_usd": 0,
+  "coding_execution": "chatgpt_subscription_codex_cloud",
+  "local_model_fallback": false,
+  "coordinator_interval_hours": 4,
+  "concurrent_chess_campaigns": 1,
+  "nnue_training_budget_hours": 0,
+  "public_fishtest_budget_hours": 0,
+  "public_fishtest_username": "ShadyF4RR",
+  "public_fishtest_max_games_approved": {
+    "stc": 0,
+    "ltc": 0
+  },
+  "research_roles": [
+    "search",
+    "evaluation"
+  ],
+  "fishtest": {
+    "submission_mode": "human_official_form",
+    "automatic_public_submission": false,
+    "max_public_experiments": 1,
+    "baseline": "current official-stockfish/Stockfish master",
+    "credentials": "user browser only",
+    "interface_review": "research-lab/fishtest/interfaces.md"
+  },
+  "task_handoff": [
+    "reviewed_control_checkout_and_sha",
+    "AGENTS.md",
+    "role_card",
+    "experiment_record",
+    "testing_profile_and_limits",
+    "assigned_candidate_worktree"
+  ],
+  "automatic_coding_enabled": false,
+  "automatic_promotion_enabled": false
+}

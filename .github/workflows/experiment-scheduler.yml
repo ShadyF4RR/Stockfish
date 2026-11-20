@@ -1,0 +1,43 @@
+name: Dispatch approved Stockfish matches
+on:
+  schedule:
+    - cron: '57 2,6,10,14,18,22 * * *'
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - .github/workflows/experiment-scheduler.yml
+      - 'research-lab/approved-matches/*.json'
+
+permissions:
+  contents: write
+concurrency:
+  group: stockfish-match-admissions
+  cancel-in-progress: false
+
+jobs:
+  dispatch:
+    if: github.repository == 'ShadyF4RR/Stockfish' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          persist-credentials: false
+      - name: Admit approved requests and release one match to a ready PC
+        env:
+          STOCKFISH_WORKER_TOKEN: ${{ github.token }}
+          QUEUE_GITHUB_TOKEN: ${{ github.token }}
+          PC_OWNER: ${{ vars.STOCKFISH_PC_OWNER }}
+        run: |
+          set -euo pipefail
+          dispatch=(python3 -I research-lab/dedicated-worker/dispatch.py)
+          "${dispatch[@]}" init > /dev/null
+          if [[ -n "$PC_OWNER" ]]; then "${dispatch[@]}" enroll-pc --owner "$PC_OWNER"; fi
+          for request in research-lab/approved-matches/*.json; do
+            "${dispatch[@]}" submit --manifest "$request"
+          done
+          python3 -I research-lab/continuous/coordinator_queue.py handoff-test \
+            --topic screen-qsearch-checkcap-001 --match EXP-QSEARCH-CHECKCAP-001 \
+            --baseline 1819b9ea37588be8adb044179fb54512f87c8249 --candidate fb5c6f82983e23b1ad0c6518960e8dc4a0c5b300
+          "${dispatch[@]}" schedule --event "$GITHUB_EVENT_NAME" --run "$GITHUB_RUN_ID" | tee -a "$GITHUB_STEP_SUMMARY"
