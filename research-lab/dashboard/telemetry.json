@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-11-20T22:13:59Z",
+  "updated_at": "2026-11-20T22:14:34Z",
   "workers": [
     {
       "id": "cloud-supervised",
-      "updated_at": "2026-11-20T22:13:59Z",
+      "updated_at": "2026-11-20T22:14:34Z",
       "offline_after_seconds": 900,
-      "status": "testing",
+      "status": "idle",
       "started_at": "2026-11-20T22:01:28Z",
       "experiment_id": "EXP-ADVERSARIAL-001",
-      "completed_games": 186,
+      "completed_games": 192,
       "planned_games": 192,
-      "remaining_games": 6,
+      "remaining_games": 0,
       "groups": [
         {
           "arm": "baseline",
@@ -353,11 +353,22 @@
           "draws": 5,
           "losses": 0,
           "abnormal_games": 0
+        },
+        {
+          "arm": "baseline",
+          "opponent": "stockfish",
+          "time_control": "3+0.03",
+          "split": "holdout",
+          "games": 6,
+          "wins": 2,
+          "draws": 3,
+          "losses": 1,
+          "abnormal_games": 0
         }
       ],
       "nps": null,
-      "cpu_percent": 46.3,
-      "ram_used_mib": 1574,
+      "cpu_percent": 5.3,
+      "ram_used_mib": 1005,
       "ram_total_mib": 18007,
       "temperature_c": null,
       "metric_scope": {
