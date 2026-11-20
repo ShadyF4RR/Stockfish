@@ -63,7 +63,18 @@
             "requests": 0,
             "runner_minutes": 110
           },
-          "checkpoints": [],
+          "checkpoints": [
+            {
+              "details": {
+                "candidate": "c72e2482c77f8eabca37550f019ed55bfb8a7b79",
+                "control_ref": "781e1b16",
+                "expected_games": 192,
+                "work": "EXP-ADVERSARIAL-001"
+              },
+              "stage": "paired-screen",
+              "time": "2026-11-20T22:06:23+00:00"
+            }
+          ],
           "expires_at": "2026-11-20T23:57:13+00:00",
           "job": "cloud-56eb3d6f00c23b433aed94-tactical",
           "lease": "c9b3e1ac28e3446681bd3841b46c635b",
