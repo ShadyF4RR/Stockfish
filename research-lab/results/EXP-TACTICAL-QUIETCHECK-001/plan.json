@@ -1,0 +1,26 @@
+{
+  "experiment_id": "EXP-TACTICAL-QUIETCHECK-001",
+  "baseline": "1819b9ea37588be8adb044179fb54512f87c8249",
+  "candidate": "c72e2482c77f8eabca37550f019ed55bfb8a7b79",
+  "hypothesis": "The existing quiet-check ordering bonus can recognize useful discovered checks and special checking moves that direct destination-square masks miss. Earlier ordering may save search when these quiet moves force a reply.",
+  "source": "src/movepick.cpp, MovePicker::generate_and_score<QUIETS>()",
+  "change": "Use Position::gives_check(m) for the existing +16384 quiet-check bonus while retaining the original static exchange safety threshold of -75.",
+  "alternative_explanation": "The added check calculation over many ordinary quiet moves may cost more than the extra ordering signal saves.",
+  "history": "7988de4a added discovered/double-check ordering to captures, and 63a2ab15 simplified capture scoring later. This experiment concerns quiet-move ordering only. It changes neither legal move generation, pruning, search extensions, network evaluation nor UCI options.",
+  "bench": {
+    "command": ["stockfish", "bench"],
+    "order": ["baseline", "candidate", "candidate", "baseline"],
+    "threads": 1,
+    "hash_mib": 16,
+    "depth": 13,
+    "cpu_affinity": 0,
+    "primary_observation": "Record deterministic node signatures, CPU and elapsed times, and NPS. An apparent slowdown needs more observations and hardware before interpretation."
+  },
+  "mechanism_probe": {
+    "position": "4k3/8/8/8/4N3/8/8/4R1K1 w - - 0 1",
+    "move": "e4g5",
+    "interpretation": "A quiet knight move uncovers rook check along the e-file. The destination square provides no direct knight check on e8. This is a diagnostic of predicate coverage, independent of strength."
+  },
+  "checks": ["compile", "UCI ready/forced legal move", "all upstream standard and Chess960 perft positions", "upstream reproducible search at 20 node budgets", "independent review"],
+  "match": "Testing agent owns the preregistered tactical-position and broad-opening paired screens. Separate suite-specific diagnostics from claims about overall playing strength. Candidate remains unpromoted and unsubmitted to Fishtest."
+}

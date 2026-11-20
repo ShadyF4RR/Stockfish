@@ -1,0 +1,21 @@
+bwrap: Only the last --chdir option will take effect
+Started game 1 of 6 (arm_candidate vs vs_stockfish)
+Started game 2 of 6 (vs_stockfish vs arm_candidate)
+Finished game 1 (arm_candidate vs vs_stockfish): 1/2-1/2 {Draw by 3-fold repetition}
+Started game 3 of 6 (arm_candidate vs vs_stockfish)
+Finished game 2 (vs_stockfish vs arm_candidate): 1/2-1/2 {Draw by 3-fold repetition}
+Started game 4 of 6 (vs_stockfish vs arm_candidate)
+Finished game 4 (vs_stockfish vs arm_candidate): 1/2-1/2 {Draw by 3-fold repetition}
+Started game 5 of 6 (arm_candidate vs vs_stockfish)
+Finished game 3 (arm_candidate vs vs_stockfish): 1/2-1/2 {Draw by insufficient mating material}
+Started game 6 of 6 (vs_stockfish vs arm_candidate)
+Finished game 5 (arm_candidate vs vs_stockfish): 1/2-1/2 {Draw by 3-fold repetition}
+Finished game 6 (vs_stockfish vs arm_candidate): 1-0 {White mates}
+--------------------------------------------------
+Results of arm_candidate vs vs_stockfish (1+0.01, 1t, 16MB, book.epd):
+Elo: -58.45 +/- 98.05, nElo: -173.72 +/- 278.00
+LOS: 11.03 %, DrawRatio: 66.67 %, PairsRatio: 0.00
+Games: 6, Wins: 0, Losses: 1, Draws: 5, Points: 2.5 (41.67 %)
+Ptnml(0-2): [0, 1, 2, 0, 0], WL/DD Ratio: 0.00
+--------------------------------------------------
+Finished match

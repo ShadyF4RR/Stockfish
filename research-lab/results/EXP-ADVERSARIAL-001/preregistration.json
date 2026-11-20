@@ -1,0 +1,346 @@
+{
+  "schema_version": 1,
+  "experiment": "EXP-ADVERSARIAL-001",
+  "baseline": {
+    "commit": "1819b9ea37588be8adb044179fb54512f87c8249",
+    "binary_sha256": "57ac1871660913d617b85887a58192cc39ebd581134e87840232a199d0280ff7",
+    "arch": "x86-64-avx2",
+    "compiler": "g++ (Debian 14.2.0-19) 14.2.0",
+    "compiler_binary_sha256": "6b3696e4dcb85e1c949c732a02befa50e3983ecf94ce7e8e58d9d503b954b79d",
+    "jobs": 4,
+    "hardware": {
+      "machine": "x86_64",
+      "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+      "kernel": "6.18.57",
+      "cpus_available": 5
+    },
+    "build_flags": {
+      "target": "build",
+      "COMP": "gcc",
+      "CXX": "g++",
+      "ARCH": "x86-64-avx2"
+    },
+    "networks": {
+      "nn-bddd9d57eb87.nnue": "bddd9d57eb87bf09a6c4e1a3b3f1cc18855c83ee45fdbe18018ac3763b56b38e"
+    }
+  },
+  "candidate": {
+    "commit": "c72e2482c77f8eabca37550f019ed55bfb8a7b79",
+    "binary_sha256": "b14133496231665034aa2a8ea75d475a05224b3f3528fb97f06ca317cecb856d",
+    "arch": "x86-64-avx2",
+    "compiler": "g++ (Debian 14.2.0-19) 14.2.0",
+    "compiler_binary_sha256": "6b3696e4dcb85e1c949c732a02befa50e3983ecf94ce7e8e58d9d503b954b79d",
+    "jobs": 2,
+    "hardware": {
+      "machine": "x86_64",
+      "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+      "kernel": "6.18.57",
+      "cpus_available": 5
+    },
+    "build_flags": {
+      "target": "build",
+      "COMP": "gcc",
+      "CXX": "g++",
+      "ARCH": "x86-64-avx2"
+    },
+    "networks": {
+      "nn-bddd9d57eb87.nnue": "bddd9d57eb87bf09a6c4e1a3b3f1cc18855c83ee45fdbe18018ac3763b56b38e"
+    }
+  },
+  "opponents": {
+    "stockfish": {
+      "source": "research/baseline",
+      "version": "1819b9ea",
+      "options": [
+        "Threads=1",
+        "Ponder=false"
+      ],
+      "sha256": "57ac1871660913d617b85887a58192cc39ebd581134e87840232a199d0280ff7"
+    },
+    "fruit": {
+      "source": "Debian fruit_2.1.dfsg-9_amd64.deb",
+      "version": "Fruit 2.1",
+      "package_sha256": "fabbe937de701f7ca91396b4bd924784a139023bdc8af4dd37508ac6ebcf72d1",
+      "options": [
+        "OwnBook=false",
+        "Ponder=false"
+      ],
+      "sha256": "620df4e146868018659741c0c6a639d51aab036ab29ceae02aa16413414deb7d"
+    },
+    "ethereal": {
+      "source": "https://github.com/AndyGrant/Ethereal",
+      "version": "V12.00",
+      "commit": "37ccbfe233ac418a49cb9a5c9f54d62b060d44ad",
+      "options": [
+        "Threads=1",
+        "Ponder=false"
+      ],
+      "sha256": "c5712fbd084ccad769d4c5ea8a1b95fc04eb563b170337060158dbba1fa18bb8"
+    },
+    "weiss": {
+      "source": "https://github.com/TerjeKir/weiss",
+      "version": "v2.0",
+      "commit": "0db49c7270f5c6286a983390a5ea2780e1e0c9f4",
+      "options": [
+        "Threads=1",
+        "NoobBook=false",
+        "OnlineSyzygy=false"
+      ],
+      "sha256": "32f3c9ff0af5dcee0782d53eb178d28d84c60c409bef91dc09a3b171bcea8c04"
+    }
+  },
+  "seed": 20261120,
+  "time_controls": [
+    "1+0.01",
+    "3+0.03"
+  ],
+  "selected_positions": {
+    "discovery": [
+      {
+        "id": "london",
+        "group": "quiet",
+        "family": "London",
+        "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6"
+      },
+      {
+        "id": "dragon",
+        "group": "tactical",
+        "family": "Sicilian",
+        "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10"
+      },
+      {
+        "id": "qgd",
+        "group": "general",
+        "family": "Queen\u2019s Gambit Declined",
+        "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7"
+      }
+    ],
+    "holdout": [
+      {
+        "id": "nimzo",
+        "group": "quiet",
+        "family": "Nimzo-Indian",
+        "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7"
+      },
+      {
+        "id": "benko",
+        "group": "tactical",
+        "family": "Benko",
+        "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8"
+      },
+      {
+        "id": "queens-indian",
+        "group": "general",
+        "family": "Queen\u2019s Indian",
+        "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7"
+      }
+    ]
+  },
+  "cells": [
+    {
+      "split": "discovery",
+      "opponent": "weiss",
+      "time_control": "1+0.01",
+      "arm": "baseline"
+    },
+    {
+      "split": "discovery",
+      "opponent": "weiss",
+      "time_control": "1+0.01",
+      "arm": "candidate"
+    },
+    {
+      "split": "discovery",
+      "opponent": "ethereal",
+      "time_control": "1+0.01",
+      "arm": "candidate"
+    },
+    {
+      "split": "discovery",
+      "opponent": "ethereal",
+      "time_control": "1+0.01",
+      "arm": "baseline"
+    },
+    {
+      "split": "discovery",
+      "opponent": "fruit",
+      "time_control": "3+0.03",
+      "arm": "baseline"
+    },
+    {
+      "split": "discovery",
+      "opponent": "fruit",
+      "time_control": "3+0.03",
+      "arm": "candidate"
+    },
+    {
+      "split": "discovery",
+      "opponent": "weiss",
+      "time_control": "3+0.03",
+      "arm": "candidate"
+    },
+    {
+      "split": "discovery",
+      "opponent": "weiss",
+      "time_control": "3+0.03",
+      "arm": "baseline"
+    },
+    {
+      "split": "discovery",
+      "opponent": "stockfish",
+      "time_control": "3+0.03",
+      "arm": "baseline"
+    },
+    {
+      "split": "discovery",
+      "opponent": "stockfish",
+      "time_control": "3+0.03",
+      "arm": "candidate"
+    },
+    {
+      "split": "discovery",
+      "opponent": "fruit",
+      "time_control": "1+0.01",
+      "arm": "candidate"
+    },
+    {
+      "split": "discovery",
+      "opponent": "fruit",
+      "time_control": "1+0.01",
+      "arm": "baseline"
+    },
+    {
+      "split": "discovery",
+      "opponent": "stockfish",
+      "time_control": "1+0.01",
+      "arm": "baseline"
+    },
+    {
+      "split": "discovery",
+      "opponent": "stockfish",
+      "time_control": "1+0.01",
+      "arm": "candidate"
+    },
+    {
+      "split": "discovery",
+      "opponent": "ethereal",
+      "time_control": "3+0.03",
+      "arm": "candidate"
+    },
+    {
+      "split": "discovery",
+      "opponent": "ethereal",
+      "time_control": "3+0.03",
+      "arm": "baseline"
+    },
+    {
+      "split": "holdout",
+      "opponent": "fruit",
+      "time_control": "3+0.03",
+      "arm": "baseline"
+    },
+    {
+      "split": "holdout",
+      "opponent": "fruit",
+      "time_control": "3+0.03",
+      "arm": "candidate"
+    },
+    {
+      "split": "holdout",
+      "opponent": "weiss",
+      "time_control": "1+0.01",
+      "arm": "candidate"
+    },
+    {
+      "split": "holdout",
+      "opponent": "weiss",
+      "time_control": "1+0.01",
+      "arm": "baseline"
+    },
+    {
+      "split": "holdout",
+      "opponent": "fruit",
+      "time_control": "1+0.01",
+      "arm": "baseline"
+    },
+    {
+      "split": "holdout",
+      "opponent": "fruit",
+      "time_control": "1+0.01",
+      "arm": "candidate"
+    },
+    {
+      "split": "holdout",
+      "opponent": "weiss",
+      "time_control": "3+0.03",
+      "arm": "candidate"
+    },
+    {
+      "split": "holdout",
+      "opponent": "weiss",
+      "time_control": "3+0.03",
+      "arm": "baseline"
+    },
+    {
+      "split": "holdout",
+      "opponent": "ethereal",
+      "time_control": "3+0.03",
+      "arm": "baseline"
+    },
+    {
+      "split": "holdout",
+      "opponent": "ethereal",
+      "time_control": "3+0.03",
+      "arm": "candidate"
+    },
+    {
+      "split": "holdout",
+      "opponent": "ethereal",
+      "time_control": "1+0.01",
+      "arm": "candidate"
+    },
+    {
+      "split": "holdout",
+      "opponent": "ethereal",
+      "time_control": "1+0.01",
+      "arm": "baseline"
+    },
+    {
+      "split": "holdout",
+      "opponent": "stockfish",
+      "time_control": "1+0.01",
+      "arm": "baseline"
+    },
+    {
+      "split": "holdout",
+      "opponent": "stockfish",
+      "time_control": "1+0.01",
+      "arm": "candidate"
+    },
+    {
+      "split": "holdout",
+      "opponent": "stockfish",
+      "time_control": "3+0.03",
+      "arm": "candidate"
+    },
+    {
+      "split": "holdout",
+      "opponent": "stockfish",
+      "time_control": "3+0.03",
+      "arm": "baseline"
+    }
+  ],
+  "planned_games": 192,
+  "corpus_sha256": "e8ddf0965834cca649488413fc9b8437669c715d8f1c8fa74a64578fba106238",
+  "analysis_plan_sha256": "3a3f84ca9859dc83d4afd94ffadcb42f7a42add5c18c5b43ffae4cb4070d495f",
+  "fastchess_revision": "894616028492ae6114835195f14a899f6fa237d3",
+  "fastchess_sha256": "a95c06372a4e74c28b11148f4ad252502e2db30fe7fb7d241abe4603ced47367",
+  "hash_mib": 16,
+  "threads_per_engine": 1,
+  "concurrency": 2,
+  "timemargin_ms": 100,
+  "wall_budget_seconds": 1080,
+  "cell_budget_seconds": 120,
+  "invalid_policy": "Keep all observed failures. No retries, substitutes or directional conclusions from incomplete cells.",
+  "bounds": "Fixed seeds, allocation and matched openings/colors; family-clustered intervals in the preregistered analysis plan."
+}

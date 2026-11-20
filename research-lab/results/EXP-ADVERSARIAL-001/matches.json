@@ -1,0 +1,2618 @@
+{
+  "schema_version": 1,
+  "experiment": "EXP-ADVERSARIAL-001",
+  "baseline": {
+    "commit": "1819b9ea37588be8adb044179fb54512f87c8249",
+    "binary_sha256": "57ac1871660913d617b85887a58192cc39ebd581134e87840232a199d0280ff7",
+    "arch": "x86-64-avx2",
+    "compiler": "g++ (Debian 14.2.0-19) 14.2.0",
+    "compiler_binary_sha256": "6b3696e4dcb85e1c949c732a02befa50e3983ecf94ce7e8e58d9d503b954b79d",
+    "jobs": 4,
+    "hardware": {
+      "machine": "x86_64",
+      "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+      "kernel": "6.18.57",
+      "cpus_available": 5
+    },
+    "build_flags": {
+      "target": "build",
+      "COMP": "gcc",
+      "CXX": "g++",
+      "ARCH": "x86-64-avx2"
+    },
+    "networks": {
+      "nn-bddd9d57eb87.nnue": "bddd9d57eb87bf09a6c4e1a3b3f1cc18855c83ee45fdbe18018ac3763b56b38e"
+    }
+  },
+  "candidate": {
+    "commit": "c72e2482c77f8eabca37550f019ed55bfb8a7b79",
+    "binary_sha256": "b14133496231665034aa2a8ea75d475a05224b3f3528fb97f06ca317cecb856d",
+    "arch": "x86-64-avx2",
+    "compiler": "g++ (Debian 14.2.0-19) 14.2.0",
+    "compiler_binary_sha256": "6b3696e4dcb85e1c949c732a02befa50e3983ecf94ce7e8e58d9d503b954b79d",
+    "jobs": 2,
+    "hardware": {
+      "machine": "x86_64",
+      "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+      "kernel": "6.18.57",
+      "cpus_available": 5
+    },
+    "build_flags": {
+      "target": "build",
+      "COMP": "gcc",
+      "CXX": "g++",
+      "ARCH": "x86-64-avx2"
+    },
+    "networks": {
+      "nn-bddd9d57eb87.nnue": "bddd9d57eb87bf09a6c4e1a3b3f1cc18855c83ee45fdbe18018ac3763b56b38e"
+    }
+  },
+  "opponents": {
+    "stockfish": {
+      "source": "research/baseline",
+      "version": "1819b9ea",
+      "options": [
+        "Threads=1",
+        "Ponder=false"
+      ],
+      "sha256": "57ac1871660913d617b85887a58192cc39ebd581134e87840232a199d0280ff7"
+    },
+    "fruit": {
+      "source": "Debian fruit_2.1.dfsg-9_amd64.deb",
+      "version": "Fruit 2.1",
+      "package_sha256": "fabbe937de701f7ca91396b4bd924784a139023bdc8af4dd37508ac6ebcf72d1",
+      "options": [
+        "OwnBook=false",
+        "Ponder=false"
+      ],
+      "sha256": "620df4e146868018659741c0c6a639d51aab036ab29ceae02aa16413414deb7d"
+    },
+    "ethereal": {
+      "source": "https://github.com/AndyGrant/Ethereal",
+      "version": "V12.00",
+      "commit": "37ccbfe233ac418a49cb9a5c9f54d62b060d44ad",
+      "options": [
+        "Threads=1",
+        "Ponder=false"
+      ],
+      "sha256": "c5712fbd084ccad769d4c5ea8a1b95fc04eb563b170337060158dbba1fa18bb8"
+    },
+    "weiss": {
+      "source": "https://github.com/TerjeKir/weiss",
+      "version": "v2.0",
+      "commit": "0db49c7270f5c6286a983390a5ea2780e1e0c9f4",
+      "options": [
+        "Threads=1",
+        "NoobBook=false",
+        "OnlineSyzygy=false"
+      ],
+      "sha256": "32f3c9ff0af5dcee0782d53eb178d28d84c60c409bef91dc09a3b171bcea8c04"
+    }
+  },
+  "time_controls": [
+    "1+0.01",
+    "3+0.03"
+  ],
+  "preregistration_sha256": "0880997250bdc15791335f49973390424590fa5f52eca5b9d343d986abd9f7d0",
+  "corpus_sha256": "e8ddf0965834cca649488413fc9b8437669c715d8f1c8fa74a64578fba106238",
+  "admission": {
+    "concurrency": 2,
+    "threads": 1,
+    "cpu_ids": [
+      0,
+      1
+    ],
+    "process_limit_mib": 639,
+    "peak_budget_mib": 3195
+  },
+  "runs": [
+    {
+      "split": "discovery",
+      "opponent": "weiss",
+      "time_control": "1+0.01",
+      "arm": "baseline",
+      "pgn": "cells/01-discovery-weiss-baseline/games.pgn",
+      "pgn_sha256": "5754550fce90cb47a11c30c505ad1e9af41afe83bcf203fbf1753ebad07cb461",
+      "status": "complete",
+      "games": [
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        }
+      ],
+      "wall_seconds": 11.063938160000362
+    },
+    {
+      "split": "discovery",
+      "opponent": "weiss",
+      "time_control": "1+0.01",
+      "arm": "candidate",
+      "pgn": "cells/02-discovery-weiss-candidate/games.pgn",
+      "pgn_sha256": "76d255924b8cb1fcab0d5d79b0689e26a328f8495963eb43d89408469eb42bbc",
+      "status": "complete",
+      "games": [
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "black",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        }
+      ],
+      "wall_seconds": 12.064701295000305
+    },
+    {
+      "split": "discovery",
+      "opponent": "ethereal",
+      "time_control": "1+0.01",
+      "arm": "candidate",
+      "pgn": "cells/03-discovery-ethereal-candidate/games.pgn",
+      "pgn_sha256": "f4f2c0560c66247d79899be5f984a906da7f6006f6ab1496564106ae639ce09d",
+      "status": "invalid",
+      "games": [
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        }
+      ],
+      "reason": "missing game or abnormal termination",
+      "wall_seconds": 28.11493798200081
+    },
+    {
+      "split": "discovery",
+      "opponent": "ethereal",
+      "time_control": "1+0.01",
+      "arm": "baseline",
+      "pgn": "cells/04-discovery-ethereal-baseline/games.pgn",
+      "pgn_sha256": "ebbb7187dce5bd7c02a135bcb69ce625a66fee0c7ec31a18766a7a1a2774585d",
+      "status": "invalid",
+      "games": [
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        }
+      ],
+      "reason": "missing game or abnormal termination",
+      "wall_seconds": 28.07674590299939
+    },
+    {
+      "split": "discovery",
+      "opponent": "fruit",
+      "time_control": "3+0.03",
+      "arm": "baseline",
+      "pgn": "cells/05-discovery-fruit-baseline/games.pgn",
+      "pgn_sha256": "94ceff0b1ef3decc339d74877a52c1e054802f2b21f09a324030660739ceb8e3",
+      "status": "complete",
+      "games": [
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        }
+      ],
+      "wall_seconds": 27.078398233999906
+    },
+    {
+      "split": "discovery",
+      "opponent": "fruit",
+      "time_control": "3+0.03",
+      "arm": "candidate",
+      "pgn": "cells/06-discovery-fruit-candidate/games.pgn",
+      "pgn_sha256": "d9610bcd8d9e3f5ecc2f694148e65ad989cb6127e402667dd13d3e412c657e07",
+      "status": "complete",
+      "games": [
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        }
+      ],
+      "wall_seconds": 29.105112792
+    },
+    {
+      "split": "discovery",
+      "opponent": "weiss",
+      "time_control": "3+0.03",
+      "arm": "candidate",
+      "pgn": "cells/07-discovery-weiss-candidate/games.pgn",
+      "pgn_sha256": "49ac321a9d757084a946626d14e3c7bbbc5aff0e0e55f57cd37c92781c7f7b3a",
+      "status": "invalid",
+      "games": [
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        }
+      ],
+      "reason": "missing game or abnormal termination",
+      "wall_seconds": 30.105634374000147
+    },
+    {
+      "split": "discovery",
+      "opponent": "weiss",
+      "time_control": "3+0.03",
+      "arm": "baseline",
+      "pgn": "cells/08-discovery-weiss-baseline/games.pgn",
+      "pgn_sha256": "29fec73014e530937129ee6981411a021e5d0b78717335e5861bb5e59a2b3566",
+      "status": "complete",
+      "games": [
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        }
+      ],
+      "wall_seconds": 33.070235806999335
+    },
+    {
+      "split": "discovery",
+      "opponent": "stockfish",
+      "time_control": "3+0.03",
+      "arm": "baseline",
+      "pgn": "cells/09-discovery-stockfish-baseline/games.pgn",
+      "pgn_sha256": "af61b86f0c476e140dfdc594b4d4ffa17287187646021cf6edb6f9e72593717d",
+      "status": "complete",
+      "games": [
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "black",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "black",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        }
+      ],
+      "wall_seconds": 28.091643132000172
+    },
+    {
+      "split": "discovery",
+      "opponent": "stockfish",
+      "time_control": "3+0.03",
+      "arm": "candidate",
+      "pgn": "cells/10-discovery-stockfish-candidate/games.pgn",
+      "pgn_sha256": "6e637b32531f63f862e7f5b6e8af26c9d00829117de26e6543581c8114db5e75",
+      "status": "complete",
+      "games": [
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "black",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "black",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        }
+      ],
+      "wall_seconds": 29.10512757700053
+    },
+    {
+      "split": "discovery",
+      "opponent": "fruit",
+      "time_control": "1+0.01",
+      "arm": "candidate",
+      "pgn": "cells/11-discovery-fruit-candidate/games.pgn",
+      "pgn_sha256": "69220c82242bad563a7c0e42304151e6076ec039492dad6ddb188055098d8dba",
+      "status": "complete",
+      "games": [
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        }
+      ],
+      "wall_seconds": 8.06670583399955
+    },
+    {
+      "split": "discovery",
+      "opponent": "fruit",
+      "time_control": "1+0.01",
+      "arm": "baseline",
+      "pgn": "cells/12-discovery-fruit-baseline/games.pgn",
+      "pgn_sha256": "473e71dcc3a25ad8f43858284b7c9c9d25197450754a6b645a2c492709542f7b",
+      "status": "complete",
+      "games": [
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        }
+      ],
+      "wall_seconds": 7.0549556109999685
+    },
+    {
+      "split": "discovery",
+      "opponent": "stockfish",
+      "time_control": "1+0.01",
+      "arm": "baseline",
+      "pgn": "cells/13-discovery-stockfish-baseline/games.pgn",
+      "pgn_sha256": "f51dfb839f47ca1384d6100ef6ae08c828c5b64c7546b655f800ed697282f212",
+      "status": "complete",
+      "games": [
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "black",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "black",
+          "result": "1-0",
+          "engine_score": 0,
+          "termination": "normal"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        }
+      ],
+      "wall_seconds": 10.061855525000283
+    },
+    {
+      "split": "discovery",
+      "opponent": "stockfish",
+      "time_control": "1+0.01",
+      "arm": "candidate",
+      "pgn": "cells/14-discovery-stockfish-candidate/games.pgn",
+      "pgn_sha256": "cc2c270e3b658a1baa9a0b5c9fee493ab241a2617c42dc546cf4dd0368dce44d",
+      "status": "complete",
+      "games": [
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "black",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "black",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        }
+      ],
+      "wall_seconds": 10.046548420000363
+    },
+    {
+      "split": "discovery",
+      "opponent": "ethereal",
+      "time_control": "3+0.03",
+      "arm": "candidate",
+      "pgn": "cells/15-discovery-ethereal-candidate/games.pgn",
+      "pgn_sha256": "7baf2eb99bab333955a4e3479ab7d47ce53f54c74632a6e0da71154d025d2971",
+      "status": "invalid",
+      "games": [
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        }
+      ],
+      "reason": "missing game or abnormal termination",
+      "wall_seconds": 50.111120839999785
+    },
+    {
+      "split": "discovery",
+      "opponent": "ethereal",
+      "time_control": "3+0.03",
+      "arm": "baseline",
+      "pgn": "cells/16-discovery-ethereal-baseline/games.pgn",
+      "pgn_sha256": "2ceab5fd950f9d85189ed17ba0c2cdb1add81e93b9bc478526a8c448f44fed52",
+      "status": "invalid",
+      "games": [
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "london",
+          "family": "London",
+          "group": "quiet",
+          "fen": "r1bqkb1r/pp3ppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R b KQkq - 1 6",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        },
+        {
+          "position_id": "dragon",
+          "family": "Sicilian",
+          "group": "tactical",
+          "fen": "r1bq1rk1/pp2ppbp/2n2np1/3p4/3NP3/2N1BP2/PPPQ2PP/2KR1B1R w - - 0 10",
+          "round": 2,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        },
+        {
+          "position_id": "qgd",
+          "family": "Queen\u2019s Gambit Declined",
+          "group": "general",
+          "fen": "r1bq1rk1/pppnbppp/4pn2/3p2B1/2PP4/2N1PN2/PP3PPP/R2QKB1R w KQ - 3 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        }
+      ],
+      "reason": "missing game or abnormal termination",
+      "wall_seconds": 50.125345654999364
+    },
+    {
+      "split": "holdout",
+      "opponent": "fruit",
+      "time_control": "3+0.03",
+      "arm": "baseline",
+      "pgn": "cells/17-holdout-fruit-baseline/games.pgn",
+      "pgn_sha256": "b50123901f916052383ee56912f7c9399dc432f44ddeee38cbcd4839c2987101",
+      "status": "complete",
+      "games": [
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        }
+      ],
+      "wall_seconds": 23.050160677999884
+    },
+    {
+      "split": "holdout",
+      "opponent": "fruit",
+      "time_control": "3+0.03",
+      "arm": "candidate",
+      "pgn": "cells/18-holdout-fruit-candidate/games.pgn",
+      "pgn_sha256": "f69da501d24f7b8a288f7bfe21e0f368d1fba8129b2a765683f46367e802a6ae",
+      "status": "complete",
+      "games": [
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        }
+      ],
+      "wall_seconds": 28.08595000599962
+    },
+    {
+      "split": "holdout",
+      "opponent": "weiss",
+      "time_control": "1+0.01",
+      "arm": "candidate",
+      "pgn": "cells/19-holdout-weiss-candidate/games.pgn",
+      "pgn_sha256": "545dd4c5047207fb4882a95e961aaf41cbfb2358d06d9b8682a23f88770be0d3",
+      "status": "complete",
+      "games": [
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "black",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        }
+      ],
+      "wall_seconds": 13.041799131000516
+    },
+    {
+      "split": "holdout",
+      "opponent": "weiss",
+      "time_control": "1+0.01",
+      "arm": "baseline",
+      "pgn": "cells/20-holdout-weiss-baseline/games.pgn",
+      "pgn_sha256": "9a38eeadbf32c448d8badde2bf5393225f70c56e08639d3ec0da56fa58085db7",
+      "status": "complete",
+      "games": [
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        }
+      ],
+      "wall_seconds": 12.104694207999273
+    },
+    {
+      "split": "holdout",
+      "opponent": "fruit",
+      "time_control": "1+0.01",
+      "arm": "baseline",
+      "pgn": "cells/21-holdout-fruit-baseline/games.pgn",
+      "pgn_sha256": "fc72b8bb4d46c9ce6ea065564b7aac67145c33b08e35f310b5f53aabbbb2248b",
+      "status": "complete",
+      "games": [
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        }
+      ],
+      "wall_seconds": 7.1254322759996285
+    },
+    {
+      "split": "holdout",
+      "opponent": "fruit",
+      "time_control": "1+0.01",
+      "arm": "candidate",
+      "pgn": "cells/22-holdout-fruit-candidate/games.pgn",
+      "pgn_sha256": "42b2f6547aa9339f108d6f1cb0bf2e094b8da8426ad46dd4286620261bf313de",
+      "status": "complete",
+      "games": [
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        }
+      ],
+      "wall_seconds": 7.060180481000316
+    },
+    {
+      "split": "holdout",
+      "opponent": "weiss",
+      "time_control": "3+0.03",
+      "arm": "candidate",
+      "pgn": "cells/23-holdout-weiss-candidate/games.pgn",
+      "pgn_sha256": "099d481adf201488f484c8010465eb0d53f602106c26b568bf965c53de3400e1",
+      "status": "complete",
+      "games": [
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        }
+      ],
+      "wall_seconds": 27.0707835230005
+    },
+    {
+      "split": "holdout",
+      "opponent": "weiss",
+      "time_control": "3+0.03",
+      "arm": "baseline",
+      "pgn": "cells/24-holdout-weiss-baseline/games.pgn",
+      "pgn_sha256": "1c23e4bd0fbb4716968f3ee3a3b4158cbc3ba4b24f800ff4704ecd53c009e648",
+      "status": "complete",
+      "games": [
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        }
+      ],
+      "wall_seconds": 31.053896503000033
+    },
+    {
+      "split": "holdout",
+      "opponent": "ethereal",
+      "time_control": "3+0.03",
+      "arm": "baseline",
+      "pgn": "cells/25-holdout-ethereal-baseline/games.pgn",
+      "pgn_sha256": "635bc70d9ff33628643ae4e4fcb5ff0c40ec94173531390ccb11aa17014f55c3",
+      "status": "invalid",
+      "games": [
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        }
+      ],
+      "reason": "missing game or abnormal termination",
+      "wall_seconds": 40.06849157799934
+    },
+    {
+      "split": "holdout",
+      "opponent": "ethereal",
+      "time_control": "3+0.03",
+      "arm": "candidate",
+      "pgn": "cells/26-holdout-ethereal-candidate/games.pgn",
+      "pgn_sha256": "e0643adcba720a6541376ba701fa56b440fd2617321e9454abb79028f689789a",
+      "status": "invalid",
+      "games": [
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        }
+      ],
+      "reason": "missing game or abnormal termination",
+      "wall_seconds": 40.05997625700002
+    },
+    {
+      "split": "holdout",
+      "opponent": "ethereal",
+      "time_control": "1+0.01",
+      "arm": "candidate",
+      "pgn": "cells/27-holdout-ethereal-candidate/games.pgn",
+      "pgn_sha256": "2a76b8d1eba9dce1bda7a86e3826b4ae6c7800c6d80dc23a07eb082a97b5eeae",
+      "status": "invalid",
+      "games": [
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        }
+      ],
+      "reason": "missing game or abnormal termination",
+      "wall_seconds": 28.101605094999286
+    },
+    {
+      "split": "holdout",
+      "opponent": "ethereal",
+      "time_control": "1+0.01",
+      "arm": "baseline",
+      "pgn": "cells/28-holdout-ethereal-baseline/games.pgn",
+      "pgn_sha256": "19cd258d505782a4399f46412731b5ba04070e990df3d040fbd98f1cf0c547cb",
+      "status": "invalid",
+      "games": [
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "0-1",
+          "engine_score": 1,
+          "termination": "time forfeit"
+        }
+      ],
+      "reason": "missing game or abnormal termination",
+      "wall_seconds": 28.0485585790002
+    },
+    {
+      "split": "holdout",
+      "opponent": "stockfish",
+      "time_control": "1+0.01",
+      "arm": "baseline",
+      "pgn": "cells/29-holdout-stockfish-baseline/games.pgn",
+      "pgn_sha256": "464b221467f73e0bfa29d4ae6c13ecb613fcd5eef20eef649bef7cdc3599d850",
+      "status": "complete",
+      "games": [
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "black",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "black",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        }
+      ],
+      "wall_seconds": 11.146580143999927
+    },
+    {
+      "split": "holdout",
+      "opponent": "stockfish",
+      "time_control": "1+0.01",
+      "arm": "candidate",
+      "pgn": "cells/30-holdout-stockfish-candidate/games.pgn",
+      "pgn_sha256": "ad333396c0ca0dcfe87b8eca22a2b87eeec5fe780c2c9e8a7ea2707151bbc054",
+      "status": "complete",
+      "games": [
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "black",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "black",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "1-0",
+          "engine_score": 0,
+          "termination": "normal"
+        }
+      ],
+      "wall_seconds": 9.046395125000345
+    },
+    {
+      "split": "holdout",
+      "opponent": "stockfish",
+      "time_control": "3+0.03",
+      "arm": "candidate",
+      "pgn": "cells/31-holdout-stockfish-candidate/games.pgn",
+      "pgn_sha256": "9da4413b89eec09f667a284ef2be1a8d1b593f579f1ef5f664900fd19438c3e0",
+      "status": "complete",
+      "games": [
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "black",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "black",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        }
+      ],
+      "wall_seconds": 27.051071163000415
+    },
+    {
+      "split": "holdout",
+      "opponent": "stockfish",
+      "time_control": "3+0.03",
+      "arm": "baseline",
+      "pgn": "cells/32-holdout-stockfish-baseline/games.pgn",
+      "pgn_sha256": "7b0cdead86630cec31c02bf84dad02b86d2d48679b86e4f208cd28f5d77909aa",
+      "status": "complete",
+      "games": [
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "white",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "nimzo",
+          "family": "Nimzo-Indian",
+          "group": "quiet",
+          "fen": "rnbq1rk1/pp3ppp/4pn2/2pp4/1bPP4/2NBPN2/PP3PPP/R1BQ1RK1 b - - 1 7",
+          "round": 1,
+          "engine_color": "black",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        },
+        {
+          "position_id": "benko",
+          "family": "Benko",
+          "group": "tactical",
+          "fen": "rn1qkb1r/4pppp/3p1n2/2pP4/4P3/2N5/PP3PPP/R1BQKbNR w KQkq - 0 8",
+          "round": 2,
+          "engine_color": "black",
+          "result": "1-0",
+          "engine_score": 0,
+          "termination": "normal"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "black",
+          "result": "1/2-1/2",
+          "engine_score": 0.5,
+          "termination": "normal"
+        },
+        {
+          "position_id": "queens-indian",
+          "family": "Queen\u2019s Indian",
+          "group": "general",
+          "fen": "rn1q1rk1/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 w - - 5 7",
+          "round": 3,
+          "engine_color": "white",
+          "result": "1-0",
+          "engine_score": 1,
+          "termination": "normal"
+        }
+      ],
+      "wall_seconds": 31.077038789000653
+    }
+  ],
+  "status": "incomplete",
+  "planned_games": 192,
+  "wall_seconds": 754.6818592950003
+}

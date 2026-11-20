@@ -7,3 +7,5 @@ Write a proposal for the coordinator with the baseline SHA, source symbol, one p
 For a pinned candidate, use the [handoff envelope](coordinator.md#structured-handoffs) and the role `search`. Summarize whether the patch still tests the proposed mechanism. Link any diagnostic output separately from game outcomes. Leave the strength decision to the statistical testing agent.
 
 For compression research, identify which code executes on download, process start and each search. Compare a distribution archive with an integrated decoder. Document the specific path by which a memory or execution-time change could affect clock-based play. Coordinate with the evaluation researcher on any decode performed while evaluating positions.
+
+For unusual openings, tactical sacrifices, opponent error rates and horizon sensitivity, use the [adversarial research role card](adversarial.md).

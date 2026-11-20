@@ -23,6 +23,9 @@
   "public_fishtest_budget_hours": 0,
   "public_fishtest_username": "ShadyF4RR",
   "public_fishtest_max_games_approved": {"stc": 0, "ltc": 0},
+  "specializations": {
+    "adversarial_opening_and_tactical_research": {"role": "search", "guide": "research-lab/agents/adversarial.md", "upstream_track": "general_strength_only"}
+  },
   "research_roles": [
     "search",
     "evaluation"
