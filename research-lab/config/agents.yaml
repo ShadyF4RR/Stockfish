@@ -19,6 +19,7 @@
   "nnue_training_budget_hours": 0,
   "public_fishtest_budget_hours": 0,
   "public_fishtest_username": null,
+  "public_fishtest_max_games_approved": {"stc": 0, "ltc": 0},
   "research_roles": [
     "search",
     "evaluation",

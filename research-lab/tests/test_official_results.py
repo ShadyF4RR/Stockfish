@@ -85,6 +85,24 @@ class OfficialResultTest(unittest.TestCase):
             with self.assertRaises(ValueError):
                 official.inspect_run(RUN_ID, packet)
 
+    def test_filtered_history_get(self):
+        path = "/api/finished_runs?page=10&username=Ann+%26+Jo&timestamp=1795200000"
+        with patch("urllib.request.build_opener") as opener:
+            response = opener.return_value.open.return_value.__enter__.return_value
+            response.status = 200
+            response.geturl.return_value = official.HOST + path
+            response.headers.get_content_type.return_value = "application/json"
+            response.read.return_value = b"{}"
+            self.assertEqual(official.fetch_json(path), {})
+            request = opener.return_value.open.call_args.args[0]
+            self.assertEqual(request.get_method(), "GET")
+            self.assertEqual(request.full_url, official.HOST + path)
+        for invalid in (path + "&success_only=1", path.replace("page=10", "page=11"),
+                        path.replace("Ann+%26+Jo", ""), path.replace("Ann+%26+Jo", "invalid%2"),
+                        path.replace("1795200000", "179520000")):
+            with self.subTest(path=invalid), self.assertRaises(ValueError):
+                official.fetch_json(invalid)
+
     def test_endpoints_and_missing_identity(self):
         for path in ["https://other.example/", "//other.example/api/active_runs",
                      "/api/stop_run", "/api/active_runs?redirect=https://other.example"]:

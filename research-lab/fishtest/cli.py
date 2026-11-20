@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Prepare and monitor standard Fishtest SPRTs. All service requests are read-only."""
 import argparse
+from datetime import datetime
 import json
 import os
 from pathlib import Path
@@ -8,11 +9,12 @@ import re
 import subprocess
 import sys
 import time
+from urllib.parse import urlencode
 
 LAB = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(LAB / 'scripts'))
 import experiment as ledger
-from local_evidence import local_evidence, require
+from local_evidence import local_evidence, require, verify_review
 from official_results import fetch_json, inspect_run
 
 OFFICIAL = 'https://github.com/official-stockfish/Stockfish'
@@ -78,6 +80,29 @@ def inspect_duplicates(packet, pages):
             'matching_pair_and_tc': duplicates, 'similar_description_or_branch': related}
 
 
+def reconcile_reservation(state, pages):
+    packet = state['packet']
+    timestamp = datetime.fromisoformat(state['authorizations'][-1]['time_utc'])
+    # Include a day before the claim to tolerate clock skew.
+    since = int(timestamp.timestamp()) - 86400
+    active = fetch_json('/api/active_runs')
+    require(all(run['args']['username'] != packet['username'] and
+                run['args']['tests_repo'].rstrip('/').casefold() != FORK.casefold()
+                for run in active.values()), 'the account or fork has active runs')
+    for page in range(1, pages + 1):
+        query = urlencode({'page': page, 'username': packet['username'], 'timestamp': since})
+        finished = fetch_json('/api/finished_runs?' + query)
+        for run in finished.values():
+            args = run['args']
+            require(args['username'] == packet['username'], 'filtered account history returned another user')
+            require((args['resolved_base'], args['resolved_new'], args['tc']) !=
+                    (packet['base_sha'], packet['candidate_sha'], packet['tc']),
+                    'possible submitted run found; reconcile and attach it')
+        if len(finished) < 50:
+            return
+    raise ValueError('history scan incomplete; retain reservation until account history is reconciled')
+
+
 def patch_id(base, head):
     diff = subprocess.check_output(['git', '-C', str(LAB.parent), 'diff', '--no-ext-diff', '--binary', base, head])
     return subprocess.check_output(['git', 'patch-id', '--stable'], input=diff).decode().split()[0]
@@ -86,6 +111,8 @@ def patch_id(base, head):
 def gate_public_slot(record, packet, args):
     require(ledger.CONFIG.get('public_fishtest_username') == packet['username'],
             'owner-approved public Fishtest account must match this packet')
+    require(ledger.CONFIG.get('public_fishtest_max_games_approved', {}).get(packet['stage'], 0)
+            >= packet['server_sprt_game_limit'], 'owner must approve the full server-enforced stage game ceiling')
     hours = ledger.CONFIG['public_fishtest_budget_hours']
     require(hours > 0 and 0 < args.hours <= hours, 'owner-approved public compute allocation is insufficient')
     verify_refs(packet)
@@ -129,15 +156,25 @@ def advance(record, state):
     if outcome['status'] != 'passed':
         state['status'] = outcome['status']
         return
+    if record['status'] != 'screened' or not same_pins(record, state['packet']):
+        state['status'] = 'archived_locally'
+        return
     if stage == 'stc':
         state['packet'] = make_packet(record, state['local'], 'ltc')
         state['status'] = 'prepared'
     else:
         earlier = inspect_run(state['runs']['stc']['run_id'], make_packet(record, state['local'], 'stc'))
-        require(earlier['status'] == 'passed', 'STC is no longer an accepted official run')
         state['runs']['stc'] = earlier
+        if earlier['status'] != 'passed':
+            state['status'] = 'stc_no_longer_passed'
+            return
+        verify_review(record)
         state['upstream_pr_body'] = upstream_body(record, state)
         state['status'] = 'pr_prepared'
+
+
+def same_pins(record, packet):
+    return (record.get('baseline_commit'), record.get('candidate_commit')) == (packet['base_sha'], packet['candidate_sha'])
 
 
 def update(record, args):
@@ -150,7 +187,6 @@ def update(record, args):
         ledger.git('merge-base', '--is-ancestor', evidence['base_sha'], evidence['candidate_sha'])
         paths = ledger.git('diff', '--name-only', evidence['base_sha'], evidence['candidate_sha']).splitlines()
         require(paths and all(p.startswith('src/') and p != 'src/Makefile' for p in paths), 'expected a focused engine patch')
-        require(re.fullmatch(r'[\w .-]{2,64}', args.username), 'invalid public Fishtest account name')
         evidence['username'] = args.username
         packet = make_packet(record, evidence, 'stc')
         verify_refs(packet)
@@ -159,6 +195,8 @@ def update(record, args):
                           'explanation': args.explanation}
     elif args.action == 'reserve':
         require(state and state['status'] == 'prepared', 'stage has no reservable packet')
+        require(same_pins(record, state['packet']), 'experiment pins changed since preparation')
+        verify_review(record)
         checks = gate_public_slot(record, state['packet'], args)
         state['status'] = 'reserved'
         state.setdefault('authorizations', []).append({
@@ -168,9 +206,8 @@ def update(record, args):
             'approved_server_cap_and_current_rules': True})
     elif args.action == 'release':
         require(state and state['status'] == 'reserved', 'only an unsubmitted reservation can be released')
-        checks = inspect_duplicates(state['packet'], args.pages)
-        require(not checks['active_account_or_fork'] and not checks['matching_pair_and_tc'],
-                f'a possible public run exists: {checks}')
+        require(args.never_submitted, 'an uncertain submission must retain its reservation')
+        reconcile_reservation(state, args.pages)
         state['status'] = 'prepared'
         state['authorizations'][-1]['released'] = True
         state.setdefault('releases', []).append({'time_utc': ledger.now(), 'reconciliation': args.reason})
@@ -211,6 +248,7 @@ def parser():
             sub.add_argument('--related-review', type=ledger.nonempty)
             sub.add_argument('--approved-server-cap-and-rules', action='store_true', required=True)
         if name == 'release':
+            sub.add_argument('--never-submitted', action='store_true', required=True)
             sub.add_argument('--reason', required=True, type=ledger.nonempty)
         if name == 'attach':
             sub.add_argument('run')
@@ -223,10 +261,13 @@ def parser():
 def main():
     args = parser().parse_args()
     if args.action in ('show', 'upstream-pr'):
-        state = ledger.load_record(args.id).get(PUBLIC)
+        record = ledger.load_record(args.id)
+        state = record.get(PUBLIC)
         require(state, 'no prepared packet')
         if args.action == 'upstream-pr':
             require(state['status'] == 'pr_prepared', 'official STC and LTC have not both passed')
+            require(same_pins(record, state['packet']), 'experiment pins changed after drafting')
+            verify_review(record)
             print(state['upstream_pr_body'], end='')
         else:
             print(json.dumps(state, indent=2))

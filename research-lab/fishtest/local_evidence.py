@@ -31,7 +31,7 @@ def inspect_engine(directory, commit):
     return build, signature
 
 
-def local_evidence(record, base_dir, new_dir, match_dir, book, rationale):
+def verify_review(record):
     require(record['status'] == 'screened', 'requires a screened experiment record')
     review = record['evidence'].get('review')
     require(isinstance(review, dict) and review.get('verdict') == 'approved'
@@ -41,6 +41,18 @@ def local_evidence(record, base_dir, new_dir, match_dir, book, rationale):
                 item['role'] == 'reviewer' and item['candidate_commit'] == record['candidate_commit']
                 and item['evidence'].get('review') == review for item in record['reports']),
             'an independent approving review for this candidate, without unresolved defects, is required')
+    implementers = set()
+    for item in record['reports']:
+        if item['role'] == 'implementation' and item['candidate_commit'] == record['candidate_commit']:
+            build = item['evidence'].get('build_configuration')
+            if isinstance(build, dict) and isinstance(build.get('implementer'), str) and build['implementer'].strip():
+                implementers.add(build['implementer'].strip().casefold())
+    require(implementers and review['reviewer'].strip().casefold() not in implementers,
+            'record the implementing identities and use a distinct reviewer')
+
+
+def local_evidence(record, base_dir, new_dir, match_dir, book, rationale):
+    verify_review(record)
     base, base_signature = inspect_engine(base_dir, record['baseline_commit'])
     new, new_signature = inspect_engine(new_dir, record['candidate_commit'])
     require(base['commit'] != new['commit'], 'self-matches do not qualify')

@@ -10,6 +10,9 @@ HOST = "https://tests.stockfishchess.org"
 RUN_ID = r"[0-9a-f]{24}"
 STANDARD = {"stc": "10+0.1", "ltc": "60+0.6"}
 API_PATH = re.compile(rf"/api/(?:get_(?:elo|run)/{RUN_ID}|active_runs|finished_runs\?page=[1-9][0-9]{{0,3}})")
+ACCOUNT_HISTORY = re.compile(
+    r"/api/finished_runs\?page=(?:[1-9]|10)&username=(?:[A-Za-z0-9_.~+\-]|%[0-9A-Fa-f]{2})+&timestamp=[0-9]{10}"
+)
 MAX_BYTES = 8 * 1024 * 1024
 
 
@@ -25,7 +28,8 @@ def check(ok, message):
 
 def fetch_json(path):
     """Read one bounded, allowlisted endpoint using system TLS verification."""
-    check(isinstance(path, str) and API_PATH.fullmatch(path), "unsupported Fishtest API path")
+    check(isinstance(path, str) and (API_PATH.fullmatch(path) or ACCOUNT_HISTORY.fullmatch(path)),
+          "unsupported Fishtest API path")
     req = urllib.request.Request(HOST + path, headers={"Accept": "application/json",
                                                       "User-Agent": "Stockfish-Research-Lab/1"})
     try:
