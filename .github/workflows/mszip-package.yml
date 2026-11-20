@@ -1,0 +1,119 @@
+name: Stockfish 19 MSZIP package
+on:
+  push:
+    branches: [experiment/EXP-COMPRESSION-001]
+    paths: ['research-lab/proofs/mszip/**', '.github/workflows/mszip-package.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mszip-package-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    if: github.repository == 'ShadyF4RR/Stockfish' && github.ref == 'refs/heads/experiment/EXP-COMPRESSION-001'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      GO_VERSION: 1.24.6
+      SF19: edb0d9db6731067ec50ce619ff372b463bc4dd5d
+      RELEASE: https://github.com/official-stockfish/Stockfish/releases/download/sf_19
+      PROOF: research-lab/proofs/mszip
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Obtain authenticated release inputs and toolchain
+        run: |
+          cd "$RUNNER_TEMP"
+          curl --fail --location --retry 2 --max-time 150 "$RELEASE/stockfish-linux-x86-64-universal.tar.gz" -o linux.tar.gz
+          curl --fail --location --retry 2 --max-time 150 "$RELEASE/stockfish-windows-x86-64-universal.zip" -o windows.zip
+          curl --fail --location --retry 2 --max-time 150 "https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz" -o go.tar.gz
+          sha256sum --check <<'CHECKSUMS'
+          9defc0d4e55d49c65a6d042f3e571a39fcea499ade6dbe741b53b8c65e03611f  linux.tar.gz
+          3c8bf1f9ea66a09350a40df4f632288285ac206d99f33ab5842c408fc30b48a7  windows.zip
+          bbca37cc395c974ffa4893ee35819ad23ebb27426df87af92e93a9ec66ef8712  go.tar.gz
+          CHECKSUMS
+          tar -xzf go.tar.gz
+          tar -xzf linux.tar.gz stockfish/stockfish-linux-x86-64-universal
+          unzip -q windows.zip stockfish/stockfish-windows-x86-64-universal.exe
+      - name: Build portable executables and assemble the matching source distribution
+        run: |
+          work="$RUNNER_TEMP"
+          export GO="$work/go/bin/go"
+          "$PROOF/build.sh" linux "$work/stockfish/stockfish-linux-x86-64-universal" "$work/linux"
+          "$PROOF/build.sh" windows "$work/stockfish/stockfish-windows-x86-64-universal.exe" "$work/windows"
+          mkdir -p "$work/source/Stockfish" "$work/source/launcher"
+          git archive "$SF19" | tar -xf - -C "$work/source/Stockfish"
+          git archive "HEAD:$PROOF" | tar -xf - -C "$work/source/launcher"
+          "$work/stockfish/stockfish-linux-x86-64-universal" export_net "$work/source/Stockfish/src/nn-1a298aa575a0.nnue"
+          echo "1a298aa575a085434d29027978dc36867fe9c5bcea9376654b7a8eba1e52dfc2  $work/source/Stockfish/src/nn-1a298aa575a0.nnue" | sha256sum -c -
+          cp "$work/go/LICENSE" "$work/source/launcher/Go-LICENSE.txt"
+          cp "$work/linux/manifest.json" "$work/source/manifest-linux.json"
+          cp "$work/windows/manifest.json" "$work/source/manifest-windows.json"
+          printf 'Engine sf_19 %s\nLauncher %s\n' "$SF19" "$GITHUB_SHA" > "$work/source/revisions.txt"
+          tar -C "$work" -czf "$work/stockfish19-mszip-source.tar.gz" source
+          for os in linux windows; do
+            mkdir -p "$work/bundle/$os"
+            cp "$work/$os/stockfish19-mszip"* "$work/$os/manifest.json" "$work/bundle/$os/"
+            cp "$work/source/Stockfish/Copying.txt" "$work/source/Stockfish/AUTHORS" "$work/source/launcher/Go-LICENSE.txt" "$work/bundle/$os/"
+            printf 'GPLv3 Corresponding Source (engine, net, launcher and build scripts) is in Stockfish-19-MSZIP-source on this run:\n%s/%s/actions/runs/%s\n' "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" > "$work/bundle/$os/SOURCE.txt"
+          done
+      - name: Test the Linux package through UCI and run its release bench
+        run: |
+          python3 "$PROOF/check_uci.py" "$RUNNER_TEMP/bundle/linux/stockfish19-mszip"
+      - name: Publish matching source and NNUE
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: Stockfish-19-MSZIP-source
+          path: ${{ runner.temp }}/stockfish19-mszip-source.tar.gz
+          archive: false
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 30
+      - name: Publish Linux engine
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: Stockfish-19-MSZIP-linux-x64
+          path: ${{ runner.temp }}/bundle/linux/stockfish19-mszip
+          archive: false
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 30
+      - name: Transfer Windows input for native verification
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: Windows-verification-input
+          path: ${{ runner.temp }}/bundle/windows
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 1
+
+  windows:
+    needs: build
+    runs-on: windows-2025
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        with:
+          name: Windows-verification-input
+          path: ${{ runner.temp }}/windows
+      - name: Test Windows UCI startup, legal move, quit and canonical bench
+        shell: pwsh
+        run: python research-lab/proofs/mszip/check_uci.py "$env:RUNNER_TEMP/windows/stockfish19-mszip.exe"
+      - name: Publish GUI-selectable Windows executable
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: Stockfish-19-MSZIP-windows-x64
+          path: ${{ runner.temp }}/windows/stockfish19-mszip.exe
+          archive: false
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 30

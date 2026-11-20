@@ -1,0 +1,28 @@
+:root { color-scheme: light; font-family: "DM Sans", system-ui, sans-serif; color: #17372a; background: #f7f6f1; }
+* { box-sizing: border-box; }
+body { margin: 0 auto; max-width: 1130px; padding: 0 clamp(18px, 5vw, 64px); }
+header { display: flex; align-items: center; gap: 9px; font-weight: 700; padding: 24px 0 18px; border-bottom: 1px solid #b8c2b9; }
+header span { font: 32px/1 "DejaVu Sans", sans-serif; }
+main { display: grid; grid-template-columns: 1.28fr 1fr; gap: clamp(28px, 5vw, 75px); align-items: center; padding: clamp(30px, 7vw, 96px) 0; }
+#board { display: grid; grid-template-columns: repeat(8, 1fr); grid-template-rows: repeat(8, minmax(0, 1fr)); aspect-ratio: 1; border: 5px solid #345645; border-radius: 5px; overflow: hidden; background: #dde4d4; container-type: inline-size; }
+.square { display: grid; place-items: center; font: clamp(14px, 4vw, 48px)/1 "DejaVu Sans", "Segoe UI Symbol", "Arial Unicode MS", sans-serif; }
+@supports (font-size: 8cqw) { .square { font-size: 9.8cqw; } }
+.dark { background: #809e83; }
+.black-piece { color: #193026; }
+.white-piece { color: #fffdf3; text-shadow: -1px 0 #394a3c, 0 1px #394a3c, 1px 0 #394a3c, 0 -1px #394a3c; }
+.highlight { box-shadow: inset 0 0 0 3px #a25e20; background: #e9c784; }
+h1 { margin: 0 0 28px; font: 500 clamp(37px, 4.2vw, 56px)/1.05 "Baskervville", Georgia, serif; letter-spacing: -0.045em; }
+label { display: block; font-weight: 650; margin-bottom: 7px; }
+textarea { display: block; width: 100%; padding: 11px; font: 14px/1.45 "IBM Plex Mono", monospace; border: 1px solid #8c9e91; background: #fffefa; color: #17372a; border-radius: 5px; resize: vertical; }
+button { background: #214e3a; color: white; border: 0; border-radius: 4px; padding: 12px 17px; font: inherit; font-weight: 650; cursor: pointer; }
+button span { margin-left: 12px; }
+button:hover { background: #346a50; }
+button:disabled { opacity: .6; cursor: wait; }
+textarea:focus-visible, button:focus-visible { outline: 2px solid #997036; outline-offset: 3px; }
+#hint, #stats { font-size: 14px; line-height: 1.5; color: #4e6455; }
+#hint { margin: 8px 0 18px; }
+#result { margin-top: 26px; padding-top: 18px; border-top: 1px solid #b8c2b9; }
+#status { margin: 0; font-weight: 650; }
+#move:not(:empty) { display: block; font: 500 40px/1.3 "IBM Plex Mono", monospace; }
+#stats { margin: 4px 0 0; }
+@media (max-width: 650px) { main { grid-template-columns: 1fr; } #board { width: min(100%, 430px); justify-self: center; } h1 { margin-bottom: 18px; } }

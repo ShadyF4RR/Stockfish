@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stockfish 19 · Position analysis</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header><span aria-hidden="true">♞</span> Stockfish 19</header>
+  <main>
+    <div id="board" role="img" aria-label="Chessboard, White at bottom"></div>
+    <section>
+      <h1>Position analysis</h1>
+      <form id="form">
+        <label for="position">Position</label>
+        <textarea id="position" required maxlength="128" spellcheck="false" autocomplete="off" rows="3" aria-describedby="hint">startpos</textarea>
+        <p id="hint">Enter a FEN, or use <code>startpos</code> for the initial position.</p>
+        <button type="submit">Find best move <span aria-hidden="true">→</span></button>
+      </form>
+      <div id="result" aria-live="polite">
+        <p id="status">Ready to analyze</p>
+        <output id="move"></output>
+        <p id="stats">20,000-node search · 1 thread</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
