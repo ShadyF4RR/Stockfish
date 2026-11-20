@@ -56,6 +56,9 @@
     {
       "attempts": [
         {
+          "artifacts": {
+            "report": "https://github.com/ShadyF4RR/Stockfish/blob/research/adversarial-tactics/research-lab/results/EXP-ADVERSARIAL-001/REPORT.md"
+          },
           "budget": {
             "cost_usd": 0.0,
             "input_tokens": 0,
@@ -63,6 +66,7 @@
             "requests": 0,
             "runner_minutes": 110
           },
+          "candidate_sha": "c72e2482c77f8eabca37550f019ed55bfb8a7b79",
           "checkpoints": [
             {
               "details": {
@@ -75,11 +79,23 @@
               "time": "2026-11-20T22:06:23+00:00"
             }
           ],
+          "ended_at": "2026-11-20T22:16:28+00:00",
           "expires_at": "2026-11-20T23:57:13+00:00",
           "job": "cloud-56eb3d6f00c23b433aed94-tactical",
           "lease": "c9b3e1ac28e3446681bd3841b46c635b",
+          "next_proposals": [],
+          "outcome": "inconclusive",
           "provider": "subscription_cloud_task",
-          "started_at": "2026-11-20T21:57:13+00:00"
+          "reason": "192/192 games completed. 34 time forfeits invalidated the registered panel. Direct candidate vs baseline 2W/21D/1L, holdout 1W/10D/1L, measured NPS -12.06%. No escalation or Fishtest.",
+          "receipt": "cea805e8e0e9387750deb438edda4d7635e2a89e1c0717d10bfc81968faef2ad",
+          "started_at": "2026-11-20T21:57:13+00:00",
+          "usage": {
+            "cost_usd": 0.0,
+            "input_tokens": 0,
+            "output_tokens": 0,
+            "requests": 0,
+            "runner_minutes": 40
+          }
         }
       ],
       "baseline": "1819b9ea37588be8adb044179fb54512f87c8249",
@@ -88,7 +104,7 @@
       "id": "EXP-CONT-000002",
       "kind": "run",
       "path": "src/movepick.cpp",
-      "status": "running",
+      "status": "inconclusive",
       "topic": "see-qualified-quiet-checks"
     },
     {
