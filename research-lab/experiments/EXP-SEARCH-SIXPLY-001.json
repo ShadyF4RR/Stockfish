@@ -1,0 +1,107 @@
+{
+  "baseline_commit": "1819b9ea37588be8adb044179fb54512f87c8249",
+  "candidate_commit": "f2f67475aa6722e73f473d1203f8d833a65bc35f",
+  "created_at": "2026-11-20T21:47:56+00:00",
+  "evidence": {
+    "artifacts": [
+      "research-lab/results/EXP-SEARCH-SIXPLY-001/README.md",
+      "research-lab/results/EXP-SEARCH-SIXPLY-001/games.pgn"
+    ],
+    "benchmark": "research-lab/results/EXP-SEARCH-SIXPLY-001/bench.json",
+    "build_configuration": {
+      "ARCH": "x86-64-avx2",
+      "COMP": "gcc",
+      "CXX": "g++",
+      "target": "build"
+    },
+    "compiler": "g++ (Debian 14.2.0-19) 14.2.0",
+    "compression": null,
+    "compute_usage": {
+      "benchmark_cpu_seconds": 9.1453,
+      "match": {
+        "child_cpu_seconds": 220.578201,
+        "wall_seconds": 222.58938649899983
+      },
+      "paid_api_usd": 0,
+      "public_fishtest_games": 0
+    },
+    "correctness": {
+      "binary_sha256": "b7adc6946a0bb975a183e8d32a69439c6f165f0a6350233856efaf85aeac036e",
+      "commit": "f2f67475aa6722e73f473d1203f8d833a65bc35f",
+      "notes": "Full perft and UCI passed on first launch. Exposed /etc/alternatives for awk in a fresh sandbox and reran the upstream reproducibility test unchanged.",
+      "perft": "passed",
+      "perft_positions": 20,
+      "reprosearch": "passed",
+      "reprosearch_node_budgets": 20,
+      "uci": "passed"
+    },
+    "elo_estimate": 21.74306492903707,
+    "elo_uncertainty": {
+      "confidence": 0.95,
+      "interval": [
+        -507.5606494350888,
+        null
+      ],
+      "method": "fixed-sample paired Hoeffding"
+    },
+    "fishtest": null,
+    "games": 16,
+    "hardware": {
+      "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+      "cpus_available": 5,
+      "kernel": "6.18.57",
+      "machine": "x86_64"
+    },
+    "hardware_review": null,
+    "match_settings": "research-lab/results/EXP-SEARCH-SIXPLY-001/match.json",
+    "review": {
+      "baseline_sha": "1819b9ea37588be8adb044179fb54512f87c8249",
+      "reviewed_sha": "f2f67475aa6722e73f473d1203f8d833a65bc35f",
+      "reviewer": "/root/independent_review",
+      "summary": "Verified one ordinary source line changes only quiet-move scoring of continuationHistory[5]. Its bounded signed integer promotes to int and division by positive 2 truncates toward zero safely. No new access, writes, indexing, synchronization, test, settings or benchmark changes. Suitable for a paired screen, with no inferred strength gain.",
+      "unresolved_defects": [],
+      "verdict": "approved"
+    },
+    "statistical_decision": "inconclusive"
+  },
+  "explanation": "4 wins, 9 draws, 3 losses across eight color-reversed pairs. Candidate Elo estimate +21.7, 95% paired Hoeffding interval [-507.6, unbounded].",
+  "hypothesis": "Reducing the six-ply continuation history weight in quiet move ordering may improve cutoff selection and playing strength.",
+  "id": "EXP-SEARCH-SIXPLY-001",
+  "related_experiments": [],
+  "reports": [
+    {
+      "candidate_commit": "f2f67475aa6722e73f473d1203f8d833a65bc35f",
+      "evidence": {
+        "protocol": "research-lab/results/EXP-SEARCH-SIXPLY-001/plan.json"
+      },
+      "role": "search",
+      "summary": "Reducing the six-ply continuation history weight in quiet move ordering may improve cutoff selection and playing strength."
+    },
+    {
+      "candidate_commit": "f2f67475aa6722e73f473d1203f8d833a65bc35f",
+      "evidence": {
+        "review": "research-lab/results/EXP-SEARCH-SIXPLY-001/review.json"
+      },
+      "role": "reviewer",
+      "summary": "Verified one ordinary source line changes only quiet-move scoring of continuationHistory[5]. Its bounded signed integer promotes to int and division by positive 2 truncates toward zero safely. No new access, writes, indexing, synchronization, test, settings or benchmark changes. Suitable for a paired screen, with no inferred strength gain."
+    },
+    {
+      "candidate_commit": "f2f67475aa6722e73f473d1203f8d833a65bc35f",
+      "evidence": {
+        "bench": "research-lab/results/EXP-SEARCH-SIXPLY-001/bench.json",
+        "match": "research-lab/results/EXP-SEARCH-SIXPLY-001/match.json"
+      },
+      "role": "testing",
+      "summary": "4 wins, 9 draws, 3 losses across eight color-reversed pairs. Candidate Elo estimate +21.7, 95% paired Hoeffding interval [-507.6, unbounded]."
+    }
+  ],
+  "responsible_agent": "search",
+  "retry_reason": null,
+  "schema_version": 1,
+  "source_changes": [
+    "src/movepick.cpp"
+  ],
+  "status": "inconclusive",
+  "topic": "quiet-six-ply-continuation",
+  "updated_at": "2026-11-20T21:55:32+00:00"
+}

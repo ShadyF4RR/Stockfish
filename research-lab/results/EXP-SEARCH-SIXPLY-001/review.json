@@ -1,0 +1,8 @@
+{
+  "verdict": "approved",
+  "reviewer": "/root/independent_review",
+  "reviewed_sha": "f2f67475aa6722e73f473d1203f8d833a65bc35f",
+  "baseline_sha": "1819b9ea37588be8adb044179fb54512f87c8249",
+  "unresolved_defects": [],
+  "summary": "Verified one ordinary source line changes only quiet-move scoring of continuationHistory[5]. Its bounded signed integer promotes to int and division by positive 2 truncates toward zero safely. No new access, writes, indexing, synchronization, test, settings or benchmark changes. Suitable for a paired screen, with no inferred strength gain."
+}

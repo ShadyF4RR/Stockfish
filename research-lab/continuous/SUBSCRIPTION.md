@@ -7,6 +7,7 @@ Start research from the signed-in Codex Cloud interface with the saved **Stockfi
 | Request | Codex workspace shell | Standard GitHub-hosted Ubuntu runner |
 | --- | --- | --- |
 | Anonymous GET to the Codex model catalogue on chatgpt.com | Proxy refused CONNECT, HTTP 403 | HTTP 401, an HTTP response from the reachable service |
+| Anonymous GET to the Codex Responses path | CONNECT 403, no origin HTTP status | HTTP 405 (GET is disallowed) |
 | Anonymous GET to the official Fishtest active-run list | Proxy refused CONNECT, HTTP 403 | HTTP 200 |
 | Nested subscription-authenticated CLI inference | WebSocket CONNECT 403, then HTTPS connection failure. No final model message. | Untested. The runner was sent no subscription credentials. |
 
@@ -14,7 +15,7 @@ The workspace network status showed an enforced restricted host list, without ch
 
 The official Codex GitHub Action documents provider API-key authentication. OpenAI separately documents an advanced account-authenticated CLI workflow on trusted private infrastructure: serialize access to the protected login cache and preserve refreshed credentials. The guide explicitly excludes public and open-source repositories. The public Stockfish fork never receives a ChatGPT session, browser cookie, password or API key. The experimental CLI command `codex cloud exec --env ...` submits a cloud task from a signed-in reachable client. Installing that binary in Actions gives the job no account access.
 
-[Codex authentication](https://developers.openai.com/codex/auth/) · [Advanced private CI restrictions](https://learn.chatgpt.com/docs/auth/ci-cd-auth) · [Official GitHub Action](https://github.com/openai/codex-action) · [GitHub runner probe](https://github.com/ShadyF4RR/Stockfish/actions/runs/44823298220) · [Fishtest production read](https://github.com/ShadyF4RR/Stockfish/actions/runs/44821143223)
+[Codex authentication](https://developers.openai.com/codex/auth/) · [Advanced private CI restrictions](https://learn.chatgpt.com/docs/auth/ci-cd-auth) · [Official GitHub Action](https://github.com/openai/codex-action) · [GitHub runner probe](https://github.com/ShadyF4RR/Stockfish/actions/runs/44824424088) · [Fishtest production read](https://github.com/ShadyF4RR/Stockfish/actions/runs/44821143223)
 
 ## Scheduling and verification
 
