@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#142c34">
+  <meta name="referrer" content="no-referrer">
+  <title>Stockfish Research Lab · Research overview</title>
+  <link rel="stylesheet" href="./dashboard.css">
+  <script src="./dashboard.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#overview">Skip to dashboard</a>
+<header class="masthead">
+  <div class="wrap mast-inner">
+    <a class="brand" href="#overview" aria-label="Stockfish Research Lab overview">
+      <span class="knight" aria-hidden="true">♞</span><span><strong>Stockfish</strong> <span class="lab">Research Lab</span></span>
+    </a>
+    <nav aria-label="Dashboard sections">
+      <a href="#experiments">Experiments</a><a href="#workers">Workers</a><a href="#history">History</a><a href="#github">GitHub</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap" id="overview">
+  <div class="page-heading">
+    <div><h1>Research overview</h1><p class="source-line" id="source-line">Waiting for a published snapshot.</p></div>
+    <div class="sync"><span id="sync-status" class="badge neutral" role="status">Loading</span><button id="refresh" type="button">Refresh</button></div>
+  </div>
+  <noscript><p class="notice">Enable JavaScript to load the dashboard. The <a href="./snapshot.json">published JSON snapshot</a> is also available directly.</p></noscript>
+  <p class="notice" id="connection" hidden></p>
+  <dl class="metrics" aria-label="Research summary" id="metrics"></dl>
+  <section id="experiments" aria-labelledby="experiments-title">
+    <div class="section-head"><h2 id="experiments-title">Active experiments</h2></div>
+    <div id="active-list" class="cards"></div>
+  </section>
+  <div class="operations">
+    <section id="workers" aria-labelledby="workers-title"><div class="section-head"><h2 id="workers-title">Testing workers</h2></div><div class="stack" id="worker-list"></div></section>
+    <section aria-labelledby="agents-title"><div class="section-head"><h2 id="agents-title">Agent assignments</h2></div><div id="agent-list" class="panel"></div></section>
+  </div>
+  <section id="history" aria-labelledby="history-title">
+    <div class="section-head"><h2 id="history-title">Experiment history</h2>
+      <label class="select-label">Show <select id="history-filter"><option value="all">All records</option></select></label>
+    </div>
+    <div id="history-table" class="panel table-wrap"></div>
+  </section>
+  <div class="pair">
+    <section aria-labelledby="promotions-title"><div class="section-head"><h2 id="promotions-title">Validated improvements</h2></div><div class="panel" id="promotions"></div></section>
+    <section aria-labelledby="fishtest-title"><div class="section-head"><h2 id="fishtest-title">Fishtest submissions</h2></div><div class="panel" id="fishtest"></div></section>
+  </div>
+  <section id="github" aria-labelledby="github-title">
+    <div class="section-head"><h2 id="github-title">GitHub activity</h2><a class="section-link" href="https://github.com/ShadyF4RR/Stockfish">Open repository ↗</a></div>
+    <div class="pair panels"><div class="panel"><h3>Recent commits</h3><div id="commits"></div></div><div class="panel"><h3>Pull requests</h3><div id="pulls"></div></div></div>
+  </section>
+  <div class="pair">
+    <section aria-labelledby="scheduler-title"><div class="section-head"><h2 id="scheduler-title">Autonomous scheduler</h2></div><div class="panel" id="scheduler"></div></section>
+    <section aria-labelledby="notifications-title"><div class="section-head"><h2 id="notifications-title">Recent notifications</h2></div><div class="panel" id="notifications"></div></section>
+  </div>
+</main>
+<footer class="wrap"><span>Stockfish Research Lab</span><a href="./snapshot.json">Deployment snapshot (JSON)</a></footer>
+</body>
+</html>
