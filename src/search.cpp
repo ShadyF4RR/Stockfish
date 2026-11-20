@@ -1848,8 +1848,8 @@ Value Search::Worker::qsearch(Position& pos, Stack* ss, Value alpha, Value beta)
             if (!capture)
                 continue;
 
-            // Do not search moves with bad enough SEE values
-            if (!pos.see_ge(move, -74))
+            // A checking capture can force a reply before the exchange is resolved.
+            if (!pos.see_ge(move, givesCheck ? -74 - PawnValue : -74))
                 continue;
         }
 
