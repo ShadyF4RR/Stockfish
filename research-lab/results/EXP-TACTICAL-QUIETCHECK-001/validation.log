@@ -1,0 +1,85 @@
+spawn ./stockfish
+uci
+Stockfish dev-20261120-c72e2482 by the Stockfish developers (see AUTHORS file)
+id name Stockfish dev-20261120-c72e2482
+id author the Stockfish developers (see AUTHORS file)
+
+option name Debug Log File type string default <empty>
+option name NumaPolicy type string default auto
+option name Threads type spin default 1 min 1 max 1024
+option name Hash type spin default 16 min 1 max 33554432
+option name Clear Hash type button
+option name Ponder type check default false
+option name MultiPV type spin default 1 min 1 max 256
+option name Skill Level type spin default 20 min 0 max 20
+option name Move Overhead type spin default 10 min 0 max 5000
+option name nodestime type spin default 0 min 0 max 10000
+option name UCI_Chess960 type check default false
+option name UCI_LimitStrength type check default false
+option name UCI_Elo type spin default 1320 min 1320 max 3190
+option name UCI_ShowWDL type check default false
+option name SyzygyPath type string default <empty>
+option name SyzygyProbeDepth type spin default 1 min 1 max 100
+option name Syzygy50MoveRule type check default true
+option name SyzygyProbeLimit type spin default 7 min 0 max 7
+option name EvalFile type string default nn-bddd9d57eb87.nnue
+uciok
+isready
+readyok
+ucinewgame
+position startpos
+go depth 4 searchmoves e2e4
+info string Available processors: 0-4
+info string Using 1 thread
+info string NNUE evaluation using nn-bddd9d57eb87.nnue (131MiB, (131952, 1024, 32, 32, 1))
+info string Network replica 1: Shared memory.
+info depth 1 seldepth 2 multipv 1 score cp 0 nodes 1 nps 1000 hashfull 0 tbhits 0 time 1 pv e2e4
+info depth 2 seldepth 3 multipv 1 score cp 23 nodes 9 nps 9000 hashfull 0 tbhits 0 time 1 pv e2e4
+info depth 3 seldepth 2 multipv 1 score cp 23 nodes 11 nps 11000 hashfull 0 tbhits 0 time 1 pv e2e4
+info depth 4 seldepth 4 multipv 1 score cp 20 nodes 23 nps 23000 hashfull 0 tbhits 0 time 1 pv e2e4 a7a6 c2c3
+bestmove e2e4 ponder a7a6
+quit
+perft testing started
+Testing depth 7: startpos... OK
+Testing depth 5: fen r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N... OK
+Testing depth 7: fen 8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - ... OK
+Testing depth 6: fen r3k2r/Pppp1ppp/1b3nbN/nP6/BBP1P3/q4N... OK
+Testing depth 5: fen rnbq1k1r/pp1Pbppp/2p5/8/2B5/8/PPP1Nn... OK
+Testing depth 5: fen r4rk1/1pp1qppp/p1np1n2/2b1p1B1/2B1P1... OK
+Testing depth 5: fen r7/4p3/5p1q/3P4/4pQ2/4pP2/6pp/R3K1kr... OK
+Testing depth 6: fen rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/R... OK
+Testing depth 6: fen 1rqbkrbn/1ppppp1p/1n6/p1N3p1/8/2P4P/... OK
+Testing depth 6: fen rbbqn1kr/pp2p1pp/6n1/2pp1p2/2P4P/P7/... OK
+Testing depth 6: fen rqbbknr1/1ppp2pp/p5n1/4pp2/P7/1PP5/1... OK
+Testing depth 6: fen 4rrb1/1kp3b1/1p1p4/pP1Pn2p/5p2/1PR2P... OK
+Testing depth 6: fen 1rkr3b/1ppn3p/3pB1n1/6q1/R2P4/4N1P1/... OK
+Testing depth 6: fen qbbnrkr1/p1pppppp/1p4n1/8/2P5/6N1/PP... OK
+Testing depth 2: fen rr6/2kpp3/1ppn2p1/p2b1q1p/P4P1P/1PNN... OK
+Testing depth 3: fen rr6/2kpp3/1ppn2p1/p2b1q1p/P4P1P/1PNN... OK
+Testing depth 4: fen rr6/2kpp3/1ppnb1p1/p2Q1q1p/P4P1P/1PN... OK
+Testing depth 4: fen rr6/2kpp3/1ppnb1p1/p4q1p/P4P1P/1PNN2... OK
+Testing depth 5: fen rr6/2kpp3/1ppnb1p1/p4q1p/P4P1P/1PNN2... OK
+Testing depth 6: fen rr6/2kpp3/1ppnb1p1/p4q1p/P4P1P/1PNN2... OK
+perft testing completed
+reprosearch testing started
+reprosearch testing with 150 nodes
+reprosearch testing with 225 nodes
+reprosearch testing with 337 nodes
+reprosearch testing with 506 nodes
+reprosearch testing with 759 nodes
+reprosearch testing with 1139 nodes
+reprosearch testing with 1708 nodes
+reprosearch testing with 2562 nodes
+reprosearch testing with 3844 nodes
+reprosearch testing with 5766 nodes
+reprosearch testing with 8649 nodes
+reprosearch testing with 12974 nodes
+reprosearch testing with 19461 nodes
+reprosearch testing with 29192 nodes
+reprosearch testing with 43789 nodes
+reprosearch testing with 65684 nodes
+reprosearch testing with 98526 nodes
+reprosearch testing with 147789 nodes
+reprosearch testing with 221683 nodes
+reprosearch testing with 332525 nodes
+reprosearch testing OK

@@ -1,0 +1,8 @@
+{
+  "verdict": "approved",
+  "reviewer": "/root/independent_review",
+  "reviewed_sha": "c72e2482c77f8eabca37550f019ed55bfb8a7b79",
+  "baseline_sha": "1819b9ea37588be8adb044179fb54512f87c8249",
+  "unresolved_defects": [],
+  "summary": "Single quiet-scoring predicate switches cached direct-check squares to the existing const gives_check predicate (including discovered and applicable special-move checks). Generated moves satisfy its structural assertions; legal move filtering is unchanged. Existing see_ge(-75) treats special moves as zero and thus admits them. No ownership, sharing, or indexing change or identified UB. General across openings. Additional checks on quiet moves may cost NPS; measure on control suite and clocked paired runs. Source-only approval for screening; no strength claim."
+}
