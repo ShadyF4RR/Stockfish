@@ -1,0 +1,860 @@
+[
+ {
+  "id": "start",
+  "initial_fen": "startpos",
+  "moves": [],
+  "expected": {
+   "count": 1,
+   "claim3": false
+  },
+  "expected_occurrences": 1,
+  "observed": {
+   "bestmove": "e2e4",
+   "score_cp": 20,
+   "mate": null
+  }
+ },
+ {
+  "id": "two-occurrences",
+  "initial_fen": "startpos",
+  "moves": [
+   "g1f3",
+   "g8f6",
+   "f3g1",
+   "f6g8"
+  ],
+  "expected": {
+   "count": 2,
+   "claim3": false,
+   "automatic": null
+  },
+  "expected_occurrences": 2,
+  "observed": {
+   "bestmove": "g1f3",
+   "score_cp": 16,
+   "mate": null
+  }
+ },
+ {
+  "id": "three-occurrences",
+  "initial_fen": "startpos",
+  "moves": [
+   "g1f3",
+   "g8f6",
+   "f3g1",
+   "f6g8",
+   "g1f3",
+   "g8f6",
+   "f3g1",
+   "f6g8"
+  ],
+  "expected": {
+   "count": 3,
+   "claim3": true,
+   "automatic": null
+  },
+  "expected_occurrences": 3,
+  "observed": {
+   "bestmove": "e2e4",
+   "score_cp": 13,
+   "mate": null
+  }
+ },
+ {
+  "id": "four-occurrences",
+  "initial_fen": "startpos",
+  "moves": [
+   "g1f3",
+   "g8f6",
+   "f3g1",
+   "f6g8",
+   "g1f3",
+   "g8f6",
+   "f3g1",
+   "f6g8",
+   "g1f3",
+   "g8f6",
+   "f3g1",
+   "f6g8"
+  ],
+  "expected": {
+   "count": 4,
+   "claim3": true,
+   "automatic": null
+  },
+  "expected_occurrences": 4,
+  "observed": {
+   "bestmove": "e2e4",
+   "score_cp": 16,
+   "mate": null
+  }
+ },
+ {
+  "id": "five-occurrences",
+  "initial_fen": "startpos",
+  "moves": [
+   "g1f3",
+   "g8f6",
+   "f3g1",
+   "f6g8",
+   "g1f3",
+   "g8f6",
+   "f3g1",
+   "f6g8",
+   "g1f3",
+   "g8f6",
+   "f3g1",
+   "f6g8",
+   "g1f3",
+   "g8f6",
+   "f3g1",
+   "f6g8"
+  ],
+  "expected": {
+   "count": 5,
+   "claim3": true,
+   "automatic": "FIVEFOLD_REPETITION"
+  },
+  "expected_occurrences": 5,
+  "observed": {
+   "bestmove": "d2d4",
+   "score_cp": 16,
+   "mate": null
+  }
+ },
+ {
+  "id": "choice-equal",
+  "initial_fen": "startpos",
+  "moves": [
+   "g1f3",
+   "g8f6",
+   "f3g1",
+   "f6g8",
+   "g1f3",
+   "g8f6",
+   "f3g1"
+  ],
+  "expected": {
+   "count": 2,
+   "claim3": true,
+   "third": [
+    "f6g8"
+   ],
+   "alternative": "b8c6",
+   "material": "balanced"
+  },
+  "expected_occurrences": 2,
+  "observed": {
+   "bestmove": "e7e5",
+   "score_cp": 78,
+   "mate": null
+  }
+ },
+ {
+  "id": "choice-winning",
+  "initial_fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNB1KBNR w KQkq - 0 1",
+  "moves": [
+   "g1f3",
+   "g8f6",
+   "f3g1",
+   "f6g8",
+   "g1f3",
+   "g8f6",
+   "f3g1"
+  ],
+  "expected": {
+   "count": 2,
+   "claim3": true,
+   "third": [
+    "f6g8"
+   ],
+   "alternative": "b8c6",
+   "material": "black up a queen"
+  },
+  "expected_occurrences": 2,
+  "observed": {
+   "bestmove": "d7d6",
+   "score_cp": 1105,
+   "mate": null
+  }
+ },
+ {
+  "id": "choice-losing",
+  "initial_fen": "rnb1kbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+  "moves": [
+   "g1f3",
+   "g8f6",
+   "f3g1",
+   "f6g8",
+   "g1f3",
+   "g8f6",
+   "f3g1"
+  ],
+  "expected": {
+   "count": 2,
+   "claim3": true,
+   "third": [
+    "f6g8"
+   ],
+   "alternative": "b8c6",
+   "material": "black down a queen"
+  },
+  "expected_occurrences": 2,
+  "observed": {
+   "bestmove": "f6g8",
+   "score_cp": 0,
+   "mate": null
+  }
+ },
+ {
+  "id": "twofold-choice",
+  "initial_fen": "startpos",
+  "moves": [
+   "g1f3",
+   "g8f6",
+   "f3g1"
+  ],
+  "expected": {
+   "count": 1,
+   "claim3": false,
+   "third": []
+  },
+  "expected_occurrences": 1,
+  "observed": {
+   "bestmove": "e7e5",
+   "score_cp": 100,
+   "mate": null
+  }
+ },
+ {
+  "id": "forced-perpetual",
+  "initial_fen": "6k1/8/7Q/8/8/8/8/K7 w - - 1 2",
+  "moves": [
+   "h6g6",
+   "g8h8",
+   "g6h6",
+   "h8g8",
+   "h6g6",
+   "g8h8",
+   "g6h6"
+  ],
+  "expected": {
+   "count": 2,
+   "claim3": true,
+   "third": [
+    "h8g8"
+   ],
+   "only": "h8g8"
+  },
+  "expected_occurrences": 2,
+  "observed": {
+   "bestmove": "h8g8",
+   "score_cp": 0,
+   "mate": null
+  }
+ },
+ {
+  "id": "clock-98",
+  "initial_fen": "7k/8/8/8/8/8/8/KR6 w - - 98 75",
+  "moves": [],
+  "expected": {
+   "count": 1,
+   "claim50": false,
+   "current50": false,
+   "automatic": null
+  },
+  "expected_occurrences": 1,
+  "observed": {
+   "bestmove": "b1g1",
+   "score_cp": 0,
+   "mate": null
+  }
+ },
+ {
+  "id": "clock-99",
+  "initial_fen": "7k/8/8/8/8/8/8/KR6 w - - 98 75",
+  "moves": [
+   "b1b2"
+  ],
+  "expected": {
+   "count": 1,
+   "claim50": true,
+   "current50": false,
+   "automatic": null
+  },
+  "expected_occurrences": 1,
+  "observed": {
+   "bestmove": "h8g8",
+   "score_cp": 0,
+   "mate": null
+  }
+ },
+ {
+  "id": "clock-100",
+  "initial_fen": "7k/8/8/8/8/8/8/KR6 w - - 98 75",
+  "moves": [
+   "b1b2",
+   "h8h7"
+  ],
+  "expected": {
+   "count": 1,
+   "claim50": true,
+   "current50": true,
+   "automatic": null
+  },
+  "expected_occurrences": 1,
+  "observed": {
+   "bestmove": "b2b1",
+   "score_cp": 0,
+   "mate": null
+  }
+ },
+ {
+  "id": "clock-149",
+  "initial_fen": "7k/8/8/8/8/8/8/KR6 w - - 148 75",
+  "moves": [
+   "b1b2"
+  ],
+  "expected": {
+   "count": 1,
+   "claim50": true,
+   "current50": true,
+   "automatic": null
+  },
+  "expected_occurrences": 1,
+  "observed": {
+   "bestmove": "h8g8",
+   "score_cp": 0,
+   "mate": null
+  }
+ },
+ {
+  "id": "clock-150",
+  "initial_fen": "7k/8/8/8/8/8/8/KR6 w - - 148 75",
+  "moves": [
+   "b1b2",
+   "h8h7"
+  ],
+  "expected": {
+   "count": 1,
+   "claim50": true,
+   "current50": true,
+   "automatic": "SEVENTYFIVE_MOVES"
+  },
+  "expected_occurrences": 1,
+  "observed": {
+   "bestmove": "b2b1",
+   "score_cp": 0,
+   "mate": null
+  }
+ },
+ {
+  "id": "clock-reset-pawn",
+  "initial_fen": "7k/8/8/8/8/8/P7/KR6 w - - 99 75",
+  "moves": [
+   "a2a3"
+  ],
+  "expected": {
+   "count": 1,
+   "claim50": false,
+   "current50": false,
+   "automatic": null
+  },
+  "expected_occurrences": 1,
+  "observed": {
+   "bestmove": "h8g7",
+   "score_cp": -1352,
+   "mate": null
+  }
+ },
+ {
+  "id": "clock-reset-capture",
+  "initial_fen": "7k/8/8/8/8/8/1n6/KR6 w - - 99 75",
+  "moves": [
+   "b1b2"
+  ],
+  "expected": {
+   "count": 1,
+   "claim50": false,
+   "current50": false,
+   "automatic": null
+  },
+  "expected_occurrences": 1,
+  "observed": {
+   "bestmove": "h8g7",
+   "score_cp": -482,
+   "mate": null
+  }
+ },
+ {
+  "id": "mate-at-100",
+  "initial_fen": "7k/8/5KQ1/8/8/8/8/8 w - - 99 75",
+  "moves": [
+   "g6g7"
+  ],
+  "expected": {
+   "count": 1,
+   "claim50": false,
+   "current50": false,
+   "automatic": "CHECKMATE",
+   "winner": "white"
+  },
+  "expected_occurrences": 1,
+  "observed": {
+   "bestmove": null,
+   "score_cp": null,
+   "mate": 0
+  }
+ },
+ {
+  "id": "mate-at-150",
+  "initial_fen": "7k/8/5KQ1/8/8/8/8/8 w - - 149 75",
+  "moves": [
+   "g6g7"
+  ],
+  "expected": {
+   "count": 1,
+   "claim50": false,
+   "current50": false,
+   "automatic": "CHECKMATE",
+   "winner": "white"
+  },
+  "expected_occurrences": 1,
+  "observed": {
+   "bestmove": null,
+   "score_cp": null,
+   "mate": 0
+  }
+ },
+ {
+  "id": "mate-in-one-at-149",
+  "initial_fen": "7k/8/5KQ1/8/8/8/8/8 w - - 149 75",
+  "moves": [],
+  "expected": {
+   "count": 1,
+   "claim50": true,
+   "mating_move": "g6g7"
+  },
+  "expected_occurrences": 1,
+  "observed": {
+   "bestmove": "g6g7",
+   "score_cp": null,
+   "mate": 1
+  }
+ },
+ {
+  "id": "stalemate",
+  "initial_fen": "7k/5K2/6Q1/8/8/8/8/8 b - - 0 52",
+  "moves": [],
+  "expected": {
+   "count": 1,
+   "automatic": "STALEMATE"
+  },
+  "expected_occurrences": 1,
+  "observed": {
+   "bestmove": null,
+   "score_cp": 0,
+   "mate": null
+  }
+ },
+ {
+  "id": "insufficient",
+  "initial_fen": "7k/8/8/8/8/8/8/KB6 w - - 0 52",
+  "moves": [],
+  "expected": {
+   "count": 1,
+   "automatic": "INSUFFICIENT_MATERIAL"
+  },
+  "expected_occurrences": 1,
+  "observed": {
+   "bestmove": "b1g6",
+   "score_cp": -1,
+   "mate": null
+  }
+ },
+ {
+  "id": "castling-rights",
+  "initial_fen": "r3k2r/8/8/8/8/8/8/R3K2R w KQkq - 0 1",
+  "moves": [
+   "h1h2",
+   "h8h7",
+   "h2h1",
+   "h7h8",
+   "h1h2",
+   "h8h7",
+   "h2h1",
+   "h7h8"
+  ],
+  "expected": {
+   "count": 2,
+   "claim3": false
+  },
+  "expected_occurrences": 2,
+  "observed": {
+   "bestmove": "h1h8",
+   "score_cp": 683,
+   "mate": null
+  }
+ },
+ {
+  "id": "legal-ep",
+  "initial_fen": "4k1n1/8/8/2pP4/8/8/8/4K1N1 w - c6 0 15",
+  "moves": [
+   "g1f3",
+   "g8f6",
+   "f3g1",
+   "f6g8",
+   "g1f3",
+   "g8f6",
+   "f3g1",
+   "f6g8"
+  ],
+  "expected": {
+   "count": 2,
+   "claim3": true
+  },
+  "expected_occurrences": 2,
+  "observed": {
+   "bestmove": "e1f1",
+   "score_cp": 0,
+   "mate": null
+  }
+ },
+ {
+  "id": "pinned-ep",
+  "initial_fen": "3rk1n1/8/8/2pP4/8/8/8/3K2N1 w - c6 0 15",
+  "moves": [
+   "g1f3",
+   "g8f6",
+   "f3g1",
+   "f6g8",
+   "g1f3",
+   "g8f6",
+   "f3g1",
+   "f6g8"
+  ],
+  "expected": {
+   "count": 3,
+   "claim3": true
+  },
+  "expected_occurrences": 3,
+  "observed": {
+   "bestmove": "g1f3",
+   "score_cp": 0,
+   "mate": null
+  }
+ },
+ {
+  "id": "italian-history",
+  "initial_fen": "startpos",
+  "moves": [
+   "e2e4",
+   "e7e5",
+   "g1f3",
+   "b8c6",
+   "f1c4",
+   "f8c5",
+   "d2d3",
+   "g8f6",
+   "b1c3",
+   "c6a5",
+   "c3b1",
+   "a5c6",
+   "b1c3",
+   "c6a5",
+   "c3b1"
+  ],
+  "expected": {},
+  "expected_occurrences": 2,
+  "observed": {
+   "bestmove": "a5c4",
+   "score_cp": 163,
+   "mate": null
+  }
+ },
+ {
+  "id": "italian-control",
+  "initial_fen": "startpos",
+  "moves": [
+   "e2e4",
+   "e7e5",
+   "g1f3",
+   "b8c6",
+   "f1c4",
+   "f8c5",
+   "d2d3",
+   "g8f6",
+   "b1c3",
+   "c6a5",
+   "c1d2",
+   "a5b3",
+   "d2c1",
+   "b3a5",
+   "c3b1"
+  ],
+  "expected": {},
+  "expected_occurrences": 1,
+  "observed": {
+   "bestmove": "a5c4",
+   "score_cp": 163,
+   "mate": null
+  }
+ },
+ {
+  "id": "london-history",
+  "initial_fen": "startpos",
+  "moves": [
+   "d2d4",
+   "d7d5",
+   "g1f3",
+   "g8f6",
+   "c1f4",
+   "c7c5",
+   "e2e3",
+   "b8c6",
+   "f3g1",
+   "f6g8",
+   "g1f3",
+   "g8f6",
+   "f3g1",
+   "f6g8",
+   "g1f3"
+  ],
+  "expected": {},
+  "expected_occurrences": 2,
+  "observed": {
+   "bestmove": "g8f6",
+   "score_cp": 0,
+   "mate": null
+  }
+ },
+ {
+  "id": "london-control",
+  "initial_fen": "startpos",
+  "moves": [
+   "d2d4",
+   "d7d5",
+   "g1f3",
+   "g8f6",
+   "c1f4",
+   "c7c5",
+   "e2e3",
+   "b8c6",
+   "f3g1",
+   "f6g8",
+   "b1a3",
+   "c6a5",
+   "a3b1",
+   "a5c6",
+   "g1f3"
+  ],
+  "expected": {},
+  "expected_occurrences": 1,
+  "observed": {
+   "bestmove": "c5d4",
+   "score_cp": 0,
+   "mate": null
+  }
+ },
+ {
+  "id": "french-history",
+  "initial_fen": "startpos",
+  "moves": [
+   "e2e4",
+   "e7e6",
+   "d2d4",
+   "d7d5",
+   "b1c3",
+   "g8f6",
+   "c1g5",
+   "f8e7",
+   "g1f3",
+   "f6g8",
+   "f3g1",
+   "g8f6",
+   "g1f3",
+   "f6g8",
+   "f3g1"
+  ],
+  "expected": {},
+  "expected_occurrences": 2,
+  "observed": {
+   "bestmove": "e7g5",
+   "score_cp": 716,
+   "mate": null
+  }
+ },
+ {
+  "id": "french-control",
+  "initial_fen": "startpos",
+  "moves": [
+   "e2e4",
+   "e7e6",
+   "d2d4",
+   "d7d5",
+   "b1c3",
+   "g8f6",
+   "c1g5",
+   "f8e7",
+   "g1f3",
+   "f6g8",
+   "c3a4",
+   "b8a6",
+   "a4c3",
+   "a6b8",
+   "f3g1"
+  ],
+  "expected": {},
+  "expected_occurrences": 1,
+  "observed": {
+   "bestmove": "e7g5",
+   "score_cp": 714,
+   "mate": null
+  }
+ },
+ {
+  "id": "queens-gambit-history",
+  "initial_fen": "startpos",
+  "moves": [
+   "d2d4",
+   "d7d5",
+   "c2c4",
+   "e7e6",
+   "b1c3",
+   "g8f6",
+   "c1g5",
+   "f6d7",
+   "c3b1",
+   "d7f6",
+   "b1c3",
+   "f6d7",
+   "c3b1",
+   "d7f6"
+  ],
+  "expected": {},
+  "expected_occurrences": 2,
+  "observed": {
+   "bestmove": "c4d5",
+   "score_cp": 26,
+   "mate": null
+  }
+ },
+ {
+  "id": "queens-gambit-control",
+  "initial_fen": "startpos",
+  "moves": [
+   "d2d4",
+   "d7d5",
+   "c2c4",
+   "e7e6",
+   "b1c3",
+   "g8f6",
+   "c1g5",
+   "f6d7",
+   "c3b1",
+   "b8a6",
+   "b1a3",
+   "a6b8",
+   "a3b1",
+   "d7f6"
+  ],
+  "expected": {},
+  "expected_occurrences": 1,
+  "observed": {
+   "bestmove": "g1f3",
+   "score_cp": 10,
+   "mate": null
+  }
+ },
+ {
+  "id": "sicilian",
+  "initial_fen": "startpos",
+  "moves": [
+   "e2e4",
+   "c7c5",
+   "g1f3",
+   "d7d6",
+   "d2d4",
+   "c5d4",
+   "f3d4",
+   "g8f6",
+   "b1c3",
+   "a7a6"
+  ],
+  "expected": {},
+  "expected_occurrences": 1,
+  "observed": {
+   "bestmove": "c1e3",
+   "score_cp": 53,
+   "mate": null
+  }
+ },
+ {
+  "id": "english",
+  "initial_fen": "startpos",
+  "moves": [
+   "c2c4",
+   "e7e5",
+   "b1c3",
+   "g8f6",
+   "g2g3",
+   "d7d5",
+   "c4d5",
+   "f6d5",
+   "f1g2"
+  ],
+  "expected": {},
+  "expected_occurrences": 1,
+  "observed": {
+   "bestmove": "c8e6",
+   "score_cp": -22,
+   "mate": null
+  }
+ },
+ {
+  "id": "kings-indian",
+  "initial_fen": "startpos",
+  "moves": [
+   "d2d4",
+   "g8f6",
+   "c2c4",
+   "g7g6",
+   "b1c3",
+   "f8g7",
+   "e2e4",
+   "d7d6",
+   "g1f3",
+   "e8g8"
+  ],
+  "expected": {},
+  "expected_occurrences": 1,
+  "observed": {
+   "bestmove": "f1e2",
+   "score_cp": 51,
+   "mate": null
+  }
+ },
+ {
+  "id": "ruy-lopez",
+  "initial_fen": "startpos",
+  "moves": [
+   "e2e4",
+   "e7e5",
+   "g1f3",
+   "b8c6",
+   "f1b5",
+   "a7a6",
+   "b5a4",
+   "g8f6",
+   "e1g1",
+   "f8e7"
+  ],
+  "expected": {},
+  "expected_occurrences": 1,
+  "observed": {
+   "bestmove": "f1e1",
+   "score_cp": 17,
+   "mate": null
+  }
+ }
+]

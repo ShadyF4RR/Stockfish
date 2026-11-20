@@ -1,0 +1,23 @@
+{
+  "commit": "fb5c6f82983e23b1ad0c6518960e8dc4a0c5b300",
+  "binary_sha256": "ad3d2c5d41485a45bf1283d6711569fdf191a5e3d16b5dd7a2c2af572a9ffa7a",
+  "arch": "x86-64-avx2",
+  "compiler": "g++ (Debian 14.2.0-19) 14.2.0",
+  "compiler_binary_sha256": "6b3696e4dcb85e1c949c732a02befa50e3983ecf94ce7e8e58d9d503b954b79d",
+  "jobs": 4,
+  "hardware": {
+    "machine": "x86_64",
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "kernel": "6.18.57",
+    "cpus_available": 5
+  },
+  "build_flags": {
+    "target": "build",
+    "COMP": "gcc",
+    "CXX": "g++",
+    "ARCH": "x86-64-avx2"
+  },
+  "networks": {
+    "nn-bddd9d57eb87.nnue": "bddd9d57eb87bf09a6c4e1a3b3f1cc18855c83ee45fdbe18018ac3763b56b38e"
+  }
+}

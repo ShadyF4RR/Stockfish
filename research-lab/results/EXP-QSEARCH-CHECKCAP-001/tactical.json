@@ -1,0 +1,94 @@
+{
+  "alien": {
+    "baseline": {
+      "depth": 12,
+      "bestmove": "c8e6",
+      "nodes": 16428,
+      "cp": 168,
+      "mate": null
+    },
+    "candidate": {
+      "depth": 12,
+      "bestmove": "c8e6",
+      "nodes": 19663,
+      "cp": 165,
+      "mate": null
+    },
+    "reference": {
+      "depth": 18,
+      "bestmove": "c6c5",
+      "nodes": 303325,
+      "cp": 221,
+      "mate": null
+    }
+  },
+  "dragon": {
+    "baseline": {
+      "depth": 12,
+      "bestmove": "e4d5",
+      "nodes": 12559,
+      "cp": 113,
+      "mate": null
+    },
+    "candidate": {
+      "depth": 12,
+      "bestmove": "e4d5",
+      "nodes": 12559,
+      "cp": 113,
+      "mate": null
+    },
+    "reference": {
+      "depth": 18,
+      "bestmove": "e4d5",
+      "nodes": 156266,
+      "cp": 54,
+      "mate": null
+    }
+  },
+  "kieseritzky": {
+    "baseline": {
+      "depth": 12,
+      "bestmove": "d8e7",
+      "nodes": 7600,
+      "cp": 89,
+      "mate": null
+    },
+    "candidate": {
+      "depth": 12,
+      "bestmove": "d8e7",
+      "nodes": 7606,
+      "cp": 89,
+      "mate": null
+    },
+    "reference": {
+      "depth": 18,
+      "bestmove": "g8f6",
+      "nodes": 277498,
+      "cp": 54,
+      "mate": null
+    }
+  },
+  "budapest": {
+    "baseline": {
+      "depth": 12,
+      "bestmove": "b1c3",
+      "nodes": 25181,
+      "cp": 47,
+      "mate": null
+    },
+    "candidate": {
+      "depth": 12,
+      "bestmove": "b1c3",
+      "nodes": 25181,
+      "cp": 47,
+      "mate": null
+    },
+    "reference": {
+      "depth": 18,
+      "bestmove": "b1c3",
+      "nodes": 258140,
+      "cp": 56,
+      "mate": null
+    }
+  }
+}

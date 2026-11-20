@@ -1,0 +1,61 @@
+{
+  "order": "ABBABAAB",
+  "cpu": 4,
+  "variant_A": "baseline",
+  "variant_B": "candidate",
+  "runs": [
+    {
+      "variant": "A",
+      "nodes": 1488683,
+      "ms": 1729,
+      "nps": 861008
+    },
+    {
+      "variant": "B",
+      "nodes": 1388515,
+      "ms": 1852,
+      "nps": 749738
+    },
+    {
+      "variant": "B",
+      "nodes": 1388515,
+      "ms": 1658,
+      "nps": 837463
+    },
+    {
+      "variant": "A",
+      "nodes": 1488683,
+      "ms": 1717,
+      "nps": 867025
+    },
+    {
+      "variant": "B",
+      "nodes": 1388515,
+      "ms": 1781,
+      "nps": 779626
+    },
+    {
+      "variant": "A",
+      "nodes": 1488683,
+      "ms": 1792,
+      "nps": 830738
+    },
+    {
+      "variant": "A",
+      "nodes": 1488683,
+      "ms": 1778,
+      "nps": 837279
+    },
+    {
+      "variant": "B",
+      "nodes": 1388515,
+      "ms": 1657,
+      "nps": 837969
+    }
+  ],
+  "median_nps": {
+    "A": 849143.5,
+    "B": 808544.5
+  },
+  "candidate_percent": -4.781170673743606
+}
