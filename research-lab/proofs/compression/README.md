@@ -74,3 +74,22 @@ Timings are single-run observations on shared hardware. Launching the
 restored executable requires setting executable permission after verifying its
 origin. The storage measurements alone provide no evidence of an engine speed
 or playing-strength change.
+
+### Runtime after installation
+
+The packaging tool exits before Stockfish launches. After both gzip outputs passed independent SHA-256 and `cmp` checks, a Linux cloud worker compared the original and restored releases on the same CPU. Run the following command with trusted binaries and networks to reproduce the probe.
+
+```sh
+python3 runtime.py ORIGINAL_EXE RESTORED_EXE ORIGINAL_NNUE RESTORED_NNUE > sf19-runtime.json
+```
+
+Each timing used a fresh engine process. Each side has four startup and four canonical single-thread bench samples, measured in alternating ABBA blocks. Inputs were pre-read for hashing and page-cache state was uncontrolled. RSS is the peak for the child engine, in KiB. The table gives medians. Both programs produced the same 2,497,913-node bench signature on all eight launches.
+
+| Measurement | Original | Restored |
+| --- | ---: | ---: |
+| Launch to UCI readyok, seconds | 0.489 | 0.484 |
+| Bench CPU time, seconds | 3.103 | 3.045 |
+| Peak bench RSS, KiB | 324,090 | 325,030 |
+| Bench nodes/second | 992,299 | 990,546 |
+
+The original and restored networks gave identical NNUE and final scores in all three fixed positions. The execution path and inputs after unpacking are byte-identical. Timing and RSS differences in these short observations do not establish a runtime benefit. Cold-start timings and CPU cache miss rates remain unmeasured. The VM exposed only software, MSR and breakpoint event sources. No compression-versus-original chess match was warranted. [Individual samples and evaluations](sf19-runtime.json)
