@@ -523,17 +523,21 @@ bool Search::Worker::iterative_deepening() {
                         rootMoves[i].inexactLower = true;
             }
 
-            // Sort the PV lines searched so far and update the GUI
-            std::stable_sort(rootMoves.begin() + pvFirst, rootMoves.begin() + pvIdx + 1);
-
-            if (compareRepetition && !threads.stop && !rootMoves[0].is_inexact()
-                && rootMoves[0].score >= VALUE_DRAW && repeats(rootMoves[0]))
+            // An interrupted optional line must never overtake the completed drawing line.
+            if (compareRepetition && pvIdx == 1)
             {
-                if (pvIdx == 0)
-                    multiPV = 2;
-                else if (!rootMoves[1].is_inexact() && rootMoves[1].score == rootMoves[0].score
-                         && !repeats(rootMoves[1]))
+                const auto& alt = rootMoves[1];
+                if (!threads.stop && !alt.is_inexact()
+                    && (alt.score > rootMoves[0].score
+                        || (alt.score == rootMoves[0].score && !repeats(alt))))
                     std::swap(rootMoves[0], rootMoves[1]);
+            }
+            else
+            {
+                std::stable_sort(rootMoves.begin() + pvFirst, rootMoves.begin() + pvIdx + 1);
+                if (compareRepetition && !threads.stop && !rootMoves[0].is_inexact()
+                    && rootMoves[0].score >= VALUE_DRAW && repeats(rootMoves[0]))
+                    multiPV = 2;
             }
 
             if (mainThread && !threads.stop && (pvIdx + 1 == multiPV || nodes > NODES_LIMIT_OUTPUT))
