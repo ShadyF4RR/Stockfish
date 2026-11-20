@@ -1,0 +1,8 @@
+{
+  "name": "Freeze research baseline",
+  "target": "branch",
+  "enforcement": "active",
+  "conditions": {"ref_name": {"include": ["refs/heads/research/baseline"], "exclude": []}},
+  "bypass_actors": [],
+  "rules": [{"type": "update"}, {"type": "deletion"}, {"type": "non_fast_forward"}]
+}

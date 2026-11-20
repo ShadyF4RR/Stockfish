@@ -1,0 +1,194 @@
+{
+  "assignments": {
+    "coordinator": "Record the findings and decide whether the experiment qualifies for promotion under the reviewed policy.",
+    "evaluation": "Research compression techniques and plausible runtime effects. Identify and verify the user-reported Stockfish 19 artifact and its comparison before interpreting size differences.",
+    "implementation": "Develop an isolated proof of concept only after infrastructure approval and experiment selection.",
+    "performance": "Benchmark memory consumption, startup time, CPU use and NPS.",
+    "reviewer": "Independently examine the single-variable patch, equivalence tests and comparability.",
+    "testing": "Verify correctness and run balanced chess matches when the measurements justify them."
+  },
+  "baseline_commit": "edb0d9db6731067ec50ce619ff372b463bc4dd5d",
+  "candidate_commit": null,
+  "coordinator": "coordinator",
+  "created_at": "2026-11-20T20:58:46+00:00",
+  "evidence": {
+    "artifacts": "research-lab/results/EXP-COMPRESSION-001/README.md",
+    "benchmark": {
+      "gzip_xz": "research-lab/results/EXP-COMPRESSION-001/sf19-runtime.json",
+      "mszip": "https://github.com/ShadyF4RR/Stockfish/blob/experiment/EXP-COMPRESSION-001/research-lab/results/EXP-COMPRESSION-001/README.md"
+    },
+    "build_configuration": "Official Stockfish 19 Linux x86-64 universal release, prebuilt; no recompilation.",
+    "compiler": null,
+    "compression": {
+      "gzip_xz": "research-lab/results/EXP-COMPRESSION-001/sf19-codecs.json",
+      "mszip": "mszip_reproduction"
+    },
+    "compute_usage": {
+      "cloud_codec_cpu_and_wall_per_trial": "research-lab/results/EXP-COMPRESSION-001/sf19-codecs.json",
+      "cloud_engine_cpu_and_wall_per_trial": "research-lab/results/EXP-COMPRESSION-001/sf19-runtime.json",
+      "public_fishtest_hours": 0
+    },
+    "correctness": "All four restores passed SHA-256 and length checks. Gzip outputs passed cmp, NNUE diagnostics matched at three positions, all eight benches searched 2497913 nodes. The actual MSZIP launchers passed UCI, a forced legal move and the SF19 release bench on native Windows and Linux GitHub runners. A Linux desktop GUI and Chromium HTML client drove the packaged engine.",
+    "elo_estimate": null,
+    "elo_uncertainty": null,
+    "fishtest": null,
+    "games": 4,
+    "hardware": "Codex Cloud Linux x86-64, same single-CPU affinity on all engine runtime trials. No CPU cache PMU.",
+    "hardware_review": null,
+    "match_settings": {
+      "elo_games": 0,
+      "fastchess": "one color-reversed pair, 4+0.04, 1 thread, 16 MiB hash",
+      "purpose": "client compatibility",
+      "xboard": "two legal mate-in-one games with reversed colors"
+    },
+    "review": null,
+    "statistical_decision": "Packaging only. No engine strength test warranted."
+  },
+  "explanation": "Packaging result documented. Owner identifies MSZIP and direct GUI/HTML use in the earlier experiment. Its exact files, implementation and 135 MB input were not recovered. Independent reconstruction restores the official native engine automatically. No playing-strength claim.",
+  "fork_baseline_commit": "1819b9ea37588be8adb044179fb54512f87c8249",
+  "hypothesis": "A lossless compression change may reduce engine or network storage and loading costs while preserving decoded data and engine behavior. Measure its effect on resident memory, startup time, CPU use and search speed before considering matches.",
+  "id": "EXP-COMPRESSION-001",
+  "mszip_reproduction": {
+    "experiment_report": "https://github.com/ShadyF4RR/Stockfish/blob/experiment/EXP-COMPRESSION-001/research-lab/results/EXP-COMPRESSION-001/README.md",
+    "linux": {
+      "block_bytes": 32768,
+      "blocks": 3148,
+      "cab_bytes": 86252676,
+      "cab_sha256": "9ba8c767c20cf6ddace7641f2e95e6d854e29cf32627ab2e1bdeda4e7ea6444f",
+      "codec": "MSZIP",
+      "go_version": "go version go1.24.6 linux/amd64",
+      "independent_decoder": "libarchive 3.7.4",
+      "input_bytes": 103153472,
+      "input_sha256": "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+      "launcher_bytes": 88174740,
+      "launcher_file": "stockfish19-mszip",
+      "launcher_sha256": "fd75419d6792664c7ac7260de67fc9b9c7ba49187813b239ada9c353a4680722",
+      "level": 1,
+      "mem_level": 4,
+      "original_commit": "edb0d9db6731067ec50ce619ff372b463bc4dd5d",
+      "original_tag": "sf_19",
+      "platform": "linux/amd64",
+      "restored_bytes": 103153472,
+      "restored_sha256": "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+      "zlib_version": "1.3.2"
+    },
+    "linux_runtime_medians": {
+      "native": {
+        "bench_nps": 848870.5,
+        "first_bestmove_seconds": 0.807285752499979,
+        "kernel_max_process_rss_kib": 324116.0,
+        "ready_seconds": 0.5946711075000621,
+        "sampled_group_peak_rss_kib": 323908.0,
+        "steady_suite_nps": 643368.1447019308,
+        "system_cpu_s": 0.25218199999999996,
+        "uci_seconds": 0.5739946480000526,
+        "user_cpu_s": 4.6592145
+      },
+      "packed_cached": {
+        "bench_nps": 857214.0,
+        "first_bestmove_seconds": 0.9148433995000005,
+        "kernel_max_process_rss_kib": 324352.0,
+        "ready_seconds": 0.7551207510000495,
+        "sampled_group_peak_rss_kib": 323862.0,
+        "steady_suite_nps": 637908.9125265129,
+        "system_cpu_s": 0.367264,
+        "uci_seconds": 0.7370619700000134,
+        "user_cpu_s": 4.7548315
+      },
+      "packed_fresh": {
+        "bench_nps": 912994.0,
+        "first_bestmove_seconds": 3.0054266370000278,
+        "kernel_max_process_rss_kib": 324316.0,
+        "ready_seconds": 2.8636157844999843,
+        "sampled_group_peak_rss_kib": 324276.0,
+        "steady_suite_nps": 719770.2132042435,
+        "system_cpu_s": 0.48903549999999996,
+        "uci_seconds": 2.841556677499966,
+        "user_cpu_s": 6.317918000000001
+      }
+    },
+    "reconstruction": {
+      "activation": "Automatic first-use decode to private cache, SHA-256 verified on subsequent launches",
+      "codec": "Cabinet 1.3 single-folder MSZIP, 32 KiB CK blocks with history, zlib level 1/memLevel 4",
+      "host": "native executable on each platform; custom HTML uses a loopback UCI backend",
+      "source_release": "official sf_19 Linux and Windows x86-64 universal"
+    },
+    "reported_original": {
+      "architecture": "unknown",
+      "codec": "MSZIP",
+      "custom_html": true,
+      "direct_gui": true,
+      "input_mb_approx": 135,
+      "output_mb_approx": 88,
+      "source": "owner recollection"
+    },
+    "verified_ci_run": "https://github.com/ShadyF4RR/Stockfish/actions/runs/44819051300",
+    "windows": {
+      "block_bytes": 32768,
+      "blocks": 3145,
+      "cab_bytes": 86206725,
+      "cab_sha256": "60928110f352466b27aad2a734e4d75b323ef9e4c2ff79fef80e5d2a1c1ac3bb",
+      "codec": "MSZIP",
+      "go_version": "go version go1.24.6 linux/amd64",
+      "independent_decoder": "libarchive 3.7.4",
+      "input_bytes": 103046300,
+      "input_sha256": "45bc8e4969147db9c2eb533810637994619bff0eacc81ccfd9854394901bcbd0",
+      "launcher_bytes": 88265216,
+      "launcher_file": "stockfish19-mszip.exe",
+      "launcher_sha256": "d4d8230c9c60379cd22c04ec75fb562f24dbf1637408e2e12e63681b46a4da91",
+      "level": 1,
+      "mem_level": 4,
+      "original_commit": "edb0d9db6731067ec50ce619ff372b463bc4dd5d",
+      "original_tag": "sf_19",
+      "platform": "windows/amd64",
+      "restored_bytes": 103046300,
+      "restored_sha256": "45bc8e4969147db9c2eb533810637994619bff0eacc81ccfd9854394901bcbd0",
+      "zlib_version": "1.3.2"
+    },
+    "windows_performance_run": "https://github.com/ShadyF4RR/Stockfish/actions/runs/44819695849"
+  },
+  "previous_proof": {
+    "branch": "proof/compression-artifact-tool",
+    "commit": "48f05a733339aa09c5fcb9cb22bed74deaa0e2d3",
+    "purpose": "gzip/xz install-only feasibility"
+  },
+  "proof_branch": "experiment/EXP-COMPRESSION-001",
+  "proof_commit": "45a664a5a5af824f4319ea3a7de6d057c350e73e",
+  "protocol": "research-lab/experiments/compression-001.md",
+  "related_experiments": [],
+  "reports": [
+    {
+      "candidate_commit": null,
+      "evidence": {
+        "artifacts": "research-lab/results/EXP-COMPRESSION-001/README.md",
+        "benchmark": "research-lab/results/EXP-COMPRESSION-001/sf19-runtime.json",
+        "compression": "research-lab/results/EXP-COMPRESSION-001/sf19-codecs.json"
+      },
+      "proof_commit": "48f05a733339aa09c5fcb9cb22bed74deaa0e2d3",
+      "role": "performance",
+      "summary": "Measured exact official release artifacts, lossless restoration, startup, CPU, peak RSS, canonical bench and NNUE equivalence. Original codec and machine cache metrics remain unknown.",
+      "time": "2026-11-20T21:06:18+00:00"
+    },
+    {
+      "candidate_commit": null,
+      "evidence": {
+        "ci": "https://github.com/ShadyF4RR/Stockfish/actions/runs/44819051300",
+        "report": "https://github.com/ShadyF4RR/Stockfish/blob/experiment/EXP-COMPRESSION-001/research-lab/results/EXP-COMPRESSION-001/README.md"
+      },
+      "proof_commit": "45a664a5a5af824f4319ea3a7de6d057c350e73e",
+      "role": "testing",
+      "summary": "Verified real MSZIP outputs against official Stockfish 19; GUI-compatible native UCI and HTML backend use, no manual extraction. Historical implementation unknown.",
+      "time": "2026-11-20T21:20:33+00:00"
+    }
+  ],
+  "responsible_agent": "evaluation",
+  "retry_reason": null,
+  "schema_version": 1,
+  "source_changes": [
+    "research-lab/proofs/mszip/",
+    ".github/workflows/mszip-package.yml"
+  ],
+  "status": "documented",
+  "topic": "compression-runtime",
+  "updated_at": "2026-11-20T21:20:33+00:00"
+}

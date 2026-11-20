@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "fork": "ShadyF4RR/Stockfish",
+  "baseline_branch": "research/baseline",
+  "integration_branch": "research/integration",
+  "required_check": "research-ci",
+  "engine_path_prefix": "src/",
+  "protected_engine_files": ["src/Makefile"],
+  "project_target_elo": 3.0,
+  "minimum_one_sided_confidence": 0.95,
+  "require_lower_bound_at_target": true,
+  "require_sequentially_valid_evidence": true,
+  "require_passing_correctness": true,
+  "require_reproducible_bench": true,
+  "require_independent_review": true,
+  "require_material_regressions_resolved": true,
+  "require_clean_merge": true,
+  "require_exact_commit_ci": true,
+  "require_official_fishtest_for_functional_change": true,
+  "automatic_integration_merge": false,
+  "automatic_upstream_submission": false
+}

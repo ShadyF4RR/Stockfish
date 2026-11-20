@@ -1,0 +1,9 @@
+# Changes to lab policy, orchestration and checks need the fork owner's review.
+/AGENTS.md        @ShadyF4RR
+/.github/         @ShadyF4RR
+/.gitattributes   @ShadyF4RR
+/.gitmodules      @ShadyF4RR
+/research-lab/    @ShadyF4RR
+/scripts/         @ShadyF4RR
+/tests/           @ShadyF4RR
+/src/Makefile     @ShadyF4RR

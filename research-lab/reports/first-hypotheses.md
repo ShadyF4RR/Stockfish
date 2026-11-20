@@ -1,0 +1,25 @@
+# Three candidates for the first experiment
+
+These proposals refer to fork commit `1819b9ea37588be8adb044179fb54512f87c8249`. None has been implemented or tested. Before allocating games, the coordinator should compare the chosen idea with the lab history, recent upstream changes and searchable Fishtest runs. Record the search terms and any related runs, including failed tests.
+
+## 1. Give the six-ply continuation less weight when ordering quiet moves
+
+In `MovePicker::generate_and_score<QUIETS>()`, Stockfish adds continuation-history scores from one, two, three, four and six plies back. The six-ply entry gets the same coefficient in the sum as the one-ply entry. Its update already has a different weight. Test exactly one change in the ordering score, from `(*ch5)[pc][to]` to `(*ch5)[pc][to] / 2`. The hypothesis is that nearby moves predict quiet cutoffs better and occasionally lose their ordering advantage to a stale entry. The recent removal of the fifth-ply update concerned a different offset. [Move scoring at the baseline](https://github.com/official-stockfish/Stockfish/blob/1819b9ea37588be8adb044179fb54512f87c8249/src/movepick.cpp) · [Fifth-ply change](https://github.com/official-stockfish/Stockfish/commit/a43f36824bb5363d574c57f5d45ade27ae15a956)
+
+Screen this one first. Its mechanism operates in a single-thread fixed-depth search and needs no training or special clock setup. On a fixed position list, measure nodes to identical depths and the fraction of quiet beta cutoffs found on the first quiet tried. Collect the latter in separate diagnostic builds of both revisions. A lower first-quiet cutoff rate undermines the ordering hypothesis. The principal risk is losing a useful sequence signal in long forcing lines.
+
+## 2. Reduce the evaluation discount for reversible moves
+
+In `scale_evaluation`, change the single divisor in `v -= v * pos.rule50_count() / 189` from 189 to 205. After 40 reversible plies, this retains approximately 80.5% of the pre-discount score instead of 78.8%. The hypothesis is that the current network still identifies convertible advantages in some positions where a pawn move or capture can reset the clock. The network and the draw adjudication rules are held fixed. The linear damping rule predates the current network. [Evaluation at the baseline](https://github.com/official-stockfish/Stockfish/blob/1819b9ea37588be8adb044179fb54512f87c8249/src/evaluate.cpp) · [Linear damping history](https://github.com/official-stockfish/Stockfish/commit/180cab443896a6a37a3c39852ff124ce856987d2) · [Network update](https://github.com/official-stockfish/Stockfish/commit/5d03b6e578a5eedc822e4563bdbb89e762fc2a59)
+
+Use the UCI `eval` diagnostic on legal non-check positions with halfmove counters 0 and 40. At 0 the final evaluation must agree. At 40 the raw NNUE output must agree and the absolute scaled score should increase wherever rounding permits. For a secondary check, play a preselected set of reversible endgames in color-reversed pairs. Record whether won positions convert before the draw limit, using tablebase outcomes where available. A fall in conversions undermines the proposed mechanism. Assess overall strength on the same broad opening distribution used for the other candidates.
+
+## 3. Allow more search time immediately after a root move switch
+
+When a different root move takes the lead, `iterative_deepening()` records `lastBestMoveDepth`. The same iteration can still get a large time discount from the share of nodes spent on the leading move. For completed iterations with `rootDepth > 1 && rootDepth == lastBestMoveDepth`, raise the floor of the existing `highBestMoveEffort` multiplier to 0.90. This one change gives a newly leading move more time for verification. The maximum clock budget still applies. A recent MultiPV fix changed how the engine measures root effort. [Time allocation at the baseline](https://github.com/official-stockfish/Stockfish/blob/1819b9ea37588be8adb044179fb54512f87c8249/src/search.cpp) · [MultiPV fix](https://github.com/official-stockfish/Stockfish/commit/afc3e378c0aed100963d8901f5e572f8639300b9)
+
+Use actual clocks with increment, MultiPV 1, one thread per engine, and an otherwise idle worker. A diagnostic run can compare completed depths after switches and time remaining ten moves later. If extra time leaves less clock later without improving move quality, the mechanism has a cost with no observed benefit. Check low-time operation, time forfeits and maximum-time behavior. A fixed-node match cannot exercise this stopping rule.
+
+## Shared decision
+
+Freeze the candidate SHA, opening set and checksum, color reversal, seed, time control, game budget and decision rule before the match. An interval spanning both a loss and the project target leaves the screen inconclusive. Use the paired game outcomes for the strength decision. Diagnostic measurements can explain a result. A promotion requires the evidence specified in the lab policy, including appropriate official Fishtest results and a reproducible new bench before an upstream functional PR. [Contribution requirements](../../CONTRIBUTING.md)
