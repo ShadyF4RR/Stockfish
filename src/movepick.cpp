@@ -252,7 +252,7 @@ ExtMove* MovePicker::generate_and_score() {
                 value += 8 * (*lph)[m.raw()] / (1 + ply);
 
             // bonus for checks
-            if ((pos.check_squares(pt) & to) && pos.see_ge(m, -75))
+            if (pos.gives_check(m) && pos.see_ge(m, -75))
                 value += 16384;
 
             m.value = value;
