@@ -164,7 +164,11 @@ def plan(state, args, now, config):
     if not state["rehearsal"] and args.action != "cloud-claim":
         return idle("subscription_dispatch_unavailable")
     provider = "rehearsal" if state["rehearsal"] else "subscription_cloud_task"
-    budget = dimensions(dict(zero(), runner_minutes=config["runner_minutes_per_attempt"]))
+    minutes = getattr(args, "reserve_minutes", None)
+    minutes = config["runner_minutes_per_attempt"] if minutes is None else minutes
+    require(type(minutes) is int and 1 <= minutes <= config["runner_minutes_per_attempt"],
+            "reservation must fit the configured attempt limit")
+    budget = dimensions(dict(zero(), runner_minutes=minutes))
     usage = accounting(state, now)
     for key, cap in zip(("daily", "lifetime"), limits(state, config)):
         expected = total([usage[key], budget])
@@ -362,6 +366,7 @@ def main():
             planner.add_argument("--" + flag, required=True)
         planner.add_argument("--out", type=Path)
         if name == "cloud-claim":
+            planner.add_argument("--reserve-minutes", type=int, help="reserve a smaller bounded supervised campaign")
             planner.add_argument("--confirm-hosted-subscription-task", action="store_true", required=True,
                                  help="operator confirms this ordinary subscription task was already started")
 
