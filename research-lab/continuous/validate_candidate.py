@@ -90,7 +90,7 @@ def networks(tree, commit, cache, provided):
             shutil.copyfile(provided / name, target)
             continue
         for url in (f"https://tests.stockfishchess.org/api/nn/{name}",
-                    f"https://raw.githubusercontent.com/official-stockfish/networks/master/{name}"):
+                    f"https://github.com/official-stockfish/networks/raw/master/{name}"):
             run = subprocess.run(["curl", "-q", "--proto", "=https", "--proto-redir", "=https",
                                   "-fsSL", "--max-time", "75", "--max-filesize", str(512 * 1024**2),
                                   "-o", target, url], env={"PATH": os.defpath})
@@ -232,6 +232,8 @@ def execute(args, report, output, work):
     if os.getenv("GITHUB_ACTIONS") == "true" and not hosted:
         raise ValueError("continuous Actions jobs require disposable GitHub-hosted runners")
     profile = cfg["hardware_profiles"][cfg["default_hardware_profile"]].copy()
+    if hosted and os.getuid() == 0:
+        raise ValueError("start the trusted worker as the ordinary hosted runner account")
     if hosted:
         # Small hosted VMs expose vCPUs. Both the reserved and assigned slots refer to vCPUs.
         profile.update(count_vcpus=True, reserve_cpus=1, reserve_mib=1536)
@@ -248,6 +250,10 @@ def execute(args, report, output, work):
     base, new = head(args.base), head(args.candidate)
     report.update(baseline_sha=base, candidate_sha=new,
                   source_paths=check_source(args.candidate, base, new, args.rehearsal))
+    fc = args.fastchess_dir
+    if not (args.rehearsal or args.build_only) and (fc is None or head(fc) != FASTCHESS or not os.access(fc / "fastchess", os.X_OK)
+            or git(fc, "diff", "--name-only", "HEAD") or sha256(fc / "app/tests/data/openings.epd") != BOOK):
+        raise ValueError("the prebuilt pinned Fastchess checkout and matching opening book are required")
     nets = work / "nets"
     nets.mkdir()
     for tree, ref in ((args.base, base), (args.candidate, new)):
@@ -267,14 +273,14 @@ def execute(args, report, output, work):
         report.update(status="validated_rehearsal", decision="validated_rehearsal",
                       reason="Verified exact standalone comment insertion and matching published bench on both builds.")
         return
+    if args.build_only:
+        report.update(status="validated_build", decision="build_only",
+                      reason="Independent correctness and benchmark replication. No match campaign allocated.")
+        return
     if ratio < NPS_FLOOR:
         report.update(status="hold_performance", decision="hold_performance",
                       reason="Candidate median benchmark speed fell below 95% of baseline; requires independent review.")
         return
-    fc = args.fastchess_dir
-    if (fc is None or head(fc) != FASTCHESS or git(fc, "diff", "--name-only", "HEAD") or
-            sha256(fc / "app/tests/data/openings.epd") != BOOK):
-        raise ValueError("the prebuilt pinned Fastchess checkout and matching opening book are required")
     # CPU and RAM were already reserved on admission. Project just this assigned
     # slice into the no-network sandbox; local_match still enforces per-game limits.
     match_cfg.update(reserve_cpus=0, reserve_mib=0, max_worker_cpus=len(cpus),
@@ -313,7 +319,9 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     for name in ("base", "candidate", "output"):
         p.add_argument(name, type=lambda x: Path(x).resolve())
-    p.add_argument("--rehearsal", action="store_true")
+    mode = p.add_mutually_exclusive_group()
+    mode.add_argument("--rehearsal", action="store_true")
+    mode.add_argument("--build-only", action="store_true", help="replicate build and bench without allocating games")
     p.add_argument("--fastchess-dir", type=lambda x: Path(x).resolve())
     p.add_argument("--nnue-dir", type=lambda x: Path(x).resolve())
     args = p.parse_args()
