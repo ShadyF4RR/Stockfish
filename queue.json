@@ -4,11 +4,6 @@
       "hypothesis": "An opt-in seeded ordering of equivalently evaluated legal root moves can change variety without sacrificing expected score.",
       "path": "src/search.cpp",
       "topic": "opt-in-seeded-root-diversity"
-    },
-    {
-      "hypothesis": "Testing only. EXP-QSEARCH-CHECKCAP-001 is implemented at fb5c6f82983e23b1ad0c6518960e8dc4a0c5b300 against 1819b9ea37588be8adb044179fb54512f87c8249. Use the immutable match-request.json on research/reporting under research-lab/results/EXP-QSEARCH-CHECKCAP-001. Run one Fastchess campaign of 50 distinct color-reversed pairs with the registered clock and seed on a verified worker. Check existing claims and results before launch. Record complete paired PGNs and interval. Do not recode or launch a duplicate campaign.",
-      "path": "src/search.cpp",
-      "topic": "screen-qsearch-checkcap-001"
     }
   ],
   "items": [
@@ -171,5 +166,14 @@
   ],
   "paused": null,
   "rehearsal": null,
-  "schema": 1
+  "schema": 1,
+  "testing_handoffs": [
+    {
+      "at": "2026-11-20T22:53:19+00:00",
+      "hypothesis": "Testing only. EXP-QSEARCH-CHECKCAP-001 is implemented at fb5c6f82983e23b1ad0c6518960e8dc4a0c5b300 against 1819b9ea37588be8adb044179fb54512f87c8249. Use the immutable match-request.json on research/reporting under research-lab/results/EXP-QSEARCH-CHECKCAP-001. Run one Fastchess campaign of 50 distinct color-reversed pairs with the registered clock and seed on a verified worker. Check existing claims and results before launch. Record complete paired PGNs and interval. Do not recode or launch a duplicate campaign.",
+      "match": "EXP-QSEARCH-CHECKCAP-001",
+      "path": "src/search.cpp",
+      "topic": "screen-qsearch-checkcap-001"
+    }
+  ]
 }
