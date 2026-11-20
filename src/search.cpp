@@ -329,6 +329,18 @@ bool Search::Worker::iterative_deepening() {
 
     multiPV = std::min(multiPV, rootMoves.size());
 
+    // Compare a second line only when the normal first choice claims a threefold.
+    const bool compareRepetition = multiPV == 1 && rootMoves.size() > 1 && !skill.enabled()
+                                && !tbConfig.rootInTB && rootPos.rule50_count() < 99
+                                && !rootPos.is_repetition(0) && rootPos.upcoming_repetition(0);
+    auto repeats = [&](const RootMove& rm) {
+        StateInfo state;
+        rootPos.do_move(rm.pv[0], state);
+        bool repeated = rootPos.is_repetition(1);
+        rootPos.undo_move(rm.pv[0]);
+        return repeated;
+    };
+
     int  searchAgainCounter = 0;
     int  failHighRecovery   = 0;
     u64  totalEffort        = 0;
@@ -361,6 +373,9 @@ bool Search::Worker::iterative_deepening() {
             rootMoves[i].previousPV         = rootMoves[i].pv;
             rootMoves[i].previousScoreExact = i < multiPV;
         }
+
+        if (compareRepetition)
+            multiPV = 1;
 
         usize pvFirst = pvLast = 0;
 
@@ -510,6 +525,16 @@ bool Search::Worker::iterative_deepening() {
 
             // Sort the PV lines searched so far and update the GUI
             std::stable_sort(rootMoves.begin() + pvFirst, rootMoves.begin() + pvIdx + 1);
+
+            if (compareRepetition && !threads.stop && !rootMoves[0].is_inexact()
+                && rootMoves[0].score >= VALUE_DRAW && repeats(rootMoves[0]))
+            {
+                if (pvIdx == 0)
+                    multiPV = 2;
+                else if (!rootMoves[1].is_inexact() && rootMoves[1].score == rootMoves[0].score
+                         && !repeats(rootMoves[1]))
+                    std::swap(rootMoves[0], rootMoves[1]);
+            }
 
             if (mainThread && !threads.stop && (pvIdx + 1 == multiPV || nodes > NODES_LIMIT_OUTPUT))
             {
