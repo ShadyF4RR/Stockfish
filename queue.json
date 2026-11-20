@@ -108,14 +108,30 @@
       "topic": "see-qualified-quiet-checks"
     },
     {
-      "attempts": [],
-      "baseline": null,
+      "attempts": [
+        {
+          "budget": {
+            "cost_usd": 0.0,
+            "input_tokens": 0,
+            "output_tokens": 0,
+            "requests": 0,
+            "runner_minutes": 45
+          },
+          "checkpoints": [],
+          "expires_at": "2026-11-21T00:16:52+00:00",
+          "job": "cloud-56eb3d6f00c23b433aed94-repetition",
+          "lease": "8686dadd74744917bb645df0cef3f21c",
+          "provider": "subscription_cloud_task",
+          "started_at": "2026-11-20T22:16:52+00:00"
+        }
+      ],
+      "baseline": "1819b9ea37588be8adb044179fb54512f87c8249",
       "created_at": "2026-11-20T22:06:16+00:00",
       "hypothesis": "Among legal root choices, retain a draw when alternatives are weaker and investigate whether supported equivalent expected results can prefer a continuation.",
       "id": "EXP-CONT-000003",
       "kind": "run",
       "path": "src/search.cpp",
-      "status": "queued",
+      "status": "running",
       "topic": "root-repetition-expected-score"
     }
   ],
