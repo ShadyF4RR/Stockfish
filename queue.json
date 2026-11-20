@@ -11,7 +11,13 @@
             "requests": 0,
             "runner_minutes": 110
           },
-          "checkpoints": [],
+          "checkpoints": [
+            {
+              "details": {},
+              "stage": "independent-review",
+              "time": "2026-11-20T21:49:29+00:00"
+            }
+          ],
           "expires_at": "2026-11-20T23:49:26+00:00",
           "job": "cloud-56eb3d6f00c23b433aed94",
           "lease": "bc9e0170baa64802a19137c8675a6e98",
