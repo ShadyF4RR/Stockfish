@@ -1,0 +1,68 @@
+name: Research CI
+on:
+  pull_request:
+    branches: [master, research/integration, research/baseline]
+  push:
+    branches: [research/integration, 'experiment/**']
+  merge_group:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: research-ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  research-ci:
+    name: research-ci
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Pin the tested source
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          git worktree add --detach "$RUNNER_TEMP/engine-src" "$SOURCE_SHA"
+          test "$(git -C "$RUNNER_TEMP/engine-src" rev-parse HEAD)" = "$SOURCE_SHA"
+          printf 'Testing engine commit %s\n' "$SOURCE_SHA" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Check the experiment ledger and scripts
+        run: |
+          for script in research-lab/scripts/*.sh; do bash -n "$script"; done
+          python3 -m unittest discover -s research-lab/tests -p 'test_*.py'
+          python3 research-lab/scripts/experiment.py list
+
+      - name: Install upstream test dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install --no-install-recommends -y expect
+
+      - name: Build and check the pinned engine
+        run: |
+          research-lab/scripts/build.sh "$RUNNER_TEMP/engine-src" "$RUNNER_TEMP/engine-build"
+          research-lab/scripts/validate.sh "$RUNNER_TEMP/engine-build"
+
+      - name: Verify the published bench and repeat it
+        run: |
+          cd "$RUNNER_TEMP/engine-src"
+          bench=$(git log -100 --format=%B | sed -nE 's/^[[:space:]]*[Bb]ench[ :]+([0-9]{6,8})[[:space:]]*$/\1/p' | sed -n '1p')
+          test -n "$bench"
+          "$GITHUB_WORKSPACE/research-lab/scripts/benchmark.sh" "$RUNNER_TEMP/engine-build" "$bench"
+
+      - name: Preserve measurements and diagnostics
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: research-ci-${{ github.sha }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/engine-build/*.json
+            ${{ runner.temp }}/engine-build/*.log
+          if-no-files-found: warn
+          retention-days: 14

@@ -1,0 +1,2 @@
+# Preserve Fastchess PGN bytes (including its final separator) for recorded SHA-256.
+*.pgn -text whitespace=-blank-at-eof

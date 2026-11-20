@@ -1,0 +1,40 @@
+name: Research queue inventory
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 4 * * *'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: research-ledger-inventory
+  cancel-in-progress: false
+
+jobs:
+  inventory:
+    # Phase 1 default is off. Opt-in only enables a read-only inventory.
+    if: vars.RESEARCH_QUEUE_INVENTORY == 'enabled'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: research/ledger
+          persist-credentials: false
+          sparse-checkout: research-lab/experiments
+      - name: Read versioned queue data
+        working-directory: ${{ runner.temp }}
+        run: |
+          python3 -I - <<'PYTHON'
+          import json, os
+          from pathlib import Path
+          ledger = Path(os.environ["GITHUB_WORKSPACE"]) / "research-lab" / "experiments"
+          rows = []
+          for path in sorted(ledger.glob("*.json")):
+              if path.is_symlink() or path.stat().st_size > 2_000_000:
+                  raise ValueError("Unexpected ledger entry")
+              record = json.loads(path.read_text())
+              rows.append({key: record[key] for key in ("id", "topic", "status")})
+          print(json.dumps(rows, ensure_ascii=True))
+          PYTHON

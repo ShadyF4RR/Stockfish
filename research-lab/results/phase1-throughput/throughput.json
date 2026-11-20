@@ -1,0 +1,30 @@
+{
+  "status": "complete",
+  "profile": "cloud_detected",
+  "measurements": [
+    {
+      "games": 4,
+      "concurrency": 2,
+      "threads": 1,
+      "games_per_hour": 394.04947096836185,
+      "wall_seconds": 36.54363490099996,
+      "evidence": "2games-1threads/match.json"
+    },
+    {
+      "games": 4,
+      "concurrency": 1,
+      "threads": 2,
+      "games_per_hour": 215.42146979001285,
+      "wall_seconds": 66.84570490600004,
+      "evidence": "1games-2threads/match.json"
+    }
+  ],
+  "fastest_observed": {
+    "games": 4,
+    "concurrency": 2,
+    "threads": 1,
+    "games_per_hour": 394.04947096836185,
+    "wall_seconds": 36.54363490099996,
+    "evidence": "2games-1threads/match.json"
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "purpose": "Phase 1 infrastructure verification",
+  "date_utc": "2026-11-20",
+  "environment": "Codex Cloud Linux worker; local execution. Speed measurements include shared CPU load.",
+  "source_changes": [],
+  "build": {
+    "commit": "1819b9ea37588be8adb044179fb54512f87c8249",
+    "binary_sha256": "57ac1871660913d617b85887a58192cc39ebd581134e87840232a199d0280ff7",
+    "arch": "x86-64-avx2",
+    "compiler": "g++ (Debian 14.2.0-19) 14.2.0",
+    "compiler_binary_sha256": "6b3696e4dcb85e1c949c732a02befa50e3983ecf94ce7e8e58d9d503b954b79d",
+    "jobs": 4,
+    "hardware": {
+      "machine": "x86_64",
+      "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+      "kernel": "6.18.57",
+      "cpus_available": 5
+    },
+    "build_flags": {
+      "target": "build",
+      "COMP": "gcc",
+      "CXX": "g++",
+      "ARCH": "x86-64-avx2"
+    },
+    "networks": {
+      "nn-bddd9d57eb87.nnue": "bddd9d57eb87bf09a6c4e1a3b3f1cc18855c83ee45fdbe18018ac3763b56b38e"
+    }
+  },
+  "network_provenance": {
+    "release_asset": "https://github.com/official-stockfish/Stockfish/releases/download/stockfish-dev-20261120-1819b9ea/stockfish-linux-x86-64-universal.tar.gz",
+    "asset_sha256": "4127d950acd1dd628df218c6ea7eadd781cf2b2998cf8094c588941952cec73a",
+    "method": "Exported the embedded net with the official binary using export_net. Verified the release asset against its GitHub digest and the exported network against the full upstream LFS OID.",
+    "network_bytes": 138360528
+  },
+  "commands": [
+    "NNUE_DIR=/tmp/sf-lab-release JOBS=4 ./research-lab/scripts/build.sh . /tmp/sf-lab-pinned",
+    "./research-lab/scripts/validate.sh /tmp/sf-lab-pinned",
+    "./research-lab/scripts/benchmark.sh /tmp/sf-lab-pinned 1488683",
+    [
+      "/tmp/sf-lab-fastchess/fastchess",
+      "-engine",
+      "cmd=/tmp/sf-lab-pinned/stockfish",
+      "name=candidate",
+      "-engine",
+      "cmd=/tmp/sf-lab-pinned/stockfish",
+      "name=baseline",
+      "-each",
+      "proto=uci",
+      "tc=4+0.04",
+      "option.Threads=1",
+      "option.Hash=16",
+      "-openings",
+      "file=/tmp/sf-lab-fastchess/app/tests/data/openings.epd",
+      "format=epd",
+      "order=random",
+      "-srand",
+      "20261120",
+      "-rounds",
+      "1",
+      "-games",
+      "2",
+      "-repeat",
+      "-concurrency",
+      "1",
+      "-report",
+      "penta=true",
+      "-pgnout",
+      "file=games.pgn",
+      "min=false"
+    ]
+  ],
+  "validation": {
+    "commit": "1819b9ea37588be8adb044179fb54512f87c8249",
+    "binary_sha256": "57ac1871660913d617b85887a58192cc39ebd581134e87840232a199d0280ff7",
+    "uci": "passed",
+    "perft": "passed",
+    "reprosearch": "passed",
+    "perft_cases": 20,
+    "reprosearch_node_budgets": 20,
+    "dependency": "Debian expect 5.45.4 installed in a temporary mount namespace at /usr/bin/expect."
+  },
+  "bench_reference_commit": "20584a026f96e7ffb99eed107dfc1aee26375dc3",
+  "benchmark": {
+    "commit": "1819b9ea37588be8adb044179fb54512f87c8249",
+    "binary_sha256": "57ac1871660913d617b85887a58192cc39ebd581134e87840232a199d0280ff7",
+    "command": [
+      "stockfish",
+      "bench"
+    ],
+    "signature": 1488683,
+    "runs": [
+      {
+        "nodes": 1488683,
+        "nps": 516186,
+        "engine_ms": 2884,
+        "wall_seconds": 3.290573176999999,
+        "cpu_seconds": 3.2207800000000004
+      },
+      {
+        "nodes": 1488683,
+        "nps": 664294,
+        "engine_ms": 2241,
+        "wall_seconds": 2.834833434000018,
+        "cpu_seconds": 2.7835329999999994
+      }
+    ],
+    "max_rss_kib": 324596,
+    "expected_nodes": 1488683
+  },
+  "paired_self_match": {
+    "settings": {
+      "max_pairs": 50,
+      "default_pairs": 10,
+      "timeout_seconds": 1800,
+      "concurrency": 1,
+      "time_control": "4+0.04",
+      "hash_mib": 16,
+      "seed": 20261120,
+      "pairs": 1,
+      "threads": 1
+    },
+    "book_sha256": "421a4efcddb95c3e70b1f9ad6abbeab1edcb6ab8e9ae743d94c42a5d78a6e82a",
+    "fastchess_sha256": "a95c06372a4e74c28b11148f4ad252502e2db30fe7fb7d241abe4603ced47367",
+    "games": 2,
+    "wins": 0,
+    "draws": 2,
+    "losses": 0,
+    "pentanomial": [
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "score": 0.5,
+    "elo": 0.0,
+    "elo_ci95": [
+      null,
+      null
+    ],
+    "interval_method": "fixed-sample paired Hoeffding",
+    "decision": "inconclusive",
+    "pgn_sha256": "c88ea2ae8d765e49f8a9448897d4a5c1e8bada6255fd550979a9e728ebebb5e5",
+    "compute": {
+      "wall_seconds": 28.46779178899999,
+      "child_cpu_seconds": 27.11668
+    },
+    "fastchess_commit": "894616028492ae6114835195f14a899f6fa237d3",
+    "book": "fastchess/app/tests/data/openings.epd",
+    "pgn": "self-match.pgn",
+    "comparison": "Identical baseline executable on both sides. One reversed opening pair exercises the match pipeline. Both Elo interval endpoints are unbounded."
+  }
+}

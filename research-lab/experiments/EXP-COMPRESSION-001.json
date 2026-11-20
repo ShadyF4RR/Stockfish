@@ -1,0 +1,67 @@
+{
+  "assignments": {
+    "coordinator": "Record the findings and decide whether the experiment qualifies for promotion under the reviewed policy.",
+    "evaluation": "Research compression techniques and plausible runtime effects. Identify and verify the user-reported Stockfish 19 artifact and its comparison before interpreting size differences.",
+    "implementation": "Develop an isolated proof of concept only after infrastructure approval and experiment selection.",
+    "performance": "Benchmark memory consumption, startup time, CPU use and NPS.",
+    "reviewer": "Independently examine the single-variable patch, equivalence tests and comparability.",
+    "testing": "Verify correctness and run balanced chess matches when the measurements justify them."
+  },
+  "baseline_commit": "edb0d9db6731067ec50ce619ff372b463bc4dd5d",
+  "candidate_commit": null,
+  "coordinator": "coordinator",
+  "created_at": "2026-11-20T20:58:46+00:00",
+  "evidence": {
+    "artifacts": "research-lab/results/EXP-COMPRESSION-001/README.md",
+    "benchmark": "research-lab/results/EXP-COMPRESSION-001/sf19-runtime.json",
+    "build_configuration": "Official Stockfish 19 Linux x86-64 universal release, prebuilt; no recompilation.",
+    "compiler": null,
+    "compression": "research-lab/results/EXP-COMPRESSION-001/sf19-codecs.json",
+    "compute_usage": {
+      "cloud_codec_cpu_and_wall_per_trial": "research-lab/results/EXP-COMPRESSION-001/sf19-codecs.json",
+      "cloud_engine_cpu_and_wall_per_trial": "research-lab/results/EXP-COMPRESSION-001/sf19-runtime.json",
+      "public_fishtest_hours": 0
+    },
+    "correctness": "All four restores passed SHA-256 and length checks. Gzip outputs passed cmp, NNUE diagnostics matched at three positions, all eight benches searched 2497913 nodes.",
+    "elo_estimate": null,
+    "elo_uncertainty": null,
+    "fishtest": null,
+    "games": 0,
+    "hardware": "Codex Cloud Linux x86-64, same single-CPU affinity on all engine runtime trials. No CPU cache PMU.",
+    "hardware_review": null,
+    "match_settings": null,
+    "review": null,
+    "statistical_decision": "Packaging only. No engine strength test warranted."
+  },
+  "explanation": "Original experiment unresolved. Independent gzip and xz trials verified storage savings and byte-identical restoration for official Stockfish 19 Linux x86-64. No changed running engine or evidence of Elo gain.",
+  "fork_baseline_commit": "1819b9ea37588be8adb044179fb54512f87c8249",
+  "hypothesis": "A lossless compression change may reduce engine or network storage and loading costs while preserving decoded data and engine behavior. Measure its effect on resident memory, startup time, CPU use and search speed before considering matches.",
+  "id": "EXP-COMPRESSION-001",
+  "proof_branch": "proof/compression-artifact-tool",
+  "proof_commit": "48f05a733339aa09c5fcb9cb22bed74deaa0e2d3",
+  "protocol": "research-lab/experiments/compression-001.md",
+  "related_experiments": [],
+  "reports": [
+    {
+      "candidate_commit": null,
+      "evidence": {
+        "artifacts": "research-lab/results/EXP-COMPRESSION-001/README.md",
+        "benchmark": "research-lab/results/EXP-COMPRESSION-001/sf19-runtime.json",
+        "compression": "research-lab/results/EXP-COMPRESSION-001/sf19-codecs.json"
+      },
+      "proof_commit": "48f05a733339aa09c5fcb9cb22bed74deaa0e2d3",
+      "role": "performance",
+      "summary": "Measured exact official release artifacts, lossless restoration, startup, CPU, peak RSS, canonical bench and NNUE equivalence. Original codec and machine cache metrics remain unknown.",
+      "time": "2026-11-20T21:06:18+00:00"
+    }
+  ],
+  "responsible_agent": "evaluation",
+  "retry_reason": null,
+  "schema_version": 1,
+  "source_changes": [
+    "research-lab/proofs/compression/"
+  ],
+  "status": "documented",
+  "topic": "compression-runtime",
+  "updated_at": "2026-11-20T21:06:18+00:00"
+}

@@ -1,0 +1,33 @@
+{
+  "local_match": {
+    "max_pairs": 50,
+    "default_pairs": 10,
+    "timeout_seconds": 1800,
+    "concurrency": "auto",
+    "time_control": "4+0.04",
+    "hash_mib": 16,
+    "seed": 20261120,
+    "reserve_cpus": 2,
+    "reserve_mib": 4096,
+    "minimum_engine_mib": 384,
+    "max_worker_cpus": 6,
+    "max_worker_mib": 12288,
+    "calibration_pairs": 2,
+    "calibration_timeout_seconds": 300
+  },
+  "default_hardware_profile": "cloud_detected",
+  "hardware_profiles": {
+    "cloud_detected": {
+      "capacity_source": "detected",
+      "reserve_cpus": 2,
+      "reserve_mib": 4096
+    },
+    "local_8c_16g": {
+      "capacity_source": "detected",
+      "max_machine_cpus": 8,
+      "max_machine_mib": 16384,
+      "reserve_cpus": 2,
+      "reserve_mib": 4096
+    }
+  }
+}
