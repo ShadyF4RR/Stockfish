@@ -1,0 +1,19 @@
+{
+  "deferred": [],
+  "items": [
+    {
+      "attempts": [],
+      "baseline": null,
+      "created_at": "2026-11-20T21:49:15+00:00",
+      "hypothesis": "Halving the six-ply continuation-history contribution when ordering quiet moves may improve first-quiet cutoff selection.",
+      "id": "EXP-CONT-000001",
+      "kind": "run",
+      "path": "src/movepick.cpp",
+      "status": "queued",
+      "topic": "quiet-six-ply-continuation"
+    }
+  ],
+  "paused": null,
+  "rehearsal": null,
+  "schema": 1
+}
