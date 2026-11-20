@@ -75,6 +75,29 @@ constexpr u64 NODES_LIMIT_OUTPUT = 10'000'000;
 constexpr int SEARCHEDLIST_CAPACITY = 32;
 using SearchedList                  = ValueList<Move, SEARCHEDLIST_CAPACITY>;
 
+// The first three exact MultiPV lines have been ranked by the same completed iteration.
+usize diversity_choice(const RootMoves& moves, usize count, const Position& pos, int seed) {
+    const RootMove& top = moves[0];
+    if (top.is_inexact() || top.score < VALUE_DRAW || is_decisive(top.score))
+        return 0;
+
+    const int bestCp = UCIEngine::to_cp(top.score, pos);
+    usize     eligible = 1;
+    while (eligible < count)
+    {
+        const RootMove& next = moves[eligible];
+        if (next.is_inexact() || next.score < VALUE_DRAW || is_decisive(next.score)
+            || bestCp - UCIEngine::to_cp(next.score, pos) > 5)
+            break;
+
+        ++eligible;
+    }
+
+    const Key key = pos.key() ^ make_key(u64(seed));
+    PRNG      rng(key ? key : 1);
+    return mul_hi64(rng.rand<u64>(), eligible);
+}
+
 // Reductions lookup table indexed by depth or move number.
 const std::array<int, MAX_MOVES> reductions = [] {
     std::array<int, MAX_MOVES> table{};
@@ -326,6 +349,15 @@ bool Search::Worker::iterative_deepening() {
     // use behind-the-scenes to retrieve a set of possible moves.
     if (skill.enabled())
         multiPV = std::max(multiPV, usize(4));
+
+    // Both experimental modes pay for the same root lines. Preserve ordinary analysis,
+    // strength limiting, mate search, tablebase play and multithreaded search.
+    const int diversityMode = options["Diversity Mode"];
+    const bool diversity = diversityMode && mainThread && threads.size() == 1 && multiPV == 1
+                        && !skill.enabled() && !tbConfig.rootInTB && !limits.mate
+                        && !limits.infinite && !limits.ponderMode && rootMoves.size() > 1;
+    if (diversity)
+        multiPV = 3;
 
     multiPV = std::min(multiPV, rootMoves.size());
 
@@ -657,6 +689,18 @@ bool Search::Worker::iterative_deepening() {
             if (is_loss(rootMoves[0].score) && rootMoves[0].score < bestScore)
                 rootMoves[0].inexactLower = true;
             uciPvSent = false;
+        }
+    }
+
+    // A full update is sent only when every line of this iteration finished. Never select
+    // from a partial iteration, which can mix bounds and scores from different depths.
+    if (diversity && diversityMode == 2 && uciPvSent)
+    {
+        const usize pick = diversity_choice(rootMoves, multiPV, rootPos, options["Diversity Seed"]);
+        if (pick)
+        {
+            std::swap(rootMoves[0], rootMoves[pick]);
+            uciPvSent = false;  // Emit the chosen score/PV before bestmove and ponder.
         }
     }
 

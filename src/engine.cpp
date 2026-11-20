@@ -104,6 +104,9 @@ Engine::Engine(std::optional<std::filesystem::path> path) :
     options.add(  //
       "MultiPV", Option(1, 1, MAX_MOVES));
 
+    options.add("Diversity Mode", Option(0, 0, 2));
+    options.add("Diversity Seed", Option(0, 0, 2147483647));
+
     options.add("Skill Level", Option(20, 0, 20));
 
     options.add("Move Overhead", Option(10, 0, 5000));
