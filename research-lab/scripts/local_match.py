@@ -71,7 +71,10 @@ def opening_key(fen):
     x, y = ord(ep[0]) - ord("a"), int(ep[1])-1
     start = y-direction
     pawn, enemy = ("P", "p") if white else ("p", "P")
-    king = next(square for square, piece in sq.items() if piece == ("K" if white else "k"))
+    kings = [square for square, piece in sq.items() if piece == ("K" if white else "k")]
+    if len(kings) != 1:
+        raise ValueError("invalid king count in EPD position")
+    king = kings[0]
 
     def attacked(after):
         kx, ky = king

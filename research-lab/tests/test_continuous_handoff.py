@@ -69,7 +69,11 @@ class Handoff(unittest.TestCase):
             self.stage(side+'/validation.json', dict(**pin, uci='passed', perft='passed', reprosearch='passed'))
         book, pgn = [], []
         for i in range(16):
-            position = f'8/8/8/8/8/8/8/8 w - {chr(97+i%8)}{3 if i<8 else 6} 0 1'
+            pawn_file = i % 8
+            pawn_rank = (str(pawn_file) if pawn_file else '') + 'P' + (str(7-pawn_file) if pawn_file < 7 else '')
+            ranks = ['4k3', '8', '8', '8', '8', '8', '8', '4K3']
+            ranks[6 - i // 8] = pawn_rank
+            position = '/'.join(ranks) + ' w - - 0 1'
             book.append(position)
             for w,b,score in (('candidate','baseline','1-0'),('baseline','candidate','0-1')):
                 pgn.append(f'[Round "{i+1}"]\n[White "{w}"]\n[Black "{b}"]\n[Result "{score}"]\n'
