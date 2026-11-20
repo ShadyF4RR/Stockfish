@@ -73,6 +73,17 @@
       "path": "src/movepick.cpp",
       "status": "running",
       "topic": "see-qualified-quiet-checks"
+    },
+    {
+      "attempts": [],
+      "baseline": null,
+      "created_at": "2026-11-20T22:06:16+00:00",
+      "hypothesis": "Among legal root choices, retain a draw when alternatives are weaker and investigate whether supported equivalent expected results can prefer a continuation.",
+      "id": "EXP-CONT-000003",
+      "kind": "run",
+      "path": "src/search.cpp",
+      "status": "queued",
+      "topic": "root-repetition-expected-score"
     }
   ],
   "paused": null,
