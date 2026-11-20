@@ -2,7 +2,10 @@ name: Codex Cloud candidate validation
 on:
   push:
     branches: [master, research/continuous-coordinator]
-    paths: [research-lab/config/cloud-candidate.json]
+    paths:
+      - research-lab/config/cloud-candidate.json
+      - research-lab/continuous/validate_candidate.py
+      - .github/workflows/cloud-candidate-check.yml
   workflow_dispatch:
     inputs:
       experiment:

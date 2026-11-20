@@ -130,6 +130,11 @@ class Sandbox:
         for name in ("/bin", "/sbin", "/lib", "/lib64"):
             if Path(name).exists():
                 self.base += ["--ro-bind", name, name]
+        # Implicit bind-mount parents may be mode 0700, owned by the namespace
+        # creator (root on Actions). The unprivileged engine must traverse these
+        # synthetic directories; only the explicitly bound host objects are visible.
+        for directory in ("/etc", "/sys/devices/system", "/sys/fs", "/opt/fastchess/bin"):
+            self.base += ["--perms", "0755", "--dir", directory]
         for name in ("/etc/alternatives", "/etc/ld.so.cache", "/sys/devices/system/cpu", "/sys/fs/cgroup"):
             if Path(name).exists():
                 self.base += ["--ro-bind", name, name]
@@ -138,7 +143,8 @@ class Sandbox:
             "--ro-bind", str(work / "nets"), "/nets", "--clearenv",
             "--setenv", "PATH", "/opt/fastchess/bin:/usr/bin:/bin", "--setenv", "HOME", "/tmp/home",
             "--setenv", "LC_ALL", "C", "--setenv", "JOBS", str(jobs),
-            "--setenv", "NNUE_DIR", "/nets", "--setenv", "GIT_CONFIG_COUNT", "1",
+            "--setenv", "NNUE_DIR", "/nets", "--setenv", "GIT_CONFIG_NOSYSTEM", "1",
+            "--setenv", "GIT_CONFIG_GLOBAL", "/dev/null", "--setenv", "GIT_CONFIG_COUNT", "1",
             "--setenv", "GIT_CONFIG_KEY_0", "safe.directory", "--setenv", "GIT_CONFIG_VALUE_0", "*",
             "--setenv", "PYTHONDONTWRITEBYTECODE", "1", "--chdir", "/tmp"]
 
