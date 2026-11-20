@@ -1,0 +1,41 @@
+{
+  "candidate_commit": "293da879bd27da174728cda7b5b46d8011f2a3ac",
+  "baseline_commit": "1819b9ea37588be8adb044179fb54512f87c8249",
+  "candidate_binary_sha256": "2227bae2c99c9aeb2a8598f957441f5368cb1a549c315bfce4acbdcf9f5ee258",
+  "baseline_binary_sha256": "57ac1871660913d617b85887a58192cc39ebd581134e87840232a199d0280ff7",
+  "network_sha256": "bddd9d57eb87bf09a6c4e1a3b3f1cc18855c83ee45fdbe18018ac3763b56b38e",
+  "compiler": "g++ (Debian 14.2.0-19) 14.2.0",
+  "arch": "x86-64-avx2",
+  "platform": "Linux x86_64",
+  "build_command": [
+    "make",
+    "--directory=src",
+    "--jobs=2",
+    "build",
+    "ARCH=x86-64-avx2",
+    "COMP=gcc",
+    "CXX=g++"
+  ],
+  "bench_command": [
+    "stockfish",
+    "bench"
+  ],
+  "candidate_runs": [
+    {
+      "nodes": 1488683,
+      "engine_ms": 1826,
+      "nps": 815269
+    },
+    {
+      "nodes": 1488683,
+      "engine_ms": 1849,
+      "nps": 805128,
+      "wall_seconds": 2.775217,
+      "cpu_seconds": 2.743276,
+      "peak_rss_kib": 414488
+    }
+  ],
+  "baseline_nodes": 1488683,
+  "bench_matches_baseline": true,
+  "interpretation": "Deterministic default bench. Throughput from these two runs on a shared cloud host is descriptive, not a paired performance measurement or strength result."
+}

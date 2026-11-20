@@ -1,0 +1,63 @@
+Started game 1 of 24 (candidate vs baseline)
+Started game 2 of 24 (baseline vs candidate)
+Finished game 1 (candidate vs baseline): 1/2-1/2 {Draw by 3-fold repetition}
+Started game 3 of 24 (candidate vs baseline)
+Finished game 2 (baseline vs candidate): 0-1 {Black mates}
+Started game 4 of 24 (baseline vs candidate)
+Finished game 4 (baseline vs candidate): 1/2-1/2 {Draw by 3-fold repetition}
+Started game 5 of 24 (candidate vs baseline)
+Finished game 3 (candidate vs baseline): 1/2-1/2 {Draw by fifty moves rule}
+Started game 6 of 24 (baseline vs candidate)
+Finished game 5 (candidate vs baseline): 1/2-1/2 {Draw by 3-fold repetition}
+Started game 7 of 24 (candidate vs baseline)
+Finished game 6 (baseline vs candidate): 1/2-1/2 {Draw by 3-fold repetition}
+Started game 8 of 24 (baseline vs candidate)
+Finished game 8 (baseline vs candidate): 1/2-1/2 {Draw by 3-fold repetition}
+Started game 9 of 24 (candidate vs baseline)
+Finished game 7 (candidate vs baseline): 1/2-1/2 {Draw by 3-fold repetition}
+Started game 10 of 24 (baseline vs candidate)
+Finished game 9 (candidate vs baseline): 0-1 {Black mates}
+Started game 11 of 24 (candidate vs baseline)
+Finished game 10 (baseline vs candidate): 0-1 {Black mates}
+Started game 12 of 24 (baseline vs candidate)
+Finished game 11 (candidate vs baseline): 0-1 {Black mates}
+Started game 13 of 24 (candidate vs baseline)
+Finished game 12 (baseline vs candidate): 0-1 {Black mates}
+Started game 14 of 24 (baseline vs candidate)
+Finished game 13 (candidate vs baseline): 1/2-1/2 {Draw by 3-fold repetition}
+Started game 15 of 24 (candidate vs baseline)
+Finished game 14 (baseline vs candidate): 1/2-1/2 {Draw by insufficient mating material}
+Started game 16 of 24 (baseline vs candidate)
+Finished game 15 (candidate vs baseline): 1/2-1/2 {Draw by insufficient mating material}
+Started game 17 of 24 (candidate vs baseline)
+Finished game 17 (candidate vs baseline): 1/2-1/2 {Draw by stalemate}
+Started game 18 of 24 (baseline vs candidate)
+Finished game 16 (baseline vs candidate): 0-1 {Black mates}
+Started game 19 of 24 (candidate vs baseline)
+Finished game 18 (baseline vs candidate): 1/2-1/2 {Draw by 3-fold repetition}
+Started game 20 of 24 (baseline vs candidate)
+Finished game 19 (candidate vs baseline): 1/2-1/2 {Draw by fifty moves rule}
+Started game 21 of 24 (candidate vs baseline)
+Finished game 20 (baseline vs candidate): 1-0 {White mates}
+--------------------------------------------------
+Results of candidate vs baseline (4+0.04, 1t, 16MB, book.pgn):
+Elo: 17.39 +/- 58.68, nElo: 45.62 +/- 152.27
+LOS: 72.15 %, DrawRatio: 70.00 %, PairsRatio: 2.00
+Games: 20, Wins: 4, Losses: 3, Draws: 13, Points: 10.5 (52.50 %)
+Ptnml(0-2): [0, 1, 7, 2, 0], WL/DD Ratio: 0.40
+--------------------------------------------------
+Started game 22 of 24 (baseline vs candidate)
+Finished game 21 (candidate vs baseline): 1/2-1/2 {Draw by stalemate}
+Started game 23 of 24 (candidate vs baseline)
+Finished game 22 (baseline vs candidate): 1/2-1/2 {Draw by 3-fold repetition}
+Started game 24 of 24 (baseline vs candidate)
+Finished game 23 (candidate vs baseline): 1/2-1/2 {Draw by 3-fold repetition}
+Finished game 24 (baseline vs candidate): 1/2-1/2 {Draw by insufficient mating material}
+--------------------------------------------------
+Results of candidate vs baseline (4+0.04, 1t, 16MB, book.pgn):
+Elo: 14.48 +/- 48.86, nElo: 41.53 +/- 139.00
+LOS: 72.09 %, DrawRatio: 75.00 %, PairsRatio: 2.00
+Games: 24, Wins: 4, Losses: 3, Draws: 17, Points: 12.5 (52.08 %)
+Ptnml(0-2): [0, 1, 9, 2, 0], WL/DD Ratio: 0.29
+--------------------------------------------------
+Finished match

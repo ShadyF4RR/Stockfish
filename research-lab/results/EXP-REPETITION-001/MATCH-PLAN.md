@@ -1,0 +1,15 @@
+# Proposed repetition match allocation
+
+**Awaiting a queue grant.** Candidate `293da879bd27da174728cda7b5b46d8011f2a3ac` descends from Stockfish `1819b9ea37588be8adb044179fb54512f87c8249`. The coordinator must record independent approval, both build hashes, verified correctness, speed, worker minutes remaining, an experiment lease and the exact fixture manifest before a game starts.
+
+The bounded proposal is **48 games, at most 25 worker minutes**, on two single-thread boards with a 16 MiB hash per engine. The candidate plays the pinned baseline head-to-head from 12 roots, both colors, at 4+0.04 and 12+0.12. Use 100 ms common time margin and fresh engine processes for each game. Reserve the full cap first. Wall exhaustion ends the attempt and preserves every observation.
+
+- Four full-history roots reach nonterminal positions where one legal next move produces a third occurrence. The Italian, London, French and Queen's Gambit families are fixed before play.
+- Four full-history controls reach the identical six-field FEN in each family along a different legal sequence with no immediate threefold claim.
+- Four broad ordinary controls arise from the Sicilian, English, King's Indian and Ruy Lopez openings. The supplied corpus includes their complete game histories.
+
+All twelve histories and their ordinal order are frozen in [the fixture corpus](../../draw-research/positions.json). The complete file SHA-256 is `1d63818bf86512af4e9f960f6c1f72ed4ef628ba4729d4a847fcaaecb1f4b730`. Canonical compact, key-sorted JSON of its match_panel hashes to `21f49785b32bb6dbb1ccc19e9f0e38b2a86afaac0044a6ca0ce9cf61eabd7f6a`. Candidate binary SHA-256 is `2227bae2c99c9aeb2a8598f957441f5368cb1a549c315bfce4acbdcf9f5ee258`; baseline binary SHA-256 is `57ac1871660913d617b85887a58192cc39ebd581134e87840232a199d0280ff7`. Both record the default bench signature 1,488,683.
+
+Use a full-history PGN book for every group. The pinned Fastchess PGN reader replays legal SAN and supplies `position startpos moves ...` or `position fen ... moves ...` to UCI. Its reader stops before a terminal forced sequence, so validate every supplied history ends at its intended nonterminal root. Verify the PGN's book move prefix and starting board for every game. Archive all moves and the actual adjudication reason. On each eligible root decision, replay the full history with effective en-passant and castling rights, then record the available claim move, side choosing, selected move and resulting occurrence count. Keep enforced threefolds, ordinary draws and game points as separate measurements. Source fixtures and the independent rule checks accompany the final registration.
+
+Forty-eight games could verify that an observed root-selection change survives clock play. Four opening families per stratum give wide simultaneous intervals and cannot resolve the lab's +3 Elo target. Quantitative strength eligibility requires a separate representative, powered protocol and a fresh compute authorization. The coordinator can defer this pilot when only promotion-grade evidence warrants spending. [Registered analysis rules](analysis-plan.md)

@@ -1,0 +1,51 @@
+{
+  "experiment": "EXP-REPETITION-001",
+  "baseline": "1819b9ea37588be8adb044179fb54512f87c8249",
+  "candidate": "293da879bd27da174728cda7b5b46d8011f2a3ac",
+  "bench_nodes": 1488683,
+  "games": 41,
+  "wins": 8,
+  "draws": 27,
+  "losses": 6,
+  "score": 0.524390243902439,
+  "sample_elo": 16.961539421234942,
+  "score_ci95": null,
+  "paired_elo_ci95": null,
+  "decision": "inconclusive",
+  "worker_status": "incomplete",
+  "issues": [
+    "Cloud environment restarted before the worker could close this cell. No games replayed."
+  ],
+  "worker_seconds": 474.05,
+  "games_by_clock": {
+    "4+0.04": {
+      "wins": 4,
+      "draws": 17,
+      "losses": 3,
+      "sample_elo": 14.48486906177792
+    },
+    "12+0.12": {
+      "wins": 4,
+      "draws": 10,
+      "losses": 3,
+      "sample_elo": 20.461008978952517
+    }
+  },
+  "root_behavior": {
+    "candidate": [
+      2,
+      8
+    ],
+    "baseline": [
+      2,
+      8
+    ]
+  },
+  "logged_wdl": {
+    "draws": 29,
+    "wins": 8,
+    "losses": 6
+  },
+  "logged_finishes": 43,
+  "planned": 48
+}
