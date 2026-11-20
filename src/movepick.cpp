@@ -241,7 +241,7 @@ ExtMove* MovePicker::generate_and_score() {
             value += (*ch1)[pc][to];
             value += (*ch2)[pc][to];
             value += (*ch3)[pc][to];
-            value += (*ch5)[pc][to];
+            value += (*ch5)[pc][to] / 2;
 
             // penalty for moving to a square threatened by a lesser piece
             // or bonus for escaping an attack by a lesser piece.
