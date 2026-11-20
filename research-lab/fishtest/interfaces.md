@@ -1,6 +1,6 @@
 # Official Fishtest interfaces and submission procedure
 
-Checked on **2026-11-20** against official server commit `a71b7cbaf674ed0aaee956eefda9abb71fc8fbf2` and contributor wiki revision `f469259e3709986995f447f5e2828c280d3b1abc`. The cloud network proxy returned HTTP 403 at CONNECT for an anonymous production run lookup. The public service's deployed revision and live status could not be verified here. Recheck current guidance and accessibility before using the service. [Server snapshot](https://github.com/official-stockfish/fishtest/tree/a71b7cbaf674ed0aaee956eefda9abb71fc8fbf2) · [Contributor guide](https://github.com/official-stockfish/fishtest/wiki/Creating-my-first-test)
+Rechecked upstream `master` and the official wiki on **2026-11-20**. The source reviewed was server commit `a71b7cbaf674ed0aaee956eefda9abb71fc8fbf2` and contributor wiki revision `f469259e3709986995f447f5e2828c280d3b1abc`. The cloud network proxy returned HTTP 403 at CONNECT for an anonymous production run lookup. The public service's deployed revision and live status could not be verified here. Recheck current guidance and accessibility before using the service. [Server snapshot](https://github.com/official-stockfish/fishtest/tree/a71b7cbaf674ed0aaee956eefda9abb71fc8fbf2) · [Contributor guide](https://github.com/official-stockfish/fishtest/wiki/Creating-my-first-test)
 
 ## Submission and authentication
 
@@ -13,7 +13,21 @@ Checked on **2026-11-20** against official server commit `a71b7cbaf674ed0aaee956
 
 [UI routes](https://github.com/official-stockfish/fishtest/blob/a71b7cbaf674ed0aaee956eefda9abb71fc8fbf2/docs/4-ui-reference.md) · [Login and account approval](https://github.com/official-stockfish/fishtest/blob/a71b7cbaf674ed0aaee956eefda9abb71fc8fbf2/server/fishtest/views.py#L658-L697) · [Run creation](https://github.com/official-stockfish/fishtest/blob/a71b7cbaf674ed0aaee956eefda9abb71fc8fbf2/server/fishtest/views.py#L2408-L2434) · [Independent run approval](https://github.com/official-stockfish/fishtest/blob/a71b7cbaf674ed0aaee956eefda9abb71fc8fbf2/server/fishtest/rundb.py#L1954-L1969) · [Worker and user API reference](https://github.com/official-stockfish/fishtest/blob/a71b7cbaf674ed0aaee956eefda9abb71fc8fbf2/docs/3-api-reference.md)
 
-**Operating decision.** Prepare and validate the submission packet locally. An authorized human with an approved Fishtest account performs the submission through the official form. The lab can monitor the resulting public run without credentials. Enabling unattended submissions would require documented operator permission covering the interface, authentication, accounts, volume and resource limits, followed by separately reviewed implementation. Keep session credentials in the human's browser. [Official form](https://tests.stockfishchess.org/tests/run)
+**Account and submission.** The owner has an approved Fishtest account and authorized its public username, `ShadyF4RR`, for this lab. The owner signs into the official form with that account and confirms the prepared stage. The project has supplied no operator authorization for unattended submissions. The lab can monitor the resulting public run without credentials. Enabling unattended submissions would require documented operator permission covering the interface, authentication, accounts, volume and resource limits, followed by separately reviewed implementation. Keep session credentials in the human's browser. [Official form](https://tests.stockfishchess.org/tests/run)
+
+## Form fields and public reads
+
+For a new run, the official UI supports the plain `/tests/run` page. Its handler reads a saved test using `/tests/run?id=<existing-run-id>`, which the UI labels **Reschedule**. Remaining defaults come from server configuration and the signed-in profile. The source supplies no documented query parameters for prefilling arbitrary new-run refs, bench or settings. The lab prints a field sheet for a new job. When reusing an STC run via Reschedule, explicitly select LTC and verify every field and both resolved commits. [Form setup](https://github.com/official-stockfish/fishtest/blob/a71b7cbaf674ed0aaee956eefda9abb71fc8fbf2/server/fishtest/views.py#L2435-L2486) · [Official Reschedule link](https://github.com/official-stockfish/fishtest/blob/a71b7cbaf674ed0aaee956eefda9abb71fc8fbf2/server/fishtest/templates/tests_view.html.j2#L193)
+
+| Anonymous GET on `https://tests.stockfishchess.org` | Response shape at the checked revision |
+|---|---|
+| `/api/active_runs` | One JSON object keyed by run ID for all unfinished runs, including pending jobs. |
+| `/api/finished_runs?page=N` | JSON object keyed by run ID, up to 50 results per 1-based page. Supports `username`, `timestamp`, `success_only`, `yellow_only` and `ltc_only`. Deleted runs are excluded. |
+| `/api/get_run/<id>` | One run object with `_id`, flags, `args` and `results`. Heavy task fields are stripped. Unknown IDs return 404. |
+| `/api/get_elo/<id>` | For SPRT, one run object with nested `elo.elo`, `elo.ci` (two endpoints of the 95% interval), `elo.LOS` and `elo.LLR`. A non-SPRT run returns `{}`. |
+| `/api/calc_elo` | With fixed-game paired outcome counts `LL,LD,DDWL,WD,WW`, returns `elo`, `ci`, and `LOS`. Each paired count refers to one opening played in both colors. SPSA tuning progress is a separate result type. |
+
+Use the verified stage's `args.sprt.state` and lifecycle flags for a promotion decision. Preserve results as observed at their sample size. [Public API implementation](https://github.com/official-stockfish/fishtest/blob/a71b7cbaf674ed0aaee956eefda9abb71fc8fbf2/server/fishtest/api.py#L344-L555) · [SPRT intervals](https://github.com/official-stockfish/fishtest/blob/a71b7cbaf674ed0aaee956eefda9abb71fc8fbf2/server/fishtest/stats/sprt.py#L123-L135)
 
 ## Procedure for an authorized contributor
 

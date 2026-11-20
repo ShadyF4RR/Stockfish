@@ -13,6 +13,7 @@ API_PATH = re.compile(rf"/api/(?:get_(?:elo|run)/{RUN_ID}|active_runs|finished_r
 ACCOUNT_HISTORY = re.compile(
     r"/api/finished_runs\?page=(?:[1-9]|10)&username=(?:[A-Za-z0-9_.~+\-]|%[0-9A-Fa-f]{2})+&timestamp=[0-9]{10}"
 )
+FIXED_ELO = re.compile(r'/api/calc_elo\?(?:LL=[0-9]{1,10}&LD=[0-9]{1,10}&DDWL=[0-9]{1,10}&WD=[0-9]{1,10}&WW=[0-9]{1,10}|W=[0-9]{1,10}&D=[0-9]{1,10}&L=[0-9]{1,10})')
 MAX_BYTES = 8 * 1024 * 1024
 
 
@@ -28,7 +29,7 @@ def check(ok, message):
 
 def fetch_json(path):
     """Read one bounded, allowlisted endpoint using system TLS verification."""
-    check(isinstance(path, str) and (API_PATH.fullmatch(path) or ACCOUNT_HISTORY.fullmatch(path)),
+    check(isinstance(path, str) and (API_PATH.fullmatch(path) or ACCOUNT_HISTORY.fullmatch(path) or FIXED_ELO.fullmatch(path)),
           "unsupported Fishtest API path")
     req = urllib.request.Request(HOST + path, headers={"Accept": "application/json",
                                                       "User-Agent": "Stockfish-Research-Lab/1"})
@@ -42,6 +43,7 @@ def fetch_json(path):
     check(len(raw) <= MAX_BYTES, "Fishtest response exceeds byte limit")
     value = json.loads(raw)
     check(isinstance(value, dict), "expected a Fishtest object")
+    check('error' not in value, 'official Fishtest reported an application error')
     return value
 
 

@@ -18,7 +18,7 @@
   "paid_api_budget_usd": 0,
   "nnue_training_budget_hours": 0,
   "public_fishtest_budget_hours": 0,
-  "public_fishtest_username": null,
+  "public_fishtest_username": "ShadyF4RR",
   "public_fishtest_max_games_approved": {"stc": 0, "ltc": 0},
   "research_roles": [
     "search",
@@ -27,6 +27,7 @@
   ],
   "fishtest": {
     "submission_mode": "human_official_form",
+    "automatic_public_submission": false,
     "max_public_experiments": 1,
     "baseline": "current official-stockfish/Stockfish master",
     "credentials": "user browser only",

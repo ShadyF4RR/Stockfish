@@ -1,0 +1,62 @@
+name: Shared Fishtest integration checks
+on:
+  push:
+    branches: [research/shared-fishtest]
+  pull_request:
+    paths:
+      - 'research-lab/fishtest/**'
+      - 'research-lab/config/agents.yaml'
+      - 'research-lab/tests/**'
+      - '.github/workflows/fishtest-*.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline:
+    name: Fishtest and ledger tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          persist-credentials: false
+      - run: python3 -m unittest discover -s research-lab/tests -p 'test_*.py'
+  public-reads:
+    name: Verify anonymous production reads
+    if: github.repository == 'ShadyF4RR/Stockfish' && github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          persist-credentials: false
+      - name: Query official listings, status and SPRT results
+        env:
+          # Historical completed STC cited by this fork's upstream history.
+          VERIFIED_STC: 6af9bd9d8e7fb2e78bc1d8ac
+        run: |
+          ft=research-lab/fishtest/cli.py
+          python3 "$ft" active --limit 2 > "$RUNNER_TEMP/active.json"
+          python3 "$ft" completed --page 1 --limit 2 > "$RUNNER_TEMP/finished.json"
+          python3 "$ft" status "$VERIFIED_STC" > "$RUNNER_TEMP/status.json"
+          python3 "$ft" results "$VERIFIED_STC" > "$RUNNER_TEMP/results.json"
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          directory = Path(os.environ["RUNNER_TEMP"])
+          def load(name):
+              return json.loads((directory / (name + ".json")).read_text())
+          active, finished, status, result = map(load, ("active", "finished", "status", "results"))
+          if not isinstance(active["runs"], list) or not finished["runs"]:
+              raise ValueError("Unexpected public listings")
+          for snapshot in (status, result):
+              if snapshot["run_id"] != os.environ["VERIFIED_STC"] or snapshot["decision"] != "accepted":
+                  raise ValueError("Official run identity or decision differed")
+          if not result["elo"]["available"]:
+              raise ValueError("Missing official Elo interval")
+          print(f"Public STC {result['run_id']}: {result['games']} games, "
+                f"SPRT {result['decision']}, official Elo {result['elo']['estimate']:.2f}.")
+          PY
