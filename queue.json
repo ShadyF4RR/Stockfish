@@ -1,0 +1,18 @@
+{
+  "active": null,
+  "enrolled_pc": null,
+  "jobs": {},
+  "limits": {
+    "daily": {
+      "games": 232,
+      "wall_minutes": 220
+    },
+    "lifetime": {
+      "games": 1160,
+      "wall_minutes": 1100
+    }
+  },
+  "paused": null,
+  "preferred_pc": null,
+  "schema": 1
+}
