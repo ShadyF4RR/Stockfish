@@ -53,6 +53,7 @@ jobs:
           "$work/stockfish/stockfish-linux-x86-64-universal" export_net "$work/source/Stockfish/src/nn-1a298aa575a0.nnue"
           echo "1a298aa575a085434d29027978dc36867fe9c5bcea9376654b7a8eba1e52dfc2  $work/source/Stockfish/src/nn-1a298aa575a0.nnue" | sha256sum -c -
           cp "$work/go/LICENSE" "$work/source/launcher/Go-LICENSE.txt"
+          printf 'Standalone engines are GPLv3. Extract only the source archive to inspect or rebuild. Add the raw .exe to a UCI GUI. Linux users first chmod +x the raw engine. Stockfish source and its license are in Stockfish/ and the MSZIP launcher build scripts are in launcher/.\n' > "$work/source/READ-ME.txt"
           cp "$work/linux/manifest.json" "$work/source/manifest-linux.json"
           cp "$work/windows/manifest.json" "$work/source/manifest-windows.json"
           printf 'Engine sf_19 %s\nLauncher %s\n' "$SF19" "$GITHUB_SHA" > "$work/source/revisions.txt"
@@ -84,6 +85,13 @@ jobs:
           if-no-files-found: error
           compression-level: 0
           retention-days: 30
+      - name: Publish optional local HTML client
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: stockfish19-html-client
+          path: research-lab/proofs/mszip/web/
+          if-no-files-found: error
+          retention-days: 30
       - name: Transfer Windows input for native verification
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
@@ -96,7 +104,7 @@ jobs:
   windows:
     needs: build
     runs-on: windows-2025
-    timeout-minutes: 8
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
         with:
@@ -108,6 +116,24 @@ jobs:
       - name: Test Windows UCI startup, legal move, quit and canonical bench
         shell: pwsh
         run: python research-lab/proofs/mszip/check_uci.py "$env:RUNNER_TEMP/windows/stockfish19-mszip.exe"
+      - name: Compare native engine and launcher on the Windows runner
+        shell: pwsh
+        run: |
+          $zip = "$env:RUNNER_TEMP/reference.zip"
+          $name = 'stockfish-windows-x86-64-universal'
+          curl.exe --fail --location --retry 2 --max-time 150 "https://github.com/official-stockfish/Stockfish/releases/download/sf_19/$name.zip" --output $zip
+          if ($LASTEXITCODE -ne 0) { throw "Release download failed" }
+          if ((Get-FileHash $zip).Hash -ne '3c8bf1f9ea66a09350a40df4f632288285ac206d99f33ab5842c408fc30b48a7') { throw "Release digest mismatch" }
+          Expand-Archive -Path $zip -DestinationPath "$env:RUNNER_TEMP/reference"
+          python research-lab/proofs/mszip/windows_trials.py "$env:RUNNER_TEMP/reference/stockfish/$name.exe" "$env:RUNNER_TEMP/windows/stockfish19-mszip.exe" "$env:RUNNER_TEMP/mszip-windows-trials.json"
+      - name: Publish Windows timing and memory observations
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: Windows-trial-observations
+          path: ${{ runner.temp }}/mszip-windows-trials.json
+          archive: false
+          if-no-files-found: error
+          retention-days: 30
       - name: Publish GUI-selectable Windows executable
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
