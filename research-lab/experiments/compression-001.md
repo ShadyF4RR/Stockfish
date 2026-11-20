@@ -1,6 +1,6 @@
 # EXP-COMPRESSION-001 · Lossless Stockfish compression
 
-**Reported observation, pending reproduction.** The owner reported a possible size reduction from 135 MB to 88 MB for Stockfish 19. The exact input, units, original archive, compressor and settings from that observation are unknown. Size reduction, runtime gains and Elo gains are separate outcomes. The original was not recovered. Independent gzip and xz trials on the official Linux release are complete. [Recovery scope, measurements and decision](../results/EXP-COMPRESSION-001/README.md)
+**Reported observation, pending reproduction.** The owner reported a possible size reduction from 135 MB to 88 MB for Stockfish 19. The exact input, units, original archive and codec settings from that observation are unknown. The owner identifies MSZIP and recalls direct GUI and custom HTML use. Size reduction, runtime gains and Elo gains are separate outcomes. The original was not recovered. Independent gzip and xz trials and a native MSZIP launcher reconstruction are complete. [Recovery scope, measurements and decision](../results/EXP-COMPRESSION-001/README.md)
 
 ## What the development checkout contains
 

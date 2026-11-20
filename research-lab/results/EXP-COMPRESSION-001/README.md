@@ -1,6 +1,6 @@
 # EXP-COMPRESSION-001 — recovery and independent reproduction
 
-**Original experiment unrecovered.** The reported 135 MB → 88 MB would save 34.81% using consistent units. The original input, output, platform, codec, flags and units remain unidentified. Reproductions below use independently identified artifacts.
+**Original experiment unrecovered.** The reported 135 MB → 88 MB would save 34.81% using consistent units. The owner subsequently identified MSZIP and recalled direct chess-GUI and HTML use. The original bytes, platform, integration method, flags and units remain unidentified. Reproductions below use independently identified artifacts.
 
 ## Recovery coverage, November 20, 2026
 
@@ -8,7 +8,11 @@
 - Searched the complete 7,356-commit history reachable from the starting fork SHA for distinctive sizes, archive/codec terms and lossless engine/network changes. Upstream commit `a46087ee` added LEB128 compression to a different NNUE and reported 70 MiB → 39 MiB. Commit `69a01b88` concerns shared network pages. Neither identifies the reported files. [Historic LEB128 change](https://github.com/official-stockfish/Stockfish/commit/a46087ee)
 - Inspected available project files, uploads, linked artifacts, matching Pages results and the accessible Stockfish-related Codex setup history. They supplied no original binary pair, script, benchmark or digest. This cloud task could not access earlier ChatGPT project history. Deleted, expired and inaccessible artifacts are outside the search. A supplied archive, transcript or hashes could reopen the recovery question.
 
-## Verified independent trials
+## Directly runnable MSZIP reconstruction
+
+The experiment branch packages the complete official Stockfish 19 Windows or Linux executable, including its embedded NNUE, in a real MSZIP cabinet. On first launch it automatically restores the native engine to a private cache. The native UCI interface works directly with a chess GUI. The optional HTML client communicates with a loopback backend. The Windows launcher is 88,265,216 bytes and the Linux launcher is 88,174,740 bytes. Native tests passed on both platforms and the artifact digests matched the independently built cloud copies. The original Windows input here was 103,046,300 bytes. [MSZIP report and runtime comparisons](https://github.com/ShadyF4RR/Stockfish/blob/experiment/EXP-COMPRESSION-001/research-lab/results/EXP-COMPRESSION-001/README.md) · [Verified downloads](https://github.com/ShadyF4RR/Stockfish/actions/runs/44819051300)
+
+## Earlier gzip and xz trials
 
 The source is the official Stockfish 19 Linux x86-64 universal release, tag `sf_19`, commit `edb0d9db6731067ec50ce619ff372b463bc4dd5d`. The published 81,388,977-byte tar.gz matched the release SHA-256. Extracted the executable and exported its default NNUE. Since the executable embeds this network, the two rows are separate packaging comparisons. Sizes are bytes, including codec framing. [Release](https://github.com/official-stockfish/Stockfish/releases/tag/sf_19)
 
