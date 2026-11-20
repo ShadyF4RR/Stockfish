@@ -1,0 +1,26 @@
+{
+  "input_name": "nn-1a298aa575a0.nnue",
+  "kind": "Stockfish NNUE network",
+  "input_bytes": 98511183,
+  "input_sha256": "1a298aa575a085434d29027978dc36867fe9c5bcea9376654b7a8eba1e52dfc2",
+  "gzip_bytes": 80631428,
+  "gzip_sha256": "4ccc2c30e1d015e73d27db3f395e1fc51f9d236337773ca89c0a566d360facf3",
+  "restored_bytes": 98511183,
+  "restored_sha256": "1a298aa575a085434d29027978dc36867fe9c5bcea9376654b7a8eba1e52dfc2",
+  "gzip_to_input_ratio": 0.8185002508801462,
+  "round_trip_verified": true,
+  "compression": {
+    "wall_seconds": 3.6469662299999754,
+    "process_cpu_seconds": 3.554194346
+  },
+  "decompression": {
+    "wall_seconds": 0.854266444000018,
+    "process_cpu_seconds": 0.8542761670000005
+  },
+  "gzip_level": 1,
+  "max_input_bytes": 268435456,
+  "python_version": "3.12.14",
+  "zlib_version": "1.3.2",
+  "machine": "x86_64",
+  "kernel": "6.18.57"
+}

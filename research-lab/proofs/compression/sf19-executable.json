@@ -1,0 +1,26 @@
+{
+  "input_name": "stockfish-linux-x86-64-universal",
+  "kind": "ELF executable",
+  "input_bytes": 103153472,
+  "input_sha256": "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+  "gzip_bytes": 82783671,
+  "gzip_sha256": "e760767b63696f12492759aba49e96172a952bcdffd067b565cebf3c23ccf265",
+  "restored_bytes": 103153472,
+  "restored_sha256": "0f83d24cc46d2c66c60f16001af5444873bc112b7d028594513426894c12da19",
+  "gzip_to_input_ratio": 0.8025291771080667,
+  "round_trip_verified": true,
+  "compression": {
+    "wall_seconds": 6.897935059999952,
+    "process_cpu_seconds": 6.88953876
+  },
+  "decompression": {
+    "wall_seconds": 1.9390088430000105,
+    "process_cpu_seconds": 1.9379454229999995
+  },
+  "gzip_level": 1,
+  "max_input_bytes": 268435456,
+  "python_version": "3.12.14",
+  "zlib_version": "1.3.2",
+  "machine": "x86_64",
+  "kernel": "6.18.57"
+}
