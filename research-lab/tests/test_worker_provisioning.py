@@ -121,6 +121,8 @@ foreach ($name in 'Write-ProvisionLog','Invoke-GuestBytes','Invoke-GuestScript')
     $node = $ast.Find({param($n) $n -is [Management.Automation.Language.FunctionDefinitionAst] -and $n.Name -eq $name},$false)
     . ([scriptblock]::Create($node.Extent.Text))
 }
+if ((Invoke-GuestScript 'stamp fixture' 'exit 42' -ExpectedExit 42) -ne 42) { throw 'Missing refresh signal' }
+if ((Invoke-GuestScript 'stamp fixture' 'true' -ExpectedExit 42) -ne 0) { throw 'Missing valid stamp signal' }
 try { Invoke-GuestScript 'fixture readiness' 'systemctl is-active --quiet stockfish-worker.service' }
 catch { if ($_ -notmatch 'exited 3') { throw } }
 try { Invoke-GuestBytes '/fixture-import' ($utf8.GetBytes($env:SF_PRIVATE_VALUE)) }

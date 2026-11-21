@@ -75,7 +75,7 @@ function Write-ProvisionLog([string]$Message) {
     [IO.File]::AppendAllText($logPath, ([DateTime]::UtcNow.ToString('o') + ' ' + $Message + [Environment]::NewLine), $utf8)
 }
 
-function Invoke-GuestBytes([string]$Command, [byte[]]$Bytes, [switch]$Diagnostics) {
+function Invoke-GuestBytes([string]$Command, [byte[]]$Bytes, [switch]$Diagnostics, [int]$ExpectedExit = -1) {
     # Commands are fixed below. Credential bytes pass only through the child's stdin.
     $entry = New-Object Diagnostics.ProcessStartInfo
     $entry.FileName = $wsl
@@ -101,18 +101,19 @@ function Invoke-GuestBytes([string]$Command, [byte[]]$Bytes, [switch]$Diagnostic
         }
         $proc.WaitForExit()
         [void]$errors.GetAwaiter().GetResult()
-        if ($proc.ExitCode -ne 0) {
+        if ($proc.ExitCode -ne 0 -and $proc.ExitCode -ne $ExpectedExit) {
             $message = "WSL command $Command exited $($proc.ExitCode)"
             Write-ProvisionLog $message
             throw "$message. See $logPath"
         }
         if ($inputFailed) { throw "Incomplete input to $Command. See $logPath" }
+        if ($ExpectedExit -ge 0) { return $proc.ExitCode }
     } finally {
         $proc.Dispose()
     }
 }
 
-function Invoke-GuestScript([string]$Stage, [string]$Script) {
+function Invoke-GuestScript([string]$Stage, [string]$Script, [int]$ExpectedExit = -1) {
     Write-ProvisionLog "stage=$Stage"
     # fd 3 carries trusted stage/error records. Discard normal stdout. Filter
     # arbitrary stderr before it crosses WSL: an apt URL or compiler message
@@ -150,7 +151,7 @@ exec 2> >(awk '
 '@
     # A child (especially apt) must never consume the rest of bash's script from stdin.
     $wrapped = $prologue + "`nprovision_stage '$Stage'`n{" + "`n" + $Script + "`n} </dev/null`n"
-    Invoke-GuestBytes '/bin/bash -se' ($utf8.GetBytes($wrapped.Replace("`r`n", "`n"))) -Diagnostics
+    Invoke-GuestBytes '/bin/bash -se' ($utf8.GetBytes($wrapped.Replace("`r`n", "`n"))) -Diagnostics -ExpectedExit $ExpectedExit
 }
 
 function Start-Keeper {
@@ -206,7 +207,7 @@ function Start-Keeper {
     }
 
     $configured = Join-Path $data 'wsl-configured-v1'
-    if (-not (Test-Path -LiteralPath $configured)) {
+    if (-not $Resume -and -not (Test-Path -LiteralPath $configured)) {
         Invoke-GuestScript 'WSL configuration' @'
 umask 022
 cat > /etc/wsl.conf <<'WSLCONF'
@@ -221,8 +222,61 @@ appendWindowsPath=false
 WSLCONF
 sync
 '@
+    }
+
+    # Record the configuration generation across a cold start. WSL2 reads the
+    # distro policy at init; another distro can keep the shared VM alive.
+    $checkStamp = @'
+set -eu
+test -f /etc/wsl.conf
+test ! -L /etc/wsl.conf
+generation=$(TZ=UTC0 stat -c '%i %z' /etc/wsl.conf && sha256sum /etc/wsl.conf)
+stamp=/etc/stockfish-wsl-isolation/applied
+if [[ ! -s "$stamp" ]] || ! cmp -s "$stamp" <(printf '%s\n' "$generation"); then
+    exit 42
+fi
+'@
+    if ((Invoke-GuestScript 'check last applied distro policy' $checkStamp -ExpectedExit 42) -eq 42) {
+        Invoke-GuestScript 'prepare dedicated distro isolation verification' @'
+set -eu
+if [[ $(cat /proc/1/comm) == systemd ]]; then
+    # A missing unit is normal on an interrupted first install. Never stop a live campaign.
+    units=$(systemctl list-units --all --type=service --no-legend --plain stockfish-worker.service)
+    if [[ -n "$units" ]]; then
+        state=$(systemctl show -p ActiveState --value stockfish-worker.service)
+        [[ "$state" == inactive || "$state" == failed ]]
+    fi
+else
+    test ! -e /etc/systemd/system/stockfish-worker.service
+fi
+test -f /etc/wsl.conf
+test ! -L /etc/wsl.conf
+install -d -m 0755 -o root -g root /etc/stockfish-wsl-isolation
+cd /etc/stockfish-wsl-isolation
+umask 022
+[[ $(stat -c %u /etc/wsl.conf) == 0 ]]
+(( (8#$(stat -c %a /etc/wsl.conf) & 022) == 0 ))
+cat /proc/sys/kernel/random/boot_id > previous-instance
+readlink /proc/1/ns/pid >> previous-instance
+TZ=UTC0 stat -c '%i %z' /etc/wsl.conf > pending
+sha256sum /etc/wsl.conf >> pending
+sync -f pending
+'@
         & $wsl --terminate $distro
-        if ($LASTEXITCODE -ne 0) { throw 'Cannot restart the dedicated distro with isolation enabled.' }
+        if ($LASTEXITCODE -ne 0) { throw 'Could not cold-start the dedicated worker distro.' }
+        Invoke-GuestScript 'confirm fresh dedicated distro boot' @'
+set -eu
+cd /etc/stockfish-wsl-isolation
+[[ $(cat /proc/1/comm) == systemd ]]
+previous=$(cat previous-instance)
+current=$(cat /proc/sys/kernel/random/boot_id && readlink /proc/1/ns/pid)
+[[ -n "$previous" && "$previous" != "$current" ]]
+generation=$(TZ=UTC0 stat -c '%i %z' /etc/wsl.conf && sha256sum /etc/wsl.conf)
+cmp -s pending <(printf '%s\n' "$generation")
+[[ ! -v WSL_INTEROP ]]
+chmod 0644 pending
+mv -fT pending applied
+'@
         [IO.File]::WriteAllText($configured, '1', $utf8)
     }
 
@@ -251,6 +305,10 @@ provision_stage "worker installation"
         [IO.File]::WriteAllText($ready, $ControlSha, $utf8)
         $serviceAction = 'restart'
     }
+    Invoke-GuestScript 'verify live dedicated distro isolation' @'
+bash /opt/stockfish-lab/research-lab/dedicated-worker/check-wsl-isolation.sh
+provision_stage "verified disabled distro interop and Windows drive automount"
+'@
     if (Test-Path -LiteralPath $tokenFile) {
         Write-ProvisionLog "stage=credential import"
         $bytes = Read-Envelope $tokenFile

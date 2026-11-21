@@ -18,9 +18,9 @@ book_sha=421a4efcddb95c3e70b1f9ad6abbeab1edcb6ab8e9ae743d94c42a5d78a6e82a
 . /etc/os-release
 [[ $ID == ubuntu && $VERSION_ID == 24.04 && $(uname -m) == x86_64 ]]
 [[ $(cat /proc/1/comm) == systemd && -f /sys/fs/cgroup/cgroup.controllers ]]
-# Windows drives and process interop must be disabled for the guest.
-awk '$0 ~ / - drvfs / || ($0 ~ / - 9p / && $0 ~ /aname=drvfs/) {found=1} END {exit found ? 1 : 0}' /proc/self/mountinfo
-[[ ! -e /proc/sys/fs/binfmt_misc/WSLInterop ]]
+provision_stage "distro-local interop and Windows mounts"
+bash "$(dirname -- "$0")/check-wsl-isolation.sh"
+provision_stage "verified disabled distro interop and Windows drive automount"
 export GIT_CONFIG_NOSYSTEM=1 GIT_CONFIG_GLOBAL=/dev/null GIT_TERMINAL_PROMPT=0
 src=$(git -C "$(dirname -- "$0")" rev-parse --show-toplevel)
 [[ $(stat -c %u "$src") == 0 && $(git -C "$src" remote get-url origin) == "$repo" ]]
@@ -130,6 +130,7 @@ StateDirectory=stockfish-worker
 StateDirectoryMode=0700
 UMask=0077
 LoadCredential=github-token:/etc/stockfish-worker/github-token
+ExecStartPre=/bin/bash /opt/stockfish-lab/research-lab/dedicated-worker/check-wsl-isolation.sh
 ExecStartPre=/usr/local/libexec/stockfish-worker-preflight
 ExecStartPre=/usr/bin/bwrap --unshare-user --unshare-pid --unshare-net --die-with-parent --new-session --ro-bind /usr /usr --ro-bind /lib /lib --ro-bind /lib64 /lib64 -- /usr/bin/true
 ExecStart=/usr/bin/python3 -I /opt/stockfish-lab/research-lab/dedicated-worker/worker.py poll --state /var/lib/stockfish-worker
@@ -148,6 +149,8 @@ NoNewPrivileges=yes
 CapabilityBoundingSet=
 AmbientCapabilities=
 PrivateTmp=yes
+InaccessiblePaths=-/run/WSL
+RestrictAddressFamilies=~AF_VSOCK
 ProtectHome=yes
 ProtectSystem=strict
 ProtectKernelModules=yes

@@ -18,7 +18,7 @@ if ($pin -cnotmatch '^[0-9a-f]{40}$') { throw 'Invalid commit' }
 $url = "https://raw.githubusercontent.com/ShadyF4RR/Stockfish/$pin/research-lab/dedicated-worker/Install-StockfishWorker.ps1"
 $file = Join-Path $env:TEMP 'Install-StockfishWorker.ps1'
 Invoke-WebRequest -UseBasicParsing $url -OutFile $file
-if ((Get-FileHash $file -Algorithm SHA256).Hash -ne 'e1508a7ee8f86282d18e38e8771490a5ea139f1359369308542b92de5cf3d395') { throw 'Installer checksum mismatch' }
+if ((Get-FileHash $file -Algorithm SHA256).Hash -ne 'e4019a8113cf3d98567d46c024f6de1c332cb4b0c726139aedaddc931d04fb62') { throw 'Installer checksum mismatch' }
 Unblock-File -LiteralPath $file
 powershell.exe -NoProfile -ExecutionPolicy RemoteSigned -File $file -ControlSha $pin
 ```
@@ -42,6 +42,12 @@ powershell.exe -NoProfile -ExecutionPolicy RemoteSigned -File $file -ControlSha 
 ```
 
 Resume requires the original task, Windows account SID and registered WSL distribution. Run it after the failed keeper exits. The installer temporarily disables new launches of that task while updating its definition. It reuses the pending encrypted token or the credential already in the guest. Completed releases and Fastchess builds are checked before reuse. The worker's game and identity directories stay in the existing VHD.
+
+On the first resume with the isolation fix, the keeper records the existing `/etc/wsl.conf` configuration and cold-starts only `StockfishWorker-2404`. It requires a different distro instance with systemd as PID 1 and the identical root-owned configuration. It refuses to interrupt an active worker. Later starts reuse the verification while the configuration generation matches.
+
+WSL 3.0.5 registers the Windows executable handler for the WSL2 VM. A systemd distribution can also have a local interop socket even with Windows process creation disabled. The keeper checks explicit `false` values for `[interop] enabled`, `appendWindowsPath`, `[automount] enabled` and `mountFsTab`. It checks a direct WSL session for an active interop channel and inspects actual mounts for Windows drive shares, including 9p and virtiofs. The service repeats the checks at startup and denies access to the interop socket directory and AF_VSOCK. Other distributions retain their own settings. [WSL 3.0.5 interop design](https://github.com/microsoft/WSL/blob/e7ef9a88db1e5e5745ed93bdce3eb9d8ee5f8aee/doc/docs/technical-documentation/interop.md) · [Distro channel setup](https://github.com/microsoft/WSL/blob/e7ef9a88db1e5e5745ed93bdce3eb9d8ee5f8aee/src/linux/init/config.cpp#L939)
+
+Look for `stage=verified disabled distro interop and Windows drive automount` in the current attempt. An isolation helper exit of **21** means missing policy or boot receipt, **22** means ambiguous or unsafe settings, **23** means changed configuration, **24** means a session advertises Windows interop, and **25** means a Windows drive mount or unreadable mount evidence.
 
 Read the protected diagnostics in elevated PowerShell. Each attempt starts with its control SHA. A Linux failure records its stage, script, line, exit code and Bash command as written. Shell variables in those commands retain their source names. Recognized stderr fragments are recorded, while other subprocess output is withheld to protect credentials. The log rotates on keeper startup at 1 MiB, retaining one previous copy.
 
